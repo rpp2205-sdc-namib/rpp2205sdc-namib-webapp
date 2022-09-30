@@ -7,10 +7,9 @@ class App extends React.Component {
   }
 
   render() {
-    return <div>I changed it!
+    return <div>
       <Overview />
     </div>
-
   }
 }
 
