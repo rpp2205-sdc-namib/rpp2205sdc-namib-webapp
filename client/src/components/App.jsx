@@ -1,4 +1,5 @@
 import React from 'react';
+import Overview from './Overview/overview.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -6,12 +7,9 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <div>Hello world</div>
-        <div>Hey</div>
-      </div>
-    )
+    return <div>
+      <Overview />
+    </div>
   }
 }
 
