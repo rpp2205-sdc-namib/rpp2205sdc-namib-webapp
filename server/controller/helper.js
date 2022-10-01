@@ -23,7 +23,7 @@ module.exports = {
     var value = req.params.value;
     axios.get(`${API_Link}/reviews?product_id=${value}`, {headers: {Authorization: process.env.access_token}})
       .then(response => {res.status(200).send(response.data)})
-      .catch(err => {console.error(err); res.status(500).send(err)});
+      .catch(err => {console.error('error'); res.status(500).send(err)});
   },
 
   getQuestionsHandler: (req, res) => {
