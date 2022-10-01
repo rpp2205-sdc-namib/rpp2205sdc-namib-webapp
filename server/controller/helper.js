@@ -35,7 +35,6 @@ module.exports = {
       }
     })
     .then(response => {
-      console.log('response: ', response);
       res.status(200).send(response.data);
     })
     .catch(err => {
@@ -48,8 +47,5 @@ module.exports = {
     axios.post(`${API_Link}/reviews`, {product_id, rating, summary, })
   },
 
-  // postQuestionsHandler: (req, res) => {
-
-  // }
 
 };
