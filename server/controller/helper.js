@@ -19,11 +19,21 @@ module.exports = {
   },
 
   getReviewsHandler: (req, res) => {
-    var param = req.params.param;
-    var value = req.params.value;
-    axios.get(`${API_Link}/reviews?product_id=${value}`, {headers: {Authorization: process.env.access_token}})
-      .then(response => {res.status(200).send(response.data)})
-      .catch(err => {console.error('error'); res.status(500).send(err)});
+    console.log(req.params);
+    var product_id = req.params.product_id;
+    var count = req.params.count;
+    var page = req.params.page;
+    var sort = req.params.sort;
+
+   if (req.url.includes('meta')) {
+    axios.get(`${API_Link}/reviews/meta?product_id=${product_id}`, {headers: {Authorization: process.env.access_token}})
+      .then(response => {console.log(response); res.status(200).send(response.data)})
+      .catch(err => {console.error(err); res.status(500).send(err)});
+   } else {
+      axios.get(`${API_Link}/reviews?product_id=${product_id}&count=${count}&page=${page}&sort=${sort}`, {headers: {Authorization: process.env.access_token}})
+        .then(response => {console.log(response); res.status(200).send(response.data)})
+        .catch(err => {console.error(err); res.status(500).send(err)});
+   }
   },
 
   getQuestionsHandler: (req, res) => {

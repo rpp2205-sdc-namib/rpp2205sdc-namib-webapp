@@ -11,7 +11,9 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 //get routes
 app.get('/products/:product_id', getProductHandler);
 
-app.get('/reviews/:product_id', getReviewsHandler);
+app.get('/reviews/:product_id/:count/:page/:sort', getReviewsHandler);
+
+app.get('/reviews/meta/:product_id', getReviewsHandler);
 
 app.get('/qa/questions/:product_id', getQuestionsHandler);
 
@@ -25,7 +27,6 @@ app.post('/reviews', (req, res) => {
 
 });
 
-// app.post('/qa/questions', postQuestionsHandler);
 
 
 //put routes
