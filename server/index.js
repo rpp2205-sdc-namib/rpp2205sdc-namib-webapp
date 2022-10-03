@@ -3,22 +3,19 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
+const { getProductHandler, getReviewsHandler, getQuestionsHandler } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 //get routes
-app.get('/products', (req, res) => {
+app.get('/products/:product_id', getProductHandler);
 
-});
+app.get('/reviews/:product_id/:count/:page/:sort', getReviewsHandler);
 
-app.get('/reviews', (req, res) => {
+app.get('/reviews/meta/:product_id', getReviewsHandler);
 
-});
-
-app.get('/qa/questions', (req, res) => {
-
-});
+app.get('/qa/questions/:product_id', getQuestionsHandler);
 
 
 //post routes
@@ -30,9 +27,6 @@ app.post('/reviews', (req, res) => {
 
 });
 
-app.post('/qa/questions', (req, res) => {
-
-});
 
 
 //put routes
