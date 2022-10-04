@@ -1,0 +1,32 @@
+.single-star-container {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #b1b1b1;
+  overflow: hidden;
+}
+.single-star-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #fde16d;
+}
+
+.single-star-outline:before, .single-star-fill:before {
+  content:"\2605";
+}
+
+.single-star-outline:before {
+  -webkit-text-stroke: 1px #848484;
+}
+
+.single-star-fill:before {
+  -webkit-text-stroke: 1px orange;
+}
+
+.single-star-container {
+  width: 16px;
+  display: inline-block
+}
