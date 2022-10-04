@@ -14,7 +14,7 @@ class Stars extends React.Component {
     if (rating > 0) {
       var [int, dec] = [Number(String(rating).split('.')[0]), Number('0.' + String(rating).split('.')[1]) || 0];
       var index = 0;
-      var newArr = this.state.stars;
+      var newArr = [0, 0, 0, 0, 0];
       while (int > 0) {
         newArr[index] = 1;
         int--;

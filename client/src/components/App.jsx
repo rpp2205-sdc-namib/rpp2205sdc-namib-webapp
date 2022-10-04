@@ -6,6 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {currentProductId: ''};
+    this.handleProductIdChange.bind(this);
   }
 
   handleProductIdChange(newId) {
@@ -15,7 +16,7 @@ class App extends React.Component {
 
   render() {
     return <div>
-      <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange.bind(this)}/>
+      <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
     </div>
   }
 }
