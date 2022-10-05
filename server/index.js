@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const { getProductHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 //get routes

@@ -5,7 +5,7 @@ import Overview from './Overview/overview.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentProductId: ''};
+    this.state = {currentProductId: '71697'}; //let's set this default value of current product id
     this.handleProductIdChange.bind(this);
   }
 

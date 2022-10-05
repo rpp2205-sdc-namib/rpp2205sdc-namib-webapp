@@ -3,11 +3,15 @@ import React from 'react';
 class Stars extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {stars: [0, 0, 0, 0, 0]};
+    this.state = {rating: 0, stars: [0, 0, 0, 0, 0]};
   }
 
-  componentDidMount() {
-    this.renderStarsByQuarters(this.props.rating);
+  componentDidUpdate(prevProps) {
+    if (this.props.rating !== prevProps.rating) {
+      this.setState({rating: this.props.rating}, () => {
+        this.renderStarsByQuarters(this.state.rating);
+      });
+    }
   }
 
   renderStarsByQuarters (rating) {
