@@ -33,11 +33,12 @@ module.exports = {
     var count = req.params.count;
     var page = req.params.page;
     var sort = req.params.sort;
+    console.log(req.params);
 
    if (req.url.includes('meta')) {
      axios.get(`${API_Link}/reviews/meta?product_id=${product_id}`, {
        headers: {
-         'Authorization': process.env.access_token
+         Authorization: process.env.access_token
        }
      })
        .then(response => {
@@ -50,11 +51,11 @@ module.exports = {
    } else {
       axios.get(`${API_Link}/reviews?product_id=${product_id}&count=${count}&page=${page}&sort=${sort}`, {
         headers: {
-          'Authorization': process.env.access_token
+          Authorization: process.env.access_token
         }
       })
         .then(response => {
-          res.status(200).send(response.data)
+          res.status(200).send(response.data);
         })
         .catch(err => {
           res.status(500).send(err);
