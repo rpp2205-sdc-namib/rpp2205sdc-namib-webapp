@@ -5,7 +5,8 @@ import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentProductId: ''};
+    this.state = {currentProductId: '71697'}; //let's set this default value of current product id
+    this.handleProductIdChange.bind(this);
   }
 
   handleProductIdChange(newId) {
@@ -16,7 +17,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange.bind(this)}/>
+        <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
         <Ratings_Reviews />
       </div>
     )
