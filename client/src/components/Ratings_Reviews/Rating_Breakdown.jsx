@@ -1,5 +1,5 @@
 import React from 'react';
-import FiveStars from '../FiveStars.jsx';
+import Stars from '../FiveStars.jsx';
 const axios = require('axios');
 
 class Rating_Breakdown extends React.Component {
@@ -51,13 +51,13 @@ class Rating_Breakdown extends React.Component {
 
   render() {
     if (!this.state.meta) {
-      console.log('test');
+      console.log('test, meta is null');
     } else {
       return (
         <div>
           <div>Average rating for one specific product.</div>
           <div>{this.averageReview(this.state.meta.data.ratings)}</div>
-          <FiveStars rating={this.averageReview(this.state.meta.data.ratings)}/>
+          <Stars rating={this.averageReview(this.state.meta.data.ratings)}/>
           <div>Total Reviews: {this.numberOfReviews(this.state.meta.data.ratings)}</div>
         </div>
       )

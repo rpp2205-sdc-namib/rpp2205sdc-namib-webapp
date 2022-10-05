@@ -50,7 +50,7 @@ class Reviews_List extends React.Component {
 
     return (
       <div>
-        <div>Reviews_List</div>
+        <div data-testid="text">Reviews_List</div>
         <button onClick={this.handleClick}>
           More Reviews
         </button>

@@ -10,7 +10,7 @@ class Individual_Review_Tile extends React.Component {
     console.log('reviews - Individual_Review_Tile', this.props.reviews);
     return (
       <div>
-        <div><h2>Individual_Review_Tile</h2></div>
+        <div><h4>Individual_Review_Tile</h4></div>
         <div>Star Rating: {this.props.reviews[0].rating}</div>
         <div>Date of Review: {this.props.reviews[0].date}</div>
         <div>Review Summary: {this.props.reviews[0].summary}</div>
