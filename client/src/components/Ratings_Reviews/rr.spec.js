@@ -1,10 +1,13 @@
+import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import Reviews_List from './Reviews_List.jsx';
-//const Reviews_List = require('./Reviews_List.jsx');
-//const [render, fireEvent, screen] = require('@testing-library/react')
+import '@testing-library/jest-dom/extend-expect';
 
 describe("Reviews_List.jsx", function(){
   test("returns the string, 'Reviews_List', to the virtual dom", function(){
-    console.log('hey');
+    render(<Reviews_List />);
+    const text = screen.getByTestId("text");
+    console.log('innerHTML', text.innerHTML);
+    expect(text).toHaveTextContent("Reviews_List");
   });
 });
