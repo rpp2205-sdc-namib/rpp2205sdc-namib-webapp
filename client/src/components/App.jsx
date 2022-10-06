@@ -35,16 +35,14 @@ class App extends React.Component {
     //only render the children components after componentDidMount() is completed fetching data from server
     if (this.state.currentProductId === '') {
       return null;
-    } else {
-      return (
-        <div>
-          <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
-          <Ratings_Reviews />
-          <Questions_Answers productId={this.state.productId} />
-        </div>
-      )
     }
-
+    return (
+      <div>
+        <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
+        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
+        <Questions_Answers productId={this.state.productId} />
+      </div>
+    )
   }
 }
 

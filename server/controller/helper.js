@@ -49,7 +49,7 @@ module.exports = {
          res.status(500).send(err);
        });
    } else {
-      axios.get(`${API_Link}/reviews?product_id=${product_id}&count=${count}&page=${page}&sort=${sort}`, {
+      axios.get(`${API_Link}/reviews?product_id=${product_id}`, {
         headers: {
           'Authorization': process.env.access_token
         }
