@@ -11,18 +11,18 @@ class Reviews_List extends React.Component {
       toggle: true
     };
 
-    this.retrieve = this.retrieve.bind(this);
+    //this.retrieve = this.retrieve.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  retrieve() {
-    axios.get('/reviews/71698/25/1/newest')
-      .then(results => {
-        console.log('results', results);
-        this.setState({ data: results, reviews: results.data.results }, () => { console.log('reviews', this.state.reviews); })
-      })
-      .catch(error => { console.error(error); });
-  }
+  // retrieve() {
+  //   axios.get('/reviews/71698/25/1/newest')
+  //     .then(results => {
+  //       console.log('results', results);
+  //       this.setState({ data: results, reviews: results.data.results }, () => { console.log('reviews', this.state.reviews); })
+  //     })
+  //     .catch(error => { console.error(error); });
+  // }
 
   handleClick(e) {
     e.preventDefault();
@@ -31,16 +31,16 @@ class Reviews_List extends React.Component {
     }));
   }
 
-  componentDidMount() {
-    this.retrieve();
-  }
+  // componentDidMount() {
+  //   this.retrieve();
+  // }
 
   render() {
     if (!this.state.toggle) {
       return (
         <div>
           <div>Reviews_List</div>
-          <Individual_Review_Tile reviews={this.state.reviews}/>
+          <Individual_Review_Tile reviews={this.props.reviews}/>
           <button onClick={this.handleClick}>
             More Reviews
           </button>

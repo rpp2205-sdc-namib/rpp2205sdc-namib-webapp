@@ -5,64 +5,64 @@ const axios = require('axios');
 class Rating_Breakdown extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      meta: null
-    };
+    this.state = {};
 
-    this.retrieve = this.retrieve.bind(this);
-    this.averageReview = this.averageReview.bind(this);
-    this.numberOfReviews = this.numberOfReviews.bind(this);
+    // this.retrieve = this.retrieve.bind(this);
+    // this.averageReview = this.averageReview.bind(this);
+    // this.numberOfReviews = this.numberOfReviews.bind(this);
   }
 
-  retrieve() {
-    axios.get('/reviews/meta/71698')
-      .then(results => {
-        console.log('results', results);
-        this.setState({ meta: results }, () => { console.log(this.state.meta); })
-      })
-      .catch(error => { console.error(error); });
-  }
+  // retrieve() {
+  //   axios.get('/reviews/meta/71698')
+  //     .then(results => {
+  //       console.log('results', results);
+  //       this.setState({ meta: results }, () => { console.log(this.state.meta); })
+  //     })
+  //     .catch(error => { console.error(error); });
+  // }
 
-  averageReview(ratings) {
-    console.log('ratings', ratings);
-    var total = 0;
-    var count = 0;
-    for (var key in ratings) {
-      total += parseInt(key) * parseInt(ratings[key]);
-      count += parseInt(ratings[key]);
-    }
+  // averageReview(ratings) {
+  //   console.log('ratings', ratings);
+  //   var total = 0;
+  //   var count = 0;
+  //   for (var key in ratings) {
+  //     total += parseInt(key) * parseInt(ratings[key]);
+  //     count += parseInt(ratings[key]);
+  //   }
 
-    var trueAverage = total/count;
-    var average = Math.round(trueAverage * 10) / 10;
-    return average;
-  }
+  //   var trueAverage = total/count;
+  //   var average = Math.round(trueAverage * 10) / 10;
+  //   return average;
+  // }
 
-  numberOfReviews(ratings) {
-    var count = 0;
-    for (var key in ratings) {
-      count += parseInt(ratings[key]);
-    }
-    return count;
-  }
+  // numberOfReviews(ratings) {
+  //   var count = 0;
+  //   for (var key in ratings) {
+  //     count += parseInt(ratings[key]);
+  //   }
+  //   return count;
+  // }
 
-  componentDidMount() {
-    this.retrieve();
-  }
+  // componentDidMount() {
+  //   this.retrieve();
+  // }
 
   render() {
-    if (!this.state.meta) {
-      console.log('test, meta is null');
-    } else {
       return (
         <div>
           <div>Average rating for one specific product.</div>
-          <div>{this.averageReview(this.state.meta.data.ratings)}</div>
-          <Stars rating={this.averageReview(this.state.meta.data.ratings)}/>
-          <div>Total Reviews: {this.numberOfReviews(this.state.meta.data.ratings)}</div>
+          <div>{this.props.rating}</div>
+          <Stars rating={this.props.rating}/>
+          <div>Total Reviews: {this.props.numOfReviews}</div>
         </div>
       )
     }
-  }
 }
 
 export default Rating_Breakdown;
+
+//<Stars rating={this.averageReview(this.state.meta.data.ratings)}/>
+
+// if (!this.state.meta) {
+//   console.log('test, meta is null');
+// } else {

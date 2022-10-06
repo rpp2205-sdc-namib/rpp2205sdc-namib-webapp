@@ -18,7 +18,7 @@ class App extends React.Component {
     return (
       <div>
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
-        <Ratings_Reviews />
+        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
       </div>
     )
   }
