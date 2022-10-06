@@ -33,7 +33,6 @@ class ProductInfo extends React.Component {
       <div id="category"><p>{this.state.currentProduct.category}</p></div>
       <div id="title"><p>{this.state.currentProduct.name}</p></div>
       <div id="overview"><p>{this.state.currentProduct.description}</p></div>
-
     </div>)
 
   }
