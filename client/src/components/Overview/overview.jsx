@@ -13,19 +13,21 @@ class Overview extends React.Component {
     this.state = {styleId: '', priceInfo: {}, styleObj: {}};
   }
 
-  handleStyleIdChange(newId) {
-
+  handleStyleIdChange(newId) { //use index or styleId?
+    axios.get(`/products/${this.props.productId}/styles`)
+    .then(response => {
+      var styleObj = newId === undefined ? response.data.results.find(style => style["default?"]) : response.data.results.find(style => style.style_id === newId);
+      this.setState({styleId: styleObj.style_id,
+                     priceInfo: {original_price: styleObj.original_price, sale_price: styleObj.sale_price},
+                     styleObj: styleObj});
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 
   componentDidMount() {
-    axios.get(`/products/${this.props.productId}/styles`)
-      .then(response => {
-        var defaultStyle = response.data.results.find(style => style["default?"]);
-        console.log(defaultStyle)
-        this.setState({styleId: defaultStyle.style_id,
-                       priceInfo: {original_price: defaultStyle.original_price, sale_price: defaultStyle.sale_price},
-                       styleObj: defaultStyle});
-      })
+    this.handleStyleIdChange();
   }
 
   render() {
@@ -36,7 +38,7 @@ class Overview extends React.Component {
         <ImageGallary />
         <ProductInfo productId={this.props.productId} styleId={this.state.styleId} rating={this.props.rating}
         totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
-        <StyleSelector styleId={this.state.styleId} changeStyle={this.handleStyleIdChange.bind(this)}/>
+        <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} changeStyle={this.handleStyleIdChange.bind(this)}/>
         <AddToCart styleId={this.state.styleId}/>
 
       </div>)
