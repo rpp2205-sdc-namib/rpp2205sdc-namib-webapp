@@ -7,6 +7,7 @@ class Stars extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log('rating in FiveStars', this.props.rating);
     if (this.props.rating !== prevProps.rating) {
       this.setState({rating: this.props.rating}, () => {
         this.renderStarsByQuarters(this.state.rating);

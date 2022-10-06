@@ -1,4 +1,5 @@
 import React from 'react';
+import Reviews_List from './Reviews_List.jsx';
 import Rating_Breakdown from './Rating_Breakdown.jsx';
 
 class Ratings_Reviews extends React.Component {
@@ -10,10 +11,10 @@ class Ratings_Reviews extends React.Component {
   render() {
     return (
       <div>
+        <Reviews_List />
         <Rating_Breakdown />
         {/* <Product_Breakdown />
         <Sort_Options />
-        <Reviews_List />
         <Invidiual_Review_Tile />
         <Write_New_Review /> */}
       </div>
