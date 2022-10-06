@@ -12,7 +12,7 @@ class Question extends React.Component {
   }
 
   handleAddAnswer() {
-    // adding an answer to the question
+    // adding an answer to the question.
     // opens up a modal window that contains a form to submit the answer
   }
 
