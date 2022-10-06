@@ -22,9 +22,11 @@ class Question extends React.Component {
 
 
   render() {
+    console.log('props: ', this.props.question)
+    if (!this.props.question) return null;
     return (
       <div>
-        <p>Q: </p>
+        <p>Q: {this.props.question.question_body}</p>
         <div>Helpful?</div>
         <div onClick={this.handleIncreaseCounts}>Yes<span>{this.state.helpfulness}</span></div>
         <div onClick={this.handleAddAnswer}>Add Answer</div>

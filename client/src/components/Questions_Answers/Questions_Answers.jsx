@@ -2,6 +2,7 @@ import React from 'react';
 import Question from './Question.jsx';
 import Answer from './Answer.jsx';
 import Search from './Search.jsx';
+import axios from 'axios';
 
 // this class is top-level component for Questions_Answers
 
@@ -9,10 +10,37 @@ class Questions_Answers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasMoreThanTwoQuestions: true
+      QAs: [],
+      selectedQAs: [],
+      hasMoreThanTwoQuestions: true,
+
     }
     this.handleMoreQuestions = this.handleShowMoreQuestions.bind(this);
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.selectTwoQuestions = this.selectTwoQuestions.bind(this);
+  }
+
+  componentDidMount() {
+    // get all questions
+    axios.get(`/qa/questions/${this.props.productId}`)
+      .then(data => {
+        // console.log('data: ', data.data.results)
+        this.setState({
+          QAs: data.data.results,
+          selectedQAs: this.selectTwoQuestions(data.data.results)
+        });
+      });
+  }
+
+  selectTwoQuestions(data) {
+    let questions = [];
+    let max = 2;
+
+    for (let i = 0; i < max; i++) {
+      questions.push(data[i]);
+    }
+
+    return questions;
   }
 
   handleShowMoreQuestions() {
@@ -25,18 +53,19 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
+    if (!this.state.selectedQAs) return null;
     return (
       <div>
         <Search />
         <div>
-          <Question />
-          <Answer />
-          <Answer />
+          <Question question={this.state.selectedQAs[0]} />
+          <Answer answer={this.state.selectedQAs[0]} />
+          <Answer answer={this.state.selectedQAs[0]} />
         </div>
         <div>
-          <Question />
-          <Answer />
-          <Answer />
+          <Question question={this.state.selectedQAs[1]} />
+          <Answer answer={this.state.selectedQAs[1]} />
+          <Answer answer={this.state.selectedQAs[1]} />
         </div>
         {this.state.hasMoreThanTwoQuestions &&
           <button onClick={this.handleShowMoreQuestions}>More Answered Questions</button>
