@@ -8,7 +8,7 @@ import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentProductId: '71697', //let's set this default value of current product id
+    this.state = {currentProductId: '',
                   rating: 0,
                   totalReviews: 0};
     this.handleProductIdChange.bind(this);
@@ -20,7 +20,8 @@ class App extends React.Component {
       .then(response => {
         var reviewsAndRating = totalReviewsAndAvgRating(response.data.ratings);
         this.setState({rating: reviewsAndRating[1],
-                       totalReviews: reviewsAndRating[0]})
+                       totalReviews: reviewsAndRating[0],
+                       currentProductId: '71697'});
       })
 
   }
@@ -31,13 +32,19 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
-        <Ratings_Reviews />
-        <Questions_Answers productId={this.state.productId} />
-      </div>
-    )
+    //only render the children components after componentDidMount() is completed fetching data from server
+    if (this.state.currentProductId === '') {
+      return null;
+    } else {
+      return (
+        <div>
+          <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
+          <Ratings_Reviews />
+          <Questions_Answers productId={this.state.productId} />
+        </div>
+      )
+    }
+
   }
 }
 
