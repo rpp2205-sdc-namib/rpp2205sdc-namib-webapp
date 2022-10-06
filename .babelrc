@@ -3,9 +3,6 @@
   "presets": [
     [
       "@babel/preset-env",
-      // {
-      //   "modules": false
-      // },
       {
         "targets": { "esmodules": false, "node": "current" }
      }
@@ -15,3 +12,4 @@
     ]
   ]
 }
+
