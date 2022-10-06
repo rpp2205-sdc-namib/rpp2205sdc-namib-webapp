@@ -7,10 +7,13 @@ class Stars extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.rating, prevProps)
     if (this.props.rating !== prevProps.rating) {
       this.setState({rating: this.props.rating}, () => {
         this.renderStarsByQuarters(this.state.rating);
       });
+    } else {
+      this.renderStarsByQuarters(this.state.rating);
     }
   }
 

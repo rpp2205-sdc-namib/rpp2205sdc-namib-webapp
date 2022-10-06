@@ -3,37 +3,34 @@ import ProductInfo from './product-info.jsx';
 import ImageGallary from './image-gallary.jsx';
 import StyleSelector from './style-selector.jsx';
 import AddToCart from './add-to-cart.jsx';
-import { avgRating } from './helperFunctions.jsx';
 import axios from 'axios';
+import Stars from '../FiveStars.jsx';
+
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {rating: 0, currentProduct: {}, currentStyles: []};
+    this.state = {styleId: '', test: 3};
+  }
+
+  handleStyleIdChange(newId) {
+    this.setState({styleId: newId})
   }
 
   componentDidMount() {
-    var id = this.props.productId;
-    var promises = [axios.get(`/products/${id}`),
-                    axios.get(`/products/${id}/styles`),
-                    axios.get(`/reviews/meta/${id}`)];
-    Promise.all(promises)
-      .then(resultArr => {
-      this.setState({currentProduct: resultArr[0].data,
-                     currentStyles: resultArr[1].data.results,
-                     rating: avgRating(resultArr[2].data.ratings)})
+    axios.get(`/products/${this.props.productId}/styles`)
+      .then(response => {
+        this.setState({styleId: response.data.results[0]})
       })
-      .catch(err => {
-        console.error(err);
-      });
   }
 
   render() {
     return (<div>
       <ImageGallary />
-      <ProductInfo rating={this.state.rating}/>
-      <StyleSelector />
-      <AddToCart />
+      <Stars rating={this.state.test}/>
+      <ProductInfo productId={this.props.productId} styleId={this.state.styleId}/>
+      <StyleSelector styleId={this.state.styleId} changeStyle={this.handleStyleIdChange.bind(this)}/>
+      <AddToCart styleId={this.state.styleId}/>
 
     </div>)
 

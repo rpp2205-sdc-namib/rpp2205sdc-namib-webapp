@@ -1,6 +1,6 @@
 module.exports = {
 
-  avgRating: (obj) => {
+  totalReviewsAndAvgRating: (obj) => {
     var arr = [1, 2, 3, 4, 5];
     var helperArr = arr.reduce((acc, element) => {
       var key = String(element);
@@ -8,7 +8,7 @@ module.exports = {
       acc[1] += Number(obj[key] * element);
       return acc;
     }, [0, 0]);
-    return (Math.round(helperArr[1] / helperArr[0] * 100) / 100).toFixed(2);
+    return [helperArr[0], (Math.round(helperArr[1] / helperArr[0] * 100) / 100).toFixed(2)];
   },
 
 }
