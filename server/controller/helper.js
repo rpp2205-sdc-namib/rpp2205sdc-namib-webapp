@@ -38,7 +38,7 @@ module.exports = {
    if (req.url.includes('meta')) {
      axios.get(`${API_Link}/reviews/meta?product_id=${product_id}`, {
        headers: {
-         Authorization: process.env.access_token
+         'Authorization': process.env.access_token
        }
      })
        .then(response => {
@@ -51,7 +51,7 @@ module.exports = {
    } else {
       axios.get(`${API_Link}/reviews?product_id=${product_id}&count=${count}&page=${page}&sort=${sort}`, {
         headers: {
-          Authorization: process.env.access_token
+          'Authorization': process.env.access_token
         }
       })
         .then(response => {
