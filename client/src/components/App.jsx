@@ -3,6 +3,7 @@ import Overview from './Overview/overview.jsx';
 import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.jsx';
 import axios from 'axios';
 import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
+import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class App extends React.Component {
       <div>
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
         <Ratings_Reviews />
+        <Questions_Answers productId={this.state.productId} />
       </div>
     )
   }
