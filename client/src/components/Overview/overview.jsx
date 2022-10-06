@@ -27,8 +27,7 @@ class Overview extends React.Component {
   render() {
     return (<div>
       <ImageGallary />
-      <Stars rating={this.state.test}/>
-      <ProductInfo productId={this.props.productId} styleId={this.state.styleId}/>
+      <ProductInfo productId={this.props.productId} styleId={this.state.styleId} rating={this.props.rating} totalReviews={this.props.totalReviews}/>
       <StyleSelector styleId={this.state.styleId} changeStyle={this.handleStyleIdChange.bind(this)}/>
       <AddToCart styleId={this.state.styleId}/>
 
