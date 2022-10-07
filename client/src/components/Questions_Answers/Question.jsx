@@ -4,8 +4,9 @@ import React from 'react';
 class Question extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props: ', props)
     this.state = {
-      helpfulness: 0
+      helpfulness: props.question.question_helpfulness
     }
     this.handleAddAnswer = this.handleAddAnswer.bind(this);
     this.handleIncreaseCounts = this.handleIncreaseCounts.bind(this);
@@ -18,12 +19,12 @@ class Question extends React.Component {
 
   handleIncreaseCounts() {
     // increase the count of helpfulness
+    this.setState({
+      helpfulness: this.state.helpfulness + 1
+    })
   }
 
-
   render() {
-    console.log('props: ', this.props.question)
-    if (!this.props.question) return null;
     return (
       <div>
         <p>Q: {this.props.question.question_body}</p>

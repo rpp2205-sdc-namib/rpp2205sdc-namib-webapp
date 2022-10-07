@@ -13,8 +13,8 @@ class Questions_Answers extends React.Component {
       QAs: [],
       selectedQAs: [],
       hasMoreThanTwoQuestions: true,
-
     }
+
     this.handleMoreQuestions = this.handleShowMoreQuestions.bind(this);
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
     this.selectTwoQuestions = this.selectTwoQuestions.bind(this);
@@ -53,20 +53,19 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
-    if (!this.state.selectedQAs) return null;
     return (
       <div>
         <Search />
-        <div>
-          <Question question={this.state.selectedQAs[0]} />
-          <Answer answer={this.state.selectedQAs[0]} />
-          <Answer answer={this.state.selectedQAs[0]} />
-        </div>
-        <div>
-          <Question question={this.state.selectedQAs[1]} />
-          <Answer answer={this.state.selectedQAs[1]} />
-          <Answer answer={this.state.selectedQAs[1]} />
-        </div>
+        {this.state.selectedQAs.map((qa, index) => {
+          if (index > 1) return;
+          return (
+            <div>
+              <Question question={qa} />
+              <Answer answer={qa} />
+              <Answer answer={qa} />
+            </div>
+          )
+        })}
         {this.state.hasMoreThanTwoQuestions &&
           <button onClick={this.handleShowMoreQuestions}>More Answered Questions</button>
         }
