@@ -11,13 +11,11 @@ class Questions_Answers extends React.Component {
     super(props);
     this.state = {
       QAs: [],
-      selectedQAs: [],
       hasMoreThanTwoQuestions: true,
     }
 
     this.handleMoreQuestions = this.handleShowMoreQuestions.bind(this);
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
-    this.selectTwoQuestions = this.selectTwoQuestions.bind(this);
   }
 
   componentDidMount() {
@@ -27,20 +25,8 @@ class Questions_Answers extends React.Component {
         // console.log('data: ', data.data.results)
         this.setState({
           QAs: data.data.results,
-          selectedQAs: this.selectTwoQuestions(data.data.results)
         });
       });
-  }
-
-  selectTwoQuestions(data) {
-    let questions = [];
-    let max = 2;
-
-    for (let i = 0; i < max; i++) {
-      questions.push(data[i]);
-    }
-
-    return questions;
   }
 
   handleShowMoreQuestions() {
@@ -56,7 +42,7 @@ class Questions_Answers extends React.Component {
     return (
       <div>
         <Search />
-        {this.state.selectedQAs.map((qa, index) => {
+        {this.state.QAs.map((qa, index) => {
           if (index > 1) return;
           return (
             <div>
