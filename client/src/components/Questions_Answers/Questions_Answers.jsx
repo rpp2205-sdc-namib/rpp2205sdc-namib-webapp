@@ -22,7 +22,6 @@ class Questions_Answers extends React.Component {
     // get all questions
     axios.get(`/qa/questions/${this.props.productId}`)
       .then(data => {
-        // console.log('data: ', data.data.results)
         this.setState({
           QAs: data.data.results,
         });
@@ -36,6 +35,7 @@ class Questions_Answers extends React.Component {
   handleAddQuestion() {
     // allows user to create a new question for the product
     // opens modal window
+
   }
 
   render() {
@@ -45,7 +45,7 @@ class Questions_Answers extends React.Component {
         {this.state.QAs.map((qa, index) => {
           if (index > 1) return;
           return (
-            <div>
+            <div key={qa.question_id}>
               <Question question={qa} />
               <Answer answer={qa} />
               <Answer answer={qa} />
