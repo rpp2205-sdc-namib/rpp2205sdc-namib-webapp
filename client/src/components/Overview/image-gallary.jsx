@@ -7,6 +7,14 @@ class ImageGallary extends React.Component {
     this.state = {currentPhotoIndex: 0, highlightArr: []}
   }
 
+  componentDidMount() {
+    var arr = [true];
+    for (var i = 0; i < this.props.photos.length - 1; i++) {
+      arr.push(false);
+    }
+    this.setState({highlightArr: arr});
+  }
+
   changeCurrentPhoto(newIndex) {
     var arr = [];
     this.props.photos.forEach((photo, index) => {
@@ -16,14 +24,19 @@ class ImageGallary extends React.Component {
         arr.push(true)
       }
     })
-    this.setState({currentPhotoIndex: newIndex, highlightArr: arr});
+    this.setState({currentPhotoIndex: newIndex, highlightArr: arr}, () => {
+      console.log(this.state)
+    });
   }
 
   render() {
+    if (this.state.highlightArr.length === 0) {
+      return null;
+    }
     return (<div className="image-gallary">
       <div className="gallary-list">{this.props.photos.map((photo, index) => {
         return (<div key={index}>
-          <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.props.highlightArr[index]}/>
+          <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.highlightArr[index]}/>
         </div>)
       })}
       </div>
