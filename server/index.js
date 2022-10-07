@@ -14,7 +14,7 @@ app.get('/products/:product_id', getProductHandler);
 
 app.get('/products/:product_id/styles', getStylesHandler);
 
-app.get('/reviews/:product_id/:count/:page/:sort', getReviewsHandler);
+app.get('/reviews/:product_id', getReviewsHandler);
 
 app.get('/reviews/meta/:product_id', getReviewsHandler);
 
@@ -49,3 +49,6 @@ app.put('/qa/questions', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on  http://localhost:${port}`);
 });
+
+
+//app.get('/reviews/:product_id/:count/:page/:sort', getReviewsHandler);

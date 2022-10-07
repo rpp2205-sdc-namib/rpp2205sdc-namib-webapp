@@ -3,16 +3,21 @@ import React from 'react';
 class Stars extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {rating: 0, stars: [0, 0, 0, 0, 0]};
+    this.state = {stars: [0, 0, 0, 0, 0]};
   }
 
-  componentDidUpdate(prevProps) {
-    console.log('rating in FiveStars', this.props.rating);
-    if (this.props.rating !== prevProps.rating) {
-      this.setState({rating: this.props.rating}, () => {
-        this.renderStarsByQuarters(this.state.rating);
-      });
-    }
+  // componentDidUpdate(prevProps) {
+  //   console.log('rating in FiveStars', this.props.rating);
+  //   if (this.props.rating !== prevProps.rating) {
+  //     this.setState({rating: this.props.rating}, () => {
+  //       this.renderStarsByQuarters(this.state.rating);
+  //     });
+  //   }
+  // }
+  componentDidMount() {
+    this.setState({rating: this.props.rating}, () => {
+      this.renderStarsByQuarters(this.state.rating);
+    });
   }
 
   renderStarsByQuarters (rating) {
@@ -42,7 +47,8 @@ class Stars extends React.Component {
   }
 
   render() {
-    return (<div>{this.state.stars.map((star, i) => {
+    console.log('render five-stars', this.props.rating);
+    return (<div className="five-stars">{this.state.stars.map((star, i) => {
       return (<div className="single-star-container" key={i}>
         <span className="single-star-outline"></span>
         <span className="single-star-fill" style={{width: star * 100 + '%'}}></span>

@@ -6,7 +6,7 @@ class ImageGallary extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (<div className="image-gallary">
 
     </div>)
 

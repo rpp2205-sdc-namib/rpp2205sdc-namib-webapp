@@ -11,4 +11,12 @@ module.exports = {
     return (Math.round(helperArr[1] / helperArr[0] * 100) / 100).toFixed(2);
   },
 
+  numberOfReviews: (ratings) => {
+    var count = 0;
+    for (var key in ratings) {
+      count += parseInt(ratings[key]);
+    }
+    return count;
+  }
+
 }

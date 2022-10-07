@@ -3,39 +3,47 @@ import ProductInfo from './product-info.jsx';
 import ImageGallary from './image-gallary.jsx';
 import StyleSelector from './style-selector.jsx';
 import AddToCart from './add-to-cart.jsx';
-import { avgRating } from './helperFunctions.jsx';
 import axios from 'axios';
+import Stars from '../FiveStars.jsx';
+
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {rating: 0, currentProduct: {}, currentStyles: []};
+    this.state = {styleId: '', priceInfo: {}, styleObj: {}};
+  }
+
+  handleStyleIdChange(newId) { //use index or styleId?
+    console.log('thumbnail clicked, newId', newId);
+    axios.get(`/products/${this.props.productId}/styles`)
+    .then(response => {
+      var styleObj = newId === undefined ? response.data.results.find(style => style["default?"]) : response.data.results.find(style => style.style_id === newId);
+      this.setState({styleId: styleObj.style_id,
+                     priceInfo: {original_price: styleObj.original_price, sale_price: styleObj.sale_price},
+                     styleObj: styleObj});
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 
   componentDidMount() {
-    var id = this.props.productId;
-    var promises = [axios.get(`/products/${id}`),
-                    axios.get(`/products/${id}/styles`),
-                    axios.get(`/reviews/meta/${id}`)];
-    Promise.all(promises)
-      .then(resultArr => {
-      this.setState({currentProduct: resultArr[0].data,
-                     currentStyles: resultArr[1].data.results,
-                     rating: avgRating(resultArr[2].data.ratings)})
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    this.handleStyleIdChange();
   }
 
   render() {
-    return (<div>
-      <ImageGallary />
-      <ProductInfo rating={this.state.rating}/>
-      <StyleSelector />
-      <AddToCart />
+    if (this.state.styleId === '') {
+      return null;
+    } else {
+      return (<div className="overview">
+        <ImageGallary photos={this.state.styleObj.photos}/>
+        <ProductInfo productId={this.props.productId} rating={this.props.rating}
+        totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
+        <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} changeStyle={this.handleStyleIdChange.bind(this)}/>
+        <AddToCart styleObj={this.state.styleObj}/>
+      </div>)
+    }
 
-    </div>)
 
   }
 }
