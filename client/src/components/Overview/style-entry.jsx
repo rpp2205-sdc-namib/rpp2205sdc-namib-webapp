@@ -12,7 +12,7 @@ class StyleEntry extends React.Component {
 
   render() {
     return (<div>
-      <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url} onClick={this.handleClick.bind(this)}></img>
+      <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleClick.bind(this)}></img>
     </div>)
 
   }

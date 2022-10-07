@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    var productId = '71697';
+    var productId = '71698';
     axios.get(`/reviews/meta/${productId}`)
       .then(response => {
         var reviewsAndRating = totalReviewsAndAvgRating(response.data.ratings);
