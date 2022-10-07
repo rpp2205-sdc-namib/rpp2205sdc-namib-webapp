@@ -5,9 +5,14 @@ class StyleEntry extends React.Component {
     super(props);
   }
 
+  handleClick() {
+    var newId = this.props.id;
+    this.props.changeStyle(newId);
+  }
+
   render() {
     return (<div>
-      <img src={this.props.styleObj.photos[0].thumbnail_url}></img>
+      <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url} onClick={this.handleClick.bind(this)}></img>
     </div>)
 
   }

@@ -14,6 +14,7 @@ class Overview extends React.Component {
   }
 
   handleStyleIdChange(newId) { //use index or styleId?
+    console.log('thumbnail clicked, newId', newId);
     axios.get(`/products/${this.props.productId}/styles`)
     .then(response => {
       var styleObj = newId === undefined ? response.data.results.find(style => style["default?"]) : response.data.results.find(style => style.style_id === newId);
@@ -34,13 +35,12 @@ class Overview extends React.Component {
     if (this.state.styleId === '') {
       return null;
     } else {
-      return (<div>
-        <ImageGallary />
-        <ProductInfo productId={this.props.productId} styleId={this.state.styleId} rating={this.props.rating}
+      return (<div className="overview">
+        <ImageGallary photos={this.state.styleObj.photos}/>
+        <ProductInfo productId={this.props.productId} rating={this.props.rating}
         totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
         <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} changeStyle={this.handleStyleIdChange.bind(this)}/>
-        <AddToCart styleId={this.state.styleId}/>
-
+        <AddToCart styleObj={this.state.styleObj}/>
       </div>)
     }
 
