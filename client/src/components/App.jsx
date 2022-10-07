@@ -21,7 +21,7 @@ class App extends React.Component {
         var reviewsAndRating = totalReviewsAndAvgRating(response.data.ratings);
         this.setState({rating: reviewsAndRating[1],
                        totalReviews: reviewsAndRating[0],
-                       currentProductId: '71697'});
+                       currentProductId: productId});
       })
 
   }

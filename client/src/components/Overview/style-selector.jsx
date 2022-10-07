@@ -22,12 +22,16 @@ class StyleSelector extends React.Component {
     if (this.state.styles.length === 0) {
       return null;
     } else {
-      return (<div>
+      return (<div className="style-selector">
+        <p>{'Style > ' + this.props.styleObj.name}</p>
+        <div className="styles">
         {this.state.styles.map((style, index) => {
-          return (<div key={index} id={style.style_id}>
-            <StyleEntry styleObj={style}/></div>)
+          return (<div className="styleEntries" key={index}>
+            <StyleEntry id={style.style_id} styleObj={style} changeStyle={this.props.changeStyle}/></div>)
         })}
-        </div>)
+        </div>
+      </div>
+      )
     }
 
 
