@@ -1,15 +1,17 @@
 import React from 'react';
 
-class yourOutfit extends React.Component {
+class YourOutfit extends React.Component {
   constructor (props) {
     super(props);
   }
 
   render () {
     return(
-
-      )
+      <div id="outfit">
+        <button>+ Add Product</button>
+      </div>
+    )
   }
 }
 
-export default yourOutfit;
+export default YourOutfit;
