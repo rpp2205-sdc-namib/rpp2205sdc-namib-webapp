@@ -33,7 +33,6 @@ module.exports = {
     var count = req.params.count;
     var page = req.params.page;
     var sort = req.params.sort;
-    console.log(req.params);
 
    if (req.url.includes('meta')) {
      axios.get(`${API_Link}/reviews/meta?product_id=${product_id}`, {

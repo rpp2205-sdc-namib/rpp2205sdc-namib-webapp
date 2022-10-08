@@ -14,7 +14,6 @@ class GallaryEntry extends React.Component {
   }
 
   render() {
-    console.log(this.props.id, this.props.highlight)
     return (<div>
       <img className="gallary-entry" src={this.props.photoInfo.thumbnail_url} onMouseOver={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyl}></img>
     </div>)

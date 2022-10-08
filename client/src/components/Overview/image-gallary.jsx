@@ -4,43 +4,41 @@ import GallaryEntry from './gallary-entry.jsx';
 class ImageGallary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentPhotoIndex: 0, highlightArr: []}
+    this.state = {currentPhotoIndex: 0}
   }
 
-  componentDidMount() {
-    var arr = [true];
-    for (var i = 0; i < this.props.photos.length - 1; i++) {
-      arr.push(false);
+  handleForward () {
+    var oldId = this.state.currentPhotoIndex;
+    if (oldId < this.props.photos.length) {
+      this.changeCurrentPhoto(oldId + 1);
     }
-    this.setState({highlightArr: arr});
+  }
+
+  handleBackward () {
+    var oldId = this.state.currentPhotoIndex;
+    if (oldId > 0) {
+      this.changeCurrentPhoto(oldId - 1);
+    }
   }
 
   changeCurrentPhoto(newIndex) {
-    var arr = [];
-    this.props.photos.forEach((photo, index) => {
-      if (index !== newIndex) {
-        arr.push(false)
-      } else {
-        arr.push(true)
-      }
-    })
-    this.setState({currentPhotoIndex: newIndex, highlightArr: arr}, () => {
-      console.log(this.state)
-    });
+    this.setState({currentPhotoIndex: newIndex});
   }
 
   render() {
-    if (this.state.highlightArr.length === 0) {
-      return null;
-    }
     return (<div className="image-gallary">
       <div className="gallary-list">{this.props.photos.map((photo, index) => {
         return (<div key={index}>
-          <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.highlightArr[index]}/>
+          <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index}/>
         </div>)
       })}
       </div>
-      <img className="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url}></img>
+      <div className="current-photo">
+        <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url}></img>
+        <button id="backBtn" onClick={this.handleBackward.bind(this)}>Back</button>
+        <button id="forwardBtn" onClick={this.handleForward.bind(this)}>Forward</button>
+      </div>
+
     </div>)
 
   }

@@ -11,4 +11,12 @@ module.exports = {
     return [helperArr[0], (Math.round(helperArr[1] / helperArr[0] * 100) / 100).toFixed(2)];
   },
 
+  QuantitySelectArr: (num) => {
+    if (num === 0) {
+      return [];
+    }
+    var num = Math.min(15, num);
+    var arr = [...Array(num + 1).keys()];
+    return arr.slice(1);
+  }
 }
