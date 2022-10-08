@@ -22,6 +22,7 @@ class Questions_Answers extends React.Component {
     // get all questions
     axios.get(`/qa/questions/${this.props.productId}`)
       .then(data => {
+        console.log('data: ', data)
         this.setState({
           QAs: data.data.results,
         });

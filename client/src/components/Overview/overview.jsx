@@ -10,17 +10,17 @@ import Stars from '../FiveStars.jsx';
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {styleId: '', priceInfo: {}, styleObj: {}};
+    this.state = {styleId: '', priceInfo: {}, styleObj: {}, styles: []};
   }
 
-  handleStyleIdChange(newId) { //use index or styleId?
-    console.log('thumbnail clicked, newId', newId);
+  handleStyleIdChange(newId) {
     axios.get(`/products/${this.props.productId}/styles`)
     .then(response => {
       var styleObj = newId === undefined ? response.data.results.find(style => style["default?"]) : response.data.results.find(style => style.style_id === newId);
       this.setState({styleId: styleObj.style_id,
                      priceInfo: {original_price: styleObj.original_price, sale_price: styleObj.sale_price},
-                     styleObj: styleObj});
+                     styleObj: styleObj,
+                     styles: response.data.results});
     })
     .catch(err => {
       console.error(err);
@@ -39,7 +39,7 @@ class Overview extends React.Component {
         <ImageGallary photos={this.state.styleObj.photos}/>
         <ProductInfo productId={this.props.productId} rating={this.props.rating}
         totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
-        <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} changeStyle={this.handleStyleIdChange.bind(this)}/>
+        <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.state.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
         <AddToCart styleObj={this.state.styleObj}/>
       </div>)
     }

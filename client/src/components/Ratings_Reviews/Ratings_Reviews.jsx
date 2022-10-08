@@ -31,7 +31,7 @@ class Ratings_Reviews extends React.Component {
   render() {
     return (
       <div>
-        <Rating_Breakdown rating={this.state.rating} numberOfReviews={this.state.numOfReviews}/>
+        <Rating_Breakdown rating={this.props.rating} numberOfReviews={this.state.numOfReviews}/>
         <Reviews_List reviews={this.state.reviews}/>
         {//<Reviews_List reviews={this.state.reviews}/>
         /* <Product_Breakdown />

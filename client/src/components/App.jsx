@@ -54,11 +54,16 @@ class App extends React.Component {
     return (
       <div >
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
+<<<<<<< HEAD
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
         <RPList show={this.handleClick.bind(this)} productId={this.state.currentProductId}/>
         {this.state.showModal ? (<Modal open={this.state.showModal} closeModal={this.handleClose.bind(this)} />) : ('')}
         <YourOutfit />
         <Questions_Answers productId={this.state.productId} />
+=======
+        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating}/>
+        <Questions_Answers productId={this.state.currentProductId} />
+>>>>>>> main
       </div>
     )
   }
