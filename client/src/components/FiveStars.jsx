@@ -15,9 +15,7 @@ class Stars extends React.Component {
   //   }
   // }
   componentDidMount() {
-    this.setState({rating: this.props.rating}, () => {
-      this.renderStarsByQuarters(this.state.rating);
-    });
+    this.renderStarsByQuarters(this.props.rating);
   }
 
   renderStarsByQuarters (rating) {
