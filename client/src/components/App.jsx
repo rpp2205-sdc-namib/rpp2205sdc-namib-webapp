@@ -8,7 +8,7 @@ import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentProductId: '71697',
+    this.state = {currentProductId: '',
                   rating: 0,
                   totalReviews: 0};
     this.handleProductIdChange.bind(this);
@@ -39,7 +39,7 @@ class App extends React.Component {
     return (
       <div>
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
-        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
+        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>
     )

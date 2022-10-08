@@ -14,7 +14,6 @@ class Overview extends React.Component {
   }
 
   handleStyleIdChange(newId) {
-    console.log('thumbnail clicked, newId', newId);
     axios.get(`/products/${this.props.productId}/styles`)
     .then(response => {
       var styleObj = newId === undefined ? response.data.results.find(style => style["default?"]) : response.data.results.find(style => style.style_id === newId);
