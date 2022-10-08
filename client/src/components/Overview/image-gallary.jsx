@@ -9,7 +9,7 @@ class ImageGallary extends React.Component {
 
   handleForward () {
     var oldId = this.state.currentPhotoIndex;
-    if (oldId < this.props.photos.length) {
+    if (oldId < this.props.photos.length - 1) {
       this.changeCurrentPhoto(oldId + 1);
     }
   }
