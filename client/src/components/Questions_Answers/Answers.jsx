@@ -7,26 +7,33 @@ class Answers extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.props.allAnswersForFirstQuestion.map((answer, index) => {
-          if (index > 1) return;
-          return (
-            <>
-              <Answer answer={answer} />
-            </>
+    if (this.props.allAnswersForFirstQuestion) {
+      return (
+        <div>
+          {this.props.allAnswersForFirstQuestion.map((answer, index) => {
+            if (index > 1) return;
+            return (
+              <div key={answer.answer_id}>
+                <Answer answer={answer} />
+              </div>
           )
         })}
-        {this.props.allAnswersForSecondQuestion.map((answer, index) => {
-          if (index > 1) return;
-          return (
-            <>
-              <Answer answer={answer} />
-            </>
-          )
-        })}
-      </div>
-    )
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          {this.props.allAnswersForSecondQuestion.map((answer, index) => {
+            if (index > 1) return;
+            return (
+              <div key={answer.answer_id}>
+                <Answer answer={answer} />
+              </div>
+            )
+          })}
+        </div>
+      )
+    }
   }
 }
 

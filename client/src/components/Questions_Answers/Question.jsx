@@ -5,6 +5,7 @@ import ModalWindow from './ModalWindow.jsx';
 class Question extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props in question: ', props)
 
     this.state = {
       helpfulness: props.question.question_helpfulness,
