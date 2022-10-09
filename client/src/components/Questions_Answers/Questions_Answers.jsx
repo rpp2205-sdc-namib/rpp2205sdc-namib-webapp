@@ -42,7 +42,6 @@ class Questions_Answers extends React.Component {
     return axios.get(`/qa/questions/${this.props.productId}`)
     .then(data => {
       var results = data.data.results;
-      console.log('results: ', results)
       this.setState({
         QAs: results,
         top2Questions: (results.length < 2) ? [results[0]] : [results[0], results[1]],
