@@ -1,6 +1,6 @@
 import React from 'react';
 import Question from './Question.jsx';
-import Answer from './Answer.jsx';
+import Answers from './Answers.jsx';
 import Search from './Search.jsx';
 import axios from 'axios';
 
@@ -11,6 +11,13 @@ class Questions_Answers extends React.Component {
     super(props);
     this.state = {
       QAs: [],
+      question_id_1: '',
+      question_id_2: '',
+      top2Questions: [],
+      allAnswersForFirstQuestion: [],
+      allAnswersForSecondQuestion: [],
+      top2AnswersForFirstQuestion: [],
+      top2AnswersForSecondQuestion: [],
       hasMoreThanTwoQuestions: true,
     }
 
@@ -21,11 +28,31 @@ class Questions_Answers extends React.Component {
   componentDidMount() {
     // get all questions
     axios.get(`/qa/questions/${this.props.productId}`)
-      .then(data => {
+      .then(async data => {
         this.setState({
           QAs: data.data.results,
+          top2Questions: [data.data.results[0], data.data.results[1]],
+          question_id_1: data.data.results[0].question_id || null,
+          question_id_2: data.data.results[1].question_id || null,
+        },
+        () => {
+          axios.get(`/qa/questions/${this.state.question_id_1}/answers`)
+          .then(data => {
+            this.setState({
+              allAnswersForFirstQuestion: data.data.results,
+              top2AnswersForFirstQuestion: [data.data.results[0], data.data.results[1]]
+            }, () => {
+              axios.get(`/qa/questions/${this.state.question_id_2}/answers`)
+              .then(data => {
+                this.setState({
+                  allAnswersForSecondQuestion: data.data.results,
+                  top2AnswersForSecondQuestion: [data.data.results[0], data.data.results[1]]
+                })
+              })
+            })
+          })
         });
-      });
+      })
   }
 
   handleShowMoreQuestions() {
@@ -42,14 +69,17 @@ class Questions_Answers extends React.Component {
     return (
       <div>
         <Search />
-        {this.state.QAs.map((qa, index) => {
-          if (index > 1) return;
+        {this.state.top2Questions.map(qa => {
           return (
-            <div key={qa.question_id}>
+            <>
               <Question question={qa} />
-              <Answer answer={qa} />
-              <Answer answer={qa} />
-            </div>
+              {this.state.top2AnswersForFirstQuestion.length && this.state.top2AnswersForSecondQuestion.length &&
+                <Answers
+                  allAnswersForFirstQuestion={this.state.allAnswersForFirstQuestion}
+                  allAnswersForSecondQuestion={this.state.allAnswersForSecondQuestion}
+                />
+              }
+            </>
           )
         })}
         {this.state.hasMoreThanTwoQuestions &&

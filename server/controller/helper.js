@@ -33,7 +33,7 @@ module.exports = {
     var count = req.params.count;
     var page = req.params.page;
     var sort = req.params.sort;
-    console.log(req.params);
+    // console.log(req.params);
 
    if (req.url.includes('meta')) {
      axios.get(`${API_Link}/reviews/meta?product_id=${product_id}`, {
@@ -75,6 +75,23 @@ module.exports = {
       res.status(200).send(response.data);
     })
     .catch(err => {
+      res.sendStatus(500);
+    })
+  },
+
+  getAnswersHandler: (req, res) => {
+    var question_id = req.params.question_id;
+
+    axios.get(`${API_Link}/qa/questions/${question_id}/answers`, {
+      headers: {
+        'Authorization': process.env.access_token
+      }
+    })
+    .then(response => {
+      res.status(200).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err)
       res.sendStatus(500);
     })
   },
