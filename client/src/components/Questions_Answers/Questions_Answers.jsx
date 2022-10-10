@@ -27,7 +27,7 @@ class Questions_Answers extends React.Component {
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     // get all questions
     this.getAllQuestions(() => {
       this.getAnswersForSpecificQuestionId(this.state.question_id_1, 1, () => {
@@ -80,6 +80,7 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
+    console.log(this.state.QAs)
     return (
       <div>
         <Search />

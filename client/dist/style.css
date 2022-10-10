@@ -163,3 +163,8 @@
   -webkit-text-stroke: 1px orange;
   position: absolute;
 }
+
+/* Questions & Answers widget */
+.seller {
+  font-weight: bold;
+}

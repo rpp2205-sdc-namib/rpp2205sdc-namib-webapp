@@ -42,11 +42,14 @@ class Answer extends React.Component {
   }
 
   render() {
+    console.log('lol: ', this.props.answer)
+    let { body, answerer_name, date } = this.props.answer;
+
     return (
       <div>
-        <p>A: {this.props.answer.body}</p>
-        <div>by {this.props.answer.answer_name === "Seller" ? "Seller" : this.props.answer.answerer_name}</div>
-        <div>{this.handleDateFormat(this.props.answer.date)}</div>
+        <p>A: {body}</p>
+        by<span className={answerer_name === "Seller" ? 'seller' : undefined}>{answerer_name === "Seller" ? "Seller" : answerer_name}</span>
+        <div>{this.handleDateFormat(date)}</div>
         <div>Helpful?</div>
         <button disabled={this.state.isYesClicked} onClick={this.handleIncreaseCounts}>Yes<span>{this.state.helpfulness}</span></button>
         {this.state.isReported ? <button disabled={this.state.isReported} onClick={this.handleReport}>Reported</button> : <button onClick={this.handleReport}>Report</button>}
