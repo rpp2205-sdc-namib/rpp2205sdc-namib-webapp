@@ -1,4 +1,3 @@
 node_modules
 client/dist/main.js
 .env
-client/dist/main.js.LICENSE.txt
