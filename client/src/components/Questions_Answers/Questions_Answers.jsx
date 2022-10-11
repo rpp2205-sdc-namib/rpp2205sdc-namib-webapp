@@ -1,6 +1,6 @@
 import React from 'react';
 import Question from './Question.jsx';
-import Answer from './Answer.jsx';
+import Answers from './Answers.jsx';
 import Search from './Search.jsx';
 import axios from 'axios';
 
@@ -11,22 +11,62 @@ class Questions_Answers extends React.Component {
     super(props);
     this.state = {
       QAs: [],
+      question_id_1: '',
+      question_id_2: '',
+      top2Questions: [],
+      allAnswersForFirstQuestion: [],
+      allAnswersForSecondQuestion: [],
+      top2AnswersForFirstQuestion: [],
+      top2AnswersForSecondQuestion: [],
       hasMoreThanTwoQuestions: true,
     }
 
+    this.getAllQuestions = this.getAllQuestions.bind(this);
+    this.getAnswersForSpecificQuestionId = this.getAnswersForSpecificQuestionId.bind(this);
     this.handleMoreQuestions = this.handleShowMoreQuestions.bind(this);
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // get all questions
-    axios.get(`/qa/questions/${this.props.productId}`)
-      .then(data => {
-        console.log('data: ', data)
+    this.getAllQuestions(() => {
+      this.getAnswersForSpecificQuestionId(this.state.question_id_1, 1, () => {
+        if (this.state.question_id_2) {
+          this.getAnswersForSpecificQuestionId(this.state.question_id_2, 2, null)
+        }
+      })
+    })
+  }
+
+  getAllQuestions(callback) {
+    return axios.get(`/qa/questions/${this.props.productId}`)
+    .then(data => {
+      var results = data.data.results;
+      this.setState({
+        QAs: results,
+        top2Questions: (results.length < 2) ? [results[0]] : [results[0], results[1]],
+        question_id_1: results[0] ? results[0].question_id : null,
+        question_id_2: results[1] ? results[1].question_id : null,
+      }, callback)
+    })
+  }
+
+  getAnswersForSpecificQuestionId(questionId, index, callback) {
+    return axios.get(`/qa/questions/${questionId}/answers`)
+    .then(data => {
+      var results = data.data.results;
+      if (index === 1) {
         this.setState({
-          QAs: data.data.results,
-        });
-      });
+          allAnswersForFirstQuestion: results,
+          top2AnswersForFirstQuestion: (results.length < 2) ? [results[0]] : [results[0], results[1]]
+        }, callback)
+      } else {
+        this.setState({
+          allAnswersForSecondQuestion: results,
+          top2AnswersForSecondQuestion: (results.length < 2) ? [results[0]] : [results[0], results[1]]
+        }, callback)
+      }
+    })
   }
 
   handleShowMoreQuestions() {
@@ -43,15 +83,30 @@ class Questions_Answers extends React.Component {
     return (
       <div>
         <Search />
-        {this.state.QAs.map((qa, index) => {
-          if (index > 1) return;
-          return (
-            <div key={qa.question_id}>
+        {this.state.top2Questions.map((qa, index) => {
+          if (index === 0) {
+            return (
+              <div key={qa.question_id}>
               <Question question={qa} />
-              <Answer answer={qa} />
-              <Answer answer={qa} />
+              {this.state.top2AnswersForFirstQuestion.length &&
+                <Answers
+                  allAnswersForFirstQuestion={this.state.allAnswersForFirstQuestion}
+                />
+              }
             </div>
-          )
+            )
+          } else {
+            return (
+              <div key={qa.question_id}>
+              <Question question={qa} />
+              {this.state.top2AnswersForSecondQuestion.length &&
+                <Answers
+                  allAnswersForSecondQuestion={this.state.allAnswersForSecondQuestion}
+                />
+              }
+              </div>
+            )
+          }
         })}
         {this.state.hasMoreThanTwoQuestions &&
           <button onClick={this.handleShowMoreQuestions}>More Answered Questions</button>
