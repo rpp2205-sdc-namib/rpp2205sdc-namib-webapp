@@ -1,54 +1,77 @@
 import React from 'react';
 import GallaryEntry from './gallary-entry.jsx';
-// import PopUp from './modal-popup.jsx';
+
+const classNameForoverview = ["image-gallary", "gallary-list", "current-photo", "backBtn", "forwardBtn", "expanded-view"];
+const classNameFormodal = ["image-gallary-modal", "gallary-list-modal", "current-photo-modal", "backBtn-modal", "forwardBtn-modal", "default-view"];
 
 class ImageGallary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentPhotoIndex: 0}
+    this.state = { currentPhotoIndex: 0};
   }
 
-  handleForward () {
+  handleForward() {
     var oldId = this.state.currentPhotoIndex;
     if (oldId < this.props.photos.length - 1) {
       this.changeCurrentPhoto(oldId + 1);
     }
   }
 
-  handleBackward () {
+  handleBackward() {
     var oldId = this.state.currentPhotoIndex;
     if (oldId > 0) {
       this.changeCurrentPhoto(oldId - 1);
     }
   }
 
+  handleClick() {
+    if(this.props.section === 'overview') {
+      this.props.handleModalAppear();
+      this.props.handleBackground("rgba(192,192,192,0.7)");
+    } else {
+      this.props.handleModalDisappear();
+      this.props.handleBackground("white");
+    }
+  }
+
   changeCurrentPhoto(newIndex) {
-    this.setState({currentPhotoIndex: newIndex});
+    this.setState({ currentPhotoIndex: newIndex });
   }
 
   render() {
     if (this.props.section === 'modal') {
       return (
-        <div>
-          hello this is a modal window!
+        <div className={this.props.section === "overview" ? "image-gallary" : "image-gallary-modal"}>
+          <div className={this.props.section === "overview" ? "gallary-list" : "gallary-list-modal"}>{this.props.photos.map((photo, index) => {
+            return (<div key={index}>
+              <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />
+            </div>)
+          })}
+          </div>
+          <div className="current-photo-modal">
+            <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex].url}></img>
+            <button id="backBtn-modal" onClick={this.handleBackward.bind(this)}>Back</button>
+            <button id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>Forward</button>
+            <button id="default-view" onClick={this.handleClick.bind(this)}>Default View</button>
+          </div>
         </div>
       )
     }
     return (
-    <div className="image-gallary">
-      <div className="gallary-list">{this.props.photos.map((photo, index) => {
-        return (<div key={index}>
-          <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index}/>
-        </div>)
-      })}
-      </div>
-      <div className="current-photo">
-        <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url}></img>
-        <button id="backBtn" onClick={this.handleBackward.bind(this)}>Back</button>
-        <button id="forwardBtn" onClick={this.handleForward.bind(this)}>Forward</button>
-        <button id="expanded-view">Expand</button>
-      </div>
-    </div>)
+      <div className="image-gallary">
+        <div className="gallary-list">{this.props.photos.map((photo, index) => {
+          return (<div key={index}>
+            <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />
+          </div>)
+        })}
+        </div>
+        <div className="current-photo">
+          <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url}></img>
+          <button id="backBtn" onClick={this.handleBackward.bind(this)}>Back</button>
+          <button id="forwardBtn" onClick={this.handleForward.bind(this)}>Forward</button>
+          <button id="expanded-view" onClick={this.handleClick.bind(this)}>Expand</button>
+        </div>
+      </div>)
 
   }
 }

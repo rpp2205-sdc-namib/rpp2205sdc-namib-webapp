@@ -11,7 +11,7 @@ import PopUp from './modal-popup.jsx';
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {styleId: '', priceInfo: {}, styleObj: {}, styles: []}; //styleObj is specific
+    this.state = {styleId: '', priceInfo: {}, styleObj: {}, styles: [], modalStyle: {"display": "none"}}; //styleObj is specific
   }
 
   handleStyleIdChange(newId) {
@@ -28,6 +28,14 @@ class Overview extends React.Component {
     })
   }
 
+  handleModalAppear() {
+    this.setState({modalStyle: {"display": "flex"}});
+  }
+
+  handleModalDisappear() {
+    this.setState({modalStyle: {"display": "none"}});
+  }
+
   componentDidMount() {
     this.handleStyleIdChange();
   }
@@ -38,14 +46,14 @@ class Overview extends React.Component {
     } else {
       return (<div className="overview-container">
         <div className="overview">
-          <ImageGallary section = "overview" photos={this.state.styleObj.photos}/>
+          <ImageGallary section = "overview" photos={this.state.styleObj.photos} handleModalAppear={this.handleModalAppear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
           <ProductInfo productId={this.props.productId} rating={this.props.rating}
           totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
           <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.state.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
           <AddToCart styleObj={this.state.styleObj}/>
       </div>
-      <div className="overview modal">
-        <ImageGallary section="modal" photos={this.state.styleObj.photos}/>
+      <div className="overview modal" style={this.state.modalStyle}>
+        <ImageGallary section="modal" photos={this.state.styleObj.photos} handleModalDisappear={this.handleModalDisappear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
       </div>
       </div>
       )

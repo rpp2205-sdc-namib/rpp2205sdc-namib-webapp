@@ -14,8 +14,8 @@ class App extends React.Component {
                   rating: 0,
                   totalReviews: 0,
                   currentProduct: {}, //contains product name, category
-                  defaultStyle: {}//contains price info(original_price, sale_price)
-                };
+                  defaultStyle: {},//contains price info(original_price, sale_price) //backgroundColor: "white"
+                  };
     this.handleProductIdChange.bind(this);
   }
 
@@ -36,10 +36,15 @@ class App extends React.Component {
       .catch(err => console.error(err))
   }
 
-
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
     this.setState({currentProductId: newId})
+  }
+
+  handleOverviewBackground(color) {
+    this.setState({backgroundColor:color}, () => {
+      console.log(this.state.backgroundColor);
+    });
   }
 
   render() {
@@ -48,8 +53,8 @@ class App extends React.Component {
       return null;
     }
     return (
-      <div >
-        <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
+      <div style={{"backgroundColor": this.state.backgroundColor}}>
+        <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
         {/* <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/> */}
         <RPList productId={this.state.currentProductId}/>
         <YourOutfit />
