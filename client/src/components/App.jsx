@@ -6,15 +6,13 @@ import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 import RPList from './RelatedItems_Comparison/rp-list.jsx'
 import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
-import Modal from './RelatedItems_Comparison/modal.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {currentProductId: '',
                   rating: 0,
-                  totalReviews: 0,
-                  showModal: false
+                  totalReviews: 0
                 };
     this.handleProductIdChange.bind(this);
   }
@@ -31,15 +29,6 @@ class App extends React.Component {
 
   }
 
-  handleClick(e) {
-    e.preventDefault();
-    this.setState({showModal: true});
-  }
-
-  handleClose(e) {
-    e.preventDefault();
-    this.setState({showModal: false});
-  }
 
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
@@ -54,16 +43,12 @@ class App extends React.Component {
     return (
       <div >
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
-<<<<<<< HEAD
-        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/>
-        <RPList show={this.handleClick.bind(this)} productId={this.state.currentProductId}/>
-        {this.state.showModal ? (<Modal open={this.state.showModal} closeModal={this.handleClose.bind(this)} />) : ('')}
+        {/* <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/> */}
+        <RPList productId={this.state.currentProductId}/>
         <YourOutfit />
         <Questions_Answers productId={this.state.productId} />
-=======
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating}/>
         <Questions_Answers productId={this.state.currentProductId} />
->>>>>>> main
       </div>
     )
   }

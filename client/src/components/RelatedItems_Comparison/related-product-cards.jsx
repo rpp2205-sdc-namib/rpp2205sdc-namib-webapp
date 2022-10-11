@@ -23,7 +23,7 @@ class RPC extends React.Component {
   render () {
     return(
       <div id="card">
-        <button onClick={this.props.showModal}>Star button</button>
+        <button onClick={this.props.show}>Star button</button>
         <p>image goes here</p>
         <p>Category</p>
         <p>Product Name</p>
