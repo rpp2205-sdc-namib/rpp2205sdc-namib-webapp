@@ -57,7 +57,7 @@ class Answers extends React.Component {
     if (this.props.allAnswersForFirstQuestion) {
       let sortedAllAnswersForFirstQuestion = this.sortBySeller('allAnswersForFirstQuestion');
       return (
-        <div>
+        <div className={`answers${this.state.viewAllAnswersForFirstQuestion ? '_expand_mode' : ''}`}>
           {sortedAllAnswersForFirstQuestion.map((answer, index) => {
             if (index > 1) return;
             return (
@@ -85,7 +85,7 @@ class Answers extends React.Component {
     } else {
       let sortedAllAnswersForSecondQuestion = this.sortBySeller('allAnswersForSecondQuestion');
       return (
-        <div>
+        <div className={`answers${this.state.viewAllAnswersForSecondQuestion ? '_expand_mode' : ''}`}>
           {sortedAllAnswersForSecondQuestion.map((answer, index) => {
             if (index > 1) return;
             return (
