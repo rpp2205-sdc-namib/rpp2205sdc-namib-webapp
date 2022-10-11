@@ -3,6 +3,7 @@
 const path = require('path');
 
 const isProduction = process.env.NODE_ENV == 'production';
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 const stylesHandler = 'style-loader';
@@ -41,8 +42,13 @@ const config = {
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
-        ],
+        ]
     },
+    optimization: {
+        minimizer: [new TerserPlugin({
+            extractComments: false
+        })]
+    }
 };
 
 module.exports = () => {
