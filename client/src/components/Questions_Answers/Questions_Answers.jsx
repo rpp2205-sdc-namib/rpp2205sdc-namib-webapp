@@ -18,7 +18,7 @@ class Questions_Answers extends React.Component {
       allAnswersForSecondQuestion: [],
       top2AnswersForFirstQuestion: [],
       top2AnswersForSecondQuestion: [],
-      hasMoreThanTwoQuestions: true,
+      hasMoreThanTwoQuestions: false,
     }
 
     this.getAllQuestions = this.getAllQuestions.bind(this);
@@ -47,6 +47,7 @@ class Questions_Answers extends React.Component {
         top2Questions: (results.length < 2) ? [results[0]] : [results[0], results[1]],
         question_id_1: results[0] ? results[0].question_id : null,
         question_id_2: results[1] ? results[1].question_id : null,
+        hasMoreThanTwoQuestions: results.length > 2
       }, callback)
     })
   }
@@ -80,7 +81,6 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
-    console.log(this.state.QAs)
     return (
       <div>
         <Search />

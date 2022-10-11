@@ -4,7 +4,6 @@ import React from 'react';
 class Answer extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props in answer: ', props)
     this.state = {
       helpfulness: props.answer.helpfulness,
       isYesClicked: false,
@@ -42,7 +41,6 @@ class Answer extends React.Component {
   }
 
   render() {
-    console.log('lol: ', this.props.answer)
     let { body, answerer_name, date } = this.props.answer;
 
     return (

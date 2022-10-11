@@ -5,8 +5,14 @@ class Answers extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      viewAllAnswersForFirstQuestion: false,
+      viewAllAnswersForSecondQuestion: false,
+    }
+
     this.sortAnswers = this.sortAnswers.bind(this);
     this.sortBySeller = this.sortBySeller.bind(this);
+    this.handleViewMoreAnswers = this.handleViewMoreAnswers.bind(this);
   }
 
   sortAnswers(callback, index) {
@@ -32,24 +38,27 @@ class Answers extends React.Component {
     return results;
   }
 
+  handleViewMoreAnswers(index) {
+    // load the rest of answers
+    // change text to "Collapse answers"
+    // Make the full list of answers scrollable
+    if (index === 'viewAllAnswersForFirstQuestion') {
+      this.setState({
+        viewAllAnswersForFirstQuestion: !this.state[index]
+      })
+    } else {
+      this.setState({
+        viewAllAnswersForSecondQuestion: !this.state[index]
+      })
+    }
+  }
+
   render() {
     if (this.props.allAnswersForFirstQuestion) {
+      let sortedAllAnswersForFirstQuestion = this.sortBySeller('allAnswersForFirstQuestion');
       return (
         <div>
-          {this.sortBySeller('allAnswersForFirstQuestion').map((answer, index) => {
-            if (index > 1) return;
-            return (
-              <div key={answer.answer_id}>
-                <Answer answer={answer} />
-              </div>
-          )
-        })}
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          {this.sortBySeller('allAnswersForSecondQuestion').map((answer, index) => {
+          {sortedAllAnswersForFirstQuestion.map((answer, index) => {
             if (index > 1) return;
             return (
               <div key={answer.answer_id}>
@@ -57,6 +66,48 @@ class Answers extends React.Component {
               </div>
             )
           })}
+          {this.state.viewAllAnswersForFirstQuestion &&
+            <div>
+              {sortedAllAnswersForFirstQuestion.map((answer, index) => {
+              if (index < 2) return;
+              return (
+                <div key={answer.answer_id}>
+                  <Answer answer={answer} />
+                </div>
+              )
+            })}
+            </div>}
+            {this.props.allAnswersForFirstQuestion.length > 2 &&
+            <button onClick={() => this.handleViewMoreAnswers('viewAllAnswersForFirstQuestion')}>{this.state.viewAllAnswersForFirstQuestion ? 'Collapse answers' : 'See more answers'}</button>
+            }
+        </div>
+      )
+    } else {
+      let sortedAllAnswersForSecondQuestion = this.sortBySeller('allAnswersForSecondQuestion');
+      return (
+        <div>
+          {sortedAllAnswersForSecondQuestion.map((answer, index) => {
+            if (index > 1) return;
+            return (
+              <div key={answer.answer_id}>
+                <Answer answer={answer} />
+              </div>
+            )
+          })}
+          {this.state.viewAllAnswersForFirstQuestion &&
+            <div>
+              {sortedAllAnswersForSecondQuestion.map((answer, index) => {
+              if (index < 2) return;
+              return (
+                <div key={answer.answer_id}>
+                  <Answer answer={answer} />
+                </div>
+              )
+            })}
+            </div>}
+            {this.props.allAnswersForSecondQuestion.length > 2 &&
+            <button onClick={() => this.handleViewMoreAnswers('viewAllAnswersForSecondQuestion')}>{this.state.viewAllAnswersForSecondQuestion ? 'Collapse answers' : 'See more answers'}</button>
+            }
         </div>
       )
     }
