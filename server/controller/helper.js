@@ -78,6 +78,23 @@ module.exports = {
     })
   },
 
+  getAnswersHandler: (req, res) => {
+    var question_id = req.params.question_id;
+
+    axios.get(`${API_Link}/qa/questions/${question_id}/answers`, {
+      headers: {
+        'Authorization': process.env.access_token
+      }
+    })
+    .then(response => {
+      res.status(200).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err)
+      res.sendStatus(500);
+    })
+  },
+
   postReviewHandler: (req, res) => {
     var { rating, recommend, characteristics, summay, body } = req.body;
     axios.post(`${API_Link}/reviews`, {product_id, rating, summary, })

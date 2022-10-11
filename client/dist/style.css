@@ -130,6 +130,30 @@
   align-content: flex-start;
 }
 
+/* Related Items and Comparison styling */
+#card {
+  padding: 10px;
+  margin: 15px;
+  border: 1px solid black;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+#outfit {
+  padding: 10px;
+  margin: 15px;
+  vertical-align: middle;
+  display: inline-block;
+  border: 1px solid black;
+}
+
+#modal {
+  width: 500 px;
+  background: white;
+  border: 1px solid black;
+  z-index: 1;
+
+}
 /* photo gallary styling */
 
 #current-photo {
