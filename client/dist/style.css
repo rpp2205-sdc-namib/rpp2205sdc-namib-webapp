@@ -1,11 +1,30 @@
 /* Overview Component Styles */
-.overview {
+.overview-container {
   height: 600px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content:center;
+}
+
+.overview {
+  height: 100%;
+  width: 100%;
+  position:absolute;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: flex-start;
 
+}
+
+.modal {
+  height: 90%;
+  width: 90%;
+  border-style: solid;
+  border-color: aqua;
+  z-index: 9;
+  opacity: 70%;
 }
 
 .image-gallary {
@@ -186,4 +205,10 @@
   color: yellow;
   -webkit-text-stroke: 1px orange;
   position: absolute;
+}
+
+/* image gallary modal view styling */
+.popup {
+  width: 800px;
+  height: 550px;
 }
