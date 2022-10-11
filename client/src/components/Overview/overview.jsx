@@ -11,7 +11,7 @@ import PopUp from './modal-popup.jsx';
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {styleId: '', priceInfo: {}, styleObj: {}, styles: []}; //thumbnail/urls,
+    this.state = {styleId: '', priceInfo: {}, styleObj: {}, styles: []}; //styleObj is specific
   }
 
   handleStyleIdChange(newId) {
