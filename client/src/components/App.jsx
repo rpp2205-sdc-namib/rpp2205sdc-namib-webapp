@@ -14,7 +14,8 @@ class App extends React.Component {
                   rating: 0,
                   totalReviews: 0,
                   currentProduct: {}, //contains product name, category
-                  defaultStyle: {},//contains price info(original_price, sale_price) //backgroundColor: "white"
+                  defaultStyle: {},//contains price info(original_price, sale_price) //
+                  background: "white"
                   };
     this.handleProductIdChange.bind(this);
   }
@@ -42,9 +43,7 @@ class App extends React.Component {
   }
 
   handleOverviewBackground(color) {
-    this.setState({backgroundColor:color}, () => {
-      console.log(this.state.backgroundColor);
-    });
+    this.setState({background: color});
   }
 
   render() {
@@ -53,7 +52,7 @@ class App extends React.Component {
       return null;
     }
     return (
-      <div style={{"backgroundColor": this.state.backgroundColor}}>
+      <div style={{"backgroundColor": this.state.background}}>
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
         {/* <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/> */}
         <RPList productId={this.state.currentProductId}/>

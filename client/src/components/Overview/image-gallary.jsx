@@ -27,7 +27,7 @@ class ImageGallary extends React.Component {
   handleClick() {
     if(this.props.section === 'overview') {
       this.props.handleModalAppear();
-      this.props.handleBackground("rgba(192,192,192,0.7)");
+      this.props.handleBackground("rgba(192,192,192,0.8)");
     } else {
       this.props.handleModalDisappear();
       this.props.handleBackground("white");
