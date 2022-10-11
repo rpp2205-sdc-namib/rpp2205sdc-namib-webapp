@@ -11,6 +11,8 @@ class YourOutfit extends React.Component {
 
   addProduct(e) {
     e.preventDefault();
+    console.log('clicked');
+    this.setState({list: [...this.state.list, this.props.productId]})
   }
 
 
@@ -18,7 +20,12 @@ class YourOutfit extends React.Component {
   render () {
     return(
       <div id="outfit">
-        <button >+ Add Product</button>
+        <button onClick={this.addProduct.bind(this)}>+ Add Product</button>
+        {this.state.list.map(element => {
+          return(
+            <RPC rating={this.props.prodRating} />
+          )
+        })}
       </div>
     )
   }
