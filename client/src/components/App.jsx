@@ -53,7 +53,6 @@ class App extends React.Component {
         {/* <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/> */}
         <RPList productId={this.state.currentProductId}/>
         <YourOutfit productId={this.state.currentProductId} prodRating={this.state.rating}/>
-        <Questions_Answers productId={this.state.productId} />
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>
