@@ -63,7 +63,6 @@ class ModalWindow extends React.Component {
     let isNicknameValid = this.state.answer.length !== 0;
     let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
 
-
     this.setState({
       isEmailValidated: isEmailValid,
       hasError: !isAnswerValid || !isNicknameValid || !isEmailValid
