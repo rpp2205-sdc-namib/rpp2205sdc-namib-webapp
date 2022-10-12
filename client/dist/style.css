@@ -187,3 +187,30 @@
   -webkit-text-stroke: 1px orange;
   position: absolute;
 }
+
+
+/* ratings_reviews */
+.reviews {
+  float: middle;
+  position:relative;
+}
+
+.tile {
+  position: relative;
+}
+
+.tile-date {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.tile-user {
+  position: absolute;
+  top: 0;
+  right: 110px;
+}
+
+.tile-user::after {
+  content: ",";
+}

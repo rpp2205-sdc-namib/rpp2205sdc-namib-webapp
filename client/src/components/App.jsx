@@ -22,11 +22,13 @@ class App extends React.Component {
     axios.get(`/reviews/meta/${productId}`)
       .then(response => {
         var reviewsAndRating = totalReviewsAndAvgRating(response.data.ratings);
-        this.setState({rating: reviewsAndRating[1],
-                       totalReviews: reviewsAndRating[0],
-                       currentProductId: productId});
+        this.setState({
+          rating: reviewsAndRating[1],
+          totalReviews: reviewsAndRating[0],
+          currentProductId: productId
+        })
       })
-
+      .catch(error => {console.error(error)});
   }
 
 
@@ -43,11 +45,9 @@ class App extends React.Component {
     return (
       <div >
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
-        {/* <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange}/> */}
         <RPList productId={this.state.currentProductId}/>
         <YourOutfit />
-        <Questions_Answers productId={this.state.productId} />
-        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating}/>
+        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>
     )

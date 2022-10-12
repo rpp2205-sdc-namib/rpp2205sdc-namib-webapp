@@ -1,27 +1,28 @@
 import React from 'react';
 import Reviews_List from './Reviews_List.jsx';
 import Rating_Breakdown from './Rating_Breakdown.jsx';
-import { avgRating, numberOfReviews } from './helperFunctions.jsx';
+import { totalReviewsAndAvgRating } from '../helperFunctions.jsx';
 import axios from 'axios';
 
 class Ratings_Reviews extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {reviews: {}, rating: 0, numOfReviews: 0};
+    this.state = {
+      reviews: [],
+      rating: this.props.rating,
+      totalReviews: this.props.totalReviews
+    };
   }
 
   componentDidMount() {
     var id = this.props.productId;
-    console.log('id', id);
-    var promises = [axios.get(`/reviews/${id}`, { params: { count: 8 } }),
-                    axios.get(`/reviews/meta/${id}`)];
-    Promise.all(promises)
-      .then(resultArr => {
-        this.setState({reviews: resultArr[0].data.results,
-                       rating: avgRating(resultArr[1].data.ratings),
-                       numOfReviews: numberOfReviews(resultArr[1].data.ratings)
-                      }, () => {console.log('reviews - test', this.state.reviews)})
+    var count = this.props.totalReviews.toString();
+    axios.get(`/reviews/${id}/${count}`)
+      .then(results => {
+        this.setState({
+          reviews: results.data.results
+        }, () => {console.log(this.state.reviews)})
       })
       .catch(err => {
         console.error(err);
@@ -29,17 +30,15 @@ class Ratings_Reviews extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Rating_Breakdown rating={this.props.rating} numberOfReviews={this.state.numOfReviews}/>
-        <Reviews_List reviews={this.state.reviews}/>
-        {//<Reviews_List reviews={this.state.reviews}/>
-        /* <Product_Breakdown />
-        <Sort_Options />
-        <Invidiual_Review_Tile />
-        <Write_New_Review /> */}
-      </div>
-    )
+    if (this.state.reviews.length) {
+      return (
+        <div>
+          <Rating_Breakdown rating={this.state.rating} totalReviews={this.state.totalReviews}/>
+          <Reviews_List reviews={this.state.reviews} totalReviews={this.state.totalReviews}/>
+        </div>
+      )
+    }
+    return null;
   }
 }
 
