@@ -5,12 +5,13 @@ import StyleSelector from './style-selector.jsx';
 import AddToCart from './add-to-cart.jsx';
 import axios from 'axios';
 import Stars from '../FiveStars.jsx';
+import PopUp from './modal-popup.jsx';
 
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {styleId: '', priceInfo: {}, styleObj: {}, styles: []};
+    this.state = {styleId: '', priceInfo: {}, styleObj: {}, styles: []}; //styleObj is specific
   }
 
   handleStyleIdChange(newId) {
@@ -35,13 +36,19 @@ class Overview extends React.Component {
     if (this.state.styleId === '') {
       return null;
     } else {
-      return (<div className="overview">
-        <ImageGallary photos={this.state.styleObj.photos}/>
-        <ProductInfo productId={this.props.productId} rating={this.props.rating}
-        totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
-        <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.state.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
-        <AddToCart styleObj={this.state.styleObj}/>
-      </div>)
+      return (<div className="overview-container">
+        <div className="overview">
+          <ImageGallary section = "overview" photos={this.state.styleObj.photos}/>
+          <ProductInfo productId={this.props.productId} rating={this.props.rating}
+          totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
+          <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.state.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
+          <AddToCart styleObj={this.state.styleObj}/>
+      </div>
+      <div className="overview modal">
+        <ImageGallary section="modal" photos={this.state.styleObj.photos}/>
+      </div>
+      </div>
+      )
     }
 
 

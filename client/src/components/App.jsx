@@ -12,21 +12,28 @@ class App extends React.Component {
     super(props);
     this.state = {currentProductId: '',
                   rating: 0,
-                  totalReviews: 0
+                  totalReviews: 0,
+                  currentProduct: {}, //contains product name, category
+                  defaultStyle: {}//contains price info(original_price, sale_price)
                 };
     this.handleProductIdChange.bind(this);
   }
 
   componentDidMount() {
     var productId = '71697';
-    axios.get(`/reviews/meta/${productId}`)
-      .then(response => {
-        var reviewsAndRating = totalReviewsAndAvgRating(response.data.ratings);
+    var promises = [axios.get(`/reviews/meta/${productId}`),
+                    axios.get(`/products/${productId}/styles`),
+                    axios.get(`/products/${productId}`)];
+    Promise.all(promises)
+      .then(responseArr => {
+        var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
         this.setState({rating: reviewsAndRating[1],
                        totalReviews: reviewsAndRating[0],
-                       currentProductId: productId});
+                       currentProductId: productId,
+                       currentProduct: responseArr[2].data,
+                       defaultStyle: responseArr[1].data.results.find(style => style["default?"])});
       })
-
+      .catch(err => console.error(err))
   }
 
 
