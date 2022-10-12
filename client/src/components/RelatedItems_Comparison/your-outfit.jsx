@@ -16,14 +16,13 @@ class YourOutfit extends React.Component {
   }
 
 
-
   render () {
     return(
       <div id="outfit">
         <button onClick={this.addProduct.bind(this)}>+ Add Product</button>
         {this.state.list.map(element => {
           return(
-            <RPC rating={this.props.prodRating} />
+            <RPC totalRating={this.props.prodRating} />
           )
         })}
       </div>

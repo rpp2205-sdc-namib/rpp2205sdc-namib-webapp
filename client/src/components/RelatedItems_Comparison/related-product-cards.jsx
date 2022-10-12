@@ -24,12 +24,12 @@ class RPC extends React.Component {
   render () {
     return(
       <div id="card">
-        <button onClick={this.props.show}>Star button</button>
+        (<button onClick={this.props.show}>Star button</button>): ()
         <p>image goes here</p>
         <p>Category</p>
         <p>Product Name</p>
         <p>Price</p>
-        <Stars />
+        <Stars rating={this.props.totalRating}/>
       </div>
     )
   }
