@@ -84,7 +84,6 @@ class Questions_Answers extends React.Component {
     return (
       <div>
         <Search />
-        {!this.state.QAs.length}
         {this.state.top2Questions.map((qa, index) => {
           if (index === 0) {
             return (
