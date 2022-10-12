@@ -19,6 +19,7 @@ class YourOutfit extends React.Component {
   render () {
     return(
       <div id="outfit">
+        <div data-testid="outfit">YourOutfit</div>
         <button onClick={this.addProduct.bind(this)}>+ Add Product</button>
         {this.state.list.map(element => {
           return(
