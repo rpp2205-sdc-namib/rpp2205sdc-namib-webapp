@@ -23,7 +23,8 @@ class App extends React.Component {
     var productId = '71697';
     var promises = [axios.get(`/reviews/meta/${productId}`),
                     axios.get(`/products/${productId}/styles`),
-                    axios.get(`/products/${productId}`)];
+                    axios.get(`/products/${productId}`),
+                    axios.get(`/products/${productId}/related`)];
     Promise.all(promises)
       .then(responseArr => {
         var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
