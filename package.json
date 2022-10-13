@@ -6,7 +6,6 @@
   "scripts": {
     "test": "jest --env=jsdom",
     "test:overview": "jest ./client/src/components/Overview/overview.test.js",
-    "test:relatedproducts": "jest .client/src/components/RelatedItems_Comparison/related-product-card.test.js",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
