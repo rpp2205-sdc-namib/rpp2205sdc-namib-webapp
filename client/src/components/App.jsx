@@ -21,8 +21,8 @@ class App extends React.Component {
     this.handleProductIdChange.bind(this);
   }
 
-  componentDidMount() {
-    var productId = '71697';
+  init(productId) {
+    //var productId = '71697';
     var promises = [axios.get(`/reviews/meta/${productId}`),
                     axios.get(`/products/${productId}/styles`),
                     axios.get(`/products/${productId}`)];
@@ -40,9 +40,13 @@ class App extends React.Component {
       .catch(err => console.error(err))
   }
 
+  componentDidMount() {
+    this.init('71697');
+  }
+
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
-    this.setState({currentProductId: newId})
+    this.init(newId);
   }
 
   handleOverviewBackground(color) {

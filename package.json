@@ -4,9 +4,9 @@
   "description": "My webpack project",
   "main": "index.js",
   "scripts": {
-    "test": "jest --env=jsdom",
+    "test": "jest --env=jsdom ----coverage",
     "test:review": "jest ./client/src/components/Ratings_Reviews/rr.spec.js --env=jsdom",
-    "test:overview": "jest ./client/src/components/Overview/overview.test.js",
+    "test:overview": "jest ./client/src/components/Overview/overview.test.js --env=jsdom ----coverage",
     "test:questions_answers": "jest ./client/src/components/Questions_Answers/questions_answers.test.js",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
@@ -14,6 +14,8 @@
     "watch": "webpack --watch & nodemon ./server/index.js"
   },
   "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["text", "json", "html"],
     "verbose": true,
     "transform": {
       "\\.[jt]sx?$": "babel-jest"
