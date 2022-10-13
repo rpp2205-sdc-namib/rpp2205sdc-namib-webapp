@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Stars from '../FiveStars.jsx';
 
 class RPC extends React.Component {
   constructor (props) {
@@ -28,7 +29,7 @@ class RPC extends React.Component {
         <p>Category</p>
         <p>Product Name</p>
         <p>Price</p>
-        <p>Rating</p>
+        <Stars rating={this.props.totalRating}/>
       </div>
     )
   }
