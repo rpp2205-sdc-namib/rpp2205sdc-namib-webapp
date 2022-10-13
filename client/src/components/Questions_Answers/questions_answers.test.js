@@ -1,17 +1,23 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import ModalWindow from './ModalWindow.jsx';
-import Questions_Answers from './Questions_Answers.jsx';
-
 /**
  * @jest-environment jsdom
  */
 
-describe('component rendering', function() {
-  test("should render Questions_Answers component correctly", function() {
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom'
+import ModalWindow from './ModalWindow.jsx';
+import Questions_Answers from './Questions_Answers.jsx';
+import Answers from './Answers.jsx';
+import Question from './Question.jsx';
+
+
+describe('Questions_Answers component rendering', function() {
+  test("should check whether an element rendered or not", function() {
     render(<Questions_Answers />);
-    screen.debug();
-  })
+    expect(screen.getByText('Add Question')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: 'Add Question'})).toBeInTheDocument();
+    expect(screen.queryByText('button', {name: 'hello'})).toBeNull();
+  });
 })
 
 
