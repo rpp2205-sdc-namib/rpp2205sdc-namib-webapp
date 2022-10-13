@@ -26,12 +26,14 @@ class Reviews_List extends React.Component {
     return (
       <div>
         <div className="reviews">
-          <div data-testid="text">Total Reviews: {this.state.totalReviews}</div>
-          {this.state.displayedReviews.map(review => {
-            return (
-              <Individual_Review_Tile review={review} key={review.review_id}/>
-            )
-          })}
+          <div>Total Reviews: {this.state.totalReviews}</div>
+          <div data-testid="tiles">
+            {this.state.displayedReviews.map(review => {
+              return (
+                <Individual_Review_Tile review={review} key={review.review_id}/>
+              )
+            })}
+          </div>
           <button onClick={this.handleClick}>
             More Reviews
           </button>

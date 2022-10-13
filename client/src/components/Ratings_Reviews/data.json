@@ -1,0 +1,36 @@
+{
+  "product": "71697",
+  "page": 0,
+  "count": 125,
+  "results": [
+      {
+          "review_id": 1275742,
+          "rating": 5,
+          "summary": "Palatino test",
+          "recommend": true,
+          "response": null,
+          "body": "Great product! Must buy!",
+          "date": "2022-07-20T00:00:00.000Z",
+          "reviewer_name": "palatino",
+          "helpfulness": 26,
+          "photos": [
+              {
+                  "id": 2455570,
+                  "url": "https://cdn.shopify.com/s/files/1/1300/6871/products/Camo-Hooded-Zip-Up-Woodland-Camo-2_63c44e42-27a9-4ff3-9571-86680e26894a_720x.jpg?v=1633078897"
+              }
+          ]
+      },
+      {
+          "review_id": 1276188,
+          "rating": 5,
+          "summary": "Just really bad",
+          "recommend": false,
+          "response": null,
+          "body": "It didn't fit. The sizing was entirely not accurate whatsoever.",
+          "date": "2022-08-25T00:00:00.000Z",
+          "reviewer_name": "mo",
+          "helpfulness": 14,
+          "photos": []
+      }
+    ]
+}

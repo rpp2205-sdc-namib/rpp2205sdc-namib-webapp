@@ -15,7 +15,7 @@ class Rating_Breakdown extends React.Component {
     return (
       <div>
         <div>Average rating for one specific product.</div>
-        <div>{this.state.rating}</div>
+        <div data-testid="star_rating">{this.state.rating}</div>
         <Stars rating={this.state.rating}/>
       </div>
     )
