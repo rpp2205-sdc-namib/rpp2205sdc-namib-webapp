@@ -3,9 +3,11 @@ import React from 'react';
 class ModalWindow extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props: ', props)
 
     this.state = {
       answer: '',
+      question: '',
       nickname: '',
       email: '',
       isEmailValidated: false,
@@ -13,41 +15,46 @@ class ModalWindow extends React.Component {
     }
 
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
+    this.handleQuestionChange = this.handleQuestionChange.bind(this);
     this.handleNickNameChange = this.handleNickNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.validateUserInput = this.validateUserInput.bind(this);
     this.validateEmail = this.validateEmail.bind(this);
     this.getInvalidFields = this.getInvalidFields.bind(this);
   }
 
+  // add an answer
   handleAnswerChange(value) {
     this.setState({
       answer: value
     });
   }
 
+  // add a question
+  handleQuestionChange(value) {
+    this.setState({
+      question: value
+    });
+  }
+
+  // both
   handleNickNameChange(value) {
     this.setState({
       nickname: value
     });
   }
 
+    // both
   handleEmailChange(value) {
     this.setState({
       email: value
     });
   }
 
+  // add an answer
   handleUploadPhotos() {
 
-  }
-
-  handleSubmit() {
-    // check validation
-      // if there are invalid entries, pop up message, disable submit button
-      //
   }
 
   validateEmail(email) {
@@ -81,9 +88,9 @@ class ModalWindow extends React.Component {
   render() {
     return (
       <div className="modal_content">
-        <span className="modal_close" onClick={this.props.closeQuestionForm}>&times;</span>
+        <span className="modal_close" onClick={this.props.closeForm}>&times;</span>
         <h2>Submit your Answer</h2>
-        <h4>Product Name _ {this.props.questionBody}</h4>
+        <h4>Product Name _ {this.props.productName}</h4>
         Your Answer*
         <textarea
           maxLength="1000"

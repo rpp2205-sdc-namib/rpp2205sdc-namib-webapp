@@ -13,15 +13,12 @@ class Question extends React.Component {
 
     this.handleAddAnswer = this.handleAddAnswer.bind(this);
     this.handleIncreaseCounts = this.handleIncreaseCounts.bind(this);
-    this.closeQuestionForm = this.closeQuestionForm.bind(this);
   }
 
-  handleAddAnswer() {
+  handleAddAnswer(isClicked) {
     // adding an answer to the question.
     // opens up a modal window that contains a form to submit the answer
-    this.setState({
-      isFormShown: true
-    });
+    this.props.handleAddAnswer(isClicked);
   }
 
   handleIncreaseCounts() {
@@ -31,20 +28,14 @@ class Question extends React.Component {
     });
   }
 
-  closeQuestionForm() {
-    this.setState({
-      isFormShown: false
-    })
-  }
-
   render() {
     return (
       <div>
         <p>Q: {this.props.question.question_body}</p>
         <div>Helpful?</div>
         <div onClick={this.handleIncreaseCounts}>Yes<span>{this.state.helpfulness}</span></div>
-        <button onClick={this.handleAddAnswer}>Add Answer</button>
-        {this.state.isFormShown && <div className="modal_container"><ModalWindow questionBody={this.props.question.question_body} closeQuestionForm={this.closeQuestionForm} /></div>}
+        <button onClick={() => this.handleAddAnswer(true)}>Add Answer</button>
+        {this.props.isAnswerFormShown && <div className="modal_container"><ModalWindow questionBody={this.props.question.question_body} closeForm={this.props.closeForm} whichForm={this.props.whichForm} /></div>}
       </div>
     )
   }
