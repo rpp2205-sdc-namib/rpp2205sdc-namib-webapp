@@ -12,6 +12,7 @@ class App extends React.Component {
     super(props);
     this.state = {currentProductId: '',
                   rating: 0,
+                  reviews: [],
                   totalReviews: 0,
                   currentProduct: {}, //contains product name, category
                   defaultStyle: {}//contains price info(original_price, sale_price)
@@ -19,22 +20,44 @@ class App extends React.Component {
     this.handleProductIdChange.bind(this);
   }
 
-  componentDidMount() {
+    componentDidMount() {
     var productId = '71697';
+    var count = 500;
     var promises = [axios.get(`/reviews/meta/${productId}`),
+                    axios.get(`/reviews/${productId}/${count}`),
                     axios.get(`/products/${productId}/styles`),
                     axios.get(`/products/${productId}`)];
     Promise.all(promises)
       .then(responseArr => {
         var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
+        console.log('totalReviews - test', responseArr[1].data.results.length);
         this.setState({rating: reviewsAndRating[1],
-                       totalReviews: reviewsAndRating[0],
+                       reviews: responseArr[1].data.results,
+                       totalReviews: responseArr[1].data.results.length,
                        currentProductId: productId,
-                       currentProduct: responseArr[2].data,
-                       defaultStyle: responseArr[1].data.results.find(style => style["default?"])});
+                       currentProduct: responseArr[3].data,
+                       defaultStyle: responseArr[2].data.results.find(style => style["default?"])});
       })
       .catch(err => console.error(err))
   }
+
+
+  // componentDidMount() {
+  //   var productId = '71697';
+  //   var promises = [axios.get(`/reviews/meta/${productId}`),
+  //                   axios.get(`/products/${productId}/styles`),
+  //                   axios.get(`/products/${productId}`)];
+  //   Promise.all(promises)
+  //     .then(responseArr => {
+  //       var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
+  //       this.setState({rating: reviewsAndRating[1],
+  //                      totalReviews: reviewsAndRating[0],
+  //                      currentProductId: productId,
+  //                      currentProduct: responseArr[2].data,
+  //                      defaultStyle: responseArr[1].data.results.find(style => style["default?"])});
+  //     })
+  //     .catch(err => console.error(err))
+  // }
 
 
   handleProductIdChange(newId) {
@@ -52,7 +75,7 @@ class App extends React.Component {
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
         <RPList productId={this.state.currentProductId}/>
         <YourOutfit />
-        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
+        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>
     )
