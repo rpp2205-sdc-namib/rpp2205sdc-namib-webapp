@@ -37,8 +37,9 @@ class App extends React.Component {
                        totalReviews: responseArr[1].data.results.length,
                        currentProductId: productId,
                        currentProduct: responseArr[3].data,
-                       styles: responseArr[2].data.results});
-                       defaultStyle: responseArr[2].data.results.find(style => style["default?"])});
+                       styles: responseArr[2].data.results,
+                       defaultStyle: responseArr[2].data.results.find(style => style["default?"])
+                      });
       })
       .catch(err => console.error(err))
   }
