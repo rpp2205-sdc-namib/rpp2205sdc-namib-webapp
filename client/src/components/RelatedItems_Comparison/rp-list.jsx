@@ -24,21 +24,29 @@ class RPList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`/products/${this.props.productId}/related`)
-      .then(response => {
-        this.setState({rp: [...response.data]});
+    var promises = [];
+    this.props.relatedProds.forEach((element) => {
+      promises.push(axios.get(`/products/${element.toString()}/styles`));
+      promises.push(axios.get(`/products/${element.toString()}`));
+    });
+    Promise.all(promises)
+      .then(responseArr => {
+        var data = responseArr.map((element) =>
+          element.data
+        )
+        console.log(data);
+        //this.setState({rp: [...responseArr]});
+
       })
-      .catch(err => {
-        console.log(err);
-      })
+      .catch(err => console.log(err));
   }
 
   render () {
     return (
       <div id="rpList">
-        {this.state.rp.map((element) => {
+        {this.state.rp.map((element, index) => {
           return(
-            <RPC current={element} show={this.handleClick.bind(this)} key={element}/>
+            <RPC prod={element} show={this.handleClick.bind(this)} key={index}/>
           )
          })
         }

@@ -10,14 +10,14 @@ class RPC extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`/products/${this.props.current}`)
-    .then((response) => {
-      //this.setState({product: response.data})
-      console.log('response', response.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    // axios.get(`/products/${this.props.current}`)
+    // .then((response) => {
+    //   //this.setState({product: response.data})
+    //   console.log('response', response.data);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // })
   }
 
   render () {

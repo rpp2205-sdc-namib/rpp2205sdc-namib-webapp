@@ -14,7 +14,8 @@ class App extends React.Component {
                   rating: 0,
                   totalReviews: 0,
                   currentProduct: {}, //contains product name, category
-                  defaultStyle: {}//contains price info(original_price, sale_price)
+                  defaultStyle: {},//contains price info(original_price, sale_price)
+                  related: []
                 };
     this.handleProductIdChange.bind(this);
   }
@@ -32,7 +33,9 @@ class App extends React.Component {
                        totalReviews: reviewsAndRating[0],
                        currentProductId: productId,
                        currentProduct: responseArr[2].data,
-                       defaultStyle: responseArr[1].data.results.find(style => style["default?"])});
+                       defaultStyle: responseArr[1].data.results.find(style => style["default?"]),
+                       related: responseArr[3].data
+                      });
       })
       .catch(err => console.error(err))
   }
@@ -51,7 +54,7 @@ class App extends React.Component {
     return (
       <div >
         <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
-        <RPList productId={this.state.currentProductId}/>
+        <RPList relatedProds={this.state.related}/>
         <YourOutfit />
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
