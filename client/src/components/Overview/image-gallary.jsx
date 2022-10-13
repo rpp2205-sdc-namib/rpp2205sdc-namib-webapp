@@ -1,9 +1,6 @@
 import React from 'react';
 import GallaryEntry from './gallary-entry.jsx';
 
-const classNameForoverview = ["image-gallary", "gallary-list", "current-photo", "backBtn", "forwardBtn", "expanded-view"];
-const classNameFormodal = ["image-gallary-modal", "gallary-list-modal", "current-photo-modal", "backBtn-modal", "forwardBtn-modal", "default-view"];
-
 class ImageGallary extends React.Component {
   constructor(props) {
     super(props);

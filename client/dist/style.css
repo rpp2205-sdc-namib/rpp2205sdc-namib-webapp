@@ -42,7 +42,7 @@
 
 .product-info {
   width: 50%;
-  height: 25%;
+  height: 35%;
   border-style: solid;
   border-color: #848484;
   display: flex;
@@ -58,13 +58,6 @@
 
 }
 
-.add-to-cart {
-  width: 50%;
-  height: 25%;
-  border-style: solid;
-  border-color: #848484;
-
-}
 
 
 /* Styling for star rating system */
@@ -174,10 +167,14 @@
 
 /* add to cart styling */
 .add-to-cart {
+  width: 50%;
+  height: 15%;
+  border-style: solid;
+  border-color: #848484;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content:space-around;
+  align-content: center;
 }
 
 .add-to-card-line1, .add-to-card-line2 {

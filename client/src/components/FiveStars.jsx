@@ -6,14 +6,6 @@ class Stars extends React.Component {
     this.state = {stars: [0, 0, 0, 0, 0]};
   }
 
-  // componentDidUpdate(prevProps) {
-  //   console.log('rating in FiveStars', this.props.rating);
-  //   if (this.props.rating !== prevProps.rating) {
-  //     this.setState({rating: this.props.rating}, () => {
-  //       this.renderStarsByQuarters(this.state.rating);
-  //     });
-  //   }
-  // }
   componentDidMount() {
     this.renderStarsByQuarters(this.props.rating);
   }
@@ -28,21 +20,24 @@ class Stars extends React.Component {
         int--;
         index++;
       }
-      if (dec >=0 && dec <= 0.125) {
-        newArr[index] = 0;
-      } else if (dec > 0.125 && dec <= 0.375) {
-        newArr[index] = 0.35; //35% fill looks like 1/4 fill
-      } else if (dec > 0.375 && dec <= 0.625) {
-        newArr[index] = 0.5;
-      } else if (dec > 0.625 <= 0.875) {
-        newArr[index] = 0.7; //70% fill looks like 3/4 fill
-      } else {
-        newArr[index] = 1;
+      if (index < 5) {
+        if (dec >=0 && dec <= 0.125) {
+          newArr[index] = 0;
+        } else if (dec > 0.125 && dec <= 0.375) {
+          newArr[index] = 0.35; //35% fill looks like 1/4 fill
+        } else if (dec > 0.375 && dec <= 0.625) {
+          newArr[index] = 0.5;
+        } else if (dec > 0.625 && dec <= 0.875) {
+          newArr[index] = 0.7; //70% fill looks like 3/4 fill
+        } else {
+          newArr[index] = 1;
+        }
       }
       this.setState({stars: newArr});
     }
 
   }
+
 
   render() {
     return (<div className="five-stars">{this.state.stars.map((star, i) => {
