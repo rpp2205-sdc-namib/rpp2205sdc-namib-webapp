@@ -243,6 +243,20 @@
   overflow: scroll;
 }
 
+.modal_content {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #000;
+  width: 80%;
+}
+
+.modal_close {
+  color: #000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
 /* image gallary modal view styling */
 .popup {
   width: 800px;
