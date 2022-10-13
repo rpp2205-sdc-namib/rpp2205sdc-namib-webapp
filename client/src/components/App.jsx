@@ -14,8 +14,10 @@ class App extends React.Component {
                   rating: 0,
                   totalReviews: 0,
                   currentProduct: {}, //contains product name, category
-                  defaultStyle: {}//contains price info(original_price, sale_price)
-                };
+                  defaultStyle: {},//contains price info(original_price, sale_price, thumbnail) //
+                  styles: [],
+                  background: "white"
+                  };
     this.handleProductIdChange.bind(this);
   }
 
@@ -31,15 +33,20 @@ class App extends React.Component {
                        totalReviews: reviewsAndRating[0],
                        currentProductId: productId,
                        currentProduct: responseArr[2].data,
-                       defaultStyle: responseArr[1].data.results.find(style => style["default?"])});
+                       defaultStyle: responseArr[1].data.results.find(style => style["default?"]),
+                       styles: responseArr[1].data.results});
+
       })
       .catch(err => console.error(err))
   }
 
-
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
     this.setState({currentProductId: newId})
+  }
+
+  handleOverviewBackground(color) {
+    this.setState({background: color});
   }
 
   render() {
@@ -48,8 +55,8 @@ class App extends React.Component {
       return null;
     }
     return (
-      <div >
-        <Overview productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>
+      <div style={{"backgroundColor": this.state.background}}>
+        <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
         <RPList productId={this.state.currentProductId}/>
         <YourOutfit productId={this.state.currentProductId} prodRating={this.state.rating}/>
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews}/>

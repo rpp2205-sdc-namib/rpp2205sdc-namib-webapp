@@ -43,6 +43,7 @@ class Stars extends React.Component {
 
   }
 
+
   render() {
     return (<div className="five-stars">{this.state.stars.map((star, i) => {
       return (<div className="single-star-container" key={i}>
