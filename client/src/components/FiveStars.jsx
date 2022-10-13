@@ -19,16 +19,21 @@ class Stars extends React.Component {
         newArr[index] = 1;
         int--;
         index++;
+        if (index === 5) {
+          index--;
+        }
       }
-      if (index < 5) {
-        if (dec >=0 && dec <= 0.125) {
+      if (dec > 0 && dec <= 0.125) {
+        newArr[index] = 0;
+      } else if (dec > 0.125 && dec <= 0.375) {
+        newArr[index] = 0.35; //35% fill looks like 1/4 fill
+      } else if (dec > 0.375 && dec <= 0.625) {
+        newArr[index] = 0.5;
+      } else if (dec > 0.625 && dec <= 0.875) {
+        newArr[index] = 0.7; //70% fill looks like 3/4 fill
+      } else {
+        if (rating === 4) {
           newArr[index] = 0;
-        } else if (dec > 0.125 && dec <= 0.375) {
-          newArr[index] = 0.35; //35% fill looks like 1/4 fill
-        } else if (dec > 0.375 && dec <= 0.625) {
-          newArr[index] = 0.5;
-        } else if (dec > 0.625 && dec <= 0.875) {
-          newArr[index] = 0.7; //70% fill looks like 3/4 fill
         } else {
           newArr[index] = 1;
         }

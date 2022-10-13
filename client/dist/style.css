@@ -209,6 +209,31 @@
   position: absolute;
 }
 
+/* ratings_reviews */
+.reviews {
+  float: middle;
+  position:relative;
+}
+
+.tile {
+  position: relative;
+}
+
+.tile-date {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.tile-user {
+  position: absolute;
+  top: 0;
+  right: 110px;
+}
+
+.tile-user::after {
+  content: ",";
+}
 /* Questions & Answers widget */
 .seller {
   font-weight: bold;
@@ -218,6 +243,20 @@
   width: 100%;
   height: 400px;
   overflow: scroll;
+}
+
+.modal_content {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #000;
+  width: 80%;
+}
+
+.modal_close {
+  color: #000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 /* image gallary modal view styling */

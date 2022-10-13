@@ -25,6 +25,7 @@ class RPList extends React.Component {
   render () {
     return (
       <div id="rpList">
+        <div data-testid="rpList">RPList</div>
         {this.state.rp.map((element) => {
           return(
             <RPC current={this.props.productId} show={this.handleClick.bind(this)} key={element}/>
