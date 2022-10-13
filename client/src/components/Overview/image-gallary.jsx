@@ -38,8 +38,8 @@ class ImageGallary extends React.Component {
   render() {
     if (this.props.section === 'modal') {
       return (
-        <div className={this.props.section === "overview" ? "image-gallary" : "image-gallary-modal"}>
-          <div className={this.props.section === "overview" ? "gallary-list" : "gallary-list-modal"}>{this.props.photos.map((photo, index) => {
+        <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
+          <div className="gallary-list-modal">{this.props.photos.map((photo, index) => {
             return (<div key={index}>
               <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />
             </div>)
@@ -55,7 +55,7 @@ class ImageGallary extends React.Component {
       )
     }
     return (
-      <div className="image-gallary">
+      <div className="image-gallary" data-testid="test-ImageGallary">
         <div className="gallary-list">{this.props.photos.map((photo, index) => {
           return (<div key={index}>
             <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />

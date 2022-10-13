@@ -13,7 +13,7 @@ class ProductInfo extends React.Component {
       var description = this.props.currentProduct.description;
       var sale_price = this.props.styleObj.sale_price;
       var original_price = this.props.styleObj.original_price;
-      return (<div className="product-info">
+      return (<div className="product-info" data-testid="test-ProductInfo">
         <Stars rating={this.props.rating}/>
         <div id="ratingScore"><p>{this.props.rating}</p></div>
         <div id="readAllReviews"><p>{this.props.totalReviews > 0 ? 'Read All ' + this.props.totalReviews + ' Reviews' : null}</p></div>
