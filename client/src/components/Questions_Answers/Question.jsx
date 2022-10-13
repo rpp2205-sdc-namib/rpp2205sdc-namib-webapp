@@ -43,8 +43,8 @@ class Question extends React.Component {
         <p>Q: {this.props.question.question_body}</p>
         <div>Helpful?</div>
         <div onClick={this.handleIncreaseCounts}>Yes<span>{this.state.helpfulness}</span></div>
-        <div onClick={this.handleAddAnswer}>Add Answer</div>
-        {this.state.isFormShown && <ModalWindow questionBody={this.props.question.question_body} closeQuestionForm={this.closeQuestionForm} />}
+        <button onClick={this.handleAddAnswer}>Add Answer</button>
+        {this.state.isFormShown && <div className="modal_container"><ModalWindow questionBody={this.props.question.question_body} closeQuestionForm={this.closeQuestionForm} /></div>}
       </div>
     )
   }

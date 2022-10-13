@@ -8,6 +8,8 @@ class ModalWindow extends React.Component {
       answer: '',
       nickname: '',
       email: '',
+      isEmailValidated: false,
+      hasError: false,
     }
 
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
@@ -16,6 +18,8 @@ class ModalWindow extends React.Component {
     this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateUserInput = this.validateUserInput.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
+    this.getInvalidFields = this.getInvalidFields.bind(this);
   }
 
   handleAnswerChange(value) {
@@ -41,18 +45,43 @@ class ModalWindow extends React.Component {
   }
 
   handleSubmit() {
+    // check validation
+      // if there are invalid entries, pop up message, disable submit button
+      //
+  }
 
+  validateEmail(email) {
+    return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
   }
 
   validateUserInput() {
-    // need to add more
-    return this.state.answer.length && this.state.nickname.length && this.state.email.length;
+    let isAnswerValid = this.state.answer.length !== 0;
+    let isNicknameValid = this.state.answer.length !== 0;
+    let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+
+    this.setState({
+      isEmailValidated: isEmailValid,
+      hasError: !isAnswerValid || !isNicknameValid || !isEmailValid
+    });
+  }
+
+  getInvalidFields() {
+    let fields = [['answer', this.state.answer.length !== 0], ['nickname', this.state.nickname.length !== 0], ['email', this.state.isEmailValidated]];
+    return fields.filter(field => {
+      if (field[1] === false) {
+        return field[0];
+      }
+    });
   }
 
   render() {
     return (
-      <div className="modal-container">
-        <span onClick={this.props.closeQuestionForm}>&times;</span>
+      <div className="modal_content">
+        <span className="modal_close" onClick={this.props.closeQuestionForm}>&times;</span>
         <h2>Submit your Answer</h2>
         <h4>Product Name _ {this.props.questionBody}</h4>
         Your Answer*
@@ -74,7 +103,8 @@ class ModalWindow extends React.Component {
         />
         <p>For authentication reasons, you will not be emailed</p>
         <button onClick={this.handleUploadPhotos}>Upload your photos</button>
-        <button onClick={this.handleSubmit}>Submit answer</button>
+        <button onClick={this.validateUserInput}>Submit answer</button>
+        {this.state.hasError ? <div>You must enter the following: {this.getInvalidFields().map(f => <div key={f}>{f}</div>)}</div> : <></>}
       </div>
     )
   }
