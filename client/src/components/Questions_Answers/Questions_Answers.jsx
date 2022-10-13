@@ -90,7 +90,6 @@ class Questions_Answers extends React.Component {
   }
 
   handleAddAnswer() {
-    console.log('clicked')
     this.setState({
       whichForm: 'answer',
       isAnswerFormShown: true
@@ -105,6 +104,7 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
+    console.log('form ', this.state.whichForm)
     return (
       <div>
         <Search />
@@ -112,7 +112,13 @@ class Questions_Answers extends React.Component {
           if (index === 0) {
             return (
               <div key={qa.question_id}>
-              <Question question={qa} handleAddAnswer={this.handleAddAnswer} isAnswerFormShown={this.state.isAnswerFormShown} whichForm={this.state.whichForm} closeForm={this.closeForm} />
+              <Question
+                question={qa}
+                handleAddAnswer={this.handleAddAnswer}
+                isAnswerFormShown={this.state.isAnswerFormShown}
+                productName={this.props.productName}
+                whichForm={this.state.whichForm}
+                closeForm={this.closeForm} />
               {this.state.top2AnswersForFirstQuestion.length &&
                 <Answers
                   allAnswersForFirstQuestion={this.state.allAnswersForFirstQuestion}
@@ -123,7 +129,12 @@ class Questions_Answers extends React.Component {
           } else {
             return (
               <div key={qa.question_id}>
-              <Question question={qa} handleAddAnswer={this.handleAddAnswer} isAnswerFormShown={this.state.isAnswerFormShown} whichForm={this.state.whichForm}/>
+              <Question
+                question={qa}
+                handleAddAnswer={this.handleAddAnswer}
+                isAnswerFormShown={this.state.isAnswerFormShown}
+                productName={this.props.productName}
+                whichForm={this.state.whichForm}/>
               {this.state.top2AnswersForSecondQuestion.length &&
                 <Answers
                   allAnswersForSecondQuestion={this.state.allAnswersForSecondQuestion}
@@ -137,7 +148,12 @@ class Questions_Answers extends React.Component {
           <button onClick={this.handleShowMoreQuestions}>More Answered Questions</button>
         }
         <button onClick={this.handleAddQuestion}>Add Question</button>
-        {this.state.isQuestionFormShown && <ModalWindow closeForm={this.closeForm} productName={this.props.productName} whichForm={this.state.whichForm} />}
+        {this.state.isQuestionFormShown &&
+          <ModalWindow
+            closeForm={this.closeForm}
+            productName={this.props.productName}
+            whichForm={this.state.whichForm}
+          />}
       </div>
     )
   }

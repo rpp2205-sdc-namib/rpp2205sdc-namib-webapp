@@ -29,13 +29,19 @@ class Question extends React.Component {
   }
 
   render() {
+    console.log('form2: ', this.props.whichForm.length)
     return (
       <div>
         <p>Q: {this.props.question.question_body}</p>
         <div>Helpful?</div>
         <div onClick={this.handleIncreaseCounts}>Yes<span>{this.state.helpfulness}</span></div>
         <button onClick={() => this.handleAddAnswer(true)}>Add Answer</button>
-        {this.props.isAnswerFormShown && <div className="modal_container"><ModalWindow questionBody={this.props.question.question_body} closeForm={this.props.closeForm} whichForm={this.props.whichForm} /></div>}
+        {this.props.isAnswerFormShown && this.props.whichForm.length !== 0 &&
+          <ModalWindow
+            questionBody={this.props.question.question_body}
+            productName={this.props.productName}
+            closeForm={this.props.closeForm}
+            whichForm={this.props.whichForm} />}
       </div>
     )
   }

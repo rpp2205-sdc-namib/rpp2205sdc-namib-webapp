@@ -3,7 +3,6 @@ import React from 'react';
 class ModalWindow extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props: ', props)
 
     this.state = {
       answer: '',
@@ -86,30 +85,37 @@ class ModalWindow extends React.Component {
   }
 
   render() {
+    console.log(this.state.answer)
+    console.log(this.state.question)
     return (
       <div className="modal_content">
         <span className="modal_close" onClick={this.props.closeForm}>&times;</span>
-        <h2>Submit your Answer</h2>
-        <h4>Product Name _ {this.props.productName}</h4>
-        Your Answer*
-        <textarea
-          maxLength="1000"
-          onChange={(e) => this.handleAnswerChange(e.target.value)}>
-        </textarea>
-        What is your nickname?*
+        {this.props.whichForm === 'answer' ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
+        {this.props.whichForm === 'answer' ? <h4>{this.props.productName}: {this.props.questionBody}</h4> : <h4>About the {this.props.productName}</h4>}
+        {this.props.whichForm === 'answer' ?
+          <div>
+            <label htmlFor="answer">Your Answer</label>
+            <textarea maxLength="1000" onChange={(e) => this.handleAnswerChange(e.target.value)} name="answer"></textarea>
+          </div> :
+          <div>
+            <label htmlFor="question">Your Question</label>
+            <textarea maxLength="1000" onChange={(e) => this.handleQuestionChange(e.target.value)} name="question"></textarea>
+          </div>
+        }
+        <label htmlFor="nickname">What is your nickname?*</label>
         <input
-          placeholder="Example: jack543!"
+          placeholder={this.state.whichForm === 'answer' ? "Example: jack543!" : "jackson11!"}
+          name="nickname"
           maxLength="60"
-          onChange={(e) => this.handleNickNameChange(e.target.value)}
-        />
+          onChange={(e) => this.handleNickNameChange(e.target.value)} />
         <p>For privacy reasons, do not use your full name or email address</p>
-        Your Email*
+        <label htmlFor="email">Your Email*</label>
         <input
           onChange={(e) => this.handleEmailChange(e.target.value)}
-          placeholder="Example: jack@email.com"
-        />
+          name="email"
+          placeholder="Example: jack@email.com"/>
         <p>For authentication reasons, you will not be emailed</p>
-        <button onClick={this.handleUploadPhotos}>Upload your photos</button>
+        {this.state.answer.length > 0 && <button onClick={this.handleUploadPhotos}>Upload your photos</button>}
         <button onClick={this.validateUserInput}>Submit answer</button>
         {this.state.hasError ? <div>You must enter the following: {this.getInvalidFields().map(f => <div key={f}>{f}</div>)}</div> : <></>}
       </div>
