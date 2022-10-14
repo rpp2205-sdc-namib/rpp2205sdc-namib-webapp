@@ -4,12 +4,15 @@ import ImageGallary from './image-gallary.jsx';
 import StyleSelector from './style-selector.jsx';
 import AddToCart from './add-to-cart.jsx';
 import { totalReviewsAndAvgRating, QuantitySelectArr } from '../helperFunctions.jsx';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, fireEvent, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+
+
 
 afterEach(() => {
   cleanup();
 });
+
 
 describe('test all overview components are rendered correctly', () => {
   test('product info component is rendered correctly', () => {
@@ -157,4 +160,49 @@ describe('helper functions are working correctly', () => {
     expect(result[1]).toBe("3.44");
   })
 });
+
+describe('end to end test to see if the user interaction is working as expected', () => {
+  test('click forward/back/expand button will perform correctly', () => {
+    var photos = [
+      {
+          "thumbnail_url": "https://images.unsplash.com/photo-1510217167326-549ae78e4738?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1510217167326-549ae78e4738?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+      },
+      {
+          "thumbnail_url": "https://images.unsplash.com/photo-1470282312847-28b943046dc1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1470282312847-28b943046dc1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"
+      },
+      {
+          "thumbnail_url": "https://images.unsplash.com/photo-1552904219-f4b87efe8792?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1552904219-f4b87efe8792?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80"
+      },
+      {
+          "thumbnail_url": "https://images.unsplash.com/photo-1519241978701-4302ab53de1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "url": "https://images.unsplash.com/photo-1519241978701-4302ab53de1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+      }];
+      render(<ImageGallary photos={photos}/>);
+      const imageTest = screen.getByTestId('test-ImageGallary');
+      const forwardBtn = imageTest.querySelector('button#forwardBtn');
+      const backBtn = imageTest.querySelector('button#backBtn');
+      const currentImage1 = imageTest.querySelector('img#current-photo');
+      const src1 = currentImage1.src;
+      expect(currentImage1).toBeInTheDocument;
+
+      fireEvent.click(forwardBtn);
+      const currentImage2 = imageTest.querySelector('img#current-photo');
+      const src2 = currentImage2.src;
+      expect(currentImage2).toBeInTheDocument;
+      expect(src1 === src2).toBe(false);
+
+      fireEvent.click(backBtn);
+      const currentImage3 = imageTest.querySelector('img#current-photo');
+      const src3 = currentImage3.src;
+      console.log(src1, src2, src3);
+      expect(src1 === src3).toBe(true);
+
+      const modalImage = imageTest.querySelector('img#current-photo-modal');
+      expect(modalImage).not.toBeInTheDocument;
+  })
+})
+
 
