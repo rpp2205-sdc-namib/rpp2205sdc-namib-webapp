@@ -10,27 +10,32 @@ class RPC extends React.Component {
   }
 
   componentDidMount() {
-    // axios.get(`/products/${this.props.current}`)
-    // .then((response) => {
-    //   //this.setState({product: response.data})
-    //   console.log('response', response.data);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // })
+
   }
 
   render () {
-    return(
-      <div id="card">
-        <button onClick={this.props.show}>Star button</button>
-        <p>image goes here</p>
-        <p>Category</p>
-        <p>Product Name</p>
-        <p>Price</p>
-        <p>Rating</p>
-      </div>
-    )
+    //console.log(this.props.info.defaultStyle.photos[0])
+    if(!this.props.info.defaultStyle) {
+      return ('')
+    } else {
+      if(this.props.info.defaultStyle.sale_price === null) {
+        var price = this.props.info.defaultStyle.original_price;
+      } else {
+        var price = this.props.info.defaultStyle.sale_price;
+      }
+      return(
+        <div id="card">
+          <button onClick={this.props.show}>Star button</button>
+          <p>
+            <img className="rpcThumbnails" src={this.props.info.defaultStyle.photos[0].thumbnail_url}></img>
+          </p>
+          <p>{this.props.info.product.category}</p>
+          <p>{this.props.info.product.name}</p>
+          <p>{price}</p>
+          <p>Rating</p>
+        </div>
+      )
+    }
   }
 
 }
