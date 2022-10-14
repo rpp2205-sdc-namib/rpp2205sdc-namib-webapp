@@ -41,7 +41,7 @@ class ImageGallary extends React.Component {
         <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
           <div className="gallary-list-modal">{this.props.photos.map((photo, index) => {
             return (<div key={index}>
-              <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />
+              <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='modal'/>
             </div>)
           })}
           </div>
@@ -58,7 +58,7 @@ class ImageGallary extends React.Component {
       <div className="image-gallary" data-testid="test-ImageGallary">
         <div className="gallary-list">{this.props.photos.map((photo, index) => {
           return (<div key={index}>
-            <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />
+            <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='overview'/>
           </div>)
         })}
         </div>
