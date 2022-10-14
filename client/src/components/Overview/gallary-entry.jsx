@@ -15,9 +15,13 @@ class GallaryEntry extends React.Component {
 
   render() {
     if (this.props.section === 'overview') {
-      return (<div>
-        <img className="gallary-entry" src={this.props.photoInfo.thumbnail_url} onMouseOver={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyle}></img>
-      </div>)
+      if (this.props.id < this.props.top || this.props.id > this.props.bottom) {
+        return null;
+      } else {
+        return (<div>
+          <img className="gallary-entry" src={this.props.photoInfo.thumbnail_url} onMouseOver={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyle}></img>
+        </div>)
+      }
     } else {
       return (
         <div>
