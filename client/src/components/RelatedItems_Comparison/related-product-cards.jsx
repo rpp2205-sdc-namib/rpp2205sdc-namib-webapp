@@ -15,8 +15,7 @@ class RPC extends React.Component {
   }
 
   render () {
-    //console.log(this.props.info.defaultStyle.photos[0])
-    if(!this.props.info.defaultStyle) {
+    if(!this.props.info) {
       return ('')
     } else {
       if(this.props.info.defaultStyle.sale_price === null) {
@@ -33,7 +32,7 @@ class RPC extends React.Component {
           <p>{this.props.info.product.category}</p>
           <p>{this.props.info.product.name}</p>
           <p>{price}</p>
-          <p>Rating</p>
+          <Stars rating={this.props.info.rating}/>
         </div>
       )
     }

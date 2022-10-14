@@ -2,6 +2,7 @@ import React from 'react';
 import RPC from './related-product-cards.jsx';
 import Modal from './modal.jsx';
 import axios from 'axios';
+import { totalReviewsAndAvgRating } from '../helperFunctions.jsx';
 
 class RPList extends React.Component {
   constructor (props) {
@@ -43,7 +44,7 @@ class RPList extends React.Component {
           data.push({
             defaultStyle: result,
             product: responseArr[i+1].data,
-            rating: responseArr[i+2].data
+            rating: totalReviewsAndAvgRating(responseArr[i+2].data.ratings)[1]
           });
         }
         this.setState({rp: [...data]}, () => {console.log(this.state)});

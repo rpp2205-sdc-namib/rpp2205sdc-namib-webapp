@@ -11,7 +11,6 @@ class YourOutfit extends React.Component {
 
   addProduct(e) {
     e.preventDefault();
-    console.log('clicked');
     this.setState({list: [...this.state.list, this.props.productId]})
   }
 
