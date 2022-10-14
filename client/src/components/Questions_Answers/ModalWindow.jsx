@@ -64,19 +64,37 @@ class ModalWindow extends React.Component {
     );
   }
 
-  validateUserInput() {
-    let isAnswerValid = this.state.answer.length !== 0;
-    let isNicknameValid = this.state.answer.length !== 0;
-    let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+  validateUserInput(value) {
+    if (value === 'answer') {
+      let isAnswerValid = this.state.answer.length !== 0;
+      let isNicknameValid = this.state.answer.length !== 0;
+      let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+      this.setState({
+        isEmailValidated: isEmailValid,
+        hasError: !isAnswerValid || !isNicknameValid || !isEmailValid
+      })
 
-    this.setState({
-      isEmailValidated: isEmailValid,
-      hasError: !isAnswerValid || !isNicknameValid || !isEmailValid
-    });
+    } else {
+      let isQuestionValid = this.state.question.length !== 0;
+      let isNicknameValid = this.state.answer.length !== 0;
+      let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+
+      this.setState({
+        isEmailValidated: isEmailValid,
+        hasError: !isQuestionValid || !isNicknameValid || !isEmailValid
+      });
+    }
   }
 
-  getInvalidFields() {
-    let fields = [['answer', this.state.answer.length !== 0], ['nickname', this.state.nickname.length !== 0], ['email', this.state.isEmailValidated]];
+  getInvalidFields(value) {
+    let fields;
+
+    if (value === 'answer') {
+      fields = [['answer', this.state.answer.length !== 0], ['nickname', this.state.nickname.length !== 0], ['email', this.state.isEmailValidated]];
+    } else {
+      fields = [['question', this.state.question.length !== 0], ['nickname', this.state.nickname.length !== 0], ['email', this.state.isEmailValidated]];
+    }
+
     return fields.filter(field => {
       if (field[1] === false) {
         return field[0];
@@ -85,8 +103,6 @@ class ModalWindow extends React.Component {
   }
 
   render() {
-    console.log(this.state.answer)
-    console.log(this.state.question)
     return (
       <div className="modal_content">
         <span className="modal_close" onClick={this.props.closeForm}>&times;</span>
@@ -94,30 +110,32 @@ class ModalWindow extends React.Component {
         {this.props.whichForm === 'answer' ? <h4>{this.props.productName}: {this.props.questionBody}</h4> : <h4>About the {this.props.productName}</h4>}
         {this.props.whichForm === 'answer' ?
           <div>
-            <label htmlFor="answer">Your Answer</label>
-            <textarea maxLength="1000" onChange={(e) => this.handleAnswerChange(e.target.value)} name="answer"></textarea>
+            <label className="label_answer" htmlFor="answer">Your Answer</label>
+            <input className="text_answer" maxLength="1000" onChange={(e) => this.handleAnswerChange(e.target.value)} name="answer" />
           </div> :
           <div>
-            <label htmlFor="question">Your Question</label>
-            <textarea maxLength="1000" onChange={(e) => this.handleQuestionChange(e.target.value)} name="question"></textarea>
+            <label className="label_question" htmlFor="question">Your Question</label>
+            <input className="text_question" maxLength="1000" onChange={(e) => this.handleQuestionChange(e.target.value)} name="question" />
           </div>
         }
-        <label htmlFor="nickname">What is your nickname?*</label>
+        <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
         <input
+          className="nickname"
           placeholder={this.state.whichForm === 'answer' ? "Example: jack543!" : "jackson11!"}
           name="nickname"
           maxLength="60"
           onChange={(e) => this.handleNickNameChange(e.target.value)} />
-        <p>For privacy reasons, do not use your full name or email address</p>
-        <label htmlFor="email">Your Email*</label>
+        <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
+        <label htmlFor="email" className="label_email">Your Email</label>
         <input
+          className="email"
           onChange={(e) => this.handleEmailChange(e.target.value)}
           name="email"
           placeholder="Example: jack@email.com"/>
-        <p>For authentication reasons, you will not be emailed</p>
-        {this.state.answer.length > 0 && <button onClick={this.handleUploadPhotos}>Upload your photos</button>}
-        <button onClick={this.validateUserInput}>Submit answer</button>
-        {this.state.hasError ? <div>You must enter the following: {this.getInvalidFields().map(f => <div key={f}>{f}</div>)}</div> : <></>}
+        <p className="sub_text">For authentication reasons, you will not be emailed</p>
+        {this.props.whichForm === 'answer' && <button className="upload_button" onClick={this.handleUploadPhotos}>Upload your photos</button>}
+        <button className="submit_button" onClick={() => this.validateUserInput(this.props.whichForm)}>Submit answer</button>
+        {this.state.hasError ? <div className="sub_text">You must enter the following: {this.getInvalidFields(this.props.whichForm).map(f => <li key={f}>{f}</li>)}</div> : <></>}
       </div>
     )
   }

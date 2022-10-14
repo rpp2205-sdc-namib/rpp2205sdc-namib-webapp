@@ -29,7 +29,6 @@ class Question extends React.Component {
   }
 
   render() {
-    console.log('form2: ', this.props.whichForm.length)
     return (
       <div>
         <p>Q: {this.props.question.question_body}</p>

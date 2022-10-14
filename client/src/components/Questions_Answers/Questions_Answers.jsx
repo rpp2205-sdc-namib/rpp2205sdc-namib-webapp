@@ -104,7 +104,6 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
-    console.log('form ', this.state.whichForm)
     return (
       <div>
         <Search />
