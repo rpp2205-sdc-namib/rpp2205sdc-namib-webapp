@@ -31,27 +31,25 @@ class Reviews_List extends React.Component {
   }
 
   render() {
-    if (this.state.limitReached) {
+    if (this.state.limitReached || (this.state.totalReviews > 0 && this.state.totalReviews <= 2)) {
       return (
         <div>
+        <div className={`reviews${this.state.displayedReviews.length > 4 ? '_expand_mode' : ''}`}>
           <div>
-            <div>Total Reviews: {this.state.totalReviews}</div>
-            <div>
-              {this.state.displayedReviews.map(review => {
-                return (
-                  <Individual_Review_Tile review={review} key={review.review_id}/>
-                )
-              })}
-            </div>
+            {this.state.displayedReviews.map(review => {
+              return (
+                <Individual_Review_Tile review={review} key={review.review_id}/>
+              )
+            })}
           </div>
         </div>
+      </div>
       );
     }
 
     return (
       <div>
-        <div className="reviews">
-          <div>Total Reviews: {this.state.totalReviews}</div>
+        <div className={`reviews${this.state.displayedReviews.length > 4 ? '_expand_mode' : ''}`}>
           <div data-testid="tiles">
             {this.state.displayedReviews.map(review => {
               return (
@@ -59,13 +57,39 @@ class Reviews_List extends React.Component {
               )
             })}
           </div>
-          <button onClick={this.handleClick}>
-            More Reviews
-          </button>
         </div>
+        <button onClick={this.handleClick}>More Reviews</button>
       </div>
     );
   }
 }
 
 export default Reviews_List;
+
+
+// return (
+//   <div className={`answers${this.state.viewAllAnswersForFirstQuestion ? '_expand_mode' : ''}`}>
+//     {sortedAllAnswersForFirstQuestion.map((answer, index) => {
+//       if (index > 1) return;
+//       return (
+//         <div key={answer.answer_id}>
+//           <Answer answer={answer} />
+//         </div>
+//       )
+//     })}
+//     {this.state.viewAllAnswersForFirstQuestion &&
+//       <div>
+//         {sortedAllAnswersForFirstQuestion.map((answer, index) => {
+//         if (index < 2) return;
+//         return (
+//           <div key={answer.answer_id}>
+//             <Answer answer={answer} />
+//           </div>
+//         )
+//       })}
+//       </div>}
+//       {this.props.allAnswersForFirstQuestion.length > 2 &&
+//       <button onClick={() => this.handleViewMoreAnswers('viewAllAnswersForFirstQuestion')}>{this.state.viewAllAnswersForFirstQuestion ? 'Collapse answers' : 'See more answers'}</button>
+//       }
+//   </div>
+// )
