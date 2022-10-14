@@ -9,9 +9,9 @@ class QuantitySelector extends React.Component {
   render() {
     return (
       <div className="quantity-selector">
-        <label htmlFor="quantity">Select Quantity: </label>
+        <label htmlFor="quantity">Quantity: </label>
         <select name="quantity" id="quantity">
-       {this.props.quantity === 0 ? (<option key="defaultQuantityOption">-</option>) : null}
+       {this.props.quantity === 0 ? (<option key="defaultQuantityOption">Select Quantity</option>) : null}
           {QuantitySelectArr(this.props.quantity).map((element, index) => {
             return (<option key={index} value={element}>{element}</option>)
           }) }

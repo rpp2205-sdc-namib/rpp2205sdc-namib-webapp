@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Stars from '../FiveStars.jsx';
 
 class RPC extends React.Component {
   constructor (props) {
