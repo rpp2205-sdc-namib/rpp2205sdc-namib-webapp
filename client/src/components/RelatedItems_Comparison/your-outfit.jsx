@@ -9,20 +9,19 @@ class YourOutfit extends React.Component {
     }
   }
 
-  addProduct(e) {
-    e.preventDefault();
-    this.setState({list: [...this.state.list, this.props.productId]})
+  componentDidMount() {
+    var keys = Object.keys(localStorage);
+    this.setState({list: [...keys]});
   }
-
 
   render () {
     return(
       <div id="outfit">
         <div data-testid="outfit">YourOutfit</div>
-        <button onClick={this.addProduct.bind(this)}>+ Add Product</button>
-        {this.state.list.map(element => {
+        <button onClick={this.props.add}>+ Add Product</button>
+        {this.state.list.map((element, index) => {
           return(
-            <RPC totalRating={this.props.prodRating} />
+            <RPC key={index} info={JSON.parse(localStorage.getItem(element))} />
           )
         })}
       </div>

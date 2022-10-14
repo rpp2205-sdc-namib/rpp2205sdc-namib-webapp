@@ -50,6 +50,19 @@ class App extends React.Component {
     this.init('71697');
   }
 
+  addProduct(e) {
+    e.preventDefault();
+    console.log('clicked');
+    localStorage.setItem(
+      this.state.currentProductId,
+      JSON.stringify({
+        rating: this.state.rating,
+        product: this.state.currentProduct,
+        defaultStyle: this.state.defaultStyle
+      })
+    )
+  }
+
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
     this.init(newId);
@@ -67,8 +80,8 @@ class App extends React.Component {
     return (
       <div style={{"backgroundColor": this.state.background}}>
         <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-        <RPList productId={this.state.currentProductId} relatedProds={this.state.related}/>
-        <YourOutfit productId={this.state.currentProductId} prodRating={this.state.rating}/>
+        <RPList relatedProds={this.state.related}/>
+        <YourOutfit add={this.addProduct.bind(this)}/>
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>

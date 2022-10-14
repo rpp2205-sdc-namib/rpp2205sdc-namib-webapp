@@ -15,7 +15,6 @@ class RPList extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    console.log('clicked');
     this.setState({showModal: true});
   }
 
@@ -35,7 +34,6 @@ class RPList extends React.Component {
     Promise.all(promises)
       .then(responseArr => {
         var data = [];
-        console.log(responseArr);
         for (var i = 0; i <= responseArr.length - 3; i+=3) {
           var result = responseArr[i].data.results.find(style => style["default?"]);
           if(result === undefined) {
@@ -47,7 +45,7 @@ class RPList extends React.Component {
             rating: totalReviewsAndAvgRating(responseArr[i+2].data.ratings)[1]
           });
         }
-        this.setState({rp: [...data]}, () => {console.log(this.state)});
+        this.setState({rp: [...data]});
       })
       .catch(err => console.log(err));
   }
