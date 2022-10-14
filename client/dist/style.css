@@ -215,6 +215,14 @@
   position:relative;
 }
 
+.reviews_expand_mode {
+  float: middle;
+  position: relative;
+  overflow: scroll;
+  width: 100%;
+  height: 800px;
+}
+
 .tile {
   position: relative;
 }

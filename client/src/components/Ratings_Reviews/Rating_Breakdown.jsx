@@ -1,6 +1,5 @@
 import React from 'react';
 import Stars from '../FiveStars.jsx';
-import axios from 'axios';
 
 class Rating_Breakdown extends React.Component {
   constructor(props) {
@@ -17,6 +16,8 @@ class Rating_Breakdown extends React.Component {
         <div>Average rating for one specific product.</div>
         <div data-testid="star_rating">{this.state.rating}</div>
         <Stars rating={this.state.rating}/>
+        <div>Total Reviews: {this.state.totalReviews}</div>
+        <div><hr /></div>
       </div>
     )
   }
