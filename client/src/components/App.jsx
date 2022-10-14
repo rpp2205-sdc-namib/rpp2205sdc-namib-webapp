@@ -27,7 +27,8 @@ class App extends React.Component {
     var promises = [axios.get(`/reviews/meta/${productId}`),
                     axios.get(`/reviews/${productId}/${count}`),
                     axios.get(`/products/${productId}/styles`),
-                    axios.get(`/products/${productId}`)];
+                    axios.get(`/products/${productId}`),
+                    axios.get(`/products/${productId}/related`)];
     Promise.all(promises)
       .then(responseArr => {
         var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
@@ -38,7 +39,8 @@ class App extends React.Component {
                        currentProductId: productId,
                        currentProduct: responseArr[3].data,
                        styles: responseArr[2].data.results,
-                       defaultStyle: responseArr[2].data.results.find(style => style["default?"])
+                       defaultStyle: responseArr[2].data.results.find(style => style["default?"]),
+                       related: responseArr[4].data
                       });
       })
       .catch(err => console.error(err))
@@ -65,7 +67,7 @@ class App extends React.Component {
     return (
       <div style={{"backgroundColor": this.state.background}}>
         <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-        <RPList productId={this.state.currentProductId}/>
+        <RPList productId={this.state.currentProductId} relatedProds={this.state.related}/>
         <YourOutfit productId={this.state.currentProductId} prodRating={this.state.rating}/>
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
         <Questions_Answers productId={this.state.currentProductId} />

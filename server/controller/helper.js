@@ -17,6 +17,17 @@ module.exports = {
 
   },
 
+  getRelatedHandler: (req, res) => {
+    var product_id = req.params.product_id;
+    axios.get(`${API_Link}/products/${product_id}/related`, auth)
+      .then(response => {
+        res.status(200).send(response.data);
+      })
+      .catch(err => {
+        res.status(500).send(err);
+      })
+  },
+
   getStylesHandler: (req, res) => {
     var product_id = req.params.product_id;
     axios.get(`${API_Link}/products/${product_id}/styles`, auth)
