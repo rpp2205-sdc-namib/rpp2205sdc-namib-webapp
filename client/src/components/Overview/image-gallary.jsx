@@ -4,7 +4,12 @@ import GallaryEntry from './gallary-entry.jsx';
 class ImageGallary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentPhotoIndex: 0};
+    this.state = { currentPhotoIndex: 0 };
+  }
+
+  currentPhotoArray(max) {
+     //max number of photos allowed in the screen, if exceeded, arrow down appears to click to next photo
+    return this.props.photos.slice(this.state.currentPhotoIndex, this.state.currentPhotoIndex + max);
   }
 
   handleForward() {
@@ -36,10 +41,11 @@ class ImageGallary extends React.Component {
   }
 
   render() {
+    var currentPhotos = this.currentPhotoArray(4);
     if (this.props.section === 'modal') {
       return (
         <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
-          <div className="gallary-list-modal">{this.props.photos.map((photo, index) => {
+          <div className="gallary-list-modal">{currentPhotos.map((photo, index) => {
             return (<div key={index}>
               <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='modal'/>
             </div>)
@@ -56,7 +62,7 @@ class ImageGallary extends React.Component {
     }
     return (
       <div className="image-gallary" data-testid="test-ImageGallary">
-        <div className="gallary-list">{this.props.photos.map((photo, index) => {
+        <div className="gallary-list">{currentPhotos.map((photo, index) => {
           return (<div key={index}>
             <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='overview'/>
           </div>)
