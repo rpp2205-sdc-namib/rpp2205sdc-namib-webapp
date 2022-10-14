@@ -289,24 +289,22 @@
   margin-bottom: 20px;
 }
 
-.upload_button {
-  background-color: #e62143;
+.upload_button, .submit_button {
   color: #fff;
   width: 150px;
   height: 30px;
   border: none;
   border-radius: 10px;
+}
+
+.upload_button {
+  background-color: #e62143;
   font-size: 14px;
   margin-right: 10px;
 }
 
 .submit_button {
   background-color: #0066ff;
-  color: #fff;
-  width: 150px;
-  height: 30px;
-  border: none;
-  border-radius: 10px;
   font-size: 16px;
 }
 

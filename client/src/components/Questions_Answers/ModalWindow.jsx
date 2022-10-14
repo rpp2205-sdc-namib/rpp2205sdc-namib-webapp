@@ -37,21 +37,18 @@ class ModalWindow extends React.Component {
     });
   }
 
-  // both
   handleNickNameChange(value) {
     this.setState({
       nickname: value
     });
   }
 
-    // both
   handleEmailChange(value) {
     this.setState({
       email: value
     });
   }
 
-  // add an answer
   handleUploadPhotos() {
 
   }
