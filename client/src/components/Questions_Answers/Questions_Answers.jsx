@@ -2,6 +2,7 @@ import React from 'react';
 import Question from './Question.jsx';
 import Answers from './Answers.jsx';
 import Search from './Search.jsx';
+import ModalWindow from './ModalWindow.jsx';
 import axios from 'axios';
 
 // this class is top-level component for Questions_Answers
@@ -19,12 +20,17 @@ class Questions_Answers extends React.Component {
       top2AnswersForFirstQuestion: [],
       top2AnswersForSecondQuestion: [],
       hasMoreThanTwoQuestions: false,
+      isQuestionFormShown: false,
+      isAnswerFormShown: false,
+      whichForm: ''
     }
 
     this.getAllQuestions = this.getAllQuestions.bind(this);
     this.getAnswersForSpecificQuestionId = this.getAnswersForSpecificQuestionId.bind(this);
-    this.handleMoreQuestions = this.handleShowMoreQuestions.bind(this);
+    this.handleShowMoreQuestions = this.handleShowMoreQuestions.bind(this);
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.handleAddAnswer = this.handleAddAnswer.bind(this);
+    this.closeForm = this.closeForm.bind(this);
   }
 
   componentDidMount() {
@@ -77,7 +83,24 @@ class Questions_Answers extends React.Component {
   handleAddQuestion() {
     // allows user to create a new question for the product
     // opens modal window
+    this.setState({
+      whichForm: 'question',
+      isQuestionFormShown: true
+    });
+  }
 
+  handleAddAnswer() {
+    this.setState({
+      whichForm: 'answer',
+      isAnswerFormShown: true
+    });
+  }
+
+  closeForm() {
+    this.setState({
+      isQuestionFormShown: false,
+      isAnswerFormShown: false,
+    });
   }
 
   render() {
@@ -88,7 +111,13 @@ class Questions_Answers extends React.Component {
           if (index === 0) {
             return (
               <div key={qa.question_id}>
-              <Question question={qa} />
+              <Question
+                question={qa}
+                handleAddAnswer={this.handleAddAnswer}
+                isAnswerFormShown={this.state.isAnswerFormShown}
+                productName={this.props.productName}
+                whichForm={this.state.whichForm}
+                closeForm={this.closeForm} />
               {this.state.top2AnswersForFirstQuestion.length &&
                 <Answers
                   allAnswersForFirstQuestion={this.state.allAnswersForFirstQuestion}
@@ -99,7 +128,12 @@ class Questions_Answers extends React.Component {
           } else {
             return (
               <div key={qa.question_id}>
-              <Question question={qa} />
+              <Question
+                question={qa}
+                handleAddAnswer={this.handleAddAnswer}
+                isAnswerFormShown={this.state.isAnswerFormShown}
+                productName={this.props.productName}
+                whichForm={this.state.whichForm}/>
               {this.state.top2AnswersForSecondQuestion.length &&
                 <Answers
                   allAnswersForSecondQuestion={this.state.allAnswersForSecondQuestion}
@@ -113,6 +147,12 @@ class Questions_Answers extends React.Component {
           <button onClick={this.handleShowMoreQuestions}>More Answered Questions</button>
         }
         <button onClick={this.handleAddQuestion}>Add Question</button>
+        {this.state.isQuestionFormShown &&
+          <ModalWindow
+            closeForm={this.closeForm}
+            productName={this.props.productName}
+            whichForm={this.state.whichForm}
+          />}
       </div>
     )
   }
