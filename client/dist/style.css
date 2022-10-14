@@ -150,6 +150,15 @@
   z-index: 1;
 
 }
+
+.rpcThumbnails {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 150px;
+  width: 150px;
+}
 /* photo gallary styling */
 
 #current-photo, #current-photo-modal {
