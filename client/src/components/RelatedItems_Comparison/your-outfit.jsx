@@ -5,7 +5,8 @@ class YourOutfit extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      list: []
+      list: [],
+      star: false
     }
   }
 
@@ -21,7 +22,7 @@ class YourOutfit extends React.Component {
         <button onClick={this.props.add}>+ Add Product</button>
         {this.state.list.map((element, index) => {
           return(
-            <RPC key={index} info={JSON.parse(localStorage.getItem(element))} />
+            <RPC action={this.state.star} key={index} info={JSON.parse(localStorage.getItem(element))} />
           )
         })}
       </div>

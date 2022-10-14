@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Action extends from React.Component {
+class Action extends React.Component {
   constructor(props) {
     super(props);
 
@@ -9,13 +9,24 @@ class Action extends from React.Component {
     }
   }
 
+  removeProduct(e) {
+    e.preventDefault();
+    localStorage.removeItem(this.props.id)
+  }
+
   render() {
     return(
-      <div id="action">
-        {/* {this.props.action ? (
-          <button></button>
-        ) : ()}  */}
-      </div>
+      this.props.actionButton ? (
+        <div id="action">
+            <button onClick={this.props.showModal}>Star</button>
+        </div>
+      ) : (
+        <div id="action">
+          <button onClick={this.removeProduct.bind(this)}>Remove</button>
+        </div>
+      )
     )
   }
 }
+
+export default Action;

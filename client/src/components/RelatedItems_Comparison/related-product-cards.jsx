@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Stars from '../FiveStars.jsx';
+import Action from './action.jsx';
 
 class RPC extends React.Component {
   constructor (props) {
@@ -25,7 +26,7 @@ class RPC extends React.Component {
       }
       return(
         <div id="card">
-          <button onClick={this.props.show}>Star button</button>
+          <Action id={this.props.info.product.id} actionButton={this.props.action} showModal={this.props.show}/>
           <p>
             <img className="rpcThumbnails" src={this.props.info.defaultStyle.photos[0].thumbnail_url}></img>
           </p>

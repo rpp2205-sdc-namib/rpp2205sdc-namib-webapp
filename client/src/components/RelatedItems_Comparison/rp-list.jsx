@@ -9,7 +9,8 @@ class RPList extends React.Component {
     super(props);
     this.state = {
       showModal: false,
-      rp: []
+      rp: [],
+      star: true
     }
   }
 
@@ -45,7 +46,7 @@ class RPList extends React.Component {
             rating: totalReviewsAndAvgRating(responseArr[i+2].data.ratings)[1]
           });
         }
-        this.setState({rp: [...data]});
+        this.setState({rp: [...data]}, () => {console.log(this.state)});
       })
       .catch(err => console.log(err));
   }
@@ -56,7 +57,7 @@ class RPList extends React.Component {
         <button>Prev</button>
         {this.state.rp.map((element, index) => {
           return(
-            <RPC info={element} show={this.handleClick.bind(this)} key={index}/>
+            <RPC action={this.state.star} info={element} show={this.handleClick.bind(this)} key={index}/>
           )
          })
         }
