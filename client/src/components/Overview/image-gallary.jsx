@@ -66,7 +66,7 @@ class ImageGallary extends React.Component {
           })}
           </div>
           <div className="current-photo-modal">
-            <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex].url}></img>
+            <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex].url || 'img/NoImageThumbnail.png'}></img>
             <button id="backBtn-modal" onClick={this.handleBackward.bind(this)}>Back</button>
             <button id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>Forward</button>
             <button id="default-view" onClick={this.handleClick.bind(this)}>Default View</button>
@@ -86,7 +86,7 @@ class ImageGallary extends React.Component {
         {this.state.bottom === this.props.photos.length - 1 ? null : <div className="arrow-down" onClick={this.handleArrowDown.bind(this)}></div>}
         </div>
         <div className="current-photo">
-          <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url}></img>
+          <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url || 'img/NoImageThumbnail.png'}></img>
           <button id="backBtn" onClick={this.handleBackward.bind(this)}>Back</button>
           <button id="forwardBtn" onClick={this.handleForward.bind(this)}>Forward</button>
           <button id="expanded-view" onClick={this.handleClick.bind(this)}>Expand</button>
