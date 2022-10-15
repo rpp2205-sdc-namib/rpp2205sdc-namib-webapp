@@ -5,11 +5,9 @@ class Reviews_List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: this.props.reviews,
-      totalReviews: this.props.totalReviews,
-      displayedReviews: this.props.reviews.slice(0, 2),
+      displayedReviews: null,
       limitReached: false,
-      tiles: 4
+      tiles: 2
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -18,10 +16,9 @@ class Reviews_List extends React.Component {
   handleClick(e) {
     e.preventDefault();
     this.setState({
-      displayedReviews: this.state.reviews.slice(0, this.state.tiles),
       tiles: this.state.tiles+=2
     }, () => {
-      if (this.state.displayedReviews.length === this.state.totalReviews) {
+      if (this.state.tiles === this.props.totalReviews) {
         console.log('limit reached');
         this.setState({
           limitReached: true
@@ -31,13 +28,13 @@ class Reviews_List extends React.Component {
   }
 
   render() {
-    console.log(this.state.reviews);
-    if (this.state.limitReached || (this.state.totalReviews > 0 && this.state.totalReviews <= 2)) {
+    console.log(this.props.reviews);
+    if (this.state.limitReached || (this.props.totalReviews > 0 && this.props.totalReviews <= 2)) {
       return (
         <div>
-        <div className={`reviews${this.state.displayedReviews.length > 4 ? '_expand_mode' : ''}`}>
+        <div className={`reviews${this.state.tiles > 4 ? '_expand_mode' : ''}`}>
           <div>
-            {this.state.displayedReviews.map(review => {
+            {this.props.reviews.slice(0, this.state.tiles).map(review => {
               return (
                 <Individual_Review_Tile review={review} key={review.review_id}/>
               )
@@ -50,9 +47,9 @@ class Reviews_List extends React.Component {
 
     return (
       <div>
-        <div className={`reviews${this.state.displayedReviews.length > 4 ? '_expand_mode' : ''}`}>
+        <div className={`reviews${this.state.tiles > 4 ? '_expand_mode' : ''}`}>
           <div data-testid="tiles">
-            {this.state.displayedReviews.map(review => {
+            {this.props.reviews.slice(0, this.state.tiles).map(review => {
               return (
                 <Individual_Review_Tile review={review} key={review.review_id}/>
               )
