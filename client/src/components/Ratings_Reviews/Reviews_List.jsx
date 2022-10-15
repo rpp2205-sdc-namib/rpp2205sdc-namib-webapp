@@ -59,7 +59,7 @@ class Reviews_List extends React.Component {
             })}
           </div>
         </div>
-        <button onClick={this.handleClick}>More Reviews</button>
+        <button onClick={this.handleClick} data-testid="more_button" className="more_button">More Reviews</button>
       </div>
     );
   }
