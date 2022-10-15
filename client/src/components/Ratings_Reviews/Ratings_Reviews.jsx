@@ -6,18 +6,14 @@ class Ratings_Reviews extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      reviews: this.props.reviews,
-      rating: this.props.rating,
-      totalReviews: this.props.totalReviews
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <div>
-        <Rating_Breakdown rating={this.state.rating} totalReviews={this.state.totalReviews}/>
-        <Reviews_List reviews={this.state.reviews} totalReviews={this.state.totalReviews}/>
+        <Rating_Breakdown productId={this.props.productId} rating={this.props.rating} totalReviews={this.props.totalReviews}/>
+        <Reviews_List productId={this.props.productId} reviews={this.props.reviews} totalReviews={this.props.totalReviews}/>
       </div>
     )
   }
