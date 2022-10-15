@@ -66,7 +66,7 @@ class ImageGallary extends React.Component {
           })}
           </div>
           <div className="current-photo-modal">
-            <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex].url || 'img/NoImageThumbnail.png'}></img>
+            <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
             <button id="backBtn-modal" onClick={this.handleBackward.bind(this)}>Back</button>
             <button id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>Forward</button>
             <button id="default-view" onClick={this.handleClick.bind(this)}>Default View</button>
@@ -77,16 +77,18 @@ class ImageGallary extends React.Component {
     return (
       <div className="image-gallary" data-testid="test-ImageGallary">
         <div className="gallary-list">
-          {this.state.top === 0 ? null : <div className="arrow-up" onClick={this.handleArrowUp.bind(this)}></div>}
+          {/* up arrow will appear when the top image is not index 0, and the number of photos is larger than 4 */}
+          {(this.state.top === 0 || this.props.photos.length <= 4) ? null : <div className="arrow-up" onMouseOver={this.handleArrowUp.bind(this)}></div>}
           {this.props.photos.map((photo, index) => {
           return (<div key={index}>
             <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='overview' top={this.state.top} bottom={this.state.bottom}/>
           </div>)
         })}
-        {this.state.bottom === this.props.photos.length - 1 ? null : <div className="arrow-down" onClick={this.handleArrowDown.bind(this)}></div>}
+        {/* down arrow will appear when the top image is not last image, and the number of photos is larger than 4 */}
+        {(this.state.bottom === this.props.photos.length - 1 || this.props.photos.length <= 4) ? null : <div className="arrow-down" onMouseOver={this.handleArrowDown.bind(this)}></div>}
         </div>
         <div className="current-photo">
-          <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url || 'img/NoImageThumbnail.png'}></img>
+          <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
           <button id="backBtn" onClick={this.handleBackward.bind(this)}>Back</button>
           <button id="forwardBtn" onClick={this.handleForward.bind(this)}>Forward</button>
           <button id="expanded-view" onClick={this.handleClick.bind(this)}>Expand</button>
