@@ -3,10 +3,13 @@ import SizeSelector from './size-selector.jsx';
 import QuantitySelector from './quantity-selector.jsx';
 import AddToOutfit from './add-to-outfit.jsx';
 
+const selectionReminder = {borderColor: "red"};
+const original = {borderColor: "black"};
+
 class AddToCart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { quantity: 0, sizeAndQuantityObj: undefined }
+    this.state = { quantity: 0, sizeAndQuantityObj: undefined, sizeBorderStyle: original, quantityBorderStyle: original }
   }
 
   componentDidMount() {
@@ -23,15 +26,29 @@ class AddToCart extends React.Component {
 
   handleSizeSelect(e) {
     var size = e.target.value;
-    if (size !== '-') {
-      this.setState({ quantity: this.state.sizeAndQuantityObj[size] })
+    if (size !== 'Select Size') {
+      this.setState({ quantity: this.state.sizeAndQuantityObj[size], sizeBorderStyle: original })
     } else {
       this.setState({ quantity: 0 });
     }
   }
 
-  handleButtonClick() {
+  handleQuantitySelect(e) {
+    var quantity = e.target.value;
+    if(quantity !== 'Select Quantity') {
+      this.setState({quantityBorderStyle: original})
+    }
+  }
 
+  handleButtonClick() {
+    var selectedSize = document.getElementById('defaultSizeOption');
+    var selectedQuantity = document.getElementById('defaultQuantityOption');
+    if (selectedSize.selected) {
+      this.setState({sizeBorderStyle: selectionReminder})
+    }
+    if (selectedQuantity.selected) {
+      this.setState({quantityBorderStyle: selectionReminder})
+    }
   }
 
   render() {
@@ -40,8 +57,8 @@ class AddToCart extends React.Component {
     }
     return (<div className="add-to-cart" data-testid="test-AddToCart">
       <div className="add-to-card-line1">
-        <SizeSelector sizeAndQuantityObj={this.state.sizeAndQuantityObj} handleSizeSelect={this.handleSizeSelect.bind(this)} />
-        <QuantitySelector quantity={this.state.quantity} />
+        <SizeSelector sizeAndQuantityObj={this.state.sizeAndQuantityObj} handleSizeSelect={this.handleSizeSelect.bind(this)} borderStyle={this.state.sizeBorderStyle}/>
+        <QuantitySelector quantity={this.state.quantity} borderStyle={this.state.quantityBorderStyle} handleQuantitySelect={this.handleQuantitySelect.bind(this)}/>
       </div>
       <div className="add-to-card-line2">
         <button id="add-to-cart-btn" onClick={this.handleButtonClick.bind(this)}>Add To Cart</button>

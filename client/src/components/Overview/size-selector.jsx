@@ -5,12 +5,13 @@ class SizeSelector extends React.Component {
     super(props)
   }
 
+
   render() {
     return (
       <div className="size-selector">
         <label htmlFor="size">Size: </label>
-        <select name="size" id="size" onChange={this.props.handleSizeSelect}>
-          <option key="defaultSizeOption">Select Size</option>
+        <select name="size" id="size" onChange={this.props.handleSizeSelect} style={this.props.borderStyle}>
+          <option key="defaultSizeOption" id="defaultSizeOption">Select Size</option>
           {Object.keys(this.props.sizeAndQuantityObj).map((element, index) => {
             return (<option key={index} value={element}>{element}</option>)
           })}
