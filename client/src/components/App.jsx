@@ -6,6 +6,7 @@ import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 import RPList from './RelatedItems_Comparison/rp-list.jsx'
 import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
+import { useNavigate } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -49,6 +50,11 @@ class App extends React.Component {
 
   componentDidMount() {
     this.init('71697');
+  }
+
+  redirect(e) {
+    const navigate = useNavigate();
+    navigate(`/${e.target.name}`)
   }
 
   addProduct(e) {

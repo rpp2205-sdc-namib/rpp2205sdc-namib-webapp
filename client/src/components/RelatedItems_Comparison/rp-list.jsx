@@ -35,6 +35,7 @@ class RPList extends React.Component {
     Promise.all(promises)
       .then(responseArr => {
         var data = [];
+        console.log(responseArr);
         for (var i = 0; i <= responseArr.length - 3; i+=3) {
           var result = responseArr[i].data.results.find(style => style["default?"]);
           if(result === undefined) {

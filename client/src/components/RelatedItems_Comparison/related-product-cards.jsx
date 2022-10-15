@@ -3,42 +3,29 @@ import axios from 'axios';
 import Stars from '../FiveStars.jsx';
 import Action from './action.jsx';
 
-class RPC extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      product: ''
-    }
-  }
+function RPC (props) {
 
-  componentDidMount() {
-
-  }
-
-  render () {
-    if(!this.props.info) {
-      return ('')
+  if(!props.info) {
+    return ('')
+  } else {
+    if(props.info.defaultStyle.sale_price === null) {
+      var price = props.info.defaultStyle.original_price;
     } else {
-      if(this.props.info.defaultStyle.sale_price === null) {
-        var price = this.props.info.defaultStyle.original_price;
-      } else {
-        var price = this.props.info.defaultStyle.sale_price;
-      }
-      return(
-        <div id="card">
-          <Action id={this.props.info.product.id} actionButton={this.props.action} showModal={this.props.show} removeProd={this.props.remove}/>
-          <p>
-            <img className="rpcThumbnails" src={this.props.info.defaultStyle.photos[0].thumbnail_url}></img>
-          </p>
-          <p>{this.props.info.product.category}</p>
-          <p>{this.props.info.product.name}</p>
-          <p>{price}</p>
-          <Stars rating={this.props.info.rating}/>
-        </div>
-      )
+      var price = props.info.defaultStyle.sale_price;
     }
+    return(
+      <div id="card" name={props.info.product.id}>
+        <Action id={props.info.product.id} actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
+        <p>
+          <img className="rpcThumbnails" src={props.info.defaultStyle.photos[0].thumbnail_url}></img>
+        </p>
+        <p>{props.info.product.category}</p>
+        <p>{props.info.product.name}</p>
+        <p>{price}</p>
+        <Stars rating={props.info.rating}/>
+      </div>
+    )
   }
-
 }
 
 export default RPC;
