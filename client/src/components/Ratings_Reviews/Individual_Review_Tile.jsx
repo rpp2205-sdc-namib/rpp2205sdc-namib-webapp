@@ -6,7 +6,6 @@ class Individual_Review_Tile extends React.Component {
     super(props);
     this.state = {
       bodyTextLength: 250,
-      body: this.props.review.body,
       expanded: false
     };
 
@@ -22,14 +21,14 @@ class Individual_Review_Tile extends React.Component {
   }
 
   show() {
-    if (this.state.bodyTextLength === this.state.body.length) {
+    if (this.state.bodyTextLength === this.props.review.body.length) {
       this.setState({
         bodyTextLength: 250,
         expanded: false
       })
-    } else if (this.state.bodyTextLength < this.state.body.length) {
+    } else if (this.state.bodyTextLength < this.props.review.body.length) {
       this.setState({
-        bodyTextLength: this.state.body.length,
+        bodyTextLength: this.props.review.body.length,
         expanded: true
       })
     }
