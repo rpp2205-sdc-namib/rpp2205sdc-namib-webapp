@@ -30,11 +30,20 @@ class Question extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Q: {this.props.question.question_body}</p>
-        <div>Helpful?</div>
-        <div onClick={this.handleIncreaseCounts}>Yes<span>{this.state.helpfulness}</span></div>
-        <button onClick={() => this.handleAddAnswer(true)}>Add Answer</button>
+      <div className="question_container">
+        <p className="question">Q: {this.props.question.question_body}</p>
+        <div>
+          <div className="helpful_text">Helpful?</div>
+          <button className="yes_button"
+            onClick={this.handleIncreaseCounts}>Yes
+          </button>
+          <div className="helpfulness_number">({this.state.helpfulness})</div>
+          <div className="division">|</div>
+          <button
+            className="add_answer_button"
+            onClick={() => this.handleAddAnswer(true)}>Add Answer
+          </button>
+        </div>
         {this.props.isAnswerFormShown && this.props.whichForm.length !== 0 &&
           <ModalWindow
             questionBody={this.props.question.question_body}
