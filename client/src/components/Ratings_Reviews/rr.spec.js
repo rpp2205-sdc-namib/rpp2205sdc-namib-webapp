@@ -21,7 +21,7 @@ afterAll(() => server.close())
 describe("Reviews_List.jsx", function(){
   test("loads two review tiles to the virtual dom", async() => {
 
-    render(<Reviews_List reviews={data.results} totalReviews={data.count}/>);
+    render(<Reviews_List reviews={data.reviews.results} totalReviews={data.reviews.count}/>);
 
     await waitFor(() => {screen.getByTestId('tiles')})
 
@@ -32,7 +32,7 @@ describe("Reviews_List.jsx", function(){
 describe("Reviews_List.jsx", function(){
   test("loads two review tiles to the virtual dom", async() => {
 
-    render(<Reviews_List reviews={data.results} totalReviews={data.count}/>);
+    render(<Reviews_List reviews={data.reviews.results} totalReviews={data.reviews.count}/>);
 
     await waitFor(() => {screen.getByTestId('tiles')})
 
@@ -50,6 +50,25 @@ describe("Reviews_Breakdown.jsx", function(){
     expect(screen.getByTestId('star_rating')).toHaveTextContent('3.86');
   });
 });
+
+describe('end to end test to see if user clicked the "more" button', () => {
+  test('click more button will perform correctly', () => {
+      render(<Reviews_List reviews={data.reviews.results} totalReviews={data.reviews.count}/>);
+      const tile = screen.getByTestId('tiles');
+      const firstReview = data.reviews.results[0].summary;
+      const secondReview = data.reviews.results[1].summary;
+      const moreBtn = screen.getByTestId('more_button');
+
+      expect(firstReview).toBeInTheDocument;
+      expect(secondReview).toBeInTheDocument;
+
+      fireEvent.click(moreBtn);
+      const thirdReview = data.reviews.results[2].summary;
+      const fourthReview = data.reviews.results[3].summary;
+      expect(thirdReview).toBeInTheDocument;
+      expect(fourthReview).toBeInTheDocument;
+  })
+})
 
 
 // describe("Reviews_List.jsx", function(){
