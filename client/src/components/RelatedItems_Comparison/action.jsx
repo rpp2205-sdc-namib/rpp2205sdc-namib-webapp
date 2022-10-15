@@ -1,32 +1,18 @@
 import React from 'react';
 
-class Action extends React.Component {
-  constructor(props) {
-    super(props);
+function Action (props) {
 
-    this.state = {
-
-    }
-  }
-
-  removeProduct(e) {
-    e.preventDefault();
-    localStorage.removeItem(this.props.id)
-  }
-
-  render() {
-    return(
-      this.props.actionButton ? (
-        <div id="action">
-            <button onClick={this.props.showModal}>Star</button>
-        </div>
-      ) : (
-        <div id="action">
-          <button onClick={this.removeProduct.bind(this)}>Remove</button>
-        </div>
-      )
+  return(
+    props.actionButton ? (
+      <div id="action">
+          <button onClick={props.showModal}>Star</button>
+      </div>
+    ) : (
+      <div id="action">
+        <button name={props.id} onClick={props.removeProd}>Remove</button>
+      </div>
     )
-  }
+  )
 }
 
 export default Action;

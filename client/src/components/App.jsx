@@ -17,7 +17,8 @@ class App extends React.Component {
                   currentProduct: {}, //contains product name, category
                   defaultStyle: {},//contains price info(original_price, sale_price, thumbnail) //
                   styles: [],
-                  background: "white"
+                  background: "white",
+                  keys: [...Object.keys(localStorage)]
                   };
     this.handleProductIdChange.bind(this);
   }
@@ -52,7 +53,6 @@ class App extends React.Component {
 
   addProduct(e) {
     e.preventDefault();
-    console.log('clicked');
     localStorage.setItem(
       this.state.currentProductId,
       JSON.stringify({
@@ -61,6 +61,14 @@ class App extends React.Component {
         defaultStyle: this.state.defaultStyle
       })
     )
+    this.setState({keys: [...Object.keys(localStorage)]});
+  }
+
+  removeProduct(e) {
+    e.preventDefault();
+    console.log('clicked');
+    localStorage.removeItem(e.target.name)
+    this.setState({keys: [...Object.keys(localStorage)]})
   }
 
   handleProductIdChange(newId) {
@@ -81,7 +89,7 @@ class App extends React.Component {
       <div style={{"backgroundColor": this.state.background}}>
         <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
         <RPList relatedProds={this.state.related}/>
-        <YourOutfit add={this.addProduct.bind(this)}/>
+        <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys}/>
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>

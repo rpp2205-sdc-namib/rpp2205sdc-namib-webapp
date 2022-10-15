@@ -26,7 +26,7 @@ class RPC extends React.Component {
       }
       return(
         <div id="card">
-          <Action id={this.props.info.product.id} actionButton={this.props.action} showModal={this.props.show}/>
+          <Action id={this.props.info.product.id} actionButton={this.props.action} showModal={this.props.show} removeProd={this.props.remove}/>
           <p>
             <img className="rpcThumbnails" src={this.props.info.defaultStyle.photos[0].thumbnail_url}></img>
           </p>
