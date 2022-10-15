@@ -54,6 +54,7 @@ class ImageGallary extends React.Component {
     this.setState({ currentPhotoIndex: newIndex });
   }
 
+
   render() {
     if (this.props.section === 'modal') {
       return (
@@ -76,13 +77,13 @@ class ImageGallary extends React.Component {
     return (
       <div className="image-gallary" data-testid="test-ImageGallary">
         <div className="gallary-list">
-          {this.state.top === 0 ? null : <div class="arrow-up" onClick={this.handleArrowUp.bind(this)}></div>}
+          {this.state.top === 0 ? null : <div className="arrow-up" onClick={this.handleArrowUp.bind(this)}></div>}
           {this.props.photos.map((photo, index) => {
           return (<div key={index}>
             <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='overview' top={this.state.top} bottom={this.state.bottom}/>
           </div>)
         })}
-        {this.state.bottom === this.props.photos.length - 1 ? null : <div class="arrow-down" onClick={this.handleArrowDown.bind(this)}></div>}
+        {this.state.bottom === this.props.photos.length - 1 ? null : <div className="arrow-down" onClick={this.handleArrowDown.bind(this)}></div>}
         </div>
         <div className="current-photo">
           <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url}></img>

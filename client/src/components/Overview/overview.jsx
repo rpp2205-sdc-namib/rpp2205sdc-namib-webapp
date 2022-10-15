@@ -13,8 +13,14 @@ class Overview extends React.Component {
     this.state = {styleId: '', priceInfo: {}, styleObj: {}, modalStyle: {"display": "none"}}; //styleObj is specific
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId) {
+      this.handleStyleIdChange();
+    }
+  }
+
   handleStyleIdChange(newId) {
-    var styleObj = newId === undefined ? this.props.styles.find(style => style["default?"]) : this.props.styles.find(style => style.style_id === newId);
+    var styleObj = newId === undefined ? this.props.defaultStyle : this.props.styles.find(style => style.style_id === newId);
     this.setState({priceInfo: {original_price: styleObj.original_price, sale_price: styleObj.sale_price},
                    styleObj: styleObj,
                    styleId: styleObj.style_id});
