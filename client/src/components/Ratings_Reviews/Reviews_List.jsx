@@ -31,6 +31,7 @@ class Reviews_List extends React.Component {
   }
 
   render() {
+    console.log(this.state.reviews);
     if (this.state.limitReached || (this.state.totalReviews > 0 && this.state.totalReviews <= 2)) {
       return (
         <div>
@@ -58,7 +59,7 @@ class Reviews_List extends React.Component {
             })}
           </div>
         </div>
-        <button onClick={this.handleClick}>More Reviews</button>
+        <button onClick={this.handleClick} data-testid="more_button" className="more_button">More Reviews</button>
       </div>
     );
   }

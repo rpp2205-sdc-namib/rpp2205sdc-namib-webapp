@@ -4,7 +4,15 @@ import GallaryEntry from './gallary-entry.jsx';
 class ImageGallary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentPhotoIndex: 0};
+    this.state = { currentPhotoIndex: 0, top: 0, bottom: 3};
+  }
+
+  handleArrowUp() {
+    this.setState({top: this.state.top - 1, bottom: this.state.bottom - 1});
+  }
+
+  handleArrowDown() {
+    this.setState({top: this.state.top + 1, bottom: this.state.bottom + 1});
   }
 
   handleForward() {
@@ -41,7 +49,7 @@ class ImageGallary extends React.Component {
         <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
           <div className="gallary-list-modal">{this.props.photos.map((photo, index) => {
             return (<div key={index}>
-              <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />
+              <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='modal'/>
             </div>)
           })}
           </div>
@@ -56,11 +64,14 @@ class ImageGallary extends React.Component {
     }
     return (
       <div className="image-gallary" data-testid="test-ImageGallary">
-        <div className="gallary-list">{this.props.photos.map((photo, index) => {
+        <div className="gallary-list">
+          {this.state.top === 0 ? null : <div class="arrow-up" onClick={this.handleArrowUp.bind(this)}></div>}
+          {this.props.photos.map((photo, index) => {
           return (<div key={index}>
-            <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} />
+            <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='overview' top={this.state.top} bottom={this.state.bottom}/>
           </div>)
         })}
+        {this.state.bottom === this.props.photos.length - 1 ? null : <div class="arrow-down" onClick={this.handleArrowDown.bind(this)}></div>}
         </div>
         <div className="current-photo">
           <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex].url}></img>

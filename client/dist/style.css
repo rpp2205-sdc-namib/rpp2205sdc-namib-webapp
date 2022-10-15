@@ -55,7 +55,6 @@
   height: 40%;
   border-style: solid;
   border-color: #848484;
-
 }
 
 
@@ -126,6 +125,95 @@
   align-content: flex-start;
 }
 
+.arrow-up {
+  position: relative;
+   top: -5px;
+   content: "";
+   display: inline-block;
+   width: 15px;
+   height: 15px;
+   border-right: 0.2em solid black;
+   border-top: 0.2em solid black;
+   transform: rotate(-45deg);
+   margin-right: 0.5em;
+   margin-left: 1.0em;
+}
+
+.arrow-down {
+  position: relative;
+  top: -5px;
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate(135deg);
+  margin-right: 0.5em;
+  margin-left: 1.0em;
+}
+
+/* image gallary modal view styling */
+.popup {
+  width: 800px;
+  height: 550px;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* .image-gallary-modal {
+  width: 49%;
+  height: 90%;
+  display:flex;
+  flex-direction: column;
+  align-content: space-around;
+} */
+
+.gallary-list-modal {
+  width: 50px;
+  border-style: solid;
+  border-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/* photo gallary styling */
+
+#current-photo, #current-photo-modal {
+  margin-top: 5%;
+  width: 100%;
+  height: 90%;
+}
+
+.gallary-list {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+/* add to cart styling */
+.add-to-cart {
+  width: 50%;
+  height: 15%;
+  border-style: solid;
+  border-color: #848484;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  align-content: center;
+}
+
+
+
 /* Related Items and Comparison styling */
 #card {
   padding: 10px;
@@ -161,32 +249,7 @@
   height: 150px;
   width: 150px;
 }
-/* photo gallary styling */
 
-#current-photo, #current-photo-modal {
-  margin-top: 5%;
-  width: 100%;
-  height: 90%;
-}
-
-
-
-.gallary-list {
-  width: 15%
-
-}
-
-/* add to cart styling */
-.add-to-cart {
-  width: 50%;
-  height: 15%;
-  border-style: solid;
-  border-color: #848484;
-  display: flex;
-  flex-direction: column;
-  justify-content:space-around;
-  align-content: center;
-}
 
 .add-to-card-line1, .add-to-card-line2 {
   width: 50%;
@@ -252,6 +315,23 @@
 
 .tile-user::after {
   content: ",";
+}
+
+.show_more {
+  cursor: pointer;
+}
+
+div.review_photo {
+  width: 70px;
+  text-align: center;
+  padding: 1px;
+  border: 1px solid black;
+  display: inline-block
+}
+
+img.review_photo {
+  max-width: 100%;
+  height: 50px;
 }
 
 /********* Questions & Answers widget **********/
@@ -329,8 +409,3 @@
   font-size: 16px;
 }
 
-/* image gallary modal view styling */
-.popup {
-  width: 800px;
-  height: 550px;
-}
