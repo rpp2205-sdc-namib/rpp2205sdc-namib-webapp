@@ -58,7 +58,7 @@ class RPList extends React.Component {
         <button>Prev</button>
         {this.state.rp.map((element, index) => {
           return(
-            <RPC action={this.state.star} info={element} show={this.handleClick.bind(this)} key={index}/>
+            <RPC action={this.state.star} info={element} show={this.handleClick.bind(this)} key={index} redirect={this.props.changeProduct}/>
           )
          })
         }

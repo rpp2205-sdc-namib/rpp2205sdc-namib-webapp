@@ -6,7 +6,6 @@ import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 import RPList from './RelatedItems_Comparison/rp-list.jsx'
 import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
-import { useNavigate } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -52,11 +51,6 @@ class App extends React.Component {
     this.init('71697');
   }
 
-  redirect(e) {
-    const navigate = useNavigate();
-    navigate(`/${e.target.name}`)
-  }
-
   addProduct(e) {
     e.preventDefault();
     localStorage.setItem(
@@ -72,14 +66,13 @@ class App extends React.Component {
 
   removeProduct(e) {
     e.preventDefault();
-    console.log('clicked');
     localStorage.removeItem(e.target.name)
     this.setState({keys: [...Object.keys(localStorage)]})
   }
 
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
-    this.init(newId);
+    this.init(newId.toString());
   }
 
   handleOverviewBackground(color) {
@@ -94,8 +87,8 @@ class App extends React.Component {
     return (
       <div style={{"backgroundColor": this.state.background}}>
         <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-        <RPList relatedProds={this.state.related}/>
-        <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys}/>
+        <RPList relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
+        <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>

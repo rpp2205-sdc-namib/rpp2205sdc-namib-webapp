@@ -14,7 +14,7 @@ function RPC (props) {
       var price = props.info.defaultStyle.sale_price;
     }
     return(
-      <div id="card" name={props.info.product.id}>
+      <div id="card" name={props.info.product.id} onClick={ () => {props.redirect(props.info.product.id)}}>
         <Action id={props.info.product.id} actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
         <p>
           <img className="rpcThumbnails" src={props.info.defaultStyle.photos[0].thumbnail_url}></img>
