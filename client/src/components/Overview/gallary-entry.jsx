@@ -1,6 +1,6 @@
 import React from 'react';
 
-const highlightStyle = {"borderStyle": "solid", "color": "orange", "borderWidth": "2px"};
+const highlightStyle = {"borderStyle": "solid", "color": "orange", "borderWidth": "2.5px"};
 const nonHighlightStyle = {"borderStyle": "none"};
 
 class GallaryEntry extends React.Component {
