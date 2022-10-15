@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
-const { getProductHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler } = require('./controller/helper.js');
+const { getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
 
@@ -21,6 +21,8 @@ app.get('/reviews/:product_id/:count', getReviewsHandler);
 app.get('/qa/questions/:product_id', getQuestionsHandler);
 
 app.get('/qa/questions/:question_id/answers', getAnswersHandler);
+
+app.get('/products/:product_id/related', getRelatedHandler);
 
 
 //post routes
