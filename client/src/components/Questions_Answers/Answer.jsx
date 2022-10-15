@@ -45,12 +45,29 @@ class Answer extends React.Component {
 
     return (
       <div>
-        <p>A: {body}</p>
-        by<span className={answerer_name === "Seller" ? 'seller' : undefined}>{answerer_name === "Seller" ? "Seller" : answerer_name}</span>
-        <div>{this.handleDateFormat(date)}</div>
-        <div>Helpful?</div>
-        <button disabled={this.state.isYesClicked} onClick={this.handleIncreaseCounts}>Yes<span>{this.state.helpfulness}</span></button>
-        {this.state.isReported ? <button disabled={this.state.isReported} onClick={this.handleReport}>Reported</button> : <button onClick={this.handleReport}>Report</button>}
+        <p className="answer">A: {body}</p>
+        <div className="answer_sub">
+          <div className="by">by</div>
+          <span className={answerer_name === "Seller" ? 'seller' : 'answerer'}>{answerer_name === "Seller" ? "Seller" : answerer_name}</span>
+          <div className="answer_date">{this.handleDateFormat(date)}</div>
+          <div>|</div>
+          <div className="helpful_text">Helpful?</div>
+          <button className="yes_button"
+            disabled={this.state.isYesClicked}
+            onClick={this.handleIncreaseCounts}>Yes
+          </button>
+          <div className="helpfulness_number">({this.state.helpfulness})</div>
+          {this.state.isReported ?
+            <button disabled={this.state.isReported}
+              className="report_button"
+              role="report_button"
+              onClick={this.handleReport}>Reported
+            </button> :
+            <button className="report_button"
+              role="report_button"
+              onClick={this.handleReport}>Report
+            </button>}
+        </div>
       </div>
     )
   }

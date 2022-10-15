@@ -253,8 +253,54 @@
 }
 
 /********* Questions & Answers widget **********/
+
+/** Answer */
+.answer {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.answer_sub {
+  display: flex;
+}
+
+.by, .answerer, .seller, .answer_date {
+  margin-right: 5px;
+}
+
 .seller {
   font-weight: bold;
+}
+
+/** Question */
+.question_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.helpful_text, .yes_button, .helpfulness_number, .division, .add_answer_button {
+  float: left;
+}
+
+.helpful_text {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.helpfulness_number {
+  margin-right: 5px;
+}
+
+.yes_button, .add_answer_button, .report_button {
+  border: none;
+  background-color: #fff;
+  text-decoration: underline;
 }
 
 .answers_expand_mode {
