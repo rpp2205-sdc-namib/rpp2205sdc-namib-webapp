@@ -9,13 +9,13 @@ class RPList extends React.Component {
     super(props);
     this.state = {
       showModal: false,
-      rp: []
+      rp: [],
+      star: true
     }
   }
 
   handleClick(e) {
     e.preventDefault();
-    console.log('clicked');
     this.setState({showModal: true});
   }
 
@@ -58,7 +58,7 @@ class RPList extends React.Component {
         <button>Prev</button>
         {this.state.rp.map((element, index) => {
           return(
-            <RPC info={element} show={this.handleClick.bind(this)} key={index}/>
+            <RPC action={this.state.star} info={element} show={this.handleClick.bind(this)} key={index} redirect={this.props.changeProduct}/>
           )
          })
         }

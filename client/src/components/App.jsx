@@ -17,7 +17,8 @@ class App extends React.Component {
                   currentProduct: {}, //contains product name, category
                   defaultStyle: {},//contains price info(original_price, sale_price, thumbnail) //
                   styles: [],
-                  background: "white"
+                  background: "white",
+                  keys: [...Object.keys(localStorage)]
                   };
     this.handleProductIdChange.bind(this);
   }
@@ -50,9 +51,28 @@ class App extends React.Component {
     this.init('71697');
   }
 
+  addProduct(e) {
+    e.preventDefault();
+    localStorage.setItem(
+      this.state.currentProductId,
+      JSON.stringify({
+        rating: this.state.rating,
+        product: this.state.currentProduct,
+        defaultStyle: this.state.defaultStyle
+      })
+    )
+    this.setState({keys: [...Object.keys(localStorage)]});
+  }
+
+  removeProduct(e) {
+    e.preventDefault();
+    localStorage.removeItem(e.target.name)
+    this.setState({keys: [...Object.keys(localStorage)]})
+  }
+
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
-    this.init(newId);
+    this.init(newId.toString());
   }
 
   handleOverviewBackground(color) {
@@ -67,8 +87,8 @@ class App extends React.Component {
     return (
       <div style={{"backgroundColor": this.state.background}}>
         <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-        <RPList productId={this.state.currentProductId} relatedProds={this.state.related}/>
-        <YourOutfit productId={this.state.currentProductId} prodRating={this.state.rating}/>
+        <RPList relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
+        <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>
