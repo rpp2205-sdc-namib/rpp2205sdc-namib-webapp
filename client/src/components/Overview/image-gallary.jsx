@@ -17,16 +17,27 @@ class ImageGallary extends React.Component {
 
   handleForward() {
     var oldId = this.state.currentPhotoIndex;
+    var newId = oldId + 1;
     if (oldId < this.props.photos.length - 1) {
       this.changeCurrentPhoto(oldId + 1);
-    }
+      if (newId > this.state.bottom) {
+        this.setState({bottom: this.state.bottom + 1, top: this.state.top + 1})
+      }
+    };
+
+
   }
 
   handleBackward() {
     var oldId = this.state.currentPhotoIndex;
+    var newId = oldId - 1;
     if (oldId > 0) {
-      this.changeCurrentPhoto(oldId - 1);
+      this.changeCurrentPhoto(newId);
+      if (newId < this.state.top) {
+        this.setState({top: this.state.top - 1, bottom: this.state.bottom - 1})
+      }
     }
+
   }
 
   handleClick() {

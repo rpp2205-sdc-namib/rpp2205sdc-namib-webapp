@@ -3,8 +3,8 @@ import SizeSelector from './size-selector.jsx';
 import QuantitySelector from './quantity-selector.jsx';
 import AddToOutfit from './add-to-outfit.jsx';
 
-const selectionReminder = {borderColor: "red"};
-const original = {borderColor: "black"};
+const selectionReminder = {borderColor: "red", borderWidth: "2px"};
+const original = {borderColor: "black", borderWidth: "1px"};
 
 class AddToCart extends React.Component {
   constructor(props) {

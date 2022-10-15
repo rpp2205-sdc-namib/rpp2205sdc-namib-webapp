@@ -1,6 +1,6 @@
 import React from 'react';
 
-const highlightStyle = {"borderStyle": "solid", "color": "orange", "borderWidth": "2px"};
+const highlightStyle = {"borderStyle": "solid", "color": "orange", "borderWidth": "2.5px"};
 const nonHighlightStyl = {"borderStyle": "none"};
 
 class StyleEntry extends React.Component {
@@ -15,7 +15,7 @@ class StyleEntry extends React.Component {
 
   render() {
     return (<div>
-      <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onMouseOver={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyl}></img>
+      <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyl}></img>
     </div>)
 
   }

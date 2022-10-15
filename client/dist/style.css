@@ -177,8 +177,6 @@
 
 .gallary-list-modal {
   width: 50px;
-  border-style: solid;
-  border-color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
