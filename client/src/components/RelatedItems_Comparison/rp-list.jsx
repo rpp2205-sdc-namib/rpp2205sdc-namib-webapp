@@ -29,7 +29,7 @@ class RPList extends React.Component {
     this.props.relatedProds.forEach((element) => {
       promises.push(axios.get(`/products/${element.toString()}/styles`));
       promises.push(axios.get(`/products/${element.toString()}`));
-      promises.push(axios.get(`/reviews/meta/${element.toString()}`))
+      promises.push(axios.get(`/reviews/meta/${element.toString()}`));
     });
 
     Promise.all(promises)
