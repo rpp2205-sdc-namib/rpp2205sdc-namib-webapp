@@ -11,7 +11,7 @@ class Questions_Answers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      QAs: [],
+      QAs: [], // all Q&A for the current product
       question_id_1: '',
       question_id_2: '',
       top2Questions: [],
@@ -22,7 +22,10 @@ class Questions_Answers extends React.Component {
       hasMoreThanTwoQuestions: false,
       isQuestionFormShown: false,
       isAnswerFormShown: false,
-      whichForm: ''
+      whichForm: '',
+      searchWord: '',
+      filtered: [],
+      isSearched: false
     }
 
     this.getAllQuestions = this.getAllQuestions.bind(this);
@@ -31,6 +34,8 @@ class Questions_Answers extends React.Component {
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
     this.handleAddAnswer = this.handleAddAnswer.bind(this);
     this.closeForm = this.closeForm.bind(this);
+    this.handleChangeSearch = this.handleChangeSearch.bind(this);
+    this.filterSearch = this.filterSearch.bind(this);
   }
 
   componentDidMount() {
@@ -103,56 +108,93 @@ class Questions_Answers extends React.Component {
     });
   }
 
+  handleChangeSearch(value) {
+    // begin search after a user types more than 3 characters
+    if (value.length < 3) return;
+
+    this.setState({
+      searchWord: value
+    }, this.filterSearch);
+  }
+
+  filterSearch() {
+    let results = this.state.QAs.filter(question => {
+      return question.question_body.includes(this.state.searchWord);
+    });
+
+    this.setState({
+      isSearched: true,
+      filtered: results
+    })
+  }
+
   render() {
+    console.log('filtered: ', this.state.filtered)
     return (
       <div>
-        <Search QAs={this.state.QAs} />
-        {this.state.top2Questions.map((qa, index) => {
-          if (index === 0) {
-            return (
-              <div key={qa.question_id}>
-              <Question
-                question={qa}
-                handleAddAnswer={this.handleAddAnswer}
-                isAnswerFormShown={this.state.isAnswerFormShown}
-                productName={this.props.productName}
-                whichForm={this.state.whichForm}
-                closeForm={this.closeForm} />
-              {this.state.top2AnswersForFirstQuestion.length &&
-                <Answers
-                  allAnswersForFirstQuestion={this.state.allAnswersForFirstQuestion}
-                />
+        <Search handleChangeSearch={this.handleChangeSearch} />
+        {this.state.isSearched ?
+          <div>
+            {this.state.filtered.map((qa) => {
+              return (
+                <div>
+                  <Question
+                    isSearched={this.state.isSearched}
+                    question={qa}
+                    handleAddAnswer={this.handleAddAnswer}
+                    isAnswerFormShown={this.state.isAnswerFormShown}
+                    productName={this.props.productName}
+                    whichForm={this.state.whichForm}
+                    closeForm={this.closeForm} />
+                </div>
+              )
+          })}
+          </div> :
+          <div>
+            {this.state.top2Questions.map((qa, index) => {
+              if (index === 0) {
+                return (
+                  <div key={qa.question_id}>
+                  <Question
+                    isSearched={this.state.isSearched}
+                    question={qa}
+                    handleAddAnswer={this.handleAddAnswer}
+                    isAnswerFormShown={this.state.isAnswerFormShown}
+                    productName={this.props.productName}
+                    whichForm={this.state.whichForm}
+                    closeForm={this.closeForm} />
+                  {this.state.top2AnswersForFirstQuestion.length &&
+                   <Answers
+                      allAnswersForFirstQuestion={this.state.allAnswersForFirstQuestion} />}
+                  </div>
+                )
+              } else {
+                return (
+                  <div key={qa.question_id}>
+                  <Question
+                    isSearched={this.state.isSearched}
+                    question={qa}
+                    handleAddAnswer={this.handleAddAnswer}
+                    isAnswerFormShown={this.state.isAnswerFormShown}
+                    productName={this.props.productName}
+                    whichForm={this.state.whichForm}/>
+                  {this.state.top2AnswersForSecondQuestion.length &&
+                    <Answers
+                      allAnswersForSecondQuestion={this.state.allAnswersForSecondQuestion} />
+                }
+                  </div>
+                )
               }
-            </div>
-            )
-          } else {
-            return (
-              <div key={qa.question_id}>
-              <Question
-                question={qa}
-                handleAddAnswer={this.handleAddAnswer}
-                isAnswerFormShown={this.state.isAnswerFormShown}
-                productName={this.props.productName}
-                whichForm={this.state.whichForm}/>
-              {this.state.top2AnswersForSecondQuestion.length &&
-                <Answers
-                  allAnswersForSecondQuestion={this.state.allAnswersForSecondQuestion}
-                />
-              }
-              </div>
-            )
-          }
-        })}
-        {this.state.hasMoreThanTwoQuestions &&
-          <button onClick={this.handleShowMoreQuestions}>More Answered Questions</button>
+              <button onClick={this.handleAddQuestion}>Add Question</button>
+              {this.state.isQuestionFormShown &&
+                <ModalWindow
+                  closeForm={this.closeForm}
+                  productName={this.props.productName}
+                  whichForm={this.state.whichForm}
+                />}
+              })}
+          </div>
         }
-        <button onClick={this.handleAddQuestion}>Add Question</button>
-        {this.state.isQuestionFormShown &&
-          <ModalWindow
-            closeForm={this.closeForm}
-            productName={this.props.productName}
-            whichForm={this.state.whichForm}
-          />}
       </div>
     )
   }
