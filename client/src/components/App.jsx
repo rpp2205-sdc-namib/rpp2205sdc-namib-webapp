@@ -72,6 +72,7 @@ class App extends React.Component {
 
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
+    console.log(newId);
     this.init(newId.toString());
   }
 

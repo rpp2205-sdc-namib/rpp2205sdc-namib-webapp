@@ -8,6 +8,7 @@
     "test:review": "jest ./client/src/components/Ratings_Reviews/rr.spec.js --env=jsdom",
     "test:overview": "jest ./client/src/components/Overview/overview.test.js --env=jsdom --detectOpenHandles ----coverage",
     "test:questions_answers": "jest ./client/src/components/Questions_Answers/questions_answers.test.js",
+    "test:related": "jest ./client/src/components/RelatedItems_Comparison/related-product-cards.test.js --coverage",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",

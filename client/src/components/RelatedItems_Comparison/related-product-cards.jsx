@@ -13,11 +13,16 @@ function RPC (props) {
     } else {
       var price = props.info.defaultStyle.sale_price;
     }
+    if(props.info.defaultStyle.photos[0].thumbnail_url === null) {
+      var photo = './img/NoImageThumbnail.png';
+    } else {
+      var photo = props.info.defaultStyle.photos[0].thumbnail_url;
+    }
     return(
-      <div id="card" name={props.info.product.id} onClick={ () => {props.redirect(props.info.product.id)}}>
+      <div id="card" onClick={ () => {props.redirect(props.info.product.id)}}>
         <Action id={props.info.product.id} actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
         <p>
-          <img className="rpcThumbnails" src={props.info.defaultStyle.photos[0].thumbnail_url}></img>
+          <img className="rpcThumbnails" src={photo}></img>
         </p>
         <p>{props.info.product.category}</p>
         <p>{props.info.product.name}</p>

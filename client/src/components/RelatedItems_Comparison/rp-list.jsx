@@ -53,6 +53,7 @@ class RPList extends React.Component {
   }
 
   render () {
+    {console.log(this.props.relatedProds)};
     return (
       <div id="rpList">
         <button>Prev</button>
