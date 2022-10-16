@@ -106,7 +106,7 @@ class Questions_Answers extends React.Component {
   render() {
     return (
       <div>
-        <Search />
+        <Search QAs={this.state.QAs} />
         {this.state.top2Questions.map((qa, index) => {
           if (index === 0) {
             return (
