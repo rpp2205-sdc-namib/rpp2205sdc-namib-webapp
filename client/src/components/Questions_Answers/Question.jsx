@@ -13,12 +13,22 @@ class Question extends React.Component {
 
     this.handleAddAnswer = this.handleAddAnswer.bind(this);
     this.handleIncreaseCounts = this.handleIncreaseCounts.bind(this);
+    this.closeForm = this.closeForm.bind(this);
   }
 
-  handleAddAnswer(isClicked) {
+  handleAddAnswer() {
     // adding an answer to the question.
     // opens up a modal window that contains a form to submit the answer
-    this.props.handleAddAnswer(isClicked);
+    // this.props.handleAddAnswer(isClicked);
+    this.setState({
+      isFormShown: true
+    });
+  }
+
+  closeForm() {
+    this.setState({
+      isFormShown: false
+    });
   }
 
   handleIncreaseCounts() {
@@ -41,15 +51,21 @@ class Question extends React.Component {
           <div className="division">|</div>
           <button
             className="add_answer_button"
-            onClick={() => this.handleAddAnswer(true)}>Add Answer
+            onClick={this.handleAddAnswer}>Add Answer
           </button>
         </div>
-        {this.props.isAnswerFormShown && this.props.whichForm.length !== 0 &&
+        {this.state.isFormShown &&
+          <ModalWindow
+            questionBody={this.props.question.question_body}
+            productName={this.props.productName}
+            closeForm={this.closeForm}
+          />}
+        {/* {this.props.isAnswerFormShown && this.props.whichForm.length !== 0 &&
           <ModalWindow
             questionBody={this.props.question.question_body}
             productName={this.props.productName}
             closeForm={this.props.closeForm}
-            whichForm={this.props.whichForm} />}
+            whichForm={this.props.whichForm} />} */}
       </div>
     )
   }

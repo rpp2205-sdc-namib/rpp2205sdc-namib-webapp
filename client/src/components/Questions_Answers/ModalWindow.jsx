@@ -61,26 +61,36 @@ class ModalWindow extends React.Component {
     );
   }
 
-  validateUserInput(value) {
-    if (value === 'answer') {
-      let isAnswerValid = this.state.answer.length !== 0;
-      let isNicknameValid = this.state.answer.length !== 0;
-      let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
-      this.setState({
-        isEmailValidated: isEmailValid,
-        hasError: !isAnswerValid || !isNicknameValid || !isEmailValid
-      })
+  validateUserInput() {
+    let isAnswerValid = this.state.answer.length !== 0;
+    let isQuestionValid = this.state.question.length !== 0;
+    let isNicknameValid = this.state.answer.length !== 0;
+    let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
 
-    } else {
-      let isQuestionValid = this.state.question.length !== 0;
-      let isNicknameValid = this.state.answer.length !== 0;
-      let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+    this.setState({
+      isEmailValidated: isEmailValid,
+      hasError: (!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid
+    })
 
-      this.setState({
-        isEmailValidated: isEmailValid,
-        hasError: !isQuestionValid || !isNicknameValid || !isEmailValid
-      });
-    }
+    // if (value === 'answer') {
+    //   let isAnswerValid = this.state.answer.length !== 0;
+    //   let isNicknameValid = this.state.answer.length !== 0;
+    //   let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+    //   this.setState({
+    //     isEmailValidated: isEmailValid,
+    //     hasError: !isAnswerValid || !isNicknameValid || !isEmailValid
+    //   })
+
+    // } else {
+    //   let isQuestionValid = this.state.question.length !== 0;
+    //   let isNicknameValid = this.state.answer.length !== 0;
+    //   let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+
+    //   this.setState({
+    //     isEmailValidated: isEmailValid,
+    //     hasError: !isQuestionValid || !isNicknameValid || !isEmailValid
+    //   });
+    // }
   }
 
   getInvalidFields(value) {
@@ -100,12 +110,13 @@ class ModalWindow extends React.Component {
   }
 
   render() {
+    console.log('props in modal window: ', this.props)
     return (
       <div className="modal_content">
         <span className="modal_close" onClick={this.props.closeForm}>&times;</span>
-        {this.props.whichForm === 'answer' ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
-        {this.props.whichForm === 'answer' ? <h4>{this.props.productName}: {this.props.questionBody}</h4> : <h4>About the {this.props.productName}</h4>}
-        {this.props.whichForm === 'answer' ?
+        {this.props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
+        {this.props.questionBody !== undefined ? <h4>{this.props.productName}: {this.props.questionBody}</h4> : <h4>About the {this.props.productName}</h4>}
+        {this.props.questionBody !== undefined ?
           <div>
             <label className="label_answer" htmlFor="answer">Your Answer</label>
             <input className="text_answer" maxLength="1000" onChange={(e) => this.handleAnswerChange(e.target.value)} name="answer" />
@@ -118,7 +129,7 @@ class ModalWindow extends React.Component {
         <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
         <input
           className="nickname"
-          placeholder={this.state.whichForm === 'answer' ? "Example: jack543!" : "jackson11!"}
+          placeholder={this.state.questionBody !== undefined ? "Example: jack543!" : "jackson11!"}
           name="nickname"
           maxLength="60"
           onChange={(e) => this.handleNickNameChange(e.target.value)} />
@@ -130,8 +141,13 @@ class ModalWindow extends React.Component {
           name="email"
           placeholder="Example: jack@email.com"/>
         <p className="sub_text">For authentication reasons, you will not be emailed</p>
-        {this.props.whichForm === 'answer' && <button className="upload_button" onClick={this.handleUploadPhotos}>Upload your photos</button>}
-        <button className="submit_button" onClick={() => this.validateUserInput(this.props.whichForm)}>Submit answer</button>
+        {this.props.questionBody !== undefined && <button className="upload_button" onClick={this.handleUploadPhotos}>Upload your photos</button>}
+        <button
+          className="submit_button"
+          // onClick={() => this.validateUserInput(this.props.whichForm)}>
+          onClick={this.validateUserInput}>
+          {this.props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
+        </button>
         {this.state.hasError ? <div className="sub_text">You must enter the following: {this.getInvalidFields(this.props.whichForm).map(f => <li key={f}>{f}</li>)}</div> : <></>}
       </div>
     )
