@@ -1,6 +1,7 @@
 /* Overview Component Styles */
 .overview-container {
-  height: 600px;
+  width: 100%;
+  height: 90vh;
   position: relative;
   display: flex;
   justify-content: center;
@@ -15,33 +16,21 @@
   flex-direction: column;
   flex-wrap: wrap;
   align-content: flex-start;
-
 }
 
-.modal {
-  /* display: none !important; */
-  opacity: 200%;
-  background-color: white;
-  height: 90%;
-  width: 90%;
-  border-style: solid;
-  border-color: aqua;
-  z-index: 9;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 
-.image-gallary, .image-gallary-modal {
-  width: 49%;
-  height: 90%;
+.image-gallary {
+  border: solid blue;
+  width: 50%;
+  height: 100%;
   display:flex;
   flex-direction: row;
   align-content: space-around;
 }
 
 .product-info {
-  width: 50%;
+  margin-left: 8%;
+  width: 41%;
   height: 35%;
   border-style: solid;
   border-color: #848484;
@@ -51,11 +40,110 @@
 }
 
 .style-selector {
-  width: 50%;
+  margin-left: 8%;
+  width: 41%;
   height: 40%;
   border-style: solid;
   border-color: #848484;
 }
+
+.add-to-cart {
+  margin-left: 8%;
+  width: 41%;
+  height: 15%;
+  border-style: solid;
+  border-color: #848484;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  align-content: center;
+}
+
+/* photo gallary styling */
+
+#current-photo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+      /* container for the current photo */
+.current-photo {
+  overflow:hidden;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 50%;
+  height: 100%;
+  border: solid black;
+}
+
+.gallary-list {
+  position: absolute;
+  top:5%;
+  left:0;
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* .backBtn-container{
+  position: absolute;
+  top: 50%;
+  left: 11%;
+  width: 60px;
+  height: 60px;
+  border: solid black;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.forwardBtn-container {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  width: 60px;
+  height: 60px;
+} */
+#backBtn:before {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  display: inline-block;
+  overflow: hidden;
+  content: "\22BF";
+  transform: rotate(135deg);
+  font-size: 60px;
+  z-index: 1;
+}
+
+#forwardBtn:before {
+  position: absolute;
+  top: 50%;
+  left: 80%;
+  content: "\22BF";
+  display: inline-block;
+  transform: rotate(-45deg);
+  font-size: 60px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* .backBtn-fill {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  white-space: nowrap;
+  background-color: #b1b1b1;
+  border: solid black;
+} */
 
 
 
@@ -154,9 +242,19 @@
 }
 
 /* image gallary modal view styling */
-.popup {
-  width: 800px;
-  height: 550px;
+
+.modal {
+  /* display: none !important; */
+  opacity: 200%;
+  background-color: white;
+  height: 100%;
+  width: 90%;
+  border-style: solid;
+  border-color: aqua;
+  z-index: 9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .dot {
@@ -167,47 +265,45 @@
   display: inline-block;
 }
 
-/* .image-gallary-modal {
-  width: 49%;
-  height: 90%;
+.image-gallary-modal {
+  border: solid blue;
+  width: 100%;
+  height: 100%;
   display:flex;
   flex-direction: column;
   align-content: space-around;
-} */
+  justify-content: space-around;
+  /* align-content: space-around; */
+}
 
 .gallary-list-modal {
   width: 50px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
 }
 
-/* photo gallary styling */
 
-#current-photo, #current-photo-modal {
-  margin-top: 5%;
-  width: 100%;
-  height: 90%;
+
+/* magnifying area styling */
+
+#current-photo-modal {
+  max-width: 100%;
+  min-width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
-.gallary-list {
-  width: 15%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-}
-
-/* add to cart styling */
-.add-to-cart {
-  width: 50%;
-  height: 15%;
+#magnifying-area {
+  height: 500px;
+  width: 500px;
+  overflow: hidden;
+  position: relative;
   border-style: solid;
-  border-color: #848484;
-  display: flex;
-  flex-direction: column;
-  justify-content:space-around;
-  align-content: center;
+  border-color: black;
 }
 
 
