@@ -36,8 +36,6 @@ class Individual_Review_Tile extends React.Component {
   }
 
   render() {
-    console.log('reviews - Individual_Review_Tile');
-    console.log('rating', this.props.review.rating);
     return (
       <div className="tile">
         <div><Stars rating={this.props.review.rating}/></div>

@@ -18,7 +18,8 @@ class App extends React.Component {
                   defaultStyle: {},//contains price info(original_price, sale_price, thumbnail) //
                   styles: [],
                   background: "white",
-                  keys: [...Object.keys(localStorage)]
+                  keys: [...Object.keys(localStorage)],
+                  related: []
                   };
     this.handleProductIdChange.bind(this);
   }
@@ -33,7 +34,6 @@ class App extends React.Component {
     Promise.all(promises)
       .then(responseArr => {
         var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
-        console.log('totalReviews - test', responseArr[1].data.results.length);
         this.setState({rating: reviewsAndRating[1],
                        reviews: responseArr[1].data.results,
                        totalReviews: responseArr[1].data.results.length,
@@ -44,6 +44,10 @@ class App extends React.Component {
                        related: responseArr[4].data
                       });
       })
+      // .then((responseArr) => {
+      //   //console.log('here 2');
+      //   this.handlePromises(responseArr[4].data);
+      // })
       .catch(err => console.error(err))
   }
 
@@ -66,7 +70,7 @@ class App extends React.Component {
 
   removeProduct(e) {
     e.preventDefault();
-    localStorage.removeItem(e.target.name)
+    localStorage.removeItem(e.target.id);
     this.setState({keys: [...Object.keys(localStorage)]})
   }
 
@@ -78,6 +82,35 @@ class App extends React.Component {
 
   handleOverviewBackground(color) {
     this.setState({background: color});
+  }
+
+  handlePromises(array) {
+    console.log('here in handlePromises');
+    var promises = [];
+    array.forEach((element) => {
+      promises.push(axios.get(`/products/${element.toString()}/styles`));
+      promises.push(axios.get(`/products/${element.toString()}`));
+      promises.push(axios.get(`/reviews/meta/${element.toString()}`))
+    });
+
+    Promise.all(promises)
+      .then(responseArr => {
+        var data = [];
+        console.log(responseArr);
+        for (var i = 0; i <= responseArr.length - 3; i+=3) {
+          var result = responseArr[i].data.results.find(style => style["default?"]);
+          if(result === undefined) {
+            result = responseArr[i].data.results[0];
+          }
+          data.push({
+            defaultStyle: result,
+            product: responseArr[i+1].data,
+            rating: totalReviewsAndAvgRating(responseArr[i+2].data.ratings)[1]
+          });
+        }
+        this.setState({related: [...data]}, () => {console.log(this.state)});
+      })
+      .catch(err => console.log(err));
   }
 
   render() {

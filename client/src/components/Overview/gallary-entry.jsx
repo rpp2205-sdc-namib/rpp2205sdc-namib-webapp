@@ -25,7 +25,7 @@ class GallaryEntry extends React.Component {
     } else {
       return (
         <div>
-          <span class="dot" src={this.props.photoInfo.thumbnail_url} onMouseOver={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyle}></span>
+          <span className="dot" src={this.props.photoInfo.thumbnail_url} onMouseOver={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyle}></span>
         </div>
       )
     }
