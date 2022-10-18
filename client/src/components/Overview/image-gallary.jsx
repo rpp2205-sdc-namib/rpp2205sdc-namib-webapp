@@ -59,17 +59,20 @@ class ImageGallary extends React.Component {
     if (this.props.section === 'modal') {
       return (
         <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
+          <div className="current-photo-modal">
+            <figure id="magnifying-area">
+              <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
+            </figure>
+
+            <button id="backBtn-modal" onClick={this.handleBackward.bind(this)}>Back</button>
+            <button id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>Forward</button>
+            <button id="default-view" onClick={this.handleClick.bind(this)}>Default View</button>
+          </div>
           <div className="gallary-list-modal">{this.props.photos.map((photo, index) => {
             return (<div key={index}>
               <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='modal'/>
             </div>)
           })}
-          </div>
-          <div className="current-photo-modal">
-            <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
-            <button id="backBtn-modal" onClick={this.handleBackward.bind(this)}>Back</button>
-            <button id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>Forward</button>
-            <button id="default-view" onClick={this.handleClick.bind(this)}>Default View</button>
           </div>
         </div>
       )
@@ -89,9 +92,13 @@ class ImageGallary extends React.Component {
         </div>
         <div className="current-photo">
           <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
-          <button id="backBtn" onClick={this.handleBackward.bind(this)}>Back</button>
-          <button id="forwardBtn" onClick={this.handleForward.bind(this)}>Forward</button>
-          <button id="expanded-view" onClick={this.handleClick.bind(this)}>Expand</button>
+            <div id="backBtn" onClick={this.handleBackward.bind(this)}>
+            </div>
+            <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
+            </div>
+            <div className="expandBtn" onClick={this.handleClick.bind(this)}>
+              <img id="expandBtn" src="img/fullscreen-icon.jpg" />
+            </div>
         </div>
       </div>)
 
