@@ -1,3 +1,87 @@
+@import url('https://css.gg/search.css');
+
+/* Top Bar */
+.topBar {
+  height: 10vh;
+  width: 100%;
+  background-color: gray;
+  display: flex;
+  justify-content: space-between;
+  z-index: -1;
+}
+
+.topBar-text {
+  font-size: 5vh;
+  color: white;
+  padding-left: 10vh;
+  padding-top: 2vh;
+  text-transform: uppercase;
+}
+
+.searchBar {
+  width: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.search-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.searchBar-underline {
+  border-top: solid 2px white;
+}
+
+.gg-search-container {
+  width: 8vh;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.gg-search {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 100%;
+  margin-left: -4px;
+  margin-top: -4px
+}
+.gg-search::after {
+  color: white;
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px;
+  width: 2px;
+  height: 8px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 12px
+}
+
+.sidewide-message {
+  padding-top: 2vh;
+  text-transform: uppercase;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-content:center;
+}
+
+/* *** Overview *** */
+
 /* Overview Component Styles */
 .overview-container {
   width: 100%;
@@ -89,7 +173,23 @@
   justify-content: center;
   z-index: 1;
 }
+.gallary-entry-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 50px;
+  width: 50px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  border: solid black;
+}
 
+.gallary-entry {
+  position: relative;
+
+}
 /* .backBtn-container{
   position: absolute;
   top: 50%;
@@ -145,8 +245,20 @@
   border: solid black;
 } */
 
+.expandBtn {
+  position: absolute;
+  top: 1vh;
+  left: 83%;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+  overflow: hidden;
+}
 
-
+#expandBtn {
+  width: 30px;
+  height: 30px;
+}
 /* Styling for star rating system */
 .single-star-container {
   position: relative;
@@ -189,12 +301,11 @@
 .price {
   display: flex;
   flex-direction: row;
-
 }
 
 
 /* thumbnails styling */
-.styleThumbnails, .gallary-entry {
+.styleThumbnails {
   margin-top: 10px;
   margin-bottom: 20px;
   margin-left: 10px;
@@ -220,8 +331,8 @@
    display: inline-block;
    width: 15px;
    height: 15px;
-   border-right: 0.2em solid black;
-   border-top: 0.2em solid black;
+   border-right: 0.1em solid black;
+   border-top: 0.1em solid black;
    transform: rotate(-45deg);
    margin-right: 0.5em;
    margin-left: 1.0em;
@@ -234,8 +345,8 @@
   display: inline-block;
   width: 15px;
   height: 15px;
-  border-right: 0.2em solid black;
-  border-top: 0.2em solid black;
+  border-right: 0.1em solid black;
+  border-top: 0.1em solid black;
   transform: rotate(135deg);
   margin-right: 0.5em;
   margin-left: 1.0em;

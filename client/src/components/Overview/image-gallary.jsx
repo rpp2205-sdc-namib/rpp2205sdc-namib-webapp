@@ -96,7 +96,9 @@ class ImageGallary extends React.Component {
             </div>
             <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
             </div>
-            <div id="expanded-view" onClick={this.handleClick.bind(this)}></div>
+            <div className="expandBtn" onClick={this.handleClick.bind(this)}>
+              <img id="expandBtn" src="img/fullscreen-icon.jpg" />
+            </div>
         </div>
       </div>)
 
