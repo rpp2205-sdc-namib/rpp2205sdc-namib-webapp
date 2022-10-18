@@ -5,30 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props: ', props)
-    // this.state = {
-    //   searchWord: ""
-    // }
-    // this.handleSearch = this.handleSearch.bind(this);
-    // this.filterSearch = this.filterSearch.bind(this);
   }
-
-  // handleSearch(value) {
-  //   // begin search after a user types more than 3 characters
-  //   if (value.length < 3) return;
-
-  //   this.setState({
-  //     searchWord: value
-  //   });
-  // }
-
-  // filterSearch(keyword) {
-  //   if (keyword.length < 3) return;
-
-  //   return this.props.QAs.filter(question => {
-  //     return question.question_body.includes(this.state.searchWord);
-  //   });
-  // }
 
   render() {
     return (

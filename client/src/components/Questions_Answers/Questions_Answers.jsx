@@ -71,8 +71,6 @@ class Questions_Answers extends React.Component {
   }
 
   handleChangeSearch(value) {
-    // if (value.length < 3) return;
-
     this.setState({
       searchWord: value,
       filteredQAs: this.filterSearch(this.state.QAs)

@@ -71,26 +71,6 @@ class ModalWindow extends React.Component {
       isEmailValidated: isEmailValid,
       hasError: (!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid
     })
-
-    // if (value === 'answer') {
-    //   let isAnswerValid = this.state.answer.length !== 0;
-    //   let isNicknameValid = this.state.answer.length !== 0;
-    //   let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
-    //   this.setState({
-    //     isEmailValidated: isEmailValid,
-    //     hasError: !isAnswerValid || !isNicknameValid || !isEmailValid
-    //   })
-
-    // } else {
-    //   let isQuestionValid = this.state.question.length !== 0;
-    //   let isNicknameValid = this.state.answer.length !== 0;
-    //   let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
-
-    //   this.setState({
-    //     isEmailValidated: isEmailValid,
-    //     hasError: !isQuestionValid || !isNicknameValid || !isEmailValid
-    //   });
-    // }
   }
 
   getInvalidFields(value) {
@@ -110,7 +90,6 @@ class ModalWindow extends React.Component {
   }
 
   render() {
-    console.log('props in modal window: ', this.props)
     return (
       <div className="modal_content">
         <span className="modal_close" onClick={this.props.closeForm}>&times;</span>

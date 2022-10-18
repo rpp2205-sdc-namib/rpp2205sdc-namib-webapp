@@ -90,7 +90,7 @@ class App extends React.Component {
         <RPList relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
         <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
-        <Questions_Answers productId={this.state.currentProductId} />
+        <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
       </div>
     )
   }

@@ -17,9 +17,6 @@ class Question extends React.Component {
   }
 
   handleAddAnswer() {
-    // adding an answer to the question.
-    // opens up a modal window that contains a form to submit the answer
-    // this.props.handleAddAnswer(isClicked);
     this.setState({
       isFormShown: true
     });
@@ -32,7 +29,6 @@ class Question extends React.Component {
   }
 
   handleIncreaseCounts() {
-    // increase the count of helpfulness
     this.setState({
       helpfulness: this.state.helpfulness + 1
     });
@@ -60,12 +56,6 @@ class Question extends React.Component {
             productName={this.props.productName}
             closeForm={this.closeForm}
           />}
-        {/* {this.props.isAnswerFormShown && this.props.whichForm.length !== 0 &&
-          <ModalWindow
-            questionBody={this.props.question.question_body}
-            productName={this.props.productName}
-            closeForm={this.props.closeForm}
-            whichForm={this.props.whichForm} />} */}
       </div>
     )
   }
