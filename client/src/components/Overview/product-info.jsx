@@ -23,7 +23,7 @@ class ProductInfo extends React.Component {
         <div id="title"><p>{name}</p></div>
         {/* <div id="description"><p>{'Description: ' + description}</p></div> */}
         <div className="price">
-          <p id="originalprice">{sale_price ? <strike>{'$' + String(original_price)}</strike> : '$' + original_price}</p>
+          <p id="originalprice">{sale_price ? <strike style={{"color": "red"}}>{'$' + String(original_price)}</strike> : '$' + original_price}</p>
           {sale_price ? <p id="saleprice">{'$' + sale_price}</p> : null}
         </div>
       </div>)

@@ -20,8 +20,8 @@ body {
 .topBar-text {
   font-size: 30px;
   color: white;
-  padding-left: 60px;
-  padding-top: 12px;
+  padding-left: 30px;
+  padding-top: 20px;
   text-transform: uppercase;
 }
 
@@ -297,9 +297,11 @@ body {
 
 .price {
   border: solid peru;
-  flex-direction: column;
-  align-items: flex-start;
   height: 57px;
+}
+
+#originalprice {
+  margin-right: 10px;
 }
 
 #description {
@@ -424,8 +426,6 @@ body {
   height: 100%;
   width: 90%;
   left: 5%;
-  border-style: solid;
-  border-color: aqua;
   z-index: 9;
   display: flex;
   flex-direction: row;
@@ -442,7 +442,6 @@ body {
 
 .image-gallary-modal {
   position: relative;
-  border: solid blue;
   width: 100%;
   height: 100%;
   display:flex;
@@ -453,12 +452,14 @@ body {
 }
 
 .current-photo-modal {
+  border: solid red;
   width: 100%;
-  height: 620px;
+  height: 100%;
   position: relative;
   display:flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .gallary-list-modal {
@@ -513,7 +514,7 @@ body {
 
 #magnifying-area {
   display: block;
-  height: 100%;
+  height: 98%;
   width: min-content;
   border: solid green;
   overflow: hidden;
@@ -522,8 +523,11 @@ body {
 
 #current-photo-modal {
   border: solid black;
-  height: 100%;
+  /* this setting means to let height show 100% of image height, and then let the image adjust width so it shows 100% of width without changing the ratio of the image */
+  max-height: 100%;
+  min-height: 100%;
   min-width: 100%;
+  max-width: auto;
   margin: 0 auto;
   position: relative;
   top: 0;
