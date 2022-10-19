@@ -111,5 +111,56 @@ module.exports = {
     axios.post(`${API_Link}/reviews`, {product_id, rating, summary, })
   },
 
+  updateHelpfulCountsForQuestion: (req, res) => {
+    var question_id = req.params.question_id;
+
+    axios.put(`${API_Link}/qa/questions/${question_id}/helpful`, {question_id}, auth)
+    .then(response => {
+      res.status(204).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
+  },
+
+  updateHelpfulCountsForAnswer: (req, res) => {
+    var answer_id = req.params.answer_id;
+
+    axios.put(`${API_Link}/qa/answers/${answer_id}/helpful`, {answer_id}, auth)
+    .then(response => {
+      res.status(204).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
+  },
+
+  updateReportForQuestion: (req, res) => {
+    var question_id = req.params.question_id;
+
+    axios.put(`${API_Link}/qa/questions/${question_id}/report`, {question_id}, auth)
+    .then(response => {
+      res.status(204).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
+  },
+
+  updateReportForAnswer: (req, res) => {
+    var answer_id = req.params.answer_id;
+
+    axios.put(`${API_Link}/qa/questions/${answer_id}/report`, {answer_id}, auth)
+    .then(response => {
+      res.status(204).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
+  }
 
 };

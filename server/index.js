@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
-const { getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler } = require('./controller/helper.js');
+const { getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
 
@@ -45,9 +45,13 @@ app.put('/reviews', (req, res) => {
 
 });
 
-app.put('/qa/questions', (req, res) => {
+app.put('/qa/questions/:question_id/helpful', updateHelpfulCountsForQuestion);
 
-});
+app.put('/qa/answers/:answer_id/helpful', updateHelpfulCountsForAnswer);
+
+app.put('qa/questions/:question_id/report', updateReportForQuestion);
+
+app.put('/qa/answers/:answer_id/report', updateReportForAnswer);
 
 
 app.listen(port, () => {

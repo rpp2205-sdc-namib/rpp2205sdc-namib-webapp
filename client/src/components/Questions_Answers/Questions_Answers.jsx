@@ -81,6 +81,7 @@ class Questions_Answers extends React.Component {
   render() {
     return (
       <div>
+        <h2>QUESTIONS & ANSWERS</h2>
         <Search handleChangeSearch={this.handleChangeSearch} />
         {this.state.searchWord.length < 2 ?
         <div className="notFiltered">
@@ -96,7 +97,7 @@ class Questions_Answers extends React.Component {
               <QA key={index} qa={qa} productName={this.props.productName} />
             )
           })}
-          {this.state.QAs.length > 2 && <button onClick={this.handleViewMoreQuestions}>More answered questions</button>}
+          {this.state.QAs.length > 2 && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
         </div> :
         <div className="filtered">
           {this.state.filteredQAs.map(qa => {
@@ -106,7 +107,7 @@ class Questions_Answers extends React.Component {
           })}
         </div>
         }
-        <button onClick={this.handleAddQuestion}>Add Question</button>
+        <button className="add_question" onClick={this.handleAddQuestion}>Add A Question +</button>
         {this.state.isFormShown &&
           <ModalWindow
             productName={this.props.productName}
