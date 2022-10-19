@@ -1,3 +1,8 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
 @import url('https://css.gg/search.css');
 
 /* Top Bar */
@@ -489,9 +494,26 @@
 }
 
 /* ratings_reviews */
+.review_container {
+  height: 1000px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content:center;
+  padding-top: 50px;
+  margin-top: 20px;
+}
+
+.reviews_list {
+  position: relative;
+  float: right;
+  width: 2200px;
+  padding-left: 30px;
+  padding-right: 20px
+}
+
 .reviews {
-  float: middle;
-  position:relative;
+  position: relative;
 }
 
 .reviews_expand_mode {
@@ -500,6 +522,22 @@
   overflow: scroll;
   width: 100%;
   height: 800px;
+}
+
+.review_recommend {
+  display: inline-block;
+}
+
+.ratings_breakdown {
+  position: relative;
+  float: left;
+  width: 400px;
+  padding-right: 30px;
+  padding-left: 20px
+}
+
+p.review_recommend {
+  padding-left: 5px;
 }
 
 .tile {
@@ -531,13 +569,106 @@ div.review_photo {
   text-align: center;
   padding: 1px;
   border: 1px solid black;
-  display: inline-block
+  display: inline-block;
+  cursor: pointer;
 }
 
 img.review_photo {
   max-width: 100%;
   height: 50px;
 }
+
+.darkBG {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100vw;
+  height: 500vh;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.modal_centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  width: 250px;
+  height: 170px;
+  background: white;
+  border-color: black;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.modal_closeBtn {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 18px;
+  color: #2c3e50;
+  background: white;
+  transition: all 0.25s ease;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
+  position: absolute;
+  right: 0;
+  top: 0;
+  align-self: flex-end;
+  margin-top: -7px;
+  margin-right: -7px;
+}
+
+.modal_closeBtn:hover {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  transform: translate(-4px, 4px);
+}
+
+.review_yes_button {
+  border: none;
+  background-color: #fff;
+  text-decoration: underline;
+}
+
+.progress {
+  margin:5px 5px;
+  float: left;
+  padding:0;
+  width:75%;
+  height:10px;
+  overflow-y:hidden;
+  background:#e5e5e5;
+  border-radius:6px;
+}
+
+.bar {
+	position:relative;
+  float:left;
+  min-width:1%;
+  height:100%;
+  background:rgb(25, 247, 66);
+}
+
+.percent {
+	position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+  font-family:tahoma,arial,helvetica;
+  font-size:12px;
+  color:black;
+}
+
+.star_progress_bar {
+  cursor: pointer;
+}
+
 
 /********* Questions & Answers widget **********/
 

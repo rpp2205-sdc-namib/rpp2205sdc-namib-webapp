@@ -17,7 +17,8 @@ class Reviews_List extends React.Component {
     if (prevState.productId !== this.props.productId) {
       this.setState({
         productId: this.props.productId,
-        tiles: 2
+        tiles: 2,
+        limitReached: false
       })
     }
   }
@@ -39,10 +40,10 @@ class Reviews_List extends React.Component {
   render() {
     console.log(this.props.reviews);
 
-
     if (this.state.limitReached || (this.props.totalReviews > 0 && this.props.totalReviews <= 2)) {
       return (
-        <div>
+        <div className="reviews_list">
+        <strong>Total Reviews: {this.props.totalReviews}</strong>
         <div className={`reviews${this.state.tiles > 4 ? '_expand_mode' : ''}`}>
           <div>
             {this.props.reviews.slice(0, this.state.tiles).map(review => {
@@ -57,7 +58,8 @@ class Reviews_List extends React.Component {
     }
 
     return (
-      <div>
+      <div className="reviews_list">
+        <strong>Total Reviews: {this.props.totalReviews}</strong>
         <div className={`reviews${this.state.tiles > 4 ? '_expand_mode' : ''}`}>
           <div data-testid="tiles">
             {this.props.reviews.slice(0, this.state.tiles).map(review => {
