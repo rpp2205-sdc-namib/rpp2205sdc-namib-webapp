@@ -123,7 +123,6 @@ class ModalWindow extends React.Component {
         {this.props.questionBody !== undefined && <button className="upload_button" onClick={this.handleUploadPhotos}>Upload your photos</button>}
         <button
           className="submit_button"
-          // onClick={() => this.validateUserInput(this.props.whichForm)}>
           onClick={this.validateUserInput}>
           {this.props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
         </button>

@@ -385,7 +385,7 @@ img.review_photo {
 
 .answers_expand_mode {
   width: 100%;
-  height: 400px;
+  height: 250px;
   overflow: scroll;
 }
 

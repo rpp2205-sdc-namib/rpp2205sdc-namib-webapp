@@ -10,24 +10,23 @@ class Questions_Answers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      QAs: [], // all Q&A for the current product
+      QAs: [],
       filteredQAs: [],
       viewMoreQuestions: false,
       isFormShown: false,
       searchWord: '',
     }
 
-    this.sortQuestionsByHelpfulness = this.sortQuestionsByHelpfulness.bind(this);
     this.getAllQuestions = this.getAllQuestions.bind(this);
-    this.getTop2Questions = this.getTop2Questions.bind(this);
+    this.sortQuestionsByHelpfulness = this.sortQuestionsByHelpfulness.bind(this);
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.handleViewMoreQuestions = this.handleViewMoreQuestions.bind(this);
     this.closeForm = this.closeForm.bind(this);
     this.handleChangeSearch = this.handleChangeSearch.bind(this);
     this.filterSearch = this.filterSearch.bind(this);
-    this.handleViewMoreQuestions = this.handleViewMoreQuestions.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getAllQuestions();
   }
 
@@ -45,11 +44,6 @@ class Questions_Answers extends React.Component {
     return data.sort((a, b) => {
       return b.question_helpfulness - a.question_helpfulness
     });
-  }
-
-  getTop2Questions(data) {
-    data.splice(2);
-    return data;
   }
 
   handleAddQuestion() {
@@ -88,19 +82,30 @@ class Questions_Answers extends React.Component {
     return (
       <div>
         <Search handleChangeSearch={this.handleChangeSearch} />
-        {this.state.searchWord.length < 2 ? this.state.QAs.map((qa, index) => {
-          if (index > 1) return;
-          return (
-            <QA qa={qa} productName={this.props.productName} />
-          );
-        }) : this.state.filteredQAs.map(qa => <QA qa={qa} productName={this.props.productName} />)}
-        {this.state.viewMoreQuestions && this.state.QAs.map((qa, index) => {
-          if (index < 2) return;
-          return (
-            <QA qa={qa} productName={this.props.productName} />
-          )
-        })}
-        {this.state.QAs.length > 2 && <button onClick={this.handleViewMoreQuestions}>More answered questions</button>}
+        {this.state.searchWord.length < 2 ?
+        <div className="notFiltered">
+          {this.state.QAs.map((qa, index) => {
+            if (index > 1) return;
+            return (
+              <QA qa={qa} productName={this.props.productName} />
+            );
+          })}
+          {this.state.viewMoreQuestions && this.state.QAs.map((qa, index) => {
+            if (index < 2) return;
+            return (
+              <QA qa={qa} productName={this.props.productName} />
+            )
+          })}
+          {this.state.QAs.length > 2 && <button onClick={this.handleViewMoreQuestions}>More answered questions</button>}
+        </div> :
+        <div className="filtered">
+          {this.state.filteredQAs.map(qa => {
+            return (
+              <QA qa={qa} productName={this.props.productName} />
+            )
+          })}
+        </div>
+        }
         <button onClick={this.handleAddQuestion}>Add Question</button>
         {this.state.isFormShown &&
           <ModalWindow

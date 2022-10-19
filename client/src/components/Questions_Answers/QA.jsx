@@ -59,23 +59,23 @@ class QA extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="QA_container">
+        <div className={this.state.seeMoreAnswers ? "answers_expand_mode" : undefined} >
         <Question question={this.props.qa} productName={this.props.productName} />
-        {this.state.answers.map((answer, index) => {
-          if (index > 1) return;
-          return (
-            <Answer answer={answer} />
-          )
-        })}
-        {this.state.seeMoreAnswers && <div>
           {this.state.answers.map((answer, index) => {
-            if (index < 2) return;
+            if (index > 1) return;
             return (
-              <div>
-                <Answer answer={answer} />
-              </div>
+              <Answer answer={answer} />
             )
-        })}</div>}
+          })}
+          {this.state.seeMoreAnswers &&
+            this.state.answers.map((answer, index) => {
+              if (index < 2) return;
+              return (
+                <Answer answer={answer} />
+              )
+          })}
+        </div>
         {this.state.answers.length > 2 && !this.state.seeMoreAnswers && <button onClick={this.handleViewMoreAnswers}>See more answers</button>}
         {this.state.seeMoreAnswers && <button onClick={this.collapseAnswers}>Collapse answers</button>}
       </div>
