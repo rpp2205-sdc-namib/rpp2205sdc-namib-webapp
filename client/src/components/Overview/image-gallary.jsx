@@ -1,5 +1,6 @@
 import React from 'react';
 import GallaryEntry from './gallary-entry.jsx';
+import MagnifyingArea from './magnifying-area.jsx';
 
 class ImageGallary extends React.Component {
   constructor(props) {
@@ -58,14 +59,11 @@ class ImageGallary extends React.Component {
 
   render() {
     if (this.props.section === 'modal') {
+      var modal_url = this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png';
       return (
         <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
           <div className="current-photo-modal">
-            <figure id="magnifying-area">
-              <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'} />
-              {/* <figcaption></figcaption> */}
-            </figure>
-
+            <MagnifyingArea url={modal_url}/>
             <div id="backBtn-modal" onClick={this.handleBackward.bind(this)}>
             </div>
             <div id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>

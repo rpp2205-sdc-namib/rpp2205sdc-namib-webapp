@@ -291,11 +291,13 @@
 }
 
 .price {
+  border: solid peru;
   flex-direction: column;
   align-items: flex-start;
+  height: 57px;
 }
 
-#description, .price {
+#description {
   height: 20%;
 }
 
@@ -413,10 +415,10 @@
 .modal {
   /* display: none !important; */
   position: absolute;
-  left: 5%;
   background-color: white;
   height: 100%;
   width: 90%;
+  left: 5%;
   border-style: solid;
   border-color: aqua;
   z-index: 9;
@@ -447,8 +449,8 @@
 
 .current-photo-modal {
   width: 100%;
-  height:98%;
-  position: absolute;
+  height: 620px;
+  position: relative;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -502,7 +504,6 @@
   height: 30px;
 }
 
-
 /* magnifying area styling */
 
 #magnifying-area {
@@ -511,8 +512,7 @@
   width: min-content;
   border: solid green;
   overflow: hidden;
-  position: absolute;
-  top: -20px;
+  position: relative;
 }
 
 #current-photo-modal {

@@ -50,7 +50,7 @@ class Overview extends React.Component {
           <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.props.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
           <AddToCart styleObj={this.state.styleObj}/>
       </div>
-      <div className="overview modal" style={this.state.modalStyle}>
+      <div className="overview modal" id="overview-modal-window" style={this.state.modalStyle}>
         <ImageGallary section="modal" photos={this.state.styleObj.photos} handleModalDisappear={this.handleModalDisappear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
       </div>
       </div>
