@@ -326,6 +326,9 @@ body {
 .add-to-outfit {
   border:solid black 1px;
   height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* thumbnails styling */
@@ -585,27 +588,9 @@ body {
   align-items: center;
 }
 
-.star {
-  visibility:hidden;
-  font-size:30px;
-  cursor:pointer;
-}
+#solidHeart, #regularHeart {
+  font-size: 20px;
 
-.star:before {
-  margin-left: -10px;
-  text-align: center;
-  content: "\2606";
-  position: relative;
-
-  visibility:visible;
-}
-.star:checked:before {
-  height: 45px;
-  width: 50px;
-  content: "\2605";
-  color: black;
-  /* -webkit-text-stroke: 1px orange; */
-  position: relative;
 }
 
 /* ratings_reviews */
