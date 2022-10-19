@@ -43,8 +43,8 @@ class Overview extends React.Component {
       return null;
     } else {
       return (<div className="overview-container">
-        <div className="overview">
           <ImageGallary section = "overview" photos={this.state.styleObj.photos} handleModalAppear={this.handleModalAppear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
+      <div className="overview">
           <ProductInfo productId={this.props.productId} currentProduct={this.props.currentProduct} styleObj={this.state.styleObj} rating={this.props.rating}
           totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
           <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.props.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>

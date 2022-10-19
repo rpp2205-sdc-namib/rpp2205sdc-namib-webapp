@@ -1,7 +1,9 @@
 @import url('https://css.gg/search.css');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 
 /* Top Bar */
 .topBar {
+  font-family: 'Josefin Sans', sans-serif;
   height: 60px;
   width: 100%;
   background-color: gray;
@@ -72,6 +74,7 @@
 }
 
 .sidewide-message {
+  font-family: 'Josefin Sans', sans-serif;
   padding-top: 12px;
   text-transform: uppercase;
   height: 30px;
@@ -85,30 +88,29 @@
 
 /* Overview Component Styles */
 .overview-container {
+  font-family: 'Josefin Sans', sans-serif;
   width: 100%;
   min-height: 600px;
   max-height: auto;
   position: relative;
   display: flex;
-  justify-content: center;
-  align-content:center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .overview {
+  position: relative;
   border: solid green;
-  min-height: 100%;
-  max-height: auto;
-  width: 100%;
-  position:absolute;
+  height: auto;
+  width: 45%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-content: space-between;
 }
 
 
 .image-gallary {
-  width: 50%;
+  width: 50vw;
   height: 100%;
   display:flex;
   flex-direction: row;
@@ -116,8 +118,7 @@
 }
 
 .product-info {
-  margin-left: 58%;
-  width: 41%;
+  width: 100%;
   height: 30%;
   border-style: solid;
   border-color: #848484;
@@ -127,20 +128,20 @@
 }
 
 .style-selector {
-  margin-left: 58%;
-  width: 41%;
-  height: 50%;
-  max-height: auto;
+  width: 100%;
+  height: auto;
   border-style: solid;
-  border-color: #848484;
+  border-color: red;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-to-cart {
-  margin-left: 58%;
-  width: 41%;
-  height: 15%;
+  width: 100%;
+  min-height: 140px;
+  max-height: auto;
   border-style: solid;
-  border-color: #848484;
+  border-color: rebeccapurple;
   display: flex;
   flex-direction: column;
   justify-content:space-around;
@@ -289,18 +290,23 @@
   height: 40px;
 }
 
+.price {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 #description, .price {
   height: 20%;
 }
 
 #title {
   font-size: 30px;
+  font-weight: bolder;
 }
 
 /* size selector styling */
 #size, #quantity, #add-to-cart-btn, .add-to-outfit {
-  margin: 20px;
-  margin-left: 0px;
+  font-family: 'Josefin Sans', sans-serif;
   width: 150px;
   height: 50px;
   font-size: 15px;
@@ -349,10 +355,11 @@
 }
 
 .styles {
+  position: relative;
   border-color: #848484;
   border-style: solid;
   width: 320px;
-  height: 78%;
+  height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -558,6 +565,7 @@
 .add-to-card-line1, .add-to-card-line2 {
   border: solid black;
   width: 100%;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
