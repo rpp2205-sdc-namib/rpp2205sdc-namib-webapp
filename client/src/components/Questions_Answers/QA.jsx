@@ -65,14 +65,14 @@ class QA extends React.Component {
           {this.state.answers.map((answer, index) => {
             if (index > 1) return;
             return (
-              <Answer answer={answer} />
+              <Answer key={index} answer={answer} />
             )
           })}
           {this.state.seeMoreAnswers &&
             this.state.answers.map((answer, index) => {
               if (index < 2) return;
               return (
-                <Answer answer={answer} />
+                <Answer key={index} answer={answer} />
               )
           })}
         </div>

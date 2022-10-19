@@ -87,13 +87,13 @@ class Questions_Answers extends React.Component {
           {this.state.QAs.map((qa, index) => {
             if (index > 1) return;
             return (
-              <QA qa={qa} productName={this.props.productName} />
+              <QA key={index} qa={qa} productName={this.props.productName} />
             );
           })}
           {this.state.viewMoreQuestions && this.state.QAs.map((qa, index) => {
             if (index < 2) return;
             return (
-              <QA qa={qa} productName={this.props.productName} />
+              <QA key={index} qa={qa} productName={this.props.productName} />
             )
           })}
           {this.state.QAs.length > 2 && <button onClick={this.handleViewMoreQuestions}>More answered questions</button>}
@@ -101,7 +101,7 @@ class Questions_Answers extends React.Component {
         <div className="filtered">
           {this.state.filteredQAs.map(qa => {
             return (
-              <QA qa={qa} productName={this.props.productName} />
+              <QA key={index} qa={qa} productName={this.props.productName} />
             )
           })}
         </div>
