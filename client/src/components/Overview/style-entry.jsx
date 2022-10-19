@@ -14,8 +14,8 @@ class StyleEntry extends React.Component {
   }
 
   render() {
-    return (<div>
-      <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleMouseOver.bind(this)} style={this.props.highlight ? highlightStyle : nonHighlightStyl}></img>
+    return (<div className="styleThumbnails-container" style={this.props.highlight ? highlightStyle : nonHighlightStyl}>
+      <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleMouseOver.bind(this)}></img>
     </div>)
 
   }

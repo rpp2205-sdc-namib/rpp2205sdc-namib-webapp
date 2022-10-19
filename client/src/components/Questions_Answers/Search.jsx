@@ -1,23 +1,20 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchWord: ""
-    }
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  handleSearch() {
-    // begin search after a user types more than 3 characters
   }
 
   render() {
     return (
-      <div>
-        <input placeholder="Have a question? Search for answers…" onChange={this.handleSearch}/>
-        <button>submit</button>
+      <div className="search_container">
+        <input
+          className="search_input"
+          placeholder="Have a question? Search for answers…"
+          onChange={(e) => this.props.handleChangeSearch(e.target.value)}/>
+        <FontAwesomeIcon className="search_icon" icon={ faSearch } />
       </div>
     )
   }
