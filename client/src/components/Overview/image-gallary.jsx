@@ -55,14 +55,6 @@ class ImageGallary extends React.Component {
     this.setState({ currentPhotoIndex: newIndex });
   }
 
-  // modalInit() {
-  //   var magnifyingArea = document.getElementById('magnifying-area');
-  //   var image = document.getElementById('current-photo-modal');
-  //   var width = image.width;
-  //   magnifyingArea.style["width"] = String(width) + "px";
-  //   console.log('image', image, width);
-  // }
-
 
   render() {
     if (this.props.section === 'modal') {
@@ -71,7 +63,7 @@ class ImageGallary extends React.Component {
           <div className="current-photo-modal">
             <figure id="magnifying-area">
               <img id="current-photo-modal" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'} />
-              <figcaption>The reason is that it wont make the image go beyond The reason is that it wont make the image go beyond </figcaption>
+              {/* <figcaption></figcaption> */}
             </figure>
 
             <div id="backBtn-modal" onClick={this.handleBackward.bind(this)}>
