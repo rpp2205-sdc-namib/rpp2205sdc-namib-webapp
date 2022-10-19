@@ -101,7 +101,7 @@ class Questions_Answers extends React.Component {
         <div className="filtered">
           {this.state.filteredQAs.map(qa => {
             return (
-              <QA key={index} qa={qa} productName={this.props.productName} />
+              <QA key={qa.question_id} qa={qa} productName={this.props.productName} />
             )
           })}
         </div>
