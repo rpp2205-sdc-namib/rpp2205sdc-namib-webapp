@@ -417,7 +417,7 @@ body {
 
 /* image gallary modal view styling */
 
-.modal {
+.overview-modal {
   /* display: none !important; */
   position: absolute;
   background-color: white;
