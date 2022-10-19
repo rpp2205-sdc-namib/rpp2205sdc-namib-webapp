@@ -666,8 +666,33 @@ img.review_photo {
   color:black;
 }
 
-.star_progress_bar {
+.five_star_ratings_bar {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.four_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.three_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.two_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.one_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.filter_ratings_message {
+  display: inline-block;
 }
 
 
