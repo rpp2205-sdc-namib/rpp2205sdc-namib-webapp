@@ -45,24 +45,24 @@ class Rating_Breakdown extends React.Component {
         <Stars rating={this.props.rating}/>
         <div>Total Ratings: {this.props.totalRatings}</div>
         <div className="progress_bars">
-          <a className="star_progress_bar" onClick={() => {this.props.filterReviews()}}>
-            <div style={{float:'left'}}>5 Stars</div>
+          <div className="star_progress_bar">
+            <a style={{float:'left'}} onClick={(e) => {this.props.filterReviews(e)}}>5 Stars</a>
             <div className="progress">
               <div className="bar" style={{width:`${this.state.fiveStarReviews}`}}>
                 <p className="percent">{this.state.fiveStarReviews}</p>
               </div>
             </div>
             <div style={{float:'left'}}>{this.props.ratings['5']}</div>
-          </a>
-          <a className="star_progress_bar" onClick={(e) => {this.props.filterReviews(e)}}>
-            <div style={{float:'left'}}>4 Stars</div>
+          </div>
+          <div className="star_progress_bar">
+          <a style={{float:'left'}} onClick={(e) => {this.props.filterReviews(e)}}>4 Stars</a>
             <div className="progress">
               <div className="bar" style={{width:`${this.state.fourStarReviews}`}}>
                 <p className="percent">{this.state.fourStarReviews}</p>
               </div>
             </div>
             <div style={{float:'left'}}>{this.props.ratings['4']}</div>
-          </a>
+          </div>
           <a className="star_progress_bar" onClick={() => {this.props.filterReviews()}}>
             <div style={{float:'left'}}>3 Stars</div>
             <div className="progress">

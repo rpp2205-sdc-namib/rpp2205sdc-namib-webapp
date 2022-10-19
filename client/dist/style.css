@@ -633,6 +633,7 @@ img.review_photo {
   border: none;
   background-color: #fff;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .progress {
