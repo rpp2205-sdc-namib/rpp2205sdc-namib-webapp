@@ -11,12 +11,12 @@ class ImageGallary extends React.Component {
 
   handleArrowUp(e) {
     this.setState({top: this.state.top - 1, bottom: this.state.bottom - 1});
-    this.props.interaction(e);
+    this.props.interaction(e.target);
   }
 
   handleArrowDown(e) {
     this.setState({top: this.state.top + 1, bottom: this.state.bottom + 1});
-    this.props.interaction(e);
+    this.props.interaction(e.target);
   }
 
   handleForward(e) {
@@ -28,7 +28,7 @@ class ImageGallary extends React.Component {
         this.setState({bottom: this.state.bottom + 1, top: this.state.top + 1})
       }
     };
-    this.props.interaction(e);
+    this.props.interaction(e.target);
 
 
   }
@@ -42,7 +42,7 @@ class ImageGallary extends React.Component {
         this.setState({top: this.state.top - 1, bottom: this.state.bottom - 1})
       }
     }
-    this.props.interaction(e);
+    this.props.interaction(e.target);
 
   }
 
@@ -55,7 +55,7 @@ class ImageGallary extends React.Component {
       this.props.handleModalDisappear();
       this.props.handleBackground("white");
     }
-    this.props.interaction(e);
+    this.props.interaction(e.target);
   }
 
   changeCurrentPhoto(newIndex) {
@@ -115,4 +115,4 @@ class ImageGallary extends React.Component {
   }
 }
 
-export default withClickData(ImageGallary);
+export default withClickData(ImageGallary, 'overview');
