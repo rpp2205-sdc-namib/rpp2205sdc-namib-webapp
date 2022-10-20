@@ -42,7 +42,7 @@ class AddToCart extends React.Component {
     }
   }
 
-  handleButtonClick() {
+  handleButtonClick(e) {
     var selectedSize = document.getElementById('defaultSizeOption');
     var selectedQuantity = document.getElementById('defaultQuantityOption');
     if (selectedSize.selected) {
@@ -52,7 +52,7 @@ class AddToCart extends React.Component {
       this.setState({quantityBorderStyle: selectionReminder})
     }
     var element = "button#add-to-cart-btn";
-    this.props.interaction(element);
+    this.props.interaction(e);
   }
 
   render() {

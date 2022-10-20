@@ -1,6 +1,7 @@
 import React from 'react';
 import GallaryEntry from './gallary-entry.jsx';
 import MagnifyingArea from './magnifying-area.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 class ImageGallary extends React.Component {
   constructor(props) {
@@ -8,15 +9,17 @@ class ImageGallary extends React.Component {
     this.state = { currentPhotoIndex: 0, top: 0, bottom: 3};
   }
 
-  handleArrowUp() {
+  handleArrowUp(e) {
     this.setState({top: this.state.top - 1, bottom: this.state.bottom - 1});
+    this.props.interaction(e);
   }
 
-  handleArrowDown() {
+  handleArrowDown(e) {
     this.setState({top: this.state.top + 1, bottom: this.state.bottom + 1});
+    this.props.interaction(e);
   }
 
-  handleForward() {
+  handleForward(e) {
     var oldId = this.state.currentPhotoIndex;
     var newId = oldId + 1;
     if (oldId < this.props.photos.length - 1) {
@@ -25,11 +28,12 @@ class ImageGallary extends React.Component {
         this.setState({bottom: this.state.bottom + 1, top: this.state.top + 1})
       }
     };
+    this.props.interaction(e);
 
 
   }
 
-  handleBackward() {
+  handleBackward(e) {
     var oldId = this.state.currentPhotoIndex;
     var newId = oldId - 1;
     if (oldId > 0) {
@@ -38,10 +42,11 @@ class ImageGallary extends React.Component {
         this.setState({top: this.state.top - 1, bottom: this.state.bottom - 1})
       }
     }
+    this.props.interaction(e);
 
   }
 
-  handleClick() {
+  handleClick(e) {
     if(this.props.section === 'overview') {
       this.props.handleModalAppear();
       this.props.handleBackground("rgba(192,192,192,0.8)");
@@ -50,6 +55,7 @@ class ImageGallary extends React.Component {
       this.props.handleModalDisappear();
       this.props.handleBackground("white");
     }
+    this.props.interaction(e);
   }
 
   changeCurrentPhoto(newIndex) {
@@ -109,4 +115,4 @@ class ImageGallary extends React.Component {
   }
 }
 
-export default ImageGallary;
+export default withClickData(ImageGallary);

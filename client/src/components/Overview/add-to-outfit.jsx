@@ -6,24 +6,13 @@ import withClickData from '../hoc_click_data.jsx';
 
 const AddToOutfit = (props) => {
   const [clicked, toggleClicked] = useState(false);
-  const [id, setId] = useState('');
-  // var handleClick = (e)=> {
-  //   toggleClicked(!clicked, () => {
-  //     console.log(e, e.target.id);
-  //     var element = `FontAwesomeIcon#${e.target.id}`;
-  //     var time = new Date();
-  //     props.interaction(element, time);
-  //   }
-  // }
-
-  useEffect(() => {
-      var element = `FontAwesomeIcon#${id}`;
-      props.interaction(element);
-  }, [clicked]);
 
   return (
-    <div className="add-to-outfit">
-     {clicked ? <FontAwesomeIcon icon={solidHeart} id="solidHeart" onClick={ (e) => {toggleClicked(!clicked); setId(e.target.id)}} /> : <FontAwesomeIcon icon={regularHeart} id="regularHeart" onClick={ (e) => {toggleClicked(!clicked); setId(e.target.id)}} />}
+    <div className="add-to-outfit" onClick={(e) => {
+      toggleClicked(!clicked);
+      props.interaction(e);
+    }}>
+     {clicked ? <FontAwesomeIcon icon={solidHeart} id="solidHeart" /> : <FontAwesomeIcon icon={regularHeart} id="regularHeart"/>}
     </div>
   )
 }
