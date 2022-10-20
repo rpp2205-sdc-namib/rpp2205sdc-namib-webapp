@@ -10,9 +10,9 @@ const AddToOutfit = (props) => {
   return (
     <div className="add-to-outfit" onClick={(e) => {
       toggleClicked(!clicked);
-      props.interaction(e);
+      props.interaction(e.currentTarget);
     }}>
-     {clicked ? <FontAwesomeIcon icon={solidHeart} id="solidHeart" /> : <FontAwesomeIcon icon={regularHeart} id="regularHeart"/>}
+     {clicked ? <FontAwesomeIcon icon={solidHeart} id="solidHeart"/> : <FontAwesomeIcon icon={regularHeart} id="regularHeart"/>}
     </div>
   )
 }

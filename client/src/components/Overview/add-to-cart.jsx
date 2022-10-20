@@ -51,8 +51,12 @@ class AddToCart extends React.Component {
     if (selectedQuantity.selected) {
       this.setState({quantityBorderStyle: selectionReminder})
     }
+<<<<<<< HEAD
     var element = "button#add-to-cart-btn";
     this.props.interaction(e);
+=======
+    this.props.interaction(e.target);
+>>>>>>> 052105f614fc5159f110f3e7599a34c69b3dc96f
   }
 
   render() {
