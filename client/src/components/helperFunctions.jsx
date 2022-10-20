@@ -21,8 +21,4 @@ module.exports = {
     var arr = [...Array(num + 1).keys()];
     return arr.slice(1);
   }
-  var num = Math.min(15, num);
-  var arr = [...Array(num + 1).keys()];
-  return arr.slice(1);
-
 }

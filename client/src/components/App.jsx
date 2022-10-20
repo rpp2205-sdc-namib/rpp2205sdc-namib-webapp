@@ -6,11 +6,8 @@ import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 import RPList from './RelatedItems_Comparison/rp-list.jsx'
 import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
-<<<<<<< HEAD
 import Carousel from './RelatedItems_Comparison/Carousel.jsx';
-=======
 import TopBar from './TopBar.jsx';
->>>>>>> main
 
 class App extends React.Component {
   constructor(props) {
