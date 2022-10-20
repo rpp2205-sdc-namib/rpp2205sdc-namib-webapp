@@ -2,6 +2,7 @@ import React from 'react';
 import SizeSelector from './size-selector.jsx';
 import QuantitySelector from './quantity-selector.jsx';
 import AddToOutfit from './add-to-outfit.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 const selectionReminder = {borderColor: "red", borderWidth: "2px"};
 const original = {borderColor: "black", borderWidth: "1px"};
@@ -13,6 +14,7 @@ class AddToCart extends React.Component {
   }
 
   componentDidMount() {
+    console.log('line17', this.props);
     if (this.props.styleObj.skus) {
       var sizeAndQuantityArr = Object.values(this.props.styleObj.skus);
       var sizeAndQuantityObj = sizeAndQuantityArr.reduce((acc, element) => {
@@ -49,6 +51,8 @@ class AddToCart extends React.Component {
     if (selectedQuantity.selected) {
       this.setState({quantityBorderStyle: selectionReminder})
     }
+    var element = "button#add-to-cart-btn";
+    this.props.interaction(element);
   }
 
   render() {
@@ -70,4 +74,4 @@ class AddToCart extends React.Component {
   }
 }
 
-export default AddToCart;
+export default withClickData(AddToCart, 'overview');
