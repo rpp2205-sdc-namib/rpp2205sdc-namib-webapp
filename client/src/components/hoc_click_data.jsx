@@ -7,7 +7,8 @@ const withClickData = (WrappedComponent, widget) => {
       super(props);
     }
 
-    interactionFunc(element) {
+    interactionFunc(target) {
+      var element = target.id ? '#' + target.id : '.' + target.className;
       var time =  String(new Date());
       axios.post('/interactions', { element, widget, time})
         .then(response => {
