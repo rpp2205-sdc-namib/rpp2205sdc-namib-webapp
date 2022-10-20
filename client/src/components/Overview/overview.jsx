@@ -13,8 +13,14 @@ class Overview extends React.Component {
     this.state = {styleId: '', priceInfo: {}, styleObj: {}, modalStyle: {"display": "none"}}; //styleObj is specific
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId) {
+      this.handleStyleIdChange();
+    }
+  }
+
   handleStyleIdChange(newId) {
-    var styleObj = newId === undefined ? this.props.styles.find(style => style["default?"]) : this.props.styles.find(style => style.style_id === newId);
+    var styleObj = newId === undefined ? this.props.defaultStyle : this.props.styles.find(style => style.style_id === newId);
     this.setState({priceInfo: {original_price: styleObj.original_price, sale_price: styleObj.sale_price},
                    styleObj: styleObj,
                    styleId: styleObj.style_id});
@@ -37,14 +43,14 @@ class Overview extends React.Component {
       return null;
     } else {
       return (<div className="overview-container">
-        <div className="overview">
           <ImageGallary section = "overview" photos={this.state.styleObj.photos} handleModalAppear={this.handleModalAppear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
+      <div className="overview">
           <ProductInfo productId={this.props.productId} currentProduct={this.props.currentProduct} styleObj={this.state.styleObj} rating={this.props.rating}
           totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
           <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.props.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
           <AddToCart styleObj={this.state.styleObj}/>
       </div>
-      <div className="overview modal" style={this.state.modalStyle}>
+      <div className="overview overview-modal" id="overview-modal-window" style={this.state.modalStyle}>
         <ImageGallary section="modal" photos={this.state.styleObj.photos} handleModalDisappear={this.handleModalDisappear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
       </div>
       </div>

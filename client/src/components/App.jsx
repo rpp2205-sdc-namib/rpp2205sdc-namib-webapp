@@ -6,12 +6,15 @@ import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 import RPList from './RelatedItems_Comparison/rp-list.jsx'
 import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
+import TopBar from './TopBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {currentProductId: '',
                   rating: 0,
+                  ratings: {},
+                  totalRatings: 0,
                   reviews: [],
                   totalReviews: 0,
                   currentProduct: {}, //contains product name, category
@@ -35,6 +38,8 @@ class App extends React.Component {
         var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
         console.log('totalReviews - test', responseArr[1].data.results.length);
         this.setState({rating: reviewsAndRating[1],
+                       ratings: responseArr[0].data.ratings,
+                       totalRatings: reviewsAndRating[0],
                        reviews: responseArr[1].data.results,
                        totalReviews: responseArr[1].data.results.length,
                        currentProductId: productId,
@@ -86,11 +91,12 @@ class App extends React.Component {
     }
     return (
       <div style={{"backgroundColor": this.state.background}}>
-        <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
+        <TopBar />
+        <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
         <RPList relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
         <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
-        <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
-        <Questions_Answers productId={this.state.currentProductId} />
+        <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings}/>
+        <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
       </div>
     )
   }
