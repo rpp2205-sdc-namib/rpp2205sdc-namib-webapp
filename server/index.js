@@ -49,6 +49,7 @@ app.put('/qa/questions', (req, res) => {
 
 });
 
+//add a wildcard matcher thats send back index.html
 
 app.listen(port, () => {
   console.log(`Listening on  http://localhost:${port}`);

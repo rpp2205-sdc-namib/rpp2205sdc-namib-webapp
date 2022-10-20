@@ -213,7 +213,7 @@
 
 
 /* Related Items and Comparison styling */
-#card {
+.card {
   padding: 10px;
   margin: 15px;
   border: 1px solid black;
@@ -452,4 +452,3 @@ img.review_photo {
   background-color: #0066ff;
   font-size: 16px;
 }
-

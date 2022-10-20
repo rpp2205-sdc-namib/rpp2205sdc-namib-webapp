@@ -6,6 +6,7 @@ import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 import RPList from './RelatedItems_Comparison/rp-list.jsx'
 import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
+import Carousel from './RelatedItems_Comparison/Carousel.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -121,8 +122,9 @@ class App extends React.Component {
     return (
       <div style={{"backgroundColor": this.state.background}}>
         <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-        <RPList relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
-        <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
+        <RPList productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
+        <Carousel add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
+        {/* <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/> */}
         <Ratings_Reviews productId={this.state.currentProductId} handleProductIdChange={this.handleProductIdChange} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews}/>
         <Questions_Answers productId={this.state.currentProductId} />
       </div>
