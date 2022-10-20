@@ -21,6 +21,14 @@ class Reviews_List extends React.Component {
         limitReached: false
       })
     }
+
+    if (prevState.totalReviews !== this.props.totalReviews) {
+      this.setState({
+        productId: this.props.productId,
+        tiles: 2,
+        limitReached: false
+      })
+    }
   }
 
   handleClick(e) {
@@ -76,44 +84,3 @@ class Reviews_List extends React.Component {
 }
 
 export default Reviews_List;
-
-
-// return (
-//   <div className={`answers${this.state.viewAllAnswersForFirstQuestion ? '_expand_mode' : ''}`}>
-//     {sortedAllAnswersForFirstQuestion.map((answer, index) => {
-//       if (index > 1) return;
-//       return (
-//         <div key={answer.answer_id}>
-//           <Answer answer={answer} />
-//         </div>
-//       )
-//     })}
-//     {this.state.viewAllAnswersForFirstQuestion &&
-//       <div>
-//         {sortedAllAnswersForFirstQuestion.map((answer, index) => {
-//         if (index < 2) return;
-//         return (
-//           <div key={answer.answer_id}>
-//             <Answer answer={answer} />
-//           </div>
-//         )
-//       })}
-//       </div>}
-//       {this.props.allAnswersForFirstQuestion.length > 2 &&
-//       <button onClick={() => this.handleViewMoreAnswers('viewAllAnswersForFirstQuestion')}>{this.state.viewAllAnswersForFirstQuestion ? 'Collapse answers' : 'See more answers'}</button>
-//       }
-//   </div>
-// )
-
-    // if (this.state.productId !== this.props.productId) {
-    //   this.resetTiles();
-    // }
-
-      // resetTiles() {
-  //   this.setState({
-  //     productId: this.props.productId,
-  //     tiles: 2
-  //   })
-  // }
-
-  //this.resetTiles = this.resetTiles.bind(this);
