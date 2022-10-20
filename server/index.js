@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
-const { getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler } = require('./controller/helper.js');
+const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
 
@@ -26,6 +26,8 @@ app.get('/products/:product_id/related', getRelatedHandler);
 
 
 //post routes
+app.post('/interactions', postInteractionHandler);
+
 app.post('/products', (req, res) => {
 
 });

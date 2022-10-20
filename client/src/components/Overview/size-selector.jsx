@@ -9,7 +9,7 @@ class SizeSelector extends React.Component {
   render() {
     return (
       <div className="size-selector">
-        <label htmlFor="size">Size: </label>
+        <label htmlFor="size"></label>
         <select name="size" id="size" onChange={this.props.handleSizeSelect} style={this.props.borderStyle}>
           <option key="defaultSizeOption" id="defaultSizeOption">Select Size</option>
           {Object.keys(this.props.sizeAndQuantityObj).map((element, index) => {
