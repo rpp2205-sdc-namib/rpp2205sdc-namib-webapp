@@ -34,7 +34,7 @@ app.post('/reviews', (req, res) => {
 
 });
 
-app.post('qa/questions', postQuestionHandler)
+app.post('/qa/questions', postQuestionHandler)
 
 app.post('/qa/questions/:question_id/answers', postAnswerHandler)
 

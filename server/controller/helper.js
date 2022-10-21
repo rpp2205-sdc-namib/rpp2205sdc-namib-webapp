@@ -165,7 +165,26 @@ module.exports = {
   },
 
   postQuestionHandler: (req, res) => {
-    console.log('hello')
+    var body = req.body.body;
+    var name = req.body.name;
+    var email = req.body.email;
+    var product_id = parseInt(req.body.product_id);
+
+    // console.log('body: ', body)
+    // console.log('name: ', name)
+    // console.log('email: ', email)
+    // console.log('productId: ', product_id)
+
+    axios.post(`${API_Link}/qa/questions`, {
+      body, name, email, product_id
+    }, auth)
+    .then(response => {
+      res.status(201).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
   },
 
   postAnswerHandler: (req, res) => {

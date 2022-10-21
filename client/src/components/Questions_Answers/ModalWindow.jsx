@@ -42,11 +42,12 @@ const ModalWindow = (props) => {
   const validateUserInput = () => {
     let isAnswerValid = answer.length !== 0;
     let isQuestionValid = question.length !== 0;
-    let isNicknameValid = answer.length !== 0;
+    let isNicknameValid = nickname.length !== 0;
     let isEmailValid = email.length !== 0 && validateEmail(email) !== null;
+    let totalValid = (!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid;
 
     setIsEmailValidated(isEmailValid);
-    setHasError((!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid);
+    setHasError(!totalValid);
 
     if (!hasError) {
       if (isAnswerValid) {
@@ -77,6 +78,12 @@ const ModalWindow = (props) => {
         name: nickname,
         email: email,
         product_id: props.productId
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log('err: ', err)
       })
     }
   }
