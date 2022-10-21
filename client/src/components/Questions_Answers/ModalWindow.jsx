@@ -100,11 +100,12 @@ const ModalWindow = (props) => {
           setUploadedImages(uploadedImages.concat(result))
           setUploadCounts(uploadCounts + 1);
 
-          axios.post(`/upload/${props.productId}/${props.questionId}/${file.name}`)
+          // axios.post(`/upload/${props.productId}/${props.questionId}/${file.name}`)
         }
       }
       fileReader.readAsDataURL(file);
     }
+    console.log('uploadCounts: ', uploadCounts)
   }, [file]);
 
   const getInvalidFields = () => {
@@ -153,12 +154,14 @@ const ModalWindow = (props) => {
         name="email"
         placeholder="Example: jack@email.com"/>
       <p className="sub_text">For authentication reasons, you will not be emailed</p>
-      <div className="upload_button">
-        <label>
-        {props.questionBody !== undefined && uploadCounts < 5 && <input type="file" onChange={handleUploadPhotos} multiple/>}
-        <span>Upload your photos</span>
-        </label>
-      </div>
+      {props.questionBody !== undefined && uploadCounts < 5 &&
+        <div className="upload_button">
+          <label>
+          <input type="file" onChange={handleUploadPhotos} multiple/>
+          <span>Upload your photos</span>
+          </label>
+        </div>
+      }
       {fileDataURL ?
         <p className="img-preview-wrapper">
           {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}
