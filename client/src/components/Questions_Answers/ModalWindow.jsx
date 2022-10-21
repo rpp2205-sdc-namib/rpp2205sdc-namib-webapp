@@ -153,7 +153,12 @@ const ModalWindow = (props) => {
         name="email"
         placeholder="Example: jack@email.com"/>
       <p className="sub_text">For authentication reasons, you will not be emailed</p>
-      {props.questionBody !== undefined && uploadCounts < 5 && <input type="file" onChange={handleUploadPhotos} className="upload_btn" multiple/>}
+      <div className="upload_button">
+        <label>
+        {props.questionBody !== undefined && uploadCounts < 5 && <input type="file" onChange={handleUploadPhotos} multiple/>}
+        <span>Upload your photos</span>
+        </label>
+      </div>
       {fileDataURL ?
         <p className="img-preview-wrapper">
           {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}

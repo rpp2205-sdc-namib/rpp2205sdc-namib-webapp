@@ -875,8 +875,17 @@ img.review_photo {
 }
 
 .upload_button {
+  display: inline-block;
+}
+
+.upload_button input[type=file] {
+  display:none;
+}
+
+.upload_button {
   background-color: #e62143;
-  font-size: 14px;
+  font-size: 16px;
+  text-align: center;
   margin-right: 10px;
 }
 
