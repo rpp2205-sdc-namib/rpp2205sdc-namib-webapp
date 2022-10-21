@@ -46,7 +46,6 @@ class Reviews_List extends React.Component {
   }
 
   render() {
-    console.log(this.props.reviews);
 
     if (this.state.limitReached || (this.props.totalReviews > 0 && this.props.totalReviews <= 2)) {
       return (
