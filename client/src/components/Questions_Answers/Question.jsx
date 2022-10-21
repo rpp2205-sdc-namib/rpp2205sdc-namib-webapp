@@ -66,6 +66,8 @@ class Question extends React.Component {
         </div>
         {this.state.isFormShown &&
           <ModalWindow
+            productId={this.props.productId}
+            questionId={this.props.question.question_id}
             questionBody={this.props.question.question_body}
             productName={this.props.productName}
             closeForm={this.closeForm}

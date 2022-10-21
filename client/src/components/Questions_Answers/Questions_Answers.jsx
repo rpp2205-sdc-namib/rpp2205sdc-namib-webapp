@@ -88,13 +88,13 @@ class Questions_Answers extends React.Component {
           {this.state.QAs.map((qa, index) => {
             if (index > 1) return;
             return (
-              <QA key={index} qa={qa} productName={this.props.productName} />
+              <QA key={index} productId={this.props.productId} qa={qa} productName={this.props.productName} />
             );
           })}
           {this.state.viewMoreQuestions && this.state.QAs.map((qa, index) => {
             if (index < 2) return;
             return (
-              <QA key={index} qa={qa} productName={this.props.productName} />
+              <QA key={index} qa={qa} productId={this.props.productId} productName={this.props.productName} />
             )
           })}
           {this.state.QAs.length > 2 && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
@@ -102,7 +102,7 @@ class Questions_Answers extends React.Component {
         <div className="filtered">
           {this.state.filteredQAs.map(qa => {
             return (
-              <QA key={qa.question_id} qa={qa} productName={this.props.productName} />
+              <QA key={qa.question_id} productId={this.props.productId} qa={qa} productName={this.props.productName} />
             )
           })}
         </div>
@@ -110,6 +110,7 @@ class Questions_Answers extends React.Component {
         <button className="add_question" onClick={this.handleAddQuestion}>Add A Question +</button>
         {this.state.isFormShown &&
           <ModalWindow
+            productId={this.props.productId}
             productName={this.props.productName}
             closeForm={this.closeForm}/>
         }

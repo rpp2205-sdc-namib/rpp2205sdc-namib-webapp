@@ -1,5 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
+const fs = require('fs');
 const API_Link = `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.CAMPUS_CODE}`;
 const auth = {headers: {Authorization: process.env.access_token}};
 
@@ -161,6 +162,41 @@ module.exports = {
       console.log('err: ', err);
       res.sendStatus(500);
     });
+  },
+
+  postQuestionHandler: (req, res) => {
+    console.log('hello')
+  },
+
+  postAnswerHandler: (req, res) => {
+    var question_id = req.params.question_id;
+    var { body, name, email, photos } = req.body;
+
+    axios.post(`${API_Link}/qa/questions/${question_id}/answers`, {
+      question_id, body, name, email, photos
+    }, auth)
+    .then(response => {
+      res.status(201).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
+  },
+
+  uploadPhotosHandler: (req, res) => {
+    let productId = req.params.product_id;
+    let question_id = req.params.question_id;
+    let image_name = req.params.image_name;
+    let rootDir = './atelier';
+    let productDir = productId;
+    let questionDir = question_id;
+
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir)
+    } else {
+
+    }
   }
 
 };

@@ -60,7 +60,7 @@ class QA extends React.Component {
   render() {
     return (
       <div className="QA_container">
-        <Question question={this.props.qa} productName={this.props.productName} />
+        <Question question={this.props.qa} productId={this.props.productId} productName={this.props.productName} />
         <div className={this.state.seeMoreAnswers ? "answers_expand_mode" : undefined} >
           {this.state.answers.map((answer, index) => {
             if (index > 1) return;

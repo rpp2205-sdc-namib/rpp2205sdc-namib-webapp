@@ -868,6 +868,12 @@ img.review_photo {
   border-radius: 10px;
 }
 
+.upload_photos {
+  display: inline-block;
+  width: 20%;
+  height: 20%;
+}
+
 .upload_button {
   background-color: #e62143;
   font-size: 14px;
