@@ -1,4 +1,5 @@
 import React from 'react';
+import withClickData from '../hoc_click_data.jsx';
 
 class Modal extends React.Component {
   constructor(props) {
@@ -14,11 +15,11 @@ class Modal extends React.Component {
     }
     return(
       <div id="modal">
-        <button onClick={this.props.closeModal}>Close</button>
+        <button onClick={(e) => {this.props.closeModal; console.log(e.target.nodeName); this.props.interaction(e.target)}}>Close</button>
         <p>Comparison text for modal goes here...</p>
       </div>
     )
   }
 }
 
-export default Modal;
+export default withClickData(Modal, 'Related Items & Comparison');

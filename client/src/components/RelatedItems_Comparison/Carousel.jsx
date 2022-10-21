@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RPC from './related-product-cards.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import withClickData from '../hoc_click_data.jsx';
 
 function Carousel (props) {
   // constructor(props) {
@@ -56,9 +57,9 @@ function Carousel (props) {
         <div data-testid="outfit">YourOutfit</div>
           {Prev ?
             ('') :
-            (<button onClick={() => { if(start === 0) {togglePrev(true)} toggleNext(false); setStart( start - 1); setEnd( end - 1 )}}>Prev</button>)
+            (<button onClick={() => { props.interaction(e.target); if(start === 0) {togglePrev(true)} toggleNext(false); setStart( start - 1); setEnd( end - 1 )}}>Prev</button>)
           }
-        <div className="card" onClick={props.add} id={start}>
+        <div className="card" onClick={(e) => {props.add; props.interaction(e.target)}}>
           <FontAwesomeIcon icon={faPlus} />
           <p>Add to Outfit</p>
         </div>
@@ -69,6 +70,7 @@ function Carousel (props) {
         {Next ?
           ('') :
           (<button onClick={() => {
+            props.interaction(e.target);
             return setStart( start + 1);
             return setEnd( end + 1 )
             if(start !== 0) {
@@ -85,4 +87,4 @@ function Carousel (props) {
   )
 }
 
-export default Carousel;
+export default withClickData(Carousel, 'Related Items & Comparison');
