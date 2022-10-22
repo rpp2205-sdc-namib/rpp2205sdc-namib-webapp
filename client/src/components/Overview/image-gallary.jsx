@@ -6,7 +6,7 @@ import withClickData from '../hoc_click_data.jsx';
 class ImageGallary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentPhotoIndex: 0, top: 0, bottom: 3};
+    this.state = { top: 0, bottom: 3};
   }
 
   handleArrowUp(e) {
@@ -23,7 +23,7 @@ class ImageGallary extends React.Component {
     var oldId = this.props.currentPhotoIndex;
     var newId = oldId + 1;
     if (oldId < this.props.photos.length - 1) {
-      this.changeCurrentPhoto(oldId + 1);
+      this.props.handleCurrentPhotoChange(oldId + 1);
       if (newId > this.state.bottom) {
         this.setState({bottom: this.state.bottom + 1, top: this.state.top + 1})
       }
@@ -37,7 +37,7 @@ class ImageGallary extends React.Component {
     var oldId = this.props.currentPhotoIndex;
     var newId = oldId - 1;
     if (oldId > 0) {
-      this.changeCurrentPhoto(newId);
+      this.props.handleCurrentPhotoChange(newId);
       if (newId < this.state.top) {
         this.setState({top: this.state.top - 1, bottom: this.state.bottom - 1})
       }
@@ -64,7 +64,6 @@ class ImageGallary extends React.Component {
 
 
   render() {
-    console.log(this.props.currentPhotoIndex);
     if (this.props.section === 'modal') {
       var modal_url = this.props.photos[this.props.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png';
       return (
@@ -103,8 +102,8 @@ class ImageGallary extends React.Component {
         {/* down arrow will appear when the top image is not last image, and the number of photos is larger than 4 */}
         {arrowForwardNotNeeded ? null : <div className="arrow-down-container" onMouseOver={this.handleArrowDown.bind(this)}><div className="arrow-down"></div></div>}
         </div>
-        <div className="current-photo" style={{"cursor": "zoom-in"}} onClick={this.handleClick.bind(this)}>
-          <img id="current-photo" src={this.props.photos[this.props.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
+        <div className="current-photo">
+          <img id="current-photo" onClick={this.handleClick.bind(this)} style={{"cursor": "zoom-in"}} src={this.props.photos[this.props.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
             {this.props.currentPhotoIndex === 0 ? null : <div id="backBtn" onClick={this.handleBackward.bind(this)}>
             </div>}
             {this.props.currentPhotoIndex ===  this.props.photos.length - 1 ? null : <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
