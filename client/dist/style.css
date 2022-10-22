@@ -990,12 +990,16 @@ img.review_photo {
   height: 60px;
 }
 
-.upload_button {
-  display: inline-block;
+.upload_text {
+  line-height: 26px;
 }
 
+/* .upload_button {
+  display: inline-block;
+} */
+
 .upload_button input[type=file] {
-  display:none;
+  display: none;
 }
 
 .upload_button {
@@ -1003,6 +1007,8 @@ img.review_photo {
   font-size: 16px;
   text-align: center;
   margin-right: 10px;
+  margin-bottom: 20px;
+  line-height: 20px;
 }
 
 .submit_button {

@@ -159,7 +159,7 @@ const ModalWindow = (props) => {
           </p> : null}
         {props.questionBody !== undefined && uploadCounts < 5 &&
           <div className="upload_button">
-            <label>
+            <label className="upload_text">
             <input type="file" onChange={handleUploadPhotos} multiple/>Upload your photos
             </label>
           </div>
