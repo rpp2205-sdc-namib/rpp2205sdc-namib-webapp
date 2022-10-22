@@ -43,7 +43,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    if (this.state.styleId === '') {
+    if (this.state.styleObj.photos === undefined) {
       return null;
     } else {
       return (<div className="overview-container">

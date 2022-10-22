@@ -66,6 +66,7 @@ class ImageGallary extends React.Component {
   render() {
     if (this.props.section === 'modal') {
       var modal_url = this.props.photos[this.props.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png';
+      console.log(modal_url);
       return (
         <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
           <div className="current-photo-modal">

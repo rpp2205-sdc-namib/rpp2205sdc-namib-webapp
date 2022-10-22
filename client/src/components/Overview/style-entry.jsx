@@ -22,7 +22,7 @@ class StyleEntry extends React.Component {
     <div className="styleThumbnails-parent">
       <img className="styleThumbnails-check" src="img/check-icon.png" style={{"display": checkDisplay}}/>
       <div className="styleThumbnails-container" style={this.props.highlight ? highlightStyle : nonHighlightStyl}>
-        <img className="styleThumbnails" id={"styleThumbnails" + this.props.id} src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleClick.bind(this)}></img>
+        <img className="styleThumbnails" id={"styleThumbnails" + this.props.id} src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleClick.bind(this)} width="50px"></img>
       </div>
     </div>
    )
