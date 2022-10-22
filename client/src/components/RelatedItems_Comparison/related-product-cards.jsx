@@ -1,6 +1,7 @@
 import React from 'react';
 import Stars from '../FiveStars.jsx';
 import Action from './action.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 function RPC (props) {
 
@@ -18,9 +19,9 @@ function RPC (props) {
       var photo = props.info.defaultStyle.photos[0].thumbnail_url;
     }
     return(
-      <div className="card" >
+      <div className="card">
         <Action id={props.info.product.id} actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
-        <div onClick={ () => {props.redirect(props.info.product.id)}}>
+        <div  onClick={ (e) => {props.redirect(props.info.product.id); console.log(e.target.nodeName); props.interaction(e.target)}}>
           <p>
             <img className="rpcThumbnails" src={photo}></img>
           </p>
@@ -34,4 +35,4 @@ function RPC (props) {
   }
 }
 
-export default RPC;
+export default withClickData(RPC, 'Related Items & Comparison');
