@@ -1,5 +1,6 @@
 import React from 'react';
 import ModalWindow from './ModalWindow.jsx';
+import axios from 'axios';
 
 // this class handles each question for the specific product
 class Question extends React.Component {
@@ -8,7 +9,8 @@ class Question extends React.Component {
 
     this.state = {
       helpfulness: props.question.question_helpfulness,
-      isFormShown: false
+      isFormShown: false,
+      isYesClicked: false
     }
 
     this.handleAddAnswer = this.handleAddAnswer.bind(this);
@@ -30,7 +32,18 @@ class Question extends React.Component {
 
   handleIncreaseCounts() {
     this.setState({
+      isYesClicked: true,
       helpfulness: this.state.helpfulness + 1
+    }, () => {
+      axios.put(`/qa/questions/${this.props.question.question_id}/helpful`)
+      .then(data => {
+        if (data.status !== 204) {
+          throw err;
+        }
+      })
+      .catch(err => {
+        console.log('failed to increment counts')
+      })
     });
   }
 
@@ -41,6 +54,7 @@ class Question extends React.Component {
         <div>
           <div className="helpful_text">Helpful?</div>
           <button className="yes_button"
+            disabled={this.state.isYesClicked}
             onClick={this.handleIncreaseCounts}>Yes
           </button>
           <div className="helpfulness_number">({this.state.helpfulness})</div>
@@ -52,6 +66,8 @@ class Question extends React.Component {
         </div>
         {this.state.isFormShown &&
           <ModalWindow
+            productId={this.props.productId}
+            questionId={this.props.question.question_id}
             questionBody={this.props.question.question_body}
             productName={this.props.productName}
             closeForm={this.closeForm}
