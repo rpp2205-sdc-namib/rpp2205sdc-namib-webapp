@@ -595,29 +595,29 @@ body {
 
 /* ratings_reviews */
 .review_container {
-  height: 1000px;
-  position: relative;
+  height: 600px;
+  position: static;
   display: flex;
   justify-content: center;
-  align-content:center;
-  padding-top: 50px;
-  margin-top: 20px;
+  align-content: center;
+  padding: 25px 0px 0px 0px;
+  margin: 25px 0px 0px 0px;
 }
 
 .reviews_list {
   position: relative;
   float: right;
-  width: 2200px;
-  padding-left: 30px;
-  padding-right: 20px
+  width: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .reviews {
   position: relative;
+  width: 100%;
 }
 
 .reviews_expand_mode {
-  float: middle;
   position: relative;
   overflow: scroll;
   width: 100%;
@@ -631,17 +631,25 @@ body {
 .ratings_breakdown {
   position: relative;
   float: left;
-  width: 400px;
-  padding-right: 30px;
-  padding-left: 20px
+  width: 20%;
+  padding-right: 25px;
+  padding-left: 25px;
 }
 
 p.review_recommend {
   padding-left: 5px;
 }
 
+.tiles {
+  position: relative;
+  width: 100%;
+}
+
 .tile {
   position: relative;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tile-date {
@@ -747,6 +755,53 @@ img.review_photo {
   border-radius:6px;
 }
 
+#characteristic > .progress > .bar {
+	position:relative;
+  float:left;
+  min-width:1%;
+  height:100%;
+  background: #e5e5e5;
+}
+
+.seperator {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 1px;
+  background: black;
+  top: -11px;
+  left: 100%;
+  border-left: 10px solid #e5e5e5;
+  border-right: 10px solid #e5e5e5;
+  border-top: 20px solid green;
+}
+
+.arrow {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 1px;
+  background: black;
+  top: -11px;
+  left: 100%;
+  border-left: 10px solid #e5e5e5;
+  border-right: 10px solid #e5e5e5;
+  border-top: 20px solid #000;
+}
+
+/* #characteristic > .progress::before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  background: black;
+  top: -15px;
+  left: 243px;
+  border-left: 6px solid rgba(255, 0, 0, 0);
+  border-right: 6px solid rgba(255, 0, 0, 0);
+  border-top: 20px solid #000;
+} */
+
 .bar {
 	position:relative;
   float:left;
@@ -795,6 +850,17 @@ img.review_photo {
   display: inline-block;
 }
 
+.progress_bars {
+  position: relative;
+  float: left;
+  width: 70%;
+}
+
+#characteristics {
+  position: relative;
+  float: left;
+  width: 70%;
+}
 
 /********* Questions & Answers widget **********/
 

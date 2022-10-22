@@ -1,5 +1,6 @@
 import React from 'react';
 import Stars from '../FiveStars.jsx';
+import Product_Breakdown from './Product_Breakdown.jsx';
 
 class Rating_Breakdown extends React.Component {
   constructor(props) {
@@ -148,6 +149,7 @@ class Rating_Breakdown extends React.Component {
             <div style={{float:'left'}}>{this.props.ratings['1']}</div>
           </div>
         </div>
+        <Product_Breakdown reviewsMeta={this.props.reviewsMeta} />
       </div>
     )
   }

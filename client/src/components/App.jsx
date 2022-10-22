@@ -12,6 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {currentProductId: '',
+                  reviewsMeta: {},
                   rating: 0,
                   ratings: {},
                   totalRatings: 0,
@@ -38,6 +39,7 @@ class App extends React.Component {
         var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
         console.log('totalReviews - test', responseArr[1].data.results.length);
         this.setState({rating: reviewsAndRating[1],
+                       reviewsMeta: responseArr[0].data,
                        ratings: responseArr[0].data.ratings,
                        totalRatings: reviewsAndRating[0],
                        reviews: responseArr[1].data.results,
@@ -95,8 +97,8 @@ class App extends React.Component {
         <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
         <RPList relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
         <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
-        <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings}/>
         <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
+        <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings} reviewsMeta={this.state.reviewsMeta}/>
       </div>
     )
   }
