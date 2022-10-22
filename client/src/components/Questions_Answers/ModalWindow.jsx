@@ -94,7 +94,6 @@ const ModalWindow = (props) => {
       fileReader = new FileReader();
       fileReader.onload = (e) => {
         const { result } = e.target;
-        console.log('result: ', result)
         if (result && !isCancel) {
           setFileDataURL(result);
           setUploadedImages(uploadedImages.concat(result))

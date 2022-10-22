@@ -1,13 +1,15 @@
+@import url('https://css.gg/search.css');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
 body {
   width: 100%;
   height: 100%;
 }
 
-@import url('https://css.gg/search.css');
-
 /* Top Bar */
 .topBar {
-  height: 10vh;
+  font-family: 'Josefin Sans', sans-serif;
+  height: 60px;
   width: 100%;
   background-color: gray;
   display: flex;
@@ -16,10 +18,10 @@ body {
 }
 
 .topBar-text {
-  font-size: 5vh;
+  font-size: 30px;
   color: white;
-  padding-left: 10vh;
-  padding-top: 2vh;
+  padding-left: 30px;
+  padding-top: 20px;
   text-transform: uppercase;
 }
 
@@ -42,8 +44,8 @@ body {
 }
 
 .gg-search-container {
-  width: 8vh;
-  height: 10vh;
+  width: 48px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,39 +79,43 @@ body {
 }
 
 .sidewide-message {
-  padding-top: 2vh;
+  font-family: 'Josefin Sans', sans-serif;
+  padding-top: 12px;
   text-transform: uppercase;
-  height: 5vh;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-content:center;
 }
+
 
 /* *** Overview *** */
 
 /* Overview Component Styles */
 .overview-container {
+  font-family: 'Josefin Sans', sans-serif;
   width: 100%;
-  height: 90vh;
+  min-height: 600px;
+  max-height: auto;
   position: relative;
   display: flex;
-  justify-content: center;
-  align-content:center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .overview {
-  height: 100%;
-  width: 100%;
-  position:absolute;
+  position: relative;
+  border: solid green;
+  height: auto;
+  width: 45%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
+  align-content: space-between;
 }
 
 
 .image-gallary {
-  width: 50%;
+  width: 50vw;
   height: 100%;
   display:flex;
   flex-direction: row;
@@ -117,9 +123,8 @@ body {
 }
 
 .product-info {
-  margin-left: 8%;
-  width: 41%;
-  height: 35%;
+  width: 100%;
+  height: 30%;
   border-style: solid;
   border-color: #848484;
   display: flex;
@@ -128,19 +133,20 @@ body {
 }
 
 .style-selector {
-  margin-left: 8%;
-  width: 41%;
-  height: 40%;
+  width: 100%;
+  height: auto;
   border-style: solid;
-  border-color: #848484;
+  border-color: red;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-to-cart {
-  margin-left: 8%;
-  width: 41%;
-  height: 15%;
+  width: 100%;
+  min-height: 140px;
+  max-height: auto;
   border-style: solid;
-  border-color: #848484;
+  border-color: rebeccapurple;
   display: flex;
   flex-direction: column;
   justify-content:space-around;
@@ -194,26 +200,7 @@ body {
   width: 100%;
   height: 100%;
 }
-/* .backBtn-container{
-  position: absolute;
-  top: 50%;
-  left: 11%;
-  width: 60px;
-  height: 60px;
-  border: solid black;
-  display: flex;
-  justify-content: center;
-}
 
-
-
-.forwardBtn-container {
-  position: absolute;
-  top: 50%;
-  left: 80%;
-  width: 60px;
-  height: 60px;
-} */
 #backBtn:before {
   position: absolute;
   top: 50%;
@@ -238,20 +225,10 @@ body {
   z-index: 1;
 }
 
-/* .backBtn-fill {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 60px;
-  height: 60px;
-  white-space: nowrap;
-  background-color: #b1b1b1;
-  border: solid black;
-} */
 
 .expandBtn {
   position: absolute;
-  top: 1vh;
+  top: 6px;
   left: 83%;
   width: 30px;
   height: 30px;
@@ -264,6 +241,10 @@ body {
   height: 30px;
 }
 /* Styling for star rating system */
+.five-stars {
+  display: flex;
+  align-items: center;
+}
 .single-star-container {
   position: relative;
   vertical-align: middle;
@@ -298,17 +279,73 @@ body {
 }
 
 /* Product info styling */
-.five-stars, #ratingScore, #readAllReviews, #category, #title, .price {
+.five-stars, #ratingScore, #category, #title, .price {
   height: 20px;
 }
 
-.price {
-  display: flex;
-  flex-direction: row;
+#readAllReviews {
+  margin-left: 3%;
 }
 
+.product-info-line1, #category, #description, .price, #title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  height: 40px;
+}
+
+.price {
+  border: solid peru;
+  height: 57px;
+}
+
+#originalprice {
+  margin-right: 10px;
+}
+
+#description {
+  height: 20%;
+}
+
+#title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* size selector styling */
+#size, #quantity, #add-to-cart-btn, .add-to-outfit {
+  font-family: 'Josefin Sans', sans-serif;
+  margin-right: 20px;
+  width: 150px;
+  height: 50px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.add-to-outfit {
+  border:solid black 1px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* thumbnails styling */
+
+.styleThumbnails-parent {
+  position: absolute;
+
+}
+
+.styleThumbnails-check {
+  position: absolute;
+  top: 13px;
+  left: 51px;
+  width: 15px;
+  height: 15px;
+  z-index: 2;
+}
 
 .styleThumbnails-container {
   margin-top: 10px;
@@ -331,13 +368,20 @@ body {
 }
 
 .styles {
+  position: relative;
   border-color: #848484;
   border-style: solid;
-  width: 300px;
+  width: 320px;
+  height: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
+}
+
+.styleEntries {
+  width: 80px;
+  height: 80px;
 }
 
 .arrow-up-container, .arrow-down-container {
@@ -378,13 +422,13 @@ body {
 
 /* image gallary modal view styling */
 
-.modal {
+.overview-modal {
   /* display: none !important; */
+  position: absolute;
   background-color: white;
   height: 100%;
   width: 90%;
-  border-style: solid;
-  border-color: aqua;
+  left: 5%;
   z-index: 9;
   display: flex;
   flex-direction: row;
@@ -401,21 +445,24 @@ body {
 
 .image-gallary-modal {
   position: relative;
-  border: solid blue;
   width: 100%;
   height: 100%;
   display:flex;
   flex-direction: column;
+  justify-content: center;
+
   /* align-content: space-around; */
 }
 
 .current-photo-modal {
+  border: solid red;
   width: 100%;
-  height:100%;
-  position: absolute;
+  height: 100%;
+  position: relative;
   display:flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .gallary-list-modal {
@@ -453,7 +500,7 @@ body {
 
 .defaultBtn {
   position: absolute;
-  top: 1vh;
+  top: 6px;
   left: 97%;
   width: 30px;
   height: 30px;
@@ -466,23 +513,24 @@ body {
   height: 30px;
 }
 
-
 /* magnifying area styling */
 
 #magnifying-area {
   display: block;
-  height: 100%;
+  height: 98%;
   width: min-content;
   border: solid green;
   overflow: hidden;
-  position: absolute;
-  top: -20px;
+  position: relative;
 }
 
 #current-photo-modal {
   border: solid black;
+  /* this setting means to let height show 100% of image height, and then let the image adjust width so it shows 100% of width without changing the ratio of the image */
+  max-height: 100%;
   min-height: 100%;
   min-width: 100%;
+  max-width: auto;
   margin: 0 auto;
   position: relative;
   top: 0;
@@ -495,7 +543,7 @@ body {
 
 
 /* Related Items and Comparison styling */
-#card {
+.card {
   padding: 10px;
   margin: 15px;
   border: 1px solid black;
@@ -532,35 +580,17 @@ body {
 
 
 .add-to-card-line1, .add-to-card-line2 {
-  width: 50%;
+  border: solid black;
+  width: 100%;
+  height: 70px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   align-items: center;
 }
 
-.star {
-  visibility:hidden;
-  font-size:20px;
-  cursor:pointer;
-}
+#solidHeart, #regularHeart {
+  font-size: 20px;
 
-.star:before {
-  width: 3%;
-  text-align: center;
-  border-style: solid;
-  border-color: #848484;
-  content: "\2606";
-  position: absolute;
-  visibility:visible;
-}
-.star:checked:before {
-  border-style: solid;
-  border-color: #848484;
-  content: "\2605";
-  color: yellow;
-  -webkit-text-stroke: 1px orange;
-  position: absolute;
 }
 
 /* ratings_reviews */
@@ -703,6 +733,7 @@ img.review_photo {
   border: none;
   background-color: #fff;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .progress {
@@ -735,8 +766,33 @@ img.review_photo {
   color:black;
 }
 
-.star_progress_bar {
+.five_star_ratings_bar {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.four_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.three_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.two_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.one_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.filter_ratings_message {
+  display: inline-block;
 }
 
 
@@ -908,4 +964,3 @@ img.review_photo {
   position: relative;
   right: 30px;
 }
-

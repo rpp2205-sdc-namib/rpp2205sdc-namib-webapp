@@ -6,6 +6,20 @@ const auth = {headers: {Authorization: process.env.access_token}};
 
 module.exports = {
 
+
+  postInteractionHandler: (req, res) => {
+    var element = req.body.element;
+    var widget = req.body.widget;
+    var time = req.body.time;
+    axios.post(`${API_Link}/interactions`, { element, widget, time }, auth)
+      .then(response => {
+        res.status(201).send(`${element} from module ${widget} at ${time} was clicked and reported to API successfully!`)
+      })
+      .catch(err => {!
+        res.status(500).send(err);
+      })
+  },
+
   getProductHandler: (req, res) => {
     var product_id = req.params.product_id;
     axios.get(`${API_Link}/products/${product_id}`, auth)

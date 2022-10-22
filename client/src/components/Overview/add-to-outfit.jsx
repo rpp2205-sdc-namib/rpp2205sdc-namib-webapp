@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+const regularHeart = require('@fortawesome/free-regular-svg-icons').faHeart;
+const solidHeart = require('@fortawesome/free-solid-svg-icons').faHeart;
+import withClickData from '../hoc_click_data.jsx';
 
-class AddToOutfit extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+const AddToOutfit = (props) => {
+  const [clicked, toggleClicked] = useState(false);
 
-  render() {
-    return (
-      <div className="add-to-outfit">
-        <label htmlFor="add-to-outfit"></label>
-        <input className="star" type="checkbox"></input>
-      </div>
-    )
-
-  }
+  return (
+    <div className="add-to-outfit" onClick={(e) => {
+      toggleClicked(!clicked);
+      props.interaction(e.currentTarget);
+    }}>
+     {clicked ? <FontAwesomeIcon icon={solidHeart} id="solidHeart"/> : <FontAwesomeIcon icon={regularHeart} id="regularHeart"/>}
+    </div>
+  )
 }
 
-export default AddToOutfit;
+
+
+export default withClickData(AddToOutfit, 'overview');
