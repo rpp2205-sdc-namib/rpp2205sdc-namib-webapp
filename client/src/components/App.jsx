@@ -24,7 +24,8 @@ class App extends React.Component {
                   styles: [],
                   background: "white",
                   keys: [...Object.keys(localStorage)],
-                  related: []
+                  related: [],
+                  carousel: ['relatedProd', 'yourOutfit']
                   };
     this.handleProductIdChange.bind(this);
   }
@@ -115,8 +116,12 @@ class App extends React.Component {
           <TopBar />
           </ErrorBoundary>
           <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-          <RPList productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
-          <Carousel add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
+          {/* <RPList productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/> */}
+          {this.state.carousel.map((element) => {
+            return(
+              <Carousel productId={this.state.currentProductId} relatedProds={this.state.related} add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
+            )
+          })}
           {/* <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/> */}
           <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings}/>
           <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
