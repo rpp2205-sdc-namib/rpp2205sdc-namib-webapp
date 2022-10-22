@@ -89,12 +89,12 @@ const ModalWindow = (props) => {
   }
 
   useEffect(() => {
-    // console.log('image: ', image)
     let fileReader, isCancel = false;
     if (file) {
       fileReader = new FileReader();
       fileReader.onload = (e) => {
         const { result } = e.target;
+        console.log('result: ', result)
         if (result && !isCancel) {
           setFileDataURL(result);
           setUploadedImages(uploadedImages.concat(result))
@@ -105,7 +105,6 @@ const ModalWindow = (props) => {
       }
       fileReader.readAsDataURL(file);
     }
-    console.log('uploadCounts: ', uploadCounts)
   }, [file]);
 
   const getInvalidFields = () => {
