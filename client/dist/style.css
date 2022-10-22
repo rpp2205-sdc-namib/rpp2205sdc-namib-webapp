@@ -828,17 +828,6 @@ img.review_photo {
   justify-content: flex-end;
 }
 
-/* .more_answered_questions {
-  position:
-} */
-
-/* .add_question {
-  position: relative;
-  right: 34%;
-  margin-top: 20px;
-} */
-
-
 /** QA */
 .QA_container {
   width: 1000px;
@@ -902,9 +891,10 @@ img.review_photo {
   margin: 0;
 }
 
-.helpful_text, .yes_button, .helpfulness_number, .add_answer_button {
-  float: left;
+.helpful_container {
+  display: flex;
 }
+
 
 .helpful_text {
   margin: 0px 5px;
@@ -944,8 +934,8 @@ img.review_photo {
   background-color: #fff;
   padding: 20px;
   border: 1px solid #000;
-  width: 50%;
-  height: 60%;
+  width: 600px;
+  max-height: 550px;
   margin: 0 auto;
 }
 
@@ -958,8 +948,7 @@ img.review_photo {
 }
 
 .label_answer, .label_question, .label_nickname, .label_email {
-  display: block;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .text_answer, .text_question {
@@ -981,7 +970,7 @@ img.review_photo {
 }
 
 .sub_text {
-  font-size: 16px;
+  font-size: 12px;
   margin-top: 5px;
   margin-bottom: 20px;
 }
@@ -996,8 +985,9 @@ img.review_photo {
 
 .upload_photos {
   display: inline-block;
-  width: 20%;
-  height: 20%;
+  margin-right: 10px;
+  width: 60px;
+  height: 60px;
 }
 
 .upload_button {

@@ -51,7 +51,7 @@ class Question extends React.Component {
     return (
       <div className="question_container">
         <p className="question">Q: {this.props.question.question_body}</p>
-        <div>
+        <div className="helpful_container">
           <div className="helpful_text">Helpful?</div>
           <button className="yes_button"
             disabled={this.state.isYesClicked}

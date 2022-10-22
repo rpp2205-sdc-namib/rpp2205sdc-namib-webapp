@@ -129,7 +129,7 @@ const ModalWindow = (props) => {
         {props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
         {props.questionBody !== undefined ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
         {props.questionBody !== undefined ?
-          <div>
+          <div className="answer_body">
             <label className="label_answer" htmlFor="answer">Your Answer</label>
             <input className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} name="answer" />
           </div> :
@@ -153,18 +153,17 @@ const ModalWindow = (props) => {
           name="email"
           placeholder="Example: jack@email.com"/>
         <p className="sub_text">For authentication reasons, you will not be emailed</p>
-        {props.questionBody !== undefined && uploadCounts < 5 &&
-          <div className="upload_button">
-            <label>
-            <input type="file" onChange={handleUploadPhotos} multiple/>
-            <span>Upload your photos</span>
-            </label>
-          </div>
-        }
         {fileDataURL ?
           <p className="img-preview-wrapper">
             {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}
           </p> : null}
+        {props.questionBody !== undefined && uploadCounts < 5 &&
+          <div className="upload_button">
+            <label>
+            <input type="file" onChange={handleUploadPhotos} multiple/>Upload your photos
+            </label>
+          </div>
+        }
         <button
           className="submit_button"
           onClick={validateUserInput}>
