@@ -97,17 +97,19 @@ class Questions_Answers extends React.Component {
               <QA key={index} qa={qa} productId={this.props.productId} productName={this.props.productName} />
             )
           })}
-          {this.state.QAs.length > 2 && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
         </> :
         <>
           {this.state.filteredQAs.map(qa => {
             return (
               <QA key={qa.question_id} productId={this.props.productId} qa={qa} productName={this.props.productName} />
-            )
-          })}
+              )
+            })}
         </>
         }
-        <button className="add_question" onClick={this.handleAddQuestion}>Add A Question +</button>
+        <div className="questions_btn">
+          {this.state.QAs.length > 2 && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
+          <button className="add_question" onClick={this.handleAddQuestion}>Add A Question +</button>
+        </div>
         {this.state.isFormShown &&
           <ModalWindow
             productId={this.props.productId}

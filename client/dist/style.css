@@ -810,8 +810,6 @@ img.review_photo {
 }
 
 .more_answered_questions, .add_question {
-  display: block;
-  margin: 0 auto;
   border: 1px solid #000;
   background-color: #fff;
   padding: 10px;
@@ -820,10 +818,25 @@ img.review_photo {
 }
 
 .add_question {
+  margin-left: 20px;
+}
+
+.questions_btn {
+  margin-top: 20px;
+  width: 540px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* .more_answered_questions {
+  position:
+} */
+
+/* .add_question {
   position: relative;
   right: 34%;
   margin-top: 20px;
-}
+} */
 
 
 /** QA */
