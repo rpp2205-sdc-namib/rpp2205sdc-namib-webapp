@@ -1,59 +1,37 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-class ModalWindow extends React.Component {
-  constructor(props) {
-    super(props);
+const ModalWindow = (props) => {
+  const [answer, setAnswer] = useState('');
+  const [question, setQuestion] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+  const [isEmailValidated, setIsEmailValidated] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [file, setFile] = useState(null);
+  const [fileDataURL, setFileDataURL] = useState(null);
+  const [uploadCounts, setUploadCounts] = useState(0);
 
-    this.state = {
-      answer: '',
-      question: '',
-      nickname: '',
-      email: '',
-      isEmailValidated: false,
-      hasError: false,
-    }
-
-    this.handleAnswerChange = this.handleAnswerChange.bind(this);
-    this.handleQuestionChange = this.handleQuestionChange.bind(this);
-    this.handleNickNameChange = this.handleNickNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleUploadPhotos = this.handleUploadPhotos.bind(this);
-    this.validateUserInput = this.validateUserInput.bind(this);
-    this.validateEmail = this.validateEmail.bind(this);
-    this.getInvalidFields = this.getInvalidFields.bind(this);
+  const handleUploadPhotos = (e) => {
+    const currentFile = e.target.files[0];
+    setFile(currentFile);
   }
 
-  // add an answer
-  handleAnswerChange(value) {
-    this.setState({
-      answer: value
-    });
+  const handleAnswerChange = (value) => {
+    setAnswer(value);
   }
-
-  // add a question
-  handleQuestionChange(value) {
-    this.setState({
-      question: value
-    });
+  const handleQuestionChange = (value) => {
+    setQuestion(value);
   }
-
-  handleNickNameChange(value) {
-    this.setState({
-      nickname: value
-    });
+  const handleNickNameChange = (value) => {
+    setNickname(value);
   }
-
-  handleEmailChange(value) {
-    this.setState({
-      email: value
-    });
+  const handleEmailChange = (value) => {
+    setEmail(value);
   }
-
-  handleUploadPhotos() {
-
-  }
-
-  validateEmail(email) {
+  const validateEmail = (email) => {
     return String(email)
     .toLowerCase()
     .match(
@@ -61,25 +39,80 @@ class ModalWindow extends React.Component {
     );
   }
 
-  validateUserInput() {
-    let isAnswerValid = this.state.answer.length !== 0;
-    let isQuestionValid = this.state.question.length !== 0;
-    let isNicknameValid = this.state.answer.length !== 0;
-    let isEmailValid = this.state.email.length !== 0 && this.validateEmail(this.state.email) !== null;
+  const validateUserInput = () => {
+    let isAnswerValid = answer.length !== 0;
+    let isQuestionValid = question.length !== 0;
+    let isNicknameValid = nickname.length !== 0;
+    let isEmailValid = email.length !== 0 && validateEmail(email) !== null;
+    let totalValid = (!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid;
 
-    this.setState({
-      isEmailValidated: isEmailValid,
-      hasError: (!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid
-    })
+    setIsEmailValidated(isEmailValid);
+    setHasError(!totalValid);
+
+    if (!hasError) {
+      if (isAnswerValid) {
+        submitForm('answer');
+      } else {
+        submitForm('question');
+      }
+    }
   }
 
-  getInvalidFields(value) {
+  const submitForm = (type) => {
+    if (type === 'answer') {
+      axios.post(`/qa/questions/${props.questionId}/answers`, {
+        body: answer,
+        name: nickname,
+        email: email,
+        photos: []
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log('err: ', err)
+      })
+    } else {
+      axios.post(`qa/questions`, {
+        body: question,
+        name: nickname,
+        email: email,
+        product_id: props.productId
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log('err: ', err)
+      })
+    }
+  }
+
+  useEffect(() => {
+    let fileReader, isCancel = false;
+    if (file) {
+      fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const { result } = e.target;
+        if (result && !isCancel) {
+          setFileDataURL(result);
+          setUploadedImages(uploadedImages.concat(result))
+          setUploadCounts(uploadCounts + 1);
+
+          // axios.post(`/upload/${props.productId}/${props.questionId}/${file.name}`)
+        }
+      }
+      fileReader.readAsDataURL(file);
+    }
+  }, [file]);
+
+  const getInvalidFields = () => {
     let fields;
 
-    if (value === 'answer') {
-      fields = [['answer', this.state.answer.length !== 0], ['nickname', this.state.nickname.length !== 0], ['email', this.state.isEmailValidated]];
+    if (props.questionBody !== undefined) {
+      fields = [['answer', answer.length !== 0], ['nickname', nickname.length !== 0], ['email', isEmailValidated]];
     } else {
-      fields = [['question', this.state.question.length !== 0], ['nickname', this.state.nickname.length !== 0], ['email', this.state.isEmailValidated]];
+      fields = [['question', question.length !== 0], ['nickname', nickname.length !== 0], ['email', isEmailValidated]];
     }
 
     return fields.filter(field => {
@@ -89,47 +122,57 @@ class ModalWindow extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <div className="modal_content">
-        <span className="modal_close" onClick={this.props.closeForm}>&times;</span>
-        {this.props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
-        {this.props.questionBody !== undefined ? <h4>{this.props.productName}: {this.props.questionBody}</h4> : <h4>About the {this.props.productName}</h4>}
-        {this.props.questionBody !== undefined ?
-          <div>
-            <label className="label_answer" htmlFor="answer">Your Answer</label>
-            <input className="text_answer" maxLength="1000" onChange={(e) => this.handleAnswerChange(e.target.value)} name="answer" />
-          </div> :
-          <div>
-            <label className="label_question" htmlFor="question">Your Question</label>
-            <input className="text_question" maxLength="1000" onChange={(e) => this.handleQuestionChange(e.target.value)} name="question" />
-          </div>
-        }
-        <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
-        <input
-          className="nickname"
-          placeholder={this.state.questionBody !== undefined ? "Example: jack543!" : "jackson11!"}
-          name="nickname"
-          maxLength="60"
-          onChange={(e) => this.handleNickNameChange(e.target.value)} />
-        <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
-        <label htmlFor="email" className="label_email">Your Email</label>
-        <input
-          className="email"
-          onChange={(e) => this.handleEmailChange(e.target.value)}
-          name="email"
-          placeholder="Example: jack@email.com"/>
-        <p className="sub_text">For authentication reasons, you will not be emailed</p>
-        {this.props.questionBody !== undefined && <button className="upload_button" onClick={this.handleUploadPhotos}>Upload your photos</button>}
-        <button
-          className="submit_button"
-          onClick={this.validateUserInput}>
-          {this.props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
-        </button>
-        {this.state.hasError ? <div className="sub_text">You must enter the following: {this.getInvalidFields(this.props.whichForm).map(f => <li key={f}>{f}</li>)}</div> : <></>}
-      </div>
-    )
-  }
+  return (
+    <div className="modal_content">
+      <span className="modal_close" onClick={props.closeForm}>&times;</span>
+      {props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
+      {props.questionBody !== undefined ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
+      {props.questionBody !== undefined ?
+        <div>
+          <label className="label_answer" htmlFor="answer">Your Answer</label>
+          <input className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} name="answer" />
+        </div> :
+        <div>
+          <label className="label_question" htmlFor="question">Your Question</label>
+          <input className="text_question" maxLength="1000" onChange={(e) => handleQuestionChange(e.target.value)} name="question" />
+        </div>
+      }
+      <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
+      <input
+        className="nickname"
+        placeholder={props.questionBody !== undefined ? "Example: jack543!" : "jackson11!"}
+        name="nickname"
+        maxLength="60"
+        onChange={(e) => handleNickNameChange(e.target.value)} />
+      <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
+      <label htmlFor="email" className="label_email">Your Email</label>
+      <input
+        className="email"
+        onChange={(e) => handleEmailChange(e.target.value)}
+        name="email"
+        placeholder="Example: jack@email.com"/>
+      <p className="sub_text">For authentication reasons, you will not be emailed</p>
+      {props.questionBody !== undefined && uploadCounts < 5 &&
+        <div className="upload_button">
+          <label>
+          <input type="file" onChange={handleUploadPhotos} multiple/>
+          <span>Upload your photos</span>
+          </label>
+        </div>
+      }
+      {fileDataURL ?
+        <p className="img-preview-wrapper">
+          {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}
+        </p> : null}
+      <button
+        className="submit_button"
+        onClick={validateUserInput}>
+        {props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
+      </button>
+      {hasError ? <div className="sub_text">You must enter the following: {getInvalidFields().map(f => <li key={f}>{f}</li>)}</div> : <></>}
+    </div>
+  )
 }
 
 export default ModalWindow;
+

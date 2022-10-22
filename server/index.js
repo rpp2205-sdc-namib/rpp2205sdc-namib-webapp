@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
-const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler } = require('./controller/helper.js');
+const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, postAnswerHandler, postQuestionHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer, uploadPhotosHandler } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
 
@@ -36,6 +36,12 @@ app.post('/reviews', (req, res) => {
 
 });
 
+app.post('/qa/questions', postQuestionHandler)
+
+app.post('/qa/questions/:question_id/answers', postAnswerHandler)
+
+app.post('/upload/:product_id/:question_id/:image_name', uploadPhotosHandler);
+
 
 
 //put routes
@@ -47,10 +53,15 @@ app.put('/reviews', (req, res) => {
 
 });
 
-app.put('/qa/questions', (req, res) => {
+app.put('/qa/questions/:question_id/helpful', updateHelpfulCountsForQuestion);
 
-});
+app.put('/qa/answers/:answer_id/helpful', updateHelpfulCountsForAnswer);
 
+app.put('qa/questions/:question_id/report', updateReportForQuestion);
+
+app.put('/qa/answers/:answer_id/report', updateReportForAnswer);
+
+//add a wildcard matcher thats send back index.html
 
 app.listen(port, () => {
   console.log(`Listening on  http://localhost:${port}`);

@@ -543,7 +543,7 @@ body {
 
 
 /* Related Items and Comparison styling */
-#card {
+.card {
   padding: 10px;
   margin: 15px;
   border: 1px solid black;
@@ -733,6 +733,7 @@ img.review_photo {
   border: none;
   background-color: #fff;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .progress {
@@ -765,12 +766,55 @@ img.review_photo {
   color:black;
 }
 
-.star_progress_bar {
+.five_star_ratings_bar {
   cursor: pointer;
+  text-decoration: underline;
+}
+
+.four_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.three_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.two_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.one_star_ratings_bar {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.filter_ratings_message {
+  display: inline-block;
 }
 
 
 /********* Questions & Answers widget **********/
+/** Questions & Answers */
+.more_answered_questions, .add_question {
+  border: 1px solid #000;
+  background-color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+/** QA */
+.load_more_answers, .collapse_answers {
+  border: none;
+  font-weight: bold;
+  background-color: #fff;
+  margin-top: 10px;
+  cursor: pointer;
+}
 
 /** Answer */
 .answer {
@@ -880,9 +924,24 @@ img.review_photo {
   border-radius: 10px;
 }
 
+.upload_photos {
+  display: inline-block;
+  width: 20%;
+  height: 20%;
+}
+
+.upload_button {
+  display: inline-block;
+}
+
+.upload_button input[type=file] {
+  display:none;
+}
+
 .upload_button {
   background-color: #e62143;
-  font-size: 14px;
+  font-size: 16px;
+  text-align: center;
   margin-right: 10px;
 }
 
@@ -905,4 +964,3 @@ img.review_photo {
   position: relative;
   right: 30px;
 }
-
