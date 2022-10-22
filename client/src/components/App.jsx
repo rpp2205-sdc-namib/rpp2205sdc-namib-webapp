@@ -51,11 +51,24 @@ class App extends React.Component {
                        related: responseArr[4].data
                       });
       })
-      // .then((responseArr) => {
-      //   //console.log('here 2');
-      //   this.handlePromises(responseArr[4].data);
-      // })
-      .catch(err => console.error(err))
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      })
   }
 
   componentDidMount() {
@@ -89,35 +102,6 @@ class App extends React.Component {
 
   handleOverviewBackground(color) {
     this.setState({background: color});
-  }
-
-  handlePromises(array) {
-    console.log('here in handlePromises');
-    var promises = [];
-    array.forEach((element) => {
-      promises.push(axios.get(`/products/${element.toString()}/styles`));
-      promises.push(axios.get(`/products/${element.toString()}`));
-      promises.push(axios.get(`/reviews/meta/${element.toString()}`))
-    });
-
-    Promise.all(promises)
-      .then(responseArr => {
-        var data = [];
-        console.log(responseArr);
-        for (var i = 0; i <= responseArr.length - 3; i+=3) {
-          var result = responseArr[i].data.results.find(style => style["default?"]);
-          if(result === undefined) {
-            result = responseArr[i].data.results[0];
-          }
-          data.push({
-            defaultStyle: result,
-            product: responseArr[i+1].data,
-            rating: totalReviewsAndAvgRating(responseArr[i+2].data.ratings)[1]
-          });
-        }
-        this.setState({related: [...data]}, () => {console.log(this.state)});
-      })
-      .catch(err => console.log(err));
   }
 
   render() {
