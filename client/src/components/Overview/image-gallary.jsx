@@ -20,7 +20,7 @@ class ImageGallary extends React.Component {
   }
 
   handleForward(e) {
-    var oldId = this.state.currentPhotoIndex;
+    var oldId = this.props.currentPhotoIndex;
     var newId = oldId + 1;
     if (oldId < this.props.photos.length - 1) {
       this.changeCurrentPhoto(oldId + 1);
@@ -34,7 +34,7 @@ class ImageGallary extends React.Component {
   }
 
   handleBackward(e) {
-    var oldId = this.state.currentPhotoIndex;
+    var oldId = this.props.currentPhotoIndex;
     var newId = oldId - 1;
     if (oldId > 0) {
       this.changeCurrentPhoto(newId);
@@ -58,22 +58,22 @@ class ImageGallary extends React.Component {
     this.props.interaction(e.target);
   }
 
-  changeCurrentPhoto(newIndex) {
-    this.setState({ currentPhotoIndex: newIndex });
-  }
+  // changeCurrentPhoto(newIndex) {
+  //   this.setState({ currentPhotoIndex: newIndex });
+  // }
 
 
   render() {
-    console.log(this.state.currentPhotoIndex);
+    console.log(this.props.currentPhotoIndex);
     if (this.props.section === 'modal') {
-      var modal_url = this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png';
+      var modal_url = this.props.photos[this.props.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png';
       return (
         <div data-testid="test-ImageGallary-modal" className="image-gallary-modal">
           <div className="current-photo-modal">
             <MagnifyingArea url={modal_url}/>
-            {this.state.currentPhotoIndex === 0 ? null : <div id="backBtn-modal" onClick={this.handleBackward.bind(this)}>
+            {this.props.currentPhotoIndex === 0 ? null : <div id="backBtn-modal" onClick={this.handleBackward.bind(this)}>
             </div>}
-            {this.state.currentPhotoIndex === this.props.photos.length - 1 ? null : <div id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>
+            {this.props.currentPhotoIndex === this.props.photos.length - 1 ? null : <div id="forwardBtn-modal" onClick={this.handleForward.bind(this)}>
             </div>}
             <div className="defaultBtn" onClick={this.handleClick.bind(this)}>
               <img id="defaultBtn" src="img/exit-full-screen-icon.png" />
@@ -81,7 +81,7 @@ class ImageGallary extends React.Component {
           </div>
           <div className="gallary-list-modal" >{this.props.photos.map((photo, index) => {
             return (<div key={index}>
-              <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='modal'/>
+              <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.props.handleCurrentPhotoChange} highlight={this.props.currentPhotoIndex === index} section='modal'/>
             </div>)
           })}
           </div>
@@ -97,17 +97,17 @@ class ImageGallary extends React.Component {
           {(this.state.top === 0 || this.props.photos.length <= 4) ? null : <div className="arrow-up-container" onMouseOver={this.handleArrowUp.bind(this)}><div className="arrow-up"></div></div>}
           {this.props.photos.map((photo, index) => {
           return (<div key={index}>
-            <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.changeCurrentPhoto.bind(this)} highlight={this.state.currentPhotoIndex === index} section='overview' top={this.state.top} bottom={this.state.bottom}/>
+            <GallaryEntry id={index} photoInfo={photo} changeCurrentPhoto={this.props.handleCurrentPhotoChange} highlight={this.props.currentPhotoIndex === index} section='overview' top={this.state.top} bottom={this.state.bottom}/>
           </div>)
         })}
         {/* down arrow will appear when the top image is not last image, and the number of photos is larger than 4 */}
         {arrowForwardNotNeeded ? null : <div className="arrow-down-container" onMouseOver={this.handleArrowDown.bind(this)}><div className="arrow-down"></div></div>}
         </div>
         <div className="current-photo" style={{"cursor": "zoom-in"}} onClick={this.handleClick.bind(this)}>
-          <img id="current-photo" src={this.props.photos[this.state.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
-            {this.state.currentPhotoIndex === 0 ? null : <div id="backBtn" onClick={this.handleBackward.bind(this)}>
+          <img id="current-photo" src={this.props.photos[this.props.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
+            {this.props.currentPhotoIndex === 0 ? null : <div id="backBtn" onClick={this.handleBackward.bind(this)}>
             </div>}
-            {this.state.currentPhotoIndex ===  this.props.photos.length - 1 ? null : <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
+            {this.props.currentPhotoIndex ===  this.props.photos.length - 1 ? null : <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
             </div>}
             <div className="expandBtn" onClick={this.handleClick.bind(this)}>
               <img id="expandBtn" src="img/fullscreen-icon.jpg" />
