@@ -58,7 +58,7 @@ class Question extends React.Component {
             onClick={this.handleIncreaseCounts}>Yes
           </button>
           <div className="helpfulness_number">({this.state.helpfulness})</div>
-          <div className="division">|</div>
+          <div className="border_line"></div>
           <button
             className="add_answer_button"
             onClick={this.handleAddAnswer}>Add Answer

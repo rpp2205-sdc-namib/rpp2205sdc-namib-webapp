@@ -123,53 +123,55 @@ const ModalWindow = (props) => {
   }
 
   return (
-    <div className="modal_content">
-      <span className="modal_close" onClick={props.closeForm}>&times;</span>
-      {props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
-      {props.questionBody !== undefined ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
-      {props.questionBody !== undefined ?
-        <div>
-          <label className="label_answer" htmlFor="answer">Your Answer</label>
-          <input className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} name="answer" />
-        </div> :
-        <div>
-          <label className="label_question" htmlFor="question">Your Question</label>
-          <input className="text_question" maxLength="1000" onChange={(e) => handleQuestionChange(e.target.value)} name="question" />
-        </div>
-      }
-      <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
-      <input
-        className="nickname"
-        placeholder={props.questionBody !== undefined ? "Example: jack543!" : "jackson11!"}
-        name="nickname"
-        maxLength="60"
-        onChange={(e) => handleNickNameChange(e.target.value)} />
-      <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
-      <label htmlFor="email" className="label_email">Your Email</label>
-      <input
-        className="email"
-        onChange={(e) => handleEmailChange(e.target.value)}
-        name="email"
-        placeholder="Example: jack@email.com"/>
-      <p className="sub_text">For authentication reasons, you will not be emailed</p>
-      {props.questionBody !== undefined && uploadCounts < 5 &&
-        <div className="upload_button">
-          <label>
-          <input type="file" onChange={handleUploadPhotos} multiple/>
-          <span>Upload your photos</span>
-          </label>
-        </div>
-      }
-      {fileDataURL ?
-        <p className="img-preview-wrapper">
-          {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}
-        </p> : null}
-      <button
-        className="submit_button"
-        onClick={validateUserInput}>
-        {props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
-      </button>
-      {hasError ? <div className="sub_text">You must enter the following: {getInvalidFields().map(f => <li key={f}>{f}</li>)}</div> : <></>}
+    <div className="modal_container">
+      <div className="modal_content">
+        <span className="modal_close" onClick={props.closeForm}>&times;</span>
+        {props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
+        {props.questionBody !== undefined ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
+        {props.questionBody !== undefined ?
+          <div>
+            <label className="label_answer" htmlFor="answer">Your Answer</label>
+            <input className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} name="answer" />
+          </div> :
+          <div>
+            <label className="label_question" htmlFor="question">Your Question</label>
+            <input className="text_question" maxLength="1000" onChange={(e) => handleQuestionChange(e.target.value)} name="question" />
+          </div>
+        }
+        <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
+        <input
+          className="nickname"
+          placeholder={props.questionBody !== undefined ? "Example: jack543!" : "jackson11!"}
+          name="nickname"
+          maxLength="60"
+          onChange={(e) => handleNickNameChange(e.target.value)} />
+        <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
+        <label htmlFor="email" className="label_email">Your Email</label>
+        <input
+          className="email"
+          onChange={(e) => handleEmailChange(e.target.value)}
+          name="email"
+          placeholder="Example: jack@email.com"/>
+        <p className="sub_text">For authentication reasons, you will not be emailed</p>
+        {props.questionBody !== undefined && uploadCounts < 5 &&
+          <div className="upload_button">
+            <label>
+            <input type="file" onChange={handleUploadPhotos} multiple/>
+            <span>Upload your photos</span>
+            </label>
+          </div>
+        }
+        {fileDataURL ?
+          <p className="img-preview-wrapper">
+            {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}
+          </p> : null}
+        <button
+          className="submit_button"
+          onClick={validateUserInput}>
+          {props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
+        </button>
+        {hasError ? <div className="sub_text">You must enter the following: {getInvalidFields().map(f => <li key={f}>{f}</li>)}</div> : <></>}
+      </div>
     </div>
   )
 }

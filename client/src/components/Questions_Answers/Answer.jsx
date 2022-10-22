@@ -65,13 +65,13 @@ class Answer extends React.Component {
     let { body, answerer_name, date } = this.props.answer;
 
     return (
-      <div>
-        <p className="answer">A: {body}</p>
+      <div className="answer_container">
+        <div className="answer_symbol">A: <span className="answer_text">{body}</span></div>
         <div className="answer_sub">
           <div className="by">by</div>
           <span className={answerer_name === "Seller" ? 'seller' : 'answerer'}>{answerer_name === "Seller" ? "Seller" : answerer_name}</span>
           <div className="answer_date">{this.handleDateFormat(date)}</div>
-          <div>|</div>
+          <div className="border_line"></div>
           <div className="helpful_text">Helpful?</div>
           <button className="yes_button"
             disabled={this.state.isYesClicked}

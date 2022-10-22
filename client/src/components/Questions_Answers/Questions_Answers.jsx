@@ -80,11 +80,11 @@ class Questions_Answers extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>QUESTIONS & ANSWERS</h2>
+      <div className="questions_answers">
+        <h2 className="questions_answers_title">QUESTIONS & ANSWERS</h2>
         <Search handleChangeSearch={this.handleChangeSearch} />
         {this.state.searchWord.length < 2 ?
-        <div className="notFiltered">
+        <>
           {this.state.QAs.map((qa, index) => {
             if (index > 1) return;
             return (
@@ -98,14 +98,14 @@ class Questions_Answers extends React.Component {
             )
           })}
           {this.state.QAs.length > 2 && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
-        </div> :
-        <div className="filtered">
+        </> :
+        <>
           {this.state.filteredQAs.map(qa => {
             return (
               <QA key={qa.question_id} productId={this.props.productId} qa={qa} productName={this.props.productName} />
             )
           })}
-        </div>
+        </>
         }
         <button className="add_question" onClick={this.handleAddQuestion}>Add A Question +</button>
         {this.state.isFormShown &&
