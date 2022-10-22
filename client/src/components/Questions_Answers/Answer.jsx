@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 // this class handles each answer for the specific product
 class Answer extends React.Component {
@@ -19,6 +20,16 @@ class Answer extends React.Component {
     // change the text to "Reported"
     this.setState({
       isReported: true
+    }, () => {
+      axios.put(`/qa/answers/${this.props.answer.answer_id}/report`)
+      .then(data => {
+        if (data.status !== 204) {
+          throw err;
+        }
+      })
+      .catch(err => {
+        console.log('failed to increment the count');
+      });
     });
   }
 
@@ -27,6 +38,16 @@ class Answer extends React.Component {
     this.setState({
       isYesClicked: true,
       helpfulness: this.state.helpfulness + 1
+    }, () => {
+      axios.put(`/qa/answers/${this.props.answer.answer_id}/helpful`)
+      .then(data => {
+        if (data.status !== 204) {
+          throw err;
+        }
+      })
+      .catch(err => {
+        console.log('failed to increment the count');
+      });
     });
   }
 
@@ -60,8 +81,7 @@ class Answer extends React.Component {
           {this.state.isReported ?
             <button disabled={this.state.isReported}
               className="report_button"
-              role="report_button"
-              onClick={this.handleReport}>Reported
+              role="report_button">Reported
             </button> :
             <button className="report_button"
               role="report_button"

@@ -1,41 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RPC from './related-product-cards.jsx';
 import Modal from './modal.jsx';
 import axios from 'axios';
-import { totalReviewsAndAvgRating } from '../helperFunctions.jsx';
+import { totalReviewsAndAvgRating, handlePromises } from '../helperFunctions.jsx';
 
-class RPList extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      showModal: false,
-      rp: [],
-      star: true
-    }
-  }
+ function RPList(props) {
 
-  handleClick(e) {
-    e.preventDefault();
-    this.setState({showModal: true});
-  }
+  const [rp, setRP] = useState([]);
+  const [showModal, setShowModal] = useState(false)
 
-  handleClose(e) {
-    e.preventDefault();
-    this.setState({showModal: false});
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     var promises = [];
-    this.props.relatedProds.forEach((element) => {
+    props.relatedProds.forEach((element) => {
       promises.push(axios.get(`/products/${element.toString()}/styles`));
       promises.push(axios.get(`/products/${element.toString()}`));
-      promises.push(axios.get(`/reviews/meta/${element.toString()}`))
+      promises.push(axios.get(`/reviews/meta/${element.toString()}`));
     });
 
     Promise.all(promises)
       .then(responseArr => {
         var data = [];
-        console.log(responseArr);
         for (var i = 0; i <= responseArr.length - 3; i+=3) {
           var result = responseArr[i].data.results.find(style => style["default?"]);
           if(result === undefined) {
@@ -47,29 +31,29 @@ class RPList extends React.Component {
             rating: totalReviewsAndAvgRating(responseArr[i+2].data.ratings)[1]
           });
         }
-        this.setState({rp: [...data]}, () => {console.log(this.state)});
+        setRP([...data]);
       })
       .catch(err => console.log(err));
-  }
 
-  render () {
-    return (
-      <div id="rpList">
-        <button>Prev</button>
-        {this.state.rp.map((element, index) => {
-          return(
-            <RPC action={this.state.star} info={element} show={this.handleClick.bind(this)} key={index} redirect={this.props.changeProduct}/>
-          )
-         })
-        }
-        <button>Next</button>
-        <div id="modal">
-          {this.state.showModal ? (<Modal open={this.state.showModal} closeModal={this.handleClose.bind(this)} />) : ('')}
-        </div>
+  }, [props.productId]);
+
+
+  return (
+    <div id="rpList">
+      <div data-testid="outfit">Related Products</div>
+      <button>Prev</button>
+      {rp.map((element, index) => {
+        return(
+          <RPC action={true} info={element} show={() => {setShowModal(true)}} key={index} redirect={props.changeProduct}/>
+        )
+        })
+      }
+      <button>Next</button>
+      <div id="modal">
+        {showModal ? (<Modal open={showModal} closeModal={() => setShowModal(false)} />) : ('')}
       </div>
-    )
-  }
-
+    </div>
+  )
 }
 
 export default RPList;

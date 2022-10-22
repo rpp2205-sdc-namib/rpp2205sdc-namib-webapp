@@ -1,18 +1,24 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
+import { faX } from '@fortawesome/free-solid-svg-icons';
+import withClickData from '../hoc_click_data.jsx';
+
+
 
 function Action (props) {
 
   return(
     props.actionButton ? (
       <div id="action">
-          <button onClick={props.showModal}>Star</button>
+        <FontAwesomeIcon id="star" icon={faStar} onClick={ (e) => {props.showModal(); props.interaction(e.currentTarget)}}/>
       </div>
     ) : (
       <div id="action">
-        <button name={props.id} onClick={props.removeProd}>Remove</button>
+        <FontAwesomeIcon id="remove" icon={faXmarkCircle} id={props.id} onClick={(e) => {props.removeProd(e); props.interaction(e.currentTarget)}}/>
       </div>
     )
   )
 }
 
-export default Action;
+export default withClickData(Action, 'Related Items & Comparison');

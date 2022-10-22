@@ -45,15 +45,11 @@ class Rating_Breakdown extends React.Component {
         count++;
       }
     })
-
-    console.log(count/total);
     return `${parseFloat(count/total).toFixed(2)*100}%`
   }
 
   percentageOfTotalReviews(totalRatings, totalSpecificRatings) {
     const percentageOfTotalSpecificRatings = `${parseFloat(totalSpecificRatings/totalRatings).toFixed(2)*100}%`
-    console.log('Ratings_Breakdown.jsx - percentageOfTotalReviews() - totalRatings', totalRatings);
-    console.log('Ratings_Breakdown.jsx - percentageOfTotalReviews() - data3', percentageOfTotalSpecificRatings);
     return percentageOfTotalSpecificRatings;
   }
 
@@ -86,10 +82,6 @@ class Rating_Breakdown extends React.Component {
   }
 
   render() {
-    console.log(this.props.ratings);
-    console.log(this.state.fiveStarReviews);
-    console.log(this.props.productId);
-    console.log('reviews test', this.props.reviews);
     return (
       <div className="ratings_breakdown">
         <strong>Ratings and Reviews</strong>
