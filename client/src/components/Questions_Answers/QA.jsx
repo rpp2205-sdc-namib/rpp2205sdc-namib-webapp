@@ -27,8 +27,10 @@ class QA extends React.Component {
 
   getAnswers() {
     let questionId = this.props.qa.question_id;
-    return axios.get(`/qa/questions/${questionId}/answers`)
+    let numberOfAnswers = Object.keys(this.props.qa.answers).length;
+    return axios.get(`/qa/questions/${questionId}/answers/${numberOfAnswers}`)
     .then(data => {
+      console.log('data: ', data.data.results)
       return data.data.results
     });
   }
@@ -58,6 +60,7 @@ class QA extends React.Component {
   }
 
   render() {
+    console.log('props in QA: ', this.props)
     return (
       <div className="QA_container">
         <Question question={this.props.qa} productId={this.props.productId} productName={this.props.productName} />

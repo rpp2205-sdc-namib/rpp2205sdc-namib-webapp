@@ -106,12 +106,9 @@ module.exports = {
 
   getAnswersHandler: (req, res) => {
     var question_id = req.params.question_id;
+    var count = req.params.count;
 
-    axios.get(`${API_Link}/qa/questions/${question_id}/answers`, {
-      headers: {
-        'Authorization': process.env.access_token
-      }
-    })
+    axios.get(`${API_Link}/qa/questions/${question_id}/answers?count=${count}`, auth)
     .then(response => {
       res.status(200).send(response.data);
     })

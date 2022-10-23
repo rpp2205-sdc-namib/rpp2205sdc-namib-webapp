@@ -79,6 +79,7 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
+    console.log('QAs: ', this.state.QAs)
     return (
       <div className="questions_answers">
         <h2 className="questions_answers_title">QUESTIONS & ANSWERS</h2>

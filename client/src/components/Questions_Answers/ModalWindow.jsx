@@ -59,6 +59,7 @@ const ModalWindow = (props) => {
   }
 
   const submitForm = (type) => {
+    console.log('type: ', type)
     if (type === 'answer') {
       axios.post(`/qa/questions/${props.questionId}/answers`, {
         body: answer,
