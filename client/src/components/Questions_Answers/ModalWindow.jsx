@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import withClickData from '../hoc_click_data.jsx';
 
 const ModalWindow = (props) => {
   const [answer, setAnswer] = useState('');
@@ -8,7 +9,7 @@ const ModalWindow = (props) => {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValidated, setIsEmailValidated] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(true);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [file, setFile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState(null);
@@ -16,6 +17,7 @@ const ModalWindow = (props) => {
 
   const handleUploadPhotos = (e) => {
     const currentFile = e.target.files[0];
+    console.log('currentFile: ', currentFile)
     setFile(currentFile);
   }
 
@@ -39,27 +41,31 @@ const ModalWindow = (props) => {
     );
   }
 
-  const validateUserInput = () => {
+  const validateUserInput = (e) => {
     let isAnswerValid = answer.length !== 0;
     let isQuestionValid = question.length !== 0;
     let isNicknameValid = nickname.length !== 0;
     let isEmailValid = email.length !== 0 && validateEmail(email) !== null;
-    let totalValid = (!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid;
+    let totalValid = (isAnswerValid || isQuestionValid) && isNicknameValid && isEmailValid;
 
     setIsEmailValidated(isEmailValid);
-    setHasError(!totalValid);
-
-    if (!hasError) {
-      if (isAnswerValid) {
-        submitForm('answer');
-      } else {
-        submitForm('question');
-      }
-    }
+    totalValid ? setHasError(false) : setHasError(true);
   }
 
-  const submitForm = (type) => {
-    console.log('type: ', type)
+  useEffect(() => {
+    if (!hasError) {
+      if (answer.length !== 0) {
+        submitForm('answer', e.target);
+      } else {
+        submitForm('question', e.target);
+      }
+    } else {
+      console.log('error in the form')
+    }
+  }, [hasError]);
+
+  const submitForm = (type, target) => {
+    this.props.interaction(target);
     if (type === 'answer') {
       axios.post(`/qa/questions/${props.questionId}/answers`, {
         body: answer,
@@ -99,8 +105,6 @@ const ModalWindow = (props) => {
           setFileDataURL(result);
           setUploadedImages(uploadedImages.concat(result))
           setUploadCounts(uploadCounts + 1);
-
-          // axios.post(`/upload/${props.productId}/${props.questionId}/${file.name}`)
         }
       }
       fileReader.readAsDataURL(file);
@@ -176,5 +180,5 @@ const ModalWindow = (props) => {
   )
 }
 
-export default ModalWindow;
+export default withClickData(ModalWindow, 'questions_answers');
 

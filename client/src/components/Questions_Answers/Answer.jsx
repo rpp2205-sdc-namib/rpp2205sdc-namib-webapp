@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import withClickData from '../hoc_click_data.jsx';
 
 // this class handles each answer for the specific product
 class Answer extends React.Component {
@@ -16,8 +17,8 @@ class Answer extends React.Component {
     this.handleDateFormat = this.handleDateFormat.bind(this);
   }
 
-  handleReport() {
-    // change the text to "Reported"
+  handleReport(e) {
+    this.props.interaction(e.target);
     this.setState({
       isReported: true
     }, () => {
@@ -33,8 +34,8 @@ class Answer extends React.Component {
     });
   }
 
-  handleIncreaseCounts() {
-    // increase the count of helpfulness
+  handleIncreaseCounts(e) {
+    this.props.interaction(e.target)
     this.setState({
       isYesClicked: true,
       helpfulness: this.state.helpfulness + 1
@@ -93,4 +94,4 @@ class Answer extends React.Component {
   }
 }
 
-export default Answer;
+export default withClickData(Answer, 'questions_answers');

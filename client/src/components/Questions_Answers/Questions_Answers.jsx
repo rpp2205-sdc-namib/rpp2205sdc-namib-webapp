@@ -3,6 +3,7 @@ import Search from './Search.jsx';
 import ModalWindow from './ModalWindow.jsx';
 import axios from 'axios';
 import QA from './QA.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 // this class is top-level component for Questions_Answers
 
@@ -46,13 +47,15 @@ class Questions_Answers extends React.Component {
     });
   }
 
-  handleAddQuestion() {
+  handleAddQuestion(e) {
+    this.props.interaction(e.target)
     this.setState({
       isFormShown: true
     });
   }
 
-  handleViewMoreQuestions() {
+  handleViewMoreQuestions(e) {
+    this.props.interaction(e.target)
     this.setState({
       viewMoreQuestions: true
     });
@@ -79,7 +82,6 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
-    console.log('QAs: ', this.state.QAs)
     return (
       <div className="questions_answers">
         <h2 className="questions_answers_title">QUESTIONS & ANSWERS</h2>
@@ -122,4 +124,4 @@ class Questions_Answers extends React.Component {
   }
 }
 
-export default Questions_Answers;
+export default withClickData(Questions_Answers, 'questions_answers');

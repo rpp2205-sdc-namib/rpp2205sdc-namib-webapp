@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
 import Answer from './Answer.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 class QA extends React.Component {
   constructor(props) {
@@ -30,7 +31,6 @@ class QA extends React.Component {
     let numberOfAnswers = Object.keys(this.props.qa.answers).length;
     return axios.get(`/qa/questions/${questionId}/answers/${numberOfAnswers}`)
     .then(data => {
-      console.log('data: ', data.data.results)
       return data.data.results
     });
   }
@@ -47,20 +47,21 @@ class QA extends React.Component {
     return sellerSorted.concat(notSellerSorted);
   }
 
-  handleViewMoreAnswers() {
+  handleViewMoreAnswers(e) {
+    this.props.interaction(e.target);
     this.setState({
       seeMoreAnswers: true
     });
   }
 
-  collapseAnswers() {
+  collapseAnswers(e) {
+    this.props.interaction(e.target);
     this.setState({
       seeMoreAnswers: false
     })
   }
 
   render() {
-    console.log('props in QA: ', this.props)
     return (
       <div className="QA_container">
         <Question question={this.props.qa} productId={this.props.productId} productName={this.props.productName} />
@@ -86,4 +87,4 @@ class QA extends React.Component {
   }
 }
 
-export default QA;
+export default withClickData(QA, 'questions_answers');
