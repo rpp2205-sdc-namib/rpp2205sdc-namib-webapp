@@ -55,8 +55,8 @@ class Stars extends React.Component {
 
   render() {
     return (<div className="five-stars">{this.state.stars.map((star, i) => {
-      return (<div className="single-star-container" key={i}>
-        <span className="single-star-outline"></span>
+      return (<div className="single-star-container" id={i} key={i}>
+        <span className="single-star-outline" onClick={(e) => {this.props.click(e)}}></span>
         <span className="single-star-fill" style={{width: star * 100 + '%'}}></span>
       </div>)
     })}

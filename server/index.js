@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
-const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, postAnswerHandler, postQuestionHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer, uploadPhotosHandler } = require('./controller/helper.js');
+const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, postAnswerHandler, postQuestionHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer, uploadPhotosHandler, postReviewHandler, updateHelpfulCountsForReview, updateReportForReview } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
 
@@ -16,7 +16,7 @@ app.get('/products/:product_id/styles', getStylesHandler);
 
 app.get('/reviews/meta/:product_id', getReviewsHandler);
 
-app.get('/reviews/:product_id/:count', getReviewsHandler);
+app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
 
 app.get('/qa/questions/:product_id', getQuestionsHandler);
 
@@ -32,9 +32,7 @@ app.post('/products', (req, res) => {
 
 });
 
-app.post('/reviews', (req, res) => {
-
-});
+app.post('/reviews', postReviewHandler);
 
 app.post('/qa/questions', postQuestionHandler)
 
@@ -49,9 +47,9 @@ app.put('/products', (req, res) => {
 
 });
 
-app.put('/reviews', (req, res) => {
+app.put('/reviews/:review_id/report', updateReportForReview);
 
-});
+app.put('/reviews/:review_id/helpful', updateHelpfulCountsForReview);
 
 app.put('/qa/questions/:question_id/helpful', updateHelpfulCountsForQuestion);
 

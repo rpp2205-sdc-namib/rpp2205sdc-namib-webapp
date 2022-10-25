@@ -32,8 +32,9 @@ class App extends React.Component {
 
   init(productId) {
     var count = 500;
+    var sort = 'relevant';
     var promises = [axios.get(`/reviews/meta/${productId}`),
-                    axios.get(`/reviews/${productId}/${count}`),
+                    axios.get(`/reviews/${productId}/${count}/${sort}`),
                     axios.get(`/products/${productId}/styles`),
                     axios.get(`/products/${productId}`),
                     axios.get(`/products/${productId}/related`)];
@@ -137,7 +138,7 @@ class App extends React.Component {
           <Carousel add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
           {/* <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/> */}
           <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
-          <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings} reviewsMeta={this.state.reviewsMeta}/>
+          <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings} reviewsMeta={this.state.reviewsMeta} currentProduct={this.state.currentProduct}/>
       </div>
     )
   }
