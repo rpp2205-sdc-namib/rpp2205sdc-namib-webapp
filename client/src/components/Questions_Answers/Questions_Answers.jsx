@@ -3,6 +3,7 @@ import Search from './Search.jsx';
 import ModalWindow from './ModalWindow.jsx';
 import axios from 'axios';
 import QA from './QA.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 // this class is top-level component for Questions_Answers
 
@@ -46,13 +47,15 @@ class Questions_Answers extends React.Component {
     });
   }
 
-  handleAddQuestion() {
+  handleAddQuestion(e) {
+    this.props.interaction(e.target)
     this.setState({
       isFormShown: true
     });
   }
 
-  handleViewMoreQuestions() {
+  handleViewMoreQuestions(e) {
+    this.props.interaction(e.target)
     this.setState({
       viewMoreQuestions: true
     });
@@ -80,35 +83,39 @@ class Questions_Answers extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="questions_answers">
+        <h2 className="questions_answers_title">QUESTIONS & ANSWERS</h2>
         <Search handleChangeSearch={this.handleChangeSearch} />
         {this.state.searchWord.length < 2 ?
-        <div className="notFiltered">
+        <>
           {this.state.QAs.map((qa, index) => {
             if (index > 1) return;
             return (
-              <QA key={index} qa={qa} productName={this.props.productName} />
+              <QA key={index} productId={this.props.productId} qa={qa} productName={this.props.productName} />
             );
           })}
           {this.state.viewMoreQuestions && this.state.QAs.map((qa, index) => {
             if (index < 2) return;
             return (
-              <QA key={index} qa={qa} productName={this.props.productName} />
+              <QA key={index} qa={qa} productId={this.props.productId} productName={this.props.productName} />
             )
           })}
-          {this.state.QAs.length > 2 && <button onClick={this.handleViewMoreQuestions}>More answered questions</button>}
-        </div> :
-        <div className="filtered">
+        </> :
+        <>
           {this.state.filteredQAs.map(qa => {
             return (
-              <QA key={qa.question_id} qa={qa} productName={this.props.productName} />
-            )
-          })}
-        </div>
+              <QA key={qa.question_id} productId={this.props.productId} qa={qa} productName={this.props.productName} />
+              )
+            })}
+        </>
         }
-        <button onClick={this.handleAddQuestion}>Add Question</button>
+        <div className="questions_btn">
+          {this.state.QAs.length > 2 && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
+          <button className="add_question" onClick={this.handleAddQuestion}>Add A Question +</button>
+        </div>
         {this.state.isFormShown &&
           <ModalWindow
+            productId={this.props.productId}
             productName={this.props.productName}
             closeForm={this.closeForm}/>
         }
@@ -117,4 +124,4 @@ class Questions_Answers extends React.Component {
   }
 }
 
-export default Questions_Answers;
+export default withClickData(Questions_Answers, 'questions_answers');

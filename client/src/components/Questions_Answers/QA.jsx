@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
 import Answer from './Answer.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 class QA extends React.Component {
   constructor(props) {
@@ -27,7 +28,8 @@ class QA extends React.Component {
 
   getAnswers() {
     let questionId = this.props.qa.question_id;
-    return axios.get(`/qa/questions/${questionId}/answers`)
+    let numberOfAnswers = Object.keys(this.props.qa.answers).length;
+    return axios.get(`/qa/questions/${questionId}/answers/${numberOfAnswers}`)
     .then(data => {
       return data.data.results
     });
@@ -45,13 +47,15 @@ class QA extends React.Component {
     return sellerSorted.concat(notSellerSorted);
   }
 
-  handleViewMoreAnswers() {
+  handleViewMoreAnswers(e) {
+    this.props.interaction(e.target);
     this.setState({
       seeMoreAnswers: true
     });
   }
 
-  collapseAnswers() {
+  collapseAnswers(e) {
+    this.props.interaction(e.target);
     this.setState({
       seeMoreAnswers: false
     })
@@ -60,8 +64,8 @@ class QA extends React.Component {
   render() {
     return (
       <div className="QA_container">
+        <Question question={this.props.qa} productId={this.props.productId} productName={this.props.productName} />
         <div className={this.state.seeMoreAnswers ? "answers_expand_mode" : undefined} >
-        <Question question={this.props.qa} productName={this.props.productName} />
           {this.state.answers.map((answer, index) => {
             if (index > 1) return;
             return (
@@ -76,11 +80,11 @@ class QA extends React.Component {
               )
           })}
         </div>
-        {this.state.answers.length > 2 && !this.state.seeMoreAnswers && <button onClick={this.handleViewMoreAnswers}>See more answers</button>}
-        {this.state.seeMoreAnswers && <button onClick={this.collapseAnswers}>Collapse answers</button>}
+        {this.state.answers.length > 2 && !this.state.seeMoreAnswers && <button className="load_more_answers" onClick={this.handleViewMoreAnswers}>LOAD MORE ANSWERS</button>}
+        {this.state.seeMoreAnswers && <button className="collapse_answers" onClick={this.collapseAnswers}>COLLAPSE ANSWERS</button>}
       </div>
     )
   }
 }
 
-export default QA;
+export default withClickData(QA, 'questions_answers');
