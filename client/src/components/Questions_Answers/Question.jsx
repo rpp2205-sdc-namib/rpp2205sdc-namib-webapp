@@ -1,6 +1,7 @@
 import React from 'react';
 import ModalWindow from './ModalWindow.jsx';
 import axios from 'axios';
+import withClickData from '../hoc_click_data.jsx';
 
 // this class handles each question for the specific product
 class Question extends React.Component {
@@ -18,7 +19,8 @@ class Question extends React.Component {
     this.closeForm = this.closeForm.bind(this);
   }
 
-  handleAddAnswer() {
+  handleAddAnswer(e) {
+    this.props.interaction(e.target);
     this.setState({
       isFormShown: true
     });
@@ -30,7 +32,8 @@ class Question extends React.Component {
     });
   }
 
-  handleIncreaseCounts() {
+  handleIncreaseCounts(e) {
+    this.props.interaction(e.target);
     this.setState({
       isYesClicked: true,
       helpfulness: this.state.helpfulness + 1
@@ -51,14 +54,14 @@ class Question extends React.Component {
     return (
       <div className="question_container">
         <p className="question">Q: {this.props.question.question_body}</p>
-        <div>
+        <div className="helpful_container">
           <div className="helpful_text">Helpful?</div>
           <button className="yes_button"
             disabled={this.state.isYesClicked}
             onClick={this.handleIncreaseCounts}>Yes
           </button>
           <div className="helpfulness_number">({this.state.helpfulness})</div>
-          <div className="division">|</div>
+          <div className="border_line"></div>
           <button
             className="add_answer_button"
             onClick={this.handleAddAnswer}>Add Answer
@@ -77,4 +80,4 @@ class Question extends React.Component {
   }
 }
 
-export default Question;
+export default withClickData(Question, 'questions_answers');
