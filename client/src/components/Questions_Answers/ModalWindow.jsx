@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import withClickData from '../hoc_click_data.jsx';
 
 const ModalWindow = (props) => {
   const [answer, setAnswer] = useState('');
@@ -8,7 +9,7 @@ const ModalWindow = (props) => {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValidated, setIsEmailValidated] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(true);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [file, setFile] = useState(null);
   const [fileDataURL, setFileDataURL] = useState(null);
@@ -16,6 +17,7 @@ const ModalWindow = (props) => {
 
   const handleUploadPhotos = (e) => {
     const currentFile = e.target.files[0];
+    console.log('currentFile: ', currentFile)
     setFile(currentFile);
   }
 
@@ -39,26 +41,31 @@ const ModalWindow = (props) => {
     );
   }
 
-  const validateUserInput = () => {
+  const validateUserInput = (e) => {
     let isAnswerValid = answer.length !== 0;
     let isQuestionValid = question.length !== 0;
     let isNicknameValid = nickname.length !== 0;
     let isEmailValid = email.length !== 0 && validateEmail(email) !== null;
-    let totalValid = (!isAnswerValid || !isQuestionValid) || !isNicknameValid || !isEmailValid;
+    let totalValid = (isAnswerValid || isQuestionValid) && isNicknameValid && isEmailValid;
 
     setIsEmailValidated(isEmailValid);
-    setHasError(!totalValid);
-
-    if (!hasError) {
-      if (isAnswerValid) {
-        submitForm('answer');
-      } else {
-        submitForm('question');
-      }
-    }
+    totalValid ? setHasError(false) : setHasError(true);
   }
 
-  const submitForm = (type) => {
+  useEffect(() => {
+    if (!hasError) {
+      if (answer.length !== 0) {
+        submitForm('answer', e.target);
+      } else {
+        submitForm('question', e.target);
+      }
+    } else {
+      console.log('error in the form')
+    }
+  }, [hasError]);
+
+  const submitForm = (type, target) => {
+    this.props.interaction(target);
     if (type === 'answer') {
       axios.post(`/qa/questions/${props.questionId}/answers`, {
         body: answer,
@@ -98,8 +105,6 @@ const ModalWindow = (props) => {
           setFileDataURL(result);
           setUploadedImages(uploadedImages.concat(result))
           setUploadCounts(uploadCounts + 1);
-
-          // axios.post(`/upload/${props.productId}/${props.questionId}/${file.name}`)
         }
       }
       fileReader.readAsDataURL(file);
@@ -123,56 +128,57 @@ const ModalWindow = (props) => {
   }
 
   return (
-    <div className="modal_content">
-      <span className="modal_close" onClick={props.closeForm}>&times;</span>
-      {props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
-      {props.questionBody !== undefined ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
-      {props.questionBody !== undefined ?
-        <div>
-          <label className="label_answer" htmlFor="answer">Your Answer</label>
-          <input className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} name="answer" />
-        </div> :
-        <div>
-          <label className="label_question" htmlFor="question">Your Question</label>
-          <input className="text_question" maxLength="1000" onChange={(e) => handleQuestionChange(e.target.value)} name="question" />
-        </div>
-      }
-      <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
-      <input
-        className="nickname"
-        placeholder={props.questionBody !== undefined ? "Example: jack543!" : "jackson11!"}
-        name="nickname"
-        maxLength="60"
-        onChange={(e) => handleNickNameChange(e.target.value)} />
-      <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
-      <label htmlFor="email" className="label_email">Your Email</label>
-      <input
-        className="email"
-        onChange={(e) => handleEmailChange(e.target.value)}
-        name="email"
-        placeholder="Example: jack@email.com"/>
-      <p className="sub_text">For authentication reasons, you will not be emailed</p>
-      {props.questionBody !== undefined && uploadCounts < 5 &&
-        <div className="upload_button">
-          <label>
-          <input type="file" onChange={handleUploadPhotos} multiple/>
-          <span>Upload your photos</span>
-          </label>
-        </div>
-      }
-      {fileDataURL ?
-        <p className="img-preview-wrapper">
-          {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}
-        </p> : null}
-      <button
-        className="submit_button"
-        onClick={validateUserInput}>
-        {props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
-      </button>
-      {hasError ? <div className="sub_text">You must enter the following: {getInvalidFields().map(f => <li key={f}>{f}</li>)}</div> : <></>}
+    <div className="modal_container">
+      <div className="modal_content">
+        <span className="modal_close" onClick={props.closeForm}>&times;</span>
+        {props.questionBody !== undefined ? <h2>Submit your Answer</h2> : <h2>Ask Your Question</h2>}
+        {props.questionBody !== undefined ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
+        {props.questionBody !== undefined ?
+          <div className="answer_body">
+            <label className="label_answer" htmlFor="answer">Your Answer</label>
+            <input className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} name="answer" />
+          </div> :
+          <div>
+            <label className="label_question" htmlFor="question">Your Question</label>
+            <input className="text_question" maxLength="1000" onChange={(e) => handleQuestionChange(e.target.value)} name="question" />
+          </div>
+        }
+        <label className="label_nickname" htmlFor="nickname">What is your nickname?</label>
+        <input
+          className="nickname"
+          placeholder={props.questionBody !== undefined ? "Example: jack543!" : "jackson11!"}
+          name="nickname"
+          maxLength="60"
+          onChange={(e) => handleNickNameChange(e.target.value)} />
+        <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
+        <label htmlFor="email" className="label_email">Your Email</label>
+        <input
+          className="email"
+          onChange={(e) => handleEmailChange(e.target.value)}
+          name="email"
+          placeholder="Example: jack@email.com"/>
+        <p className="sub_text">For authentication reasons, you will not be emailed</p>
+        {fileDataURL ?
+          <p className="img-preview-wrapper">
+            {uploadedImages.map(img => <img className="upload_photos" key={img} src={img} alt="preview" />)}
+          </p> : null}
+        {props.questionBody !== undefined && uploadCounts < 5 &&
+          <div className="upload_button">
+            <label className="upload_text">
+            <input type="file" onChange={handleUploadPhotos} multiple/>Upload your photos
+            </label>
+          </div>
+        }
+        <button
+          className="submit_button"
+          onClick={validateUserInput}>
+          {props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
+        </button>
+        {hasError ? <div className="sub_text">You must enter the following: {getInvalidFields().map(f => <li key={f}>{f}</li>)}</div> : <></>}
+      </div>
     </div>
   )
 }
 
-export default ModalWindow;
+export default withClickData(ModalWindow, 'questions_answers');
 

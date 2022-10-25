@@ -12,7 +12,7 @@ class Search extends React.Component {
       <div className="search_container">
         <input
           className="search_input"
-          placeholder="Have a question? Search for answers…"
+          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS…"
           onChange={(e) => this.props.handleChangeSearch(e.target.value)}/>
         <FontAwesomeIcon className="search_icon" icon={ faSearch } />
       </div>

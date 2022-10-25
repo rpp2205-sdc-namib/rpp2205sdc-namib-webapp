@@ -20,7 +20,7 @@ app.get('/reviews/:product_id/:count', getReviewsHandler);
 
 app.get('/qa/questions/:product_id', getQuestionsHandler);
 
-app.get('/qa/questions/:question_id/answers', getAnswersHandler);
+app.get('/qa/questions/:question_id/answers/:count', getAnswersHandler);
 
 app.get('/products/:product_id/related', getRelatedHandler);
 

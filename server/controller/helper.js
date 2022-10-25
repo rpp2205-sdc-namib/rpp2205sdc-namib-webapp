@@ -91,12 +91,9 @@ module.exports = {
   getQuestionsHandler: (req, res) => {
     var product_id = req.params.product_id;
 
-    axios.get(`${API_Link}/qa/questions?product_id=${product_id}`, {
-      headers: {
-        'Authorization': process.env.access_token
-      }
-    })
+    axios.get(`${API_Link}/qa/questions?product_id=${product_id}`, auth)
     .then(response => {
+      console.log('response.data: ', response.data)
       res.status(200).send(response.data);
     })
     .catch(err => {
@@ -106,12 +103,9 @@ module.exports = {
 
   getAnswersHandler: (req, res) => {
     var question_id = req.params.question_id;
+    var count = req.params.count;
 
-    axios.get(`${API_Link}/qa/questions/${question_id}/answers`, {
-      headers: {
-        'Authorization': process.env.access_token
-      }
-    })
+    axios.get(`${API_Link}/qa/questions/${question_id}/answers?count=${count}`, auth)
     .then(response => {
       res.status(200).send(response.data);
     })
@@ -183,12 +177,7 @@ module.exports = {
     var name = req.body.name;
     var email = req.body.email;
     var product_id = parseInt(req.body.product_id);
-
-    // console.log('body: ', body)
-    // console.log('name: ', name)
-    // console.log('email: ', email)
-    // console.log('productId: ', product_id)
-
+    
     axios.post(`${API_Link}/qa/questions`, {
       body, name, email, product_id
     }, auth)
