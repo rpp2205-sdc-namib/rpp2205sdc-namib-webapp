@@ -16,7 +16,7 @@ class ProductInfo extends React.Component {
       return (<div className="product-info" data-testid="test-ProductInfo">
         <div className="product-info-line1">
           <Stars rating={this.props.rating}/>
-          <div id="readAllReviews">{this.props.totalReviews > 0 ? 'Read All ' + this.props.totalReviews + ' Reviews' : null}</div>
+          <a href="#review_container" id="readAllReviews">{this.props.totalReviews > 0 ? 'Read All ' + this.props.totalReviews + ' Reviews' : null}</a>
         </div>
         {/* <div id="ratingScore"><p>{this.props.rating}</p></div> */}
         <div id="category"><p>{'Category > ' + category}</p></div>

@@ -105,7 +105,7 @@ body {
 
 .overview {
   position: relative;
-  border: solid green;
+  /* border: solid green; */
   height: auto;
   width: 45%;
   display: flex;
@@ -125,8 +125,8 @@ body {
 .product-info {
   width: 100%;
   height: 30%;
-  border-style: solid;
-  border-color: #848484;
+  /* border-style: solid; */
+  /* border-color: #848484; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -135,8 +135,8 @@ body {
 .style-selector {
   width: 100%;
   height: auto;
-  border-style: solid;
-  border-color: red;
+  /* border-style: solid; */
+  /* border-color: red; */
   display: flex;
   flex-direction: column;
 }
@@ -145,8 +145,8 @@ body {
   width: 100%;
   min-height: 140px;
   max-height: auto;
-  border-style: solid;
-  border-color: rebeccapurple;
+  /* border-style: solid; */
+  /* border-color: rebeccapurple; */
   display: flex;
   flex-direction: column;
   justify-content:space-around;
@@ -297,7 +297,7 @@ body {
 }
 
 .price {
-  border: solid peru;
+  /* border: solid peru; */
   height: 57px;
 }
 
@@ -370,8 +370,8 @@ body {
 
 .styles {
   position: relative;
-  border-color: #848484;
-  border-style: solid;
+  /* border-color: #848484; */
+  /* border-style: solid; */
   width: 320px;
   height: auto;
   display: flex;
@@ -456,7 +456,7 @@ body {
 }
 
 .current-photo-modal {
-  border: solid red;
+  /* border: solid red; */
   width: 100%;
   height: 100%;
   position: relative;
@@ -520,7 +520,7 @@ body {
   display: block;
   height: 98%;
   width: min-content;
-  border: solid green;
+  /* border: solid green; */
   overflow: hidden;
   position: relative;
 }
@@ -581,7 +581,7 @@ body {
 
 
 .add-to-card-line1, .add-to-card-line2 {
-  border: solid black;
+  /* border: solid black; */
   width: 100%;
   height: 70px;
   display: flex;

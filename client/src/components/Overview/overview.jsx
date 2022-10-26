@@ -10,13 +10,17 @@ import Stars from '../FiveStars.jsx';
 class Overview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {styleId: '', priceInfo: {}, styleObj: {}, modalStyle: {"display": "none"}}; //styleObj is specific
+    this.state = {currentPhotoIndex: 0, styleId: '', priceInfo: {}, styleObj: {}, modalStyle: {"display": "none"}}; //styleObj is specific
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.productId !== prevProps.productId) {
       this.handleStyleIdChange();
     }
+  }
+
+  handleCurrentPhotoChange(newIndex) {
+    this.setState({currentPhotoIndex: newIndex});
   }
 
   handleStyleIdChange(newId) {
@@ -39,11 +43,11 @@ class Overview extends React.Component {
   }
 
   render() {
-    if (this.state.styleId === '') {
+    if (this.state.styleObj.photos === undefined) {
       return null;
     } else {
       return (<div className="overview-container">
-          <ImageGallary section = "overview" photos={this.state.styleObj.photos} handleModalAppear={this.handleModalAppear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
+          <ImageGallary section = "overview" currentPhotoIndex={this.state.currentPhotoIndex} handleCurrentPhotoChange={this.handleCurrentPhotoChange.bind(this)} photos={this.state.styleObj.photos} handleModalAppear={this.handleModalAppear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
       <div className="overview">
           <ProductInfo productId={this.props.productId} currentProduct={this.props.currentProduct} styleObj={this.state.styleObj} rating={this.props.rating}
           totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
@@ -51,7 +55,7 @@ class Overview extends React.Component {
           <AddToCart styleObj={this.state.styleObj}/>
       </div>
       <div className="overview overview-modal" id="overview-modal-window" style={this.state.modalStyle}>
-        <ImageGallary section="modal" photos={this.state.styleObj.photos} handleModalDisappear={this.handleModalDisappear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
+        <ImageGallary section="modal" currentPhotoIndex={this.state.currentPhotoIndex} handleCurrentPhotoChange={this.handleCurrentPhotoChange.bind(this)} photos={this.state.styleObj.photos} handleModalDisappear={this.handleModalDisappear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
       </div>
       </div>
       )

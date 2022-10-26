@@ -14,7 +14,6 @@ class AddToCart extends React.Component {
   }
 
   componentDidMount() {
-    console.log('line17', this.props);
     if (this.props.styleObj.skus) {
       var sizeAndQuantityArr = Object.values(this.props.styleObj.skus);
       var sizeAndQuantityObj = sizeAndQuantityArr.reduce((acc, element) => {
