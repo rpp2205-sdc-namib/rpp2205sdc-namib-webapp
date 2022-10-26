@@ -92,7 +92,6 @@ module.exports = {
 
     axios.get(`${API_Link}/qa/questions?product_id=${product_id}`, auth)
     .then(response => {
-      console.log('response.data: ', response.data)
       res.status(200).send(response.data);
     })
     .catch(err => {
@@ -207,7 +206,7 @@ module.exports = {
     var name = req.body.name;
     var email = req.body.email;
     var product_id = parseInt(req.body.product_id);
-    
+
     axios.post(`${API_Link}/qa/questions`, {
       body, name, email, product_id
     }, auth)

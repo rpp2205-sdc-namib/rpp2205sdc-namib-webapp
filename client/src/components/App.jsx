@@ -91,6 +91,7 @@ class App extends React.Component {
   }
 
   handleOverviewBackground(color) {
+    console.log(color);
     this.setState({background: color});
   }
 

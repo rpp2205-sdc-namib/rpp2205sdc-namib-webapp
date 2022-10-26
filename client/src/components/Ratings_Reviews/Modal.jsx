@@ -4,7 +4,7 @@ import { RiCloseLine } from "react-icons/ri";
 const Modal = ({ setIsOpen, imgSrc }) => {
   return (
     <>
-      <div className="darkBG" onClick={() => setIsOpen(false)} />
+      <div  onClick={() => setIsOpen(false)} />
       <div className="modal_centered">
         <div className="modal">
           <img className="review_photo_modal" src={imgSrc}/>

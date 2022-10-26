@@ -3,6 +3,7 @@ import { RiCloseLine } from "react-icons/ri";
 import Stars from '../FiveStars.jsx';
 import axios from 'axios';
 import withClickData from '../hoc_click_data.jsx';
+import StarRating from './Star_Rating.jsx';
 const data = require("./data.json");
 const config = require("./config.json");
 
@@ -17,6 +18,7 @@ class Write_New_Review extends React.Component {
       characteristics: {},
       reviewSummary: '',
       reviewBody: '',
+      reviewBodyCount: 50,
       photos: [],
       assets: [],
       nickname: '',
@@ -57,7 +59,11 @@ class Write_New_Review extends React.Component {
     if (event.target.className === "review_summary"){
       this.setState({reviewSummary: event.target.value});
     } else if (event.target.className === "review_body"){
-      this.setState({reviewBody: event.target.value});
+      let length = 50 - event.target.value.length;
+      this.setState({
+        reviewBody: event.target.value,
+        reviewBodyCount: length
+      });
     } else if (event.target.className === "review_name"){
       this.setState({nickname: event.target.value});
     } else if (event.target.className === "review_email"){
@@ -65,13 +71,12 @@ class Write_New_Review extends React.Component {
     }
   }
 
-  handleClick(e) {
+  handleClick(e, rating) {
 
     console.log(e);
-    if(e.target.className.includes('star')) {
-      let value = parseInt(e.target.parentNode.attributes.id.value) + 1;
+    if(e.target.className === "rating") {
       this.setState({
-        starRating: value
+        starRating: rating
         }, () => { console.log(this.state.starRating) }
       )
     } else if (e.target.id === "yes" || e.target.id === "no") {
@@ -150,7 +155,7 @@ class Write_New_Review extends React.Component {
             <form className="new_review_form" onSubmit={this.handleSubmit}>
               <label className="review_form_label">
                 <h4 className="review_form_label_text">Overall Rating</h4>
-                <div className="overall_rating"><Stars click={this.handleClick}/></div>
+                <StarRating click={this.handleClick}/>
               </label>
               <label className="review_form_label">
                 <fieldset className="rf_fieldset">
@@ -212,16 +217,14 @@ class Write_New_Review extends React.Component {
                         </div> :
                         null
                       }
-                    </div>
-                    <div>
-                    {this.state.assets.map(asset => {
-                        return (
-                          <div className="review_photo" key={asset.asset_id}>
-                            <img className="review_photo" src={asset.url}/>
-                          </div>
-                        )
-                      })
-                    }
+                      {this.state.assets.map(asset => {
+                          return (
+                            <div className="review_photo" key={asset.asset_id}>
+                              <img className="review_photo" src={asset.url}/>
+                            </div>
+                          )
+                        })
+                      }
                     </div>
                 </fieldset>
               </label>
@@ -232,7 +235,11 @@ class Write_New_Review extends React.Component {
               </label>
               <label className="review_form_label">
                 <h4 className="rf_header">Add a written review</h4>
-                <input type="textarea" value={this.state.reviewBody} className="review_body" required minLength="50" maxLength="1000" placeholder="Why did you like the product or not?" onChange={this.handleChange}/>
+                <textarea value={this.state.reviewBody} onKeyDown={this.__handleKeyDown} className="review_body" required minLength="50" maxLength="1000" placeholder="Why did you like the product or not?" onChange={this.handleChange}/>
+                {this.state.reviewBodyCount > 0 ?
+                  <div>Minimum required characters left: [{this.state.reviewBodyCount}]</div> :
+                  <div>Minimum reached</div>
+                }
               </label>
               <label className="review_form_label">
                 <h4 className="rf_header">Choose your nickname</h4>
@@ -257,4 +264,6 @@ export default withClickData(Write_New_Review, 'ratings_and_reviews');
 
 {/* <div className="review_photo" onClick={() => {this.setIsOpen(true, photo.url)}}>
 <img className="review_photo" src={photo.url}/>
+
+<div className="overall_rating"><Stars click={this.handleClick}/></div>
 </div> */}
