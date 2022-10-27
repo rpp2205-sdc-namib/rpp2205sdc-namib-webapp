@@ -162,4 +162,3 @@ const ModalWindow = (props) => {
 }
 
 export default withClickData(ModalWindow, 'questions_answers');
-
