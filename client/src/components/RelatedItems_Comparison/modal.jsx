@@ -14,7 +14,7 @@ function Modal (props) {
         <div className ="row">
           <div className="column">
             <b><p>{props.overview.name}</p></b>
-            {props.overview.features.map((element) => {
+            {props.overview.features.map((element, index) => {
               return(
                 <p key={index}>{element.feature}: {element.value}</p>
               )
@@ -25,7 +25,7 @@ function Modal (props) {
           </div>
           <div className="column">
             <b><p>{props.card.name}</p></b>
-            {props.card.features.map((element) => {
+            {props.card.features.map((element, index) => {
               return(
                 <p key={index}>{element.feature}: {element.value}</p>
               )
