@@ -9,6 +9,7 @@ function YourOutfit (props) {
   const[start, setStart] = useState(0);
   const [Prev, togglePrev] = useState('');
   const [Next, toggleNext] = useState('');
+  //const [width, toggleNext] = useState(ref.current)
 
   const arr = props.list.map((element, index) =>(
     <RPC action={false} key={index} remove={props.removeProd}
@@ -35,7 +36,7 @@ function YourOutfit (props) {
 
 
   return (
-    <div data-testid="outfit">YourOutfit
+    <div data-testid="outfit" className="container">YourOutfit
       <div className="main-container">
         {Prev ?
           ('') :
@@ -49,7 +50,6 @@ function YourOutfit (props) {
             </div>
             {arr}
           </div>
-          {console.log('here start', start)}
         </div>
         {Next ?
             ('') :

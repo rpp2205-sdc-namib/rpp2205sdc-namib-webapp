@@ -9,8 +9,6 @@ import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
 import Carousel from './RelatedItems_Comparison/Carousel.jsx';
 import TopBar from './TopBar.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
-import { Routes, Route, Link } from "react-router-dom";
-import { redirect } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -53,7 +51,6 @@ class App extends React.Component {
                        defaultStyle: responseArr[2].data.results.find(style => style["default?"]) || responseArr[2].data.results[0],
                        related: responseArr[4].data
                       });
-        return redirect(`${productId}`);
       })
       .catch((error) => {
         if (error.response) {
@@ -124,12 +121,7 @@ class App extends React.Component {
       <div style={{"backgroundColor": this.state.background}}>
           <TopBar />
           <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-          <RPList productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
-          {/* {this.state.carousel.map((element) => {
-            return(
-              <Carousel add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
-            )
-          })} */}
+          <RPList overview={this.state.currentProduct} productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
           <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
           <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings}/>
           <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />

@@ -11,7 +11,7 @@ function Action (props) {
   return(
     props.actionButton ? (
       <div id="action">
-        <FontAwesomeIcon id="star" icon={faStar} onClick={ (e) => {props.showModal(); props.interaction(e.currentTarget)}}/>
+        <FontAwesomeIcon id="star" icon={faStar} onClick={ (e) => {props.showModal(props.info); props.interaction(e.currentTarget)}}/>
       </div>
     ) : (
       <div id="action">
