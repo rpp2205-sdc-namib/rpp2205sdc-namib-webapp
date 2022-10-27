@@ -9,7 +9,7 @@ import Rating_Breakdown from './Rating_Breakdown.jsx';
 import * as data from './data.json';
 
 const server = setupServer(
-  rest.get('/reviews/71697/125', (req, res, ctx) => {
+  rest.get('/reviews/71697/500/relevant', (req, res, ctx) => {
     return res(ctx.status(200));
   })
 )
@@ -25,7 +25,7 @@ describe("Reviews_List.jsx", function(){
 
     await waitFor(() => {screen.getByTestId('tiles')})
 
-    expect(screen.getByTestId('tiles')).toHaveTextContent('Palatino');
+    expect(screen.getByTestId('tiles')).toHaveTextContent('really like it');
   });
 });
 
@@ -36,18 +36,18 @@ describe("Reviews_List.jsx", function(){
 
     await waitFor(() => {screen.getByTestId('tiles')})
 
-    expect(screen.getByTestId('tiles')).toHaveTextContent('Just really bad');
+    expect(screen.getByTestId('tiles')).toHaveTextContent('Test upload muti pictures');
   });
 });
 
-describe("Reviews_Breakdown.jsx", function(){
+describe("Rating_Breakdown.jsx", function(){
   test("loads the average star rating for a specific product", async() => {
 
-    render(<Rating_Breakdown rating={3.86}/>);
+    render(<Rating_Breakdown reviewsMeta={data.reviewsMeta} reviews={data.reviews.results} ratings={data.reviewsMeta.ratings} rating={3.70}/>);
 
     await waitFor(() => {screen.getByTestId('star_rating')})
 
-    expect(screen.getByTestId('star_rating')).toHaveTextContent('3.86');
+    expect(screen.getByTestId('star_rating')).toHaveTextContent('3.7');
   });
 });
 
@@ -69,13 +69,3 @@ describe('end to end test to see if user clicked the "more" button', () => {
       expect(fourthReview).toBeInTheDocument;
   })
 })
-
-
-// describe("Reviews_List.jsx", function(){
-//   test("loads two review tiles to the virtual dom", function(){
-//     render(<Reviews_List />);
-//     const text = screen.getByTestId("text");
-//     console.log('innerHTML', text.innerHTML);
-//     expect(text).toHaveTextContent("Total Reviews:");
-//   });
-// });
