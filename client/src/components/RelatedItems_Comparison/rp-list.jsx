@@ -13,10 +13,12 @@ import withClickData from '../hoc_click_data.jsx';
   const[end, setEnd] = useState(4);
   const [Prev, togglePrev] = useState(true);
   const [Next, toggleNext] = useState(false);
+  const [prodInfo, setProdInfo] = useState({})
+  const [name, setName] = useState('')
 
   const arr = rp.map((element, index) => {
     return(
-      <RPC action={true} info={element} show={() => {setShowModal(true)}} key={index} redirect={props.changeProduct}/>
+      <RPC action={true} info={element} show={(obj, name) => {setProdInfo(obj); setShowModal(true);}} key={index} redirect={props.changeProduct}/>
     )
   });
 
@@ -65,13 +67,12 @@ import withClickData from '../hoc_click_data.jsx';
 
 
   return (
-    <div data-testid="outfit">Related Products
+    <div data-testid="rpList" className="container">Related Products
       <div id="carousel-container">
         {Prev ?
           ('') :
           (<button onClick={(e) => { props.interaction(e.target); setStart(start - 1); setEnd(end - 1);}}>Prev</button>)
         }
-        {console.log('relatedProds length', props.relatedProds.length)}
         <div id="carousel">
           {arr}
         </div>
@@ -84,7 +85,7 @@ import withClickData from '../hoc_click_data.jsx';
             setEnd(end + 1);
           }}>Next</button>)
         }
-        {showModal ? (<Modal open={showModal} closeModal={() => setShowModal(false)} />) : ('')}
+        {showModal ? (<Modal card={prodInfo} overview={props.overview} open={showModal} closeModal={() => setShowModal(false)} />) : ('')}
       </div>
     </div>
   )

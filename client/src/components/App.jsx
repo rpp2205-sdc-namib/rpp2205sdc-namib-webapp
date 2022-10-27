@@ -54,7 +54,6 @@ class App extends React.Component {
                        defaultStyle: responseArr[2].data.results.find(style => style["default?"]) || responseArr[2].data.results[0],
                        related: responseArr[4].data
                       });
-        return redirect(`${productId}`);
       })
       .catch((error) => {
         if (error.response) {
@@ -77,7 +76,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.init('71697');
+    var prodId = window.location.pathname
+    if(prodId.slice(1) !== '') {
+      this.init(prodId.slice(1))
+    } else {
+      this.init('71697');
+    }
   }
 
   addProduct(e) {
@@ -101,6 +105,7 @@ class App extends React.Component {
 
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
+    location.pathname = ('/' + newId.toString());
     console.log(newId);
     this.init(newId.toString());
 
@@ -119,18 +124,9 @@ class App extends React.Component {
     }
     return (
       <div style={{"backgroundColor": this.state.background}}>
-        <ErrorBoundary>
           <TopBar />
-          </ErrorBoundary>
           <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
-          <RPList productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
-          <Carousel add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
-          {/* <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/> */}
-          {/* {this.state.carousel.map((element) => {
-            return(
-              <Carousel add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
-            )
-          })} */}
+          <RPList overview={this.state.currentProduct} productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
           <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
           <ErrorBoundary>
             <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />

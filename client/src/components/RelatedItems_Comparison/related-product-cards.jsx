@@ -20,7 +20,7 @@ function RPC (props) {
     }
     return(
       <div className="card">
-        <Action actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
+        <Action info={props.info.product} prodName={props.info.product.name} actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
         <div id={props.info.product.id} onClick={ (e) => {props.redirect(props.info.product.id); console.log(e.target.nodeName); props.interaction(e.target)}}>
           <p>
             <img className="rpcThumbnails" src={photo}></img>

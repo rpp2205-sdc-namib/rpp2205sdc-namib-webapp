@@ -11,11 +11,11 @@ function Action (props) {
   return(
     props.actionButton ? (
       <div id="action">
-        <FontAwesomeIcon id="star" icon={faStar} onClick={ (e) => {props.showModal(); props.interaction(e.currentTarget)}}/>
+        <FontAwesomeIcon className="star" icon={faStar} onClick={ (e) => {props.showModal(props.info); props.interaction(e.currentTarget)}}/>
       </div>
     ) : (
       <div id="action">
-        <FontAwesomeIcon id="remove" icon={faXmarkCircle} id={props.id} onClick={(e) => {props.removeProd(e); props.interaction(e.currentTarget)}}/>
+        <FontAwesomeIcon id={props.info.id} className="remove" icon={faXmarkCircle} onClick={(e) => {props.removeProd(e); props.interaction(e.currentTarget)}}/>
       </div>
     )
   )
