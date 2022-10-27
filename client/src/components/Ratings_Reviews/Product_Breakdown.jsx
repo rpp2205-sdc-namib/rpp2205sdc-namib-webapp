@@ -2,7 +2,6 @@ import React from 'react';
 const data = require("./data.json");
 
 const ratingInPercentage = (value) => {
-  console.log('value', parseInt(value));
   let result = `${((value/5)*100).toFixed(2)}%`
   return result;
 }

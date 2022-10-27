@@ -85,7 +85,6 @@ class Rating_Breakdown extends React.Component {
   }
 
   render() {
-    console.log(this.state.threeStarReviews);
     return (
       <div className="ratings_breakdown">
         <strong>Ratings and Reviews</strong>
