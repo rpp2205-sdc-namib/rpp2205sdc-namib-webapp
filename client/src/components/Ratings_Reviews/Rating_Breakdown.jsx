@@ -89,7 +89,7 @@ class Rating_Breakdown extends React.Component {
     return (
       <div className="ratings_breakdown">
         <strong>Ratings and Reviews</strong>
-        <div className="star_rating">
+        <div data-testid="star_rating" className="star_rating">
           <div className="star_rating_text">{this.props.rating}</div>
           <div className="star_output"><Stars rating={this.props.rating}/></div>
         </div>
