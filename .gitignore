@@ -2,3 +2,4 @@ node_modules
 client/dist/main.js
 .env
 coverage/
+client/src/components/Questions_Answers/config.js
