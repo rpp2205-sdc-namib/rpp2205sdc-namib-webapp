@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Stars from '../FiveStars.jsx';
 import Action from './action.jsx';
 import withClickData from '../hoc_click_data.jsx';
@@ -20,8 +20,8 @@ function RPC (props) {
     }
     return(
       <div className="card">
-        <Action id={props.info.product.id} actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
-        <div  onClick={ (e) => {props.redirect(props.info.product.id); console.log(e.target.nodeName); props.interaction(e.target)}}>
+        <Action actionButton={props.action} showModal={props.show} removeProd={props.remove}/>
+        <div id={props.info.product.id} onClick={ (e) => {props.redirect(props.info.product.id); console.log(e.target.nodeName); props.interaction(e.target)}}>
           <p>
             <img className="rpcThumbnails" src={photo}></img>
           </p>

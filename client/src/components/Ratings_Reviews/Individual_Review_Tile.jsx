@@ -2,6 +2,8 @@ import React from 'react';
 import Modal from './Modal.jsx';
 import Stars from '../FiveStars.jsx';
 import { FiCheck } from "react-icons/fi";
+import axios from 'axios';
+import withClickData from '../hoc_click_data.jsx';
 
 class Individual_Review_Tile extends React.Component {
   constructor(props) {
@@ -12,7 +14,7 @@ class Individual_Review_Tile extends React.Component {
       isOpen: false,
       helpfulness: props.review.helpfulness,
       isYesClicked: false,
-      //isReported: false,
+      isReported: false,
       imgSrc: null
     };
 
@@ -51,12 +53,39 @@ class Individual_Review_Tile extends React.Component {
   //   });
   // }
 
-  handleIncreaseCounts() {
+  handleIncreaseCounts(e, review_id) {
     // increase the count of helpfulness
-    this.setState({
-      isYesClicked: true,
-      helpfulness: this.state.helpfulness + 1
-    });
+    let text = e.target.innerText;
+    if (text === "Yes") {
+
+      this.setState({
+        isYesClicked: true,
+        helpfulness: this.state.helpfulness + 1
+      });
+
+      axios.put(`/reviews/${review_id}/helpful`)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(error => {
+          console.error(error);
+        })
+    } else {
+
+      this.setState({
+        isReported: true,
+      });
+
+      axios.put(`/reviews/${review_id}/report`)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(error => {
+          console.error(error);
+        })
+    }
+
+    this.props.interaction(e.target);
   }
 
   show() {
@@ -74,13 +103,11 @@ class Individual_Review_Tile extends React.Component {
   }
 
   render() {
-
     return (
       <div className="tile">
         <div><Stars rating={this.props.review.rating}/></div>
         <div><strong>{this.props.review.summary}</strong></div>
-        <div className="tile-user">{this.props.review.reviewer_name}</div>
-        <div className="tile-date">{this.changeDateFormat(this.props.review.date)}</div>
+        <div className="tile-user">{this.changeDateFormat(this.props.review.date)}, {this.props.review.reviewer_name}</div>
         <div>{this.props.review.body.slice(0, this.state.bodyTextLength)}</div>
         <div>
           {this.props.review.body.length < this.state.bodyTextLength ? (
@@ -117,14 +144,27 @@ class Individual_Review_Tile extends React.Component {
           </div> :
           null
         }
-        <div>Response to Review: {this.props.review.response}</div>
+        {this.props.review.reponse == null ?
+          <div></div> :
+          <div className="review_response">
+            <strong>Response</strong>
+            <div>{this.props.review.reponse}</div>
+          </div>
+        }
         <div>
           <p>
             Helpful?
             <button className="review_yes_button"
               disabled={this.state.isYesClicked}
-              onClick={this.handleIncreaseCounts}>
-              Yes ({this.state.helpfulness})
+              onClick={(e) => {this.handleIncreaseCounts(e, this.props.review.review_id)}}>
+              Yes
+            </button>
+            ({this.state.helpfulness})
+            |
+            <button className="review_report_button"
+              disabled={this.state.isReported}
+              onClick={(e) => {this.handleIncreaseCounts(e, this.props.review.review_id)}}>
+              Report
             </button>
           </p>
         </div>
@@ -135,7 +175,7 @@ class Individual_Review_Tile extends React.Component {
   }
 }
 
-export default Individual_Review_Tile;
+export default withClickData(Individual_Review_Tile, 'ratings_and_reviews');
 
 
 {/*
@@ -146,3 +186,5 @@ export default Individual_Review_Tile;
 
 
 {/* <div>{this.props.review.body}</div> */}
+
+// {this.props.review.reponse === null ? <div>test</div> :<div className="review_response"><strong>Response:</strong><div>{this.props.review.response}</div></div>}

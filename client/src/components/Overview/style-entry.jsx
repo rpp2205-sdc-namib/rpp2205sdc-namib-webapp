@@ -1,4 +1,5 @@
 import React from 'react';
+import withClickData from '../hoc_click_data.jsx';
 
 const highlightStyle = {"borderStyle": "solid", "color": "rgb(116, 196, 65)", "borderWidth": "2.5px"};
 const nonHighlightStyl = {"borderStyle": "none"};
@@ -9,9 +10,10 @@ class StyleEntry extends React.Component {
     super(props);
   }
 
-  handleMouseOver() {
+  handleClick(e) {
     var newId = this.props.id;
     this.props.changeStyle(newId);
+    this.props.interaction(e.target);
   }
 
   render() {
@@ -20,7 +22,7 @@ class StyleEntry extends React.Component {
     <div className="styleThumbnails-parent">
       <img className="styleThumbnails-check" src="img/check-icon.png" style={{"display": checkDisplay}}/>
       <div className="styleThumbnails-container" style={this.props.highlight ? highlightStyle : nonHighlightStyl}>
-        <img className="styleThumbnails" src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleMouseOver.bind(this)}></img>
+        <img className="styleThumbnails" id={"styleThumbnails" + this.props.id} src={this.props.styleObj.photos[0].thumbnail_url || 'img/NoImageThumbnail.png'} onClick={this.handleClick.bind(this)} width="50px"></img>
       </div>
     </div>
    )
@@ -28,4 +30,4 @@ class StyleEntry extends React.Component {
   }
 }
 
-export default StyleEntry;
+export default withClickData(StyleEntry, 'overview');

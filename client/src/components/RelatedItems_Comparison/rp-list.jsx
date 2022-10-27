@@ -3,11 +3,22 @@ import RPC from './related-product-cards.jsx';
 import Modal from './modal.jsx';
 import axios from 'axios';
 import { totalReviewsAndAvgRating, handlePromises } from '../helperFunctions.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
  function RPList(props) {
 
   const [rp, setRP] = useState([]);
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const[start, setStart] = useState(0);
+  const[end, setEnd] = useState(4);
+  const [Prev, togglePrev] = useState(true);
+  const [Next, toggleNext] = useState(false);
+
+  const arr = rp.map((element, index) => {
+    return(
+      <RPC action={true} info={element} show={() => {setShowModal(true)}} key={index} redirect={props.changeProduct}/>
+    )
+  });
 
   useEffect(() => {
     var promises = [];
@@ -37,23 +48,46 @@ import { totalReviewsAndAvgRating, handlePromises } from '../helperFunctions.jsx
 
   }, [props.productId]);
 
+    useEffect(()=> {
+      if(start === 0) {
+        togglePrev(true);
+      }
+      if(end === arr.length) {
+        toggleNext(true);
+      }
+      if(start > 0) {
+        togglePrev(false)
+      }
+      if(end < arr.length) {
+        toggleNext(false);
+      }
+    }, [start, end, rp.length])
+
 
   return (
-    <div id="rpList">
-      <div data-testid="outfit">Related Products</div>
-      <button>Prev</button>
-      {rp.map((element, index) => {
-        return(
-          <RPC action={true} info={element} show={() => {setShowModal(true)}} key={index} redirect={props.changeProduct}/>
-        )
-        })
-      }
-      <button>Next</button>
-      <div id="modal">
+    <div data-testid="outfit">Related Products
+      <div id="carousel-container">
+        {Prev ?
+          ('') :
+          (<button onClick={(e) => { props.interaction(e.target); setStart(start - 1); setEnd(end - 1);}}>Prev</button>)
+        }
+        {console.log('relatedProds length', props.relatedProds.length)}
+        <div id="carousel">
+          {arr}
+        </div>
+
+        {Next ?
+          ('') :
+          (<button onClick={(e) => {
+            props.interaction(e.target);
+            setStart(start + 1);
+            setEnd(end + 1);
+          }}>Next</button>)
+        }
         {showModal ? (<Modal open={showModal} closeModal={() => setShowModal(false)} />) : ('')}
       </div>
     </div>
   )
 }
 
-export default RPList;
+export default withClickData(RPList, 'Related Items & Comparison');

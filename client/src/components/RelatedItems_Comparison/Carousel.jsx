@@ -5,82 +5,53 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import withClickData from '../hoc_click_data.jsx';
 
 function Carousel (props) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     start: 0,
-  //     end: 3,
-  //     hidePrev: true
-  //   }
-  // }
 
-  // handleNext(e) {
-  //   this.setState({start: 0, end: 3})
-  // }
+  const[start, setStart] = useState(0);
+  const[end, setEnd] = useState(3);
   const [Prev, togglePrev] = useState(true);
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(3);
-  const [Next, toggleNext] = useState(false);
+  const [Next, toggleNext] = useState(true);
 
-  const arr = props.list.map((element, index) => {
-    return(
+   const arr = props.list.map((element, index) =>(
       <RPC action={false} key={index} remove={props.removeProd}
         info={JSON.parse(localStorage.getItem(element))} redirect={props.changeProduct}
       />
-    )
-  })
+  ));
 
-  useEffect(() => {
-    if(arr.length === 3) {
-      toggleNext(true);
-      togglePrev(true);
-    }
-    if(arr.length > 3) {
-      toggleNext(false);
-    }
-  }, [props.list]);
-
-  const handleNav = () => {
-    if(start > 0) {
-      togglePrev(false);
-    }
+  useEffect(()=> {
     if(start === 0) {
       togglePrev(true);
+    }
+    if(end === arr.length) {
+      toggleNext(true);
+    }
+    if(start > 0) {
+      togglePrev(false)
+    }
+    if(end < arr.length) {
       toggleNext(false);
     }
-  }
-
-  //{console.log('start', start, 'end', end)}
+  }, [start, end, props.list.length])
 
     return (
       <div id="outfit">
         <div data-testid="outfit">YourOutfit</div>
           {Prev ?
             ('') :
-            (<button onClick={() => { props.interaction(e.target); if(start === 0) {togglePrev(true)} toggleNext(false); setStart( start - 1); setEnd( end - 1 )}}>Prev</button>)
+            (<button onClick={(e) => { props.interaction(e.target); setStart(start - 1); setEnd(end - 1);}}>Prev</button>)
           }
-        <div className="card" onClick={(e) => {props.add; props.interaction(e.target)}}>
+        <div className="card" onClick={(e) => {props.add(e); props.interaction(e.target)}}>
           <FontAwesomeIcon icon={faPlus} />
           <p>Add to Outfit</p>
         </div>
+        {console.log(arr.length)}
         {arr.slice(start, end)}
-        {/* {if(end === arr.length) {
-          togglePrev(!prev);
-        }} */}
+        {console.log('here start', start, 'end', end)}
         {Next ?
           ('') :
-          (<button onClick={() => {
+          (<button onClick={(e) => {
             props.interaction(e.target);
-            return setStart( start + 1);
-            return setEnd( end + 1 )
-            if(start !== 0) {
-              console.log('start', start, 'end', end)
-              togglePrev(false)
-            }
-            if(end === arr.length) {
-              togglePrev(false);
-              toggleNext(true)
-            };
+            setStart(start + 1);
+            setEnd(end + 1);
           }}>Next</button>)
         }
     </div>

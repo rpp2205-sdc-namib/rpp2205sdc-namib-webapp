@@ -57,7 +57,6 @@ module.exports = {
   getReviewsHandler: (req, res) => {
     var product_id = req.params.product_id;
     var count = req.params.count;
-    var page = req.params.page;
     var sort = req.params.sort;
 
    if (req.url.includes('meta')) {
@@ -74,7 +73,7 @@ module.exports = {
          res.status(500).send(err);
        });
    } else {
-      axios.get(`${API_Link}/reviews?product_id=${product_id}&count=${count}`, {
+      axios.get(`${API_Link}/reviews?product_id=${product_id}&count=${count}&sort=${sort}`, {
         headers: {
           'Authorization': process.env.access_token
         }
@@ -93,7 +92,6 @@ module.exports = {
 
     axios.get(`${API_Link}/qa/questions?product_id=${product_id}`, auth)
     .then(response => {
-      console.log('response.data: ', response.data)
       res.status(200).send(response.data);
     })
     .catch(err => {
@@ -116,8 +114,39 @@ module.exports = {
   },
 
   postReviewHandler: (req, res) => {
-    var { rating, recommend, characteristics, summay, body } = req.body;
-    axios.post(`${API_Link}/reviews`, {product_id, rating, summary, })
+    var object = req.body
+    axios.post(`${API_Link}/reviews`, object, auth)
+      .then(response => {
+        res.status(201).send(`new post was made successfully!`)
+      })
+      .catch(err => {
+        res.status(500).send(err);
+      })
+  },
+
+  updateHelpfulCountsForReview: (req, res) => {
+    var review_id = req.params.review_id;
+    axios.put(`${API_Link}/reviews/${review_id}/helpful`, {review_id}, auth)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
+  },
+
+  updateReportForReview: (req, res) => {
+    var review_id = req.params.review_id;
+
+    axios.put(`${API_Link}/reviews/${review_id}/report`, {review_id}, auth)
+    .then(response => {
+      res.status(204).send(response.data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      res.sendStatus(500);
+    });
   },
 
   updateHelpfulCountsForQuestion: (req, res) => {
@@ -177,7 +206,7 @@ module.exports = {
     var name = req.body.name;
     var email = req.body.email;
     var product_id = parseInt(req.body.product_id);
-    
+
     axios.post(`${API_Link}/qa/questions`, {
       body, name, email, product_id
     }, auth)

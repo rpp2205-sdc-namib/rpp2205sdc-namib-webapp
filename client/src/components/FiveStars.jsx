@@ -55,7 +55,7 @@ class Stars extends React.Component {
 
   render() {
     return (<div className="five-stars">{this.state.stars.map((star, i) => {
-      return (<div className="single-star-container" key={i}>
+      return (<div className="single-star-container" id={i} key={i}>
         <span className="single-star-outline"></span>
         <span className="single-star-fill" style={{width: star * 100 + '%'}}></span>
       </div>)
@@ -66,3 +66,5 @@ class Stars extends React.Component {
 }
 
 export default Stars;
+
+{/* <span className="single-star-outline" onClick={(e) => {this.props.click(e)}}></span> */}

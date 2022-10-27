@@ -1,5 +1,7 @@
 import React from 'react';
 import Stars from '../FiveStars.jsx';
+import Product_Breakdown from './Product_Breakdown.jsx';
+import withClickData from '../hoc_click_data.jsx';
 
 class Rating_Breakdown extends React.Component {
   constructor(props) {
@@ -71,6 +73,8 @@ class Rating_Breakdown extends React.Component {
     this.setState({
       messages: messages
     }, () => {console.log(this.state.messages)})
+
+    this.props.interaction(e.target);
   }
 
   clearMessages() {
@@ -81,11 +85,14 @@ class Rating_Breakdown extends React.Component {
   }
 
   render() {
+    console.log(this.state.threeStarReviews);
     return (
       <div className="ratings_breakdown">
         <strong>Ratings and Reviews</strong>
-        <div data-testid="star_rating">{this.props.rating}</div>
-        <Stars rating={this.props.rating}/>
+        <div data-testid="star_rating" className="star_rating">
+          <div className="star_rating_text">{this.props.rating}</div>
+          <div className="star_output"><Stars rating={this.props.rating}/></div>
+        </div>
         <div>Total Ratings: {this.props.totalRatings}</div>
         <div>{this.state.recommendationPercentage} of reviews recommend this product</div>
         <div className="filter_ratings_message">
@@ -98,7 +105,6 @@ class Rating_Breakdown extends React.Component {
             <a className="five_star_ratings_bar" style={{float:'left'}} onClick={(e) => {this.props.filterReviews(e); this.filterNotification(e)}}>5 Stars</a>
             <div className="progress">
               <div className="bar" style={{width:`${this.state.fiveStarReviews}`}}>
-                <p className="percent">{this.state.fiveStarReviews}</p>
               </div>
             </div>
             <div style={{float:'left'}}>{this.props.ratings['5']}</div>
@@ -107,7 +113,6 @@ class Rating_Breakdown extends React.Component {
             <a className="four_star_ratings_bar" style={{float:'left'}} onClick={(e) => {this.props.filterReviews(e); this.filterNotification(e)}}>4 Stars</a>
               <div className="progress">
                 <div className="bar" style={{width:`${this.state.fourStarReviews}`}}>
-                  <p className="percent">{this.state.fourStarReviews}</p>
                 </div>
               </div>
               <div style={{float:'left'}}>{this.props.ratings['4']}</div>
@@ -115,8 +120,7 @@ class Rating_Breakdown extends React.Component {
           <div>
             <a className="three_star_ratings_bar" style={{float:'left'}} onClick={(e) => {this.props.filterReviews(e); this.filterNotification(e)}}>3 Stars</a>
               <div className="progress">
-                <div className="bar" style={{width:`${this.state.threeStarReviews}`}}>
-                  <p className="percent">{this.state.threeStarReviews}</p>
+                <div className="bar" style={{width:`${this.state.threeStarReviews === 'NaN%' ? '0%' : this.state.threeStarReviews}`}}>
                 </div>
               </div>
               <div style={{float:'left'}}>{this.props.ratings['3']}</div>
@@ -125,7 +129,6 @@ class Rating_Breakdown extends React.Component {
             <a className="two_star_ratings_bar" style={{float:'left'}} onClick={(e) => {this.props.filterReviews(e); this.filterNotification(e)}}>2 Stars</a>
             <div className="progress">
               <div className="bar" style={{width:`${this.state.twoStarReviews}`}}>
-                <p className="percent">{this.state.twoStarReviews}</p>
               </div>
             </div>
             <div style={{float:'left'}}>{this.props.ratings['2']}</div>
@@ -134,18 +137,18 @@ class Rating_Breakdown extends React.Component {
             <a className="one_star_ratings_bar" style={{float:'left'}} onClick={(e) => {this.props.filterReviews(e); this.filterNotification(e)}}>1 Stars</a>
               <div className="progress">
                 <div className="bar" style={{width:`${this.state.oneStarReviews}`}}>
-                  <p className="percent">{this.state.oneStarReviews}</p>
                 </div>
               </div>
             <div style={{float:'left'}}>{this.props.ratings['1']}</div>
           </div>
         </div>
+        <Product_Breakdown reviewsMeta={this.props.reviewsMeta} />
       </div>
     )
   }
 }
 
-export default Rating_Breakdown;
+export default withClickData(Rating_Breakdown, 'ratings_and_reviews');
 
 {/* <p>
 <a className="show_more" onClick={this.show}>

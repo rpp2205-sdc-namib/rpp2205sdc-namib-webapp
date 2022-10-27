@@ -1,62 +1,183 @@
 {
+  "reviewsMeta": {
+    "product_id": "71697",
+    "ratings": {
+        "1": "19",
+        "2": "19",
+        "3": "35",
+        "4": "29",
+        "5": "76"
+    },
+    "recommended": {
+        "false": "44",
+        "true": "134"
+    },
+    "characteristics": {
+      "Fit": {
+          "id": 240582,
+          "value": "3.3862068965517241"
+      },
+      "Length": {
+          "id": 240583,
+          "value": "3.2638888888888889"
+      },
+      "Comfort": {
+          "id": 240584,
+          "value": "3.4652777777777778"
+      },
+      "Quality": {
+          "id": 240585,
+          "value": "3.6013986013986014"
+      }
+    }
+  },
+
   "reviews": {
     "product": "71697",
     "page": 0,
-    "count": 125,
+    "count": 500,
     "results": [
       {
-        "review_id": 1275742,
-        "rating": 5,
-        "summary": "Palatino test",
-        "recommend": true,
-        "response": null,
-        "body": "Great product! Must buy!",
-        "date": "2022-07-20T00:00:00.000Z",
-        "reviewer_name": "palatino",
-        "helpfulness": 26,
-        "photos": [
-          {
-            "id": 2455570,
-            "url": "https://cdn.shopify.com/s/files/1/1300/6871/products/Camo-Hooded-Zip-Up-Woodland-Camo-2_63c44e42-27a9-4ff3-9571-86680e26894a_720x.jpg?v=1633078897"
-          }
-        ]
+          "review_id": 1275253,
+          "rating": 5,
+          "summary": "really like it ",
+          "recommend": true,
+          "response": null,
+          "body": "really like it really like it really like it really like it ",
+          "date": "2022-06-11T00:00:00.000Z",
+          "reviewer_name": "test",
+          "helpfulness": 12,
+          "photos": []
       },
       {
-        "review_id": 1276188,
-        "rating": 5,
-        "summary": "Just really bad",
-        "recommend": false,
-        "response": null,
-        "body": "It didn't fit. The sizing was entirely not accurate whatsoever.",
-        "date": "2022-08-25T00:00:00.000Z",
-        "reviewer_name": "mo",
-        "helpfulness": 14,
-        "photos": []
+          "review_id": 1276912,
+          "rating": 1,
+          "summary": "Test upload muti pictures",
+          "recommend": false,
+          "response": null,
+          "body": "Test upload pictures. Team application! lol --====",
+          "date": "2022-10-20T00:00:00.000Z",
+          "reviewer_name": "yuchen",
+          "helpfulness": 10,
+          "photos": [
+              {
+                  "id": 2456350,
+                  "url": "https://res.cloudinary.com/dskwqzkmr/image/upload/v1666280816/gydmwsspxa6fcbjqnt6f.jpg"
+              },
+              {
+                  "id": 2456351,
+                  "url": "https://res.cloudinary.com/dskwqzkmr/image/upload/v1666280816/eg8accgaype9csfque0z.png"
+              }
+          ]
       },
       {
-        "review_id": 1276189,
-        "rating": 3,
-        "summary": "Just alright",
-        "recommend": true,
-        "response": null,
-        "body": "It does the job, but isn't perfect. If it was any more expensive I'd say don't do it.",
-        "date": "2022-08-25T00:00:00.000Z",
-        "reviewer_name": "Johnny",
-        "helpfulness": 9,
-        "photos": []
+          "review_id": 1276251,
+          "rating": 4,
+          "summary": "testing",
+          "recommend": true,
+          "response": null,
+          "body": "adding review body adding review body adding review body",
+          "date": "2022-08-29T00:00:00.000Z",
+          "reviewer_name": "gytest1",
+          "helpfulness": 6,
+          "photos": [
+              {
+                  "id": 2455861,
+                  "url": "https://res.cloudinary.com/lexicon-atelier/image/upload/v1661733999/nnoyb1vnnkrmn0t8gvmo.jpg"
+              }
+          ]
       },
       {
-        "review_id": 1275253,
-        "rating": 5,
-        "summary": "really like it ",
-        "recommend": true,
-        "response": null,
-        "body": "really like it really like it really like it really like it ",
-        "date": "2022-06-11T00:00:00.000Z",
-        "reviewer_name": "test",
-        "helpfulness": 7,
-        "photos": []
+          "review_id": 1276007,
+          "rating": 3,
+          "summary": "Test image upload",
+          "recommend": false,
+          "response": null,
+          "body": "jsfdkhfjksdhfjksadhfjksahfjkshfjksdfabfnashfjwhfiweufhwejffaksdhfjahfjdskafhjakfnbaksdhfjkahfjahfhjakhfjakhfjakhfjakhfjieuywihfjakhfjkabhnfjkahfjahfjkahfjkahfjkahfjiwuiefajkhfjkahfjiweuyfuadshfjakhfuewfhfjkahfiweuyisadhfiweqyusfhjsadhfiwuywuhfahfuwyiwoefwiofhsjdghfuwieyfwhfwjhfuiweyfwieohfwhyfuwefhwuihfwjfwpufwoiefwoiefiwieo",
+          "date": "2022-07-26T00:00:00.000Z",
+          "reviewer_name": "palatino",
+          "helpfulness": 5,
+          "photos": [
+              {
+                  "id": 2455734,
+                  "url": "https://i.ibb.co/xj0F8sb/a46ac165a3f7.webp"
+              }
+          ]
+      },
+      {
+          "review_id": 1276190,
+          "rating": 4,
+          "summary": "Pretty good!",
+          "recommend": true,
+          "response": null,
+          "body": "Does its job and does it well. Fits a little snug but outside that its great!",
+          "date": "2022-08-25T00:00:00.000Z",
+          "reviewer_name": "jeanie",
+          "helpfulness": 5,
+          "photos": []
+      },
+      {
+          "review_id": 1276419,
+          "rating": 5,
+          "summary": "Wahoo",
+          "recommend": true,
+          "response": null,
+          "body": "BEST PRODUCT EVER YOU MUST BUY THIS IT WILL MAKE YOU HAPPY",
+          "date": "2022-09-05T00:00:00.000Z",
+          "reviewer_name": "happyman",
+          "helpfulness": 5,
+          "photos": [
+              {
+                  "id": 2456024,
+                  "url": "http://res.cloudinary.com/dzblbll9t/image/upload/v1662417414/j4drcofxpdzdrbqd32p3.jpg"
+              }
+          ]
       }
     ]
+  },
+
+  "characteristics": {
+    "Size": {
+      "1": "A size too small",
+      "2": "½ a size too small",
+      "3": "Perfect",
+      "4": "½ a size too big",
+      "5": "A size too wide"
+    },
+    "Width": {
+      "1": "Too narrow",
+      "2": "Slightly narrow",
+      "3": "Perfect",
+      "4": "Slightly wide",
+      "5": "Too wide"
+    },
+    "Comfort": {
+      "1": "Uncomfortable",
+      "2": "Slightly uncomfortable",
+      "3": "Ok",
+      "4": "Comfortable",
+      "5": "Perfect"
+    },
+    "Quality": {
+      "1": "Poor",
+      "2": "Below average",
+      "3": "What I expected",
+      "4": "Pretty great",
+      "5": "Perfect"
+    },
+    "Length": {
+      "1": "Runs Short",
+      "2": "Runs slightly short",
+      "3": "Perfect",
+      "4": "Runs slightly long",
+      "5": "Runs long"
+    },
+    "Fit": {
+      "1": "Runs tight",
+      "2": "Runs slightly tight",
+      "3": "Perfect",
+      "4": "Runs slightly long",
+      "5": "Runs long"
+    }
   }
 }
