@@ -545,11 +545,28 @@ body {
 
 
 /* Related Items and Comparison styling */
+.container {
+  padding: 20px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
 .main-container {
   padding: 10px;
   margin: 15px;
   display: flex;
   align-items: center;
+}
+
+.column {
+  width: 33.33%;
+  float: left;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .card {
@@ -581,14 +598,8 @@ body {
   width: 100%;
   height: 100%;
   white-space: nowrap;
-  scrollbar-width: none;
-  scroll-behavior: smooth;
-
 }
 
-#carousel::-webkit-scrollbar {
-  display: none;
-}
 
 .nav.Prev, .nav.Next {
   background: white;
@@ -596,8 +607,6 @@ body {
   position: relative;
   margin: 10px;
   padding: 10px;
-  display: flex;
-  align-items: center;
 }
 
 .nav.Prev {
@@ -616,11 +625,27 @@ body {
 } */
 
 #modal {
-  width: 500 px;
-  background: white;
-  z-index: 1;
-  border: 1px solid black;
+  background-color: rgb(241, 241, 241);
+  padding: 20px;
+  border: 1px solid #000;
+  width: 600px;
+  max-height: 550px;
+  margin: 0 auto;
+  text-align: center;
+}
 
+#modalbttn{
+  float: left;
+}
+
+#modal_container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-top: 100px;
+  z-index: 1;
 }
 
 .rpcThumbnails {

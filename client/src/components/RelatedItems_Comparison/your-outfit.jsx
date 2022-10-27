@@ -6,11 +6,10 @@ import withClickData from '../hoc_click_data.jsx';
 
 function YourOutfit (props) {
   const ref = React.createRef();
-  const[start, setStart] = useState('0px');
-  const[end, setEnd] = useState(3);
+  const[start, setStart] = useState(0);
   const [Prev, togglePrev] = useState('');
   const [Next, toggleNext] = useState('');
-  const [overflow, toggleOverflow] = useState('hidden');
+  //const [width, toggleNext] = useState(ref.current)
 
   const arr = props.list.map((element, index) =>(
     <RPC action={false} key={index} remove={props.removeProd}
@@ -20,55 +19,46 @@ function YourOutfit (props) {
 
 
   useLayoutEffect(()=> {
-    if(start === '0px') {
+    if(start.toString() + 'px' === '0px') {
       togglePrev(true);
-      console.log(isOverflowing(document.getElementById('carousel')));
+      console.log();
     }
-    if(!isOverflowing(document.getElementById('carousel-container'))) {
-      toggleNext(true);
-    }
-    if(start !== '0px') {
+    if(start.toString() + 'px' !== '0px') {
       togglePrev(false)
     }
     if(ref.current.clientWidth < ref.current.scrollWidth) {
       toggleNext(false);
     }
-  }, [start, end, props.list.length, ref])
+    if(!(ref.current.clientWidth < ref.current.scrollWidth)) {
+      toggleNext(true);
+    }
+  }, [start, props.list.length, ref])
 
-
-  const isOverflowing = (element) => {
-    return element.offsetWidth < element.scrollWidth;
-  }
-
-  // useEffect(() => {
-  //   setStart('-300px');
-  //   toggleOverflow('hidden');
-  // }, [overflow]);
 
   return (
-    <div data-testid="outfit" className="main-container">YourOutfit
-      {Prev ?
-        ('') :
-        (<button className="nav Prev" onClick={(e) => { props.interaction(e.target)} }>Prev</button>)
-      }
-      <div id="carousel-container" ref={ref}>
-        {console.log(arr.length)}
-        <div id="carousel" style={{ transform: `translateX(${start})` }}>
-          <div className="card" onClick={(e) => {props.add(e); props.interaction(e.target)}}>
-            <FontAwesomeIcon icon={faPlus} />
-            <p>Add to Outfit</p>
-          </div>
-          {arr}
-        </div>
-        {console.log('here start', start, 'end', end)}
-      </div>
-      {Next ?
+    <div data-testid="outfit" className="container">YourOutfit
+      <div className="main-container">
+        {Prev ?
           ('') :
-          (<button className="nav Next" onClick={(e) => {
-            props.interaction(e.target);
-            setStart('-300px');
-          }}>Next</button>)
-      }
+          (<button className="nav Prev" onClick={(e) => { props.interaction(e.target); setStart(start + 300);} }>Prev</button>)
+        }
+        <div id="carousel-container" ref={ref}>
+          <div id="carousel" style={{ transform: `translateX(${start.toString()}px)` }}>
+            <div className="card" onClick={(e) => {props.add(e); props.interaction(e.target)}}>
+              <FontAwesomeIcon icon={faPlus} />
+              <p>Add to Outfit</p>
+            </div>
+            {arr}
+          </div>
+        </div>
+        {Next ?
+            ('') :
+            (<button className="nav Next" onClick={(e) => {
+              props.interaction(e.target);
+              setStart(start - 300);
+            }}>Next</button>)
+        }
+      </div>
     </div>
   )
 }
