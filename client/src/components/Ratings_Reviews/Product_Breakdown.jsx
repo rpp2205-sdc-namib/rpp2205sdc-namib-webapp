@@ -49,20 +49,3 @@ const Product_Breakdown = ({reviewsMeta}) => {
 }
 
 export default Product_Breakdown;
-
-
-{/* <div className="progress">
-<div className="bar" style={{width:`${ratingInPercentage(parseInt(val.value))}`}}></div>
-<p className="percent">{this.state.fiveStarReviews}</p>
-</div> */}
-
-{/* <div className="seperator" style={{left:`20%`}}></div>
-<div className="seperator" style={{left:`40%`}}></div>
-<div className="seperator" style={{left:`60%`}}></div> */}
-{/* <div className="seperator" style={{left:`80%`}}></div> */}
-
-{/* <div className="characteristic_name">{data.characteristics[key][1]}</div>
-<div className="characteristic_name">{data.characteristics[key][2]}</div>
-<div className="characteristic_name">{data.characteristics[key][3]}</div>
-<div className="characteristic_name">{data.characteristics[key][4]}</div>
-<div className="characteristic_name">{data.characteristics[key][5]}</div> */}
