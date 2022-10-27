@@ -69,7 +69,7 @@ class Ratings_Reviews extends React.Component {
 
   render() {
     return (
-      <div className="review_container">
+      <div className="review_container" id="review_container">
         <Rating_Breakdown productId={this.props.productId} rating={this.props.rating} reviews={this.props.reviews} ratings={this.props.ratings} totalReviews={this.props.totalReviews} totalRatings={this.props.totalRatings} filterReviews={this.filterReviews} clearFilter={this.clearFilter}/>
         <Reviews_List productId={this.props.productId} reviews={this.state.filteredReviews.length > 0 ? this.state.filteredReviews : this.props.reviews} totalReviews={this.state.filteredReviews.length > 0 ? this.state.filteredReviews.length : this.props.totalReviews}/>
       </div>
