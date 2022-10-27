@@ -76,7 +76,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.init('71697');
+    var prodId = window.location.pathname
+    if(prodId.slice(1) !== '') {
+      this.init(prodId.slice(1))
+    } else {
+      this.init('71697');
+    }
   }
 
   addProduct(e) {
@@ -100,6 +105,7 @@ class App extends React.Component {
 
   handleProductIdChange(newId) {
     //can be used by all components for product ID change
+    location.pathname = ('/' + newId.toString());
     console.log(newId);
     this.init(newId.toString());
 
@@ -116,9 +122,7 @@ class App extends React.Component {
     }
     return (
       <div style={{"backgroundColor": this.state.background}}>
-        <ErrorBoundary>
           <TopBar />
-          </ErrorBoundary>
           <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
           <RPList productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
           {/* {this.state.carousel.map((element) => {

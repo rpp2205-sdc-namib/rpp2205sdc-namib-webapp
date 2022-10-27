@@ -62,6 +62,16 @@ app.put('qa/questions/:question_id/report', updateReportForQuestion);
 app.put('/qa/answers/:answer_id/report', updateReportForAnswer);
 
 //add a wildcard matcher thats send back index.html
+app.get('/:productId', (req, res) => {
+
+  res.sendFile('index.html', { root: path.join(__dirname, '../client/dist') }, (err) => {
+    if(err) {
+      next(err);
+    } else {
+      console.log('Sent');
+  }
+  })
+})
 
 app.listen(port, () => {
   console.log(`Listening on  http://localhost:${port}`);
