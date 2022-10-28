@@ -4,7 +4,7 @@ import Stars from '../FiveStars.jsx';
 import axios from 'axios';
 import withClickData from '../hoc_click_data.jsx';
 import StarRating from './Star_Rating.jsx';
-import config from './config.js';
+import config from './config_rr.js';
 const data = require("./data.json");
 
 class Write_New_Review extends React.Component {
