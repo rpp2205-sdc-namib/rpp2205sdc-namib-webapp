@@ -3,8 +3,6 @@ import RPC from './related-product-cards.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import withClickData from '../hoc_click_data.jsx';
-import '../../../dist/style.css';
-
 
 function YourOutfit (props) {
   const ref = React.createRef();
@@ -37,8 +35,8 @@ function YourOutfit (props) {
   }, [start])
 
   return (
-    <div data-testid="outfit" className="container">
-      <p>YourOutfit</p>
+    <div className="container">
+      <p data-testid="outfit">Your Outfit</p>
       <div className="main-container">
         {Prev ?
           ('') :
