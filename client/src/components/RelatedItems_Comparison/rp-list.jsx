@@ -68,7 +68,8 @@ import withClickData from '../hoc_click_data.jsx';
 
 
   return (
-    <div data-testid="rpList" className="container">Related Products
+    <div data-testid="rpList" className="container">
+      <p>Related Products</p>
       <div className="main-container">
           {Prev ?
             ('') :

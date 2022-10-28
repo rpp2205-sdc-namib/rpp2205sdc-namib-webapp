@@ -37,7 +37,8 @@ function YourOutfit (props) {
   }, [start])
 
   return (
-    <div data-testid="outfit" className="container">YourOutfit
+    <div data-testid="outfit" className="container">
+      <p>YourOutfit</p>
       <div className="main-container">
         {Prev ?
           ('') :
