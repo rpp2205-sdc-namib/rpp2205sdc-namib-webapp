@@ -3,6 +3,8 @@ import RPC from './related-product-cards.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import withClickData from '../hoc_click_data.jsx';
+import '../../../dist/style.css';
+
 
 function YourOutfit (props) {
   const ref = React.createRef();
@@ -18,7 +20,7 @@ function YourOutfit (props) {
   ));
 
 
-  useLayoutEffect(()=> {
+  useEffect(()=> {
     if(start.toString() + 'px' === '0px') {
       togglePrev(true);
       console.log();
@@ -32,8 +34,7 @@ function YourOutfit (props) {
     if(!(ref.current.clientWidth < ref.current.scrollWidth)) {
       toggleNext(true);
     }
-  }, [start, props.list.length, ref])
-
+  }, [start])
 
   return (
     <div data-testid="outfit" className="container">YourOutfit
@@ -49,7 +50,7 @@ function YourOutfit (props) {
               <p>Add to Outfit</p>
             </div>
             {arr}
-          </div>
+         </div>
         </div>
         {Next ?
             ('') :

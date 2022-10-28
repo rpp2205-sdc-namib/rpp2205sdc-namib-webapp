@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import withClickData from '../hoc_click_data.jsx';
-import config from './config.js';
+//import config from './config.js';
 
 const ModalWindow = (props) => {
   const [answer, setAnswer] = useState('');
