@@ -10,11 +10,11 @@ import withClickData from '../hoc_click_data.jsx';
   const [rp, setRP] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const[start, setStart] = useState(0);
-  const[end, setEnd] = useState(4);
-  const [Prev, togglePrev] = useState(true);
-  const [Next, toggleNext] = useState(false);
+  const [Prev, togglePrev] = useState('');
+  const [Next, toggleNext] = useState('');
   const [prodInfo, setProdInfo] = useState({})
   const [name, setName] = useState('')
+  const ref = React.createRef();
 
   const arr = rp.map((element, index) => {
     return(
@@ -50,42 +50,44 @@ import withClickData from '../hoc_click_data.jsx';
 
   }, [props.productId]);
 
-    useEffect(()=> {
-      if(start === 0) {
-        togglePrev(true);
-      }
-      if(end === arr.length) {
-        toggleNext(true);
-      }
-      if(start > 0) {
-        togglePrev(false)
-      }
-      if(end < arr.length) {
-        toggleNext(false);
-      }
-    }, [start, end, rp.length])
+  useEffect(()=> {
+    if(start.toString() + 'px' === '0px') {
+      togglePrev(true);
+      console.log();
+    }
+    if(start.toString() + 'px' !== '0px') {
+      togglePrev(false)
+    }
+    if(ref.current.clientWidth < ref.current.scrollWidth) {
+      toggleNext(false);
+    }
+    if(!(ref.current.clientWidth < ref.current.scrollWidth)) {
+      toggleNext(true);
+    }
+  }, [start, ref])
 
 
   return (
-    <div data-testid="rpList" className="container">Related Products
-      <div id="carousel-container">
-        {Prev ?
-          ('') :
-          (<button onClick={(e) => { props.interaction(e.target); setStart(start - 1); setEnd(end - 1);}}>Prev</button>)
-        }
-        <div id="carousel">
-          {arr}
+    <div data-testid="rpList" className="container">
+      <p>Related Products</p>
+      <div className="main-container">
+          {Prev ?
+            ('') :
+            (<button className="nav Prev" onClick={(e) => { props.interaction(e.target); setStart(start + 300);}}>Prev</button>)
+          }
+        <div id="carousel-container" ref={ref}>
+          <div id="carousel" style={{ transform: `translateX(${start.toString()}px)` }}>
+            {arr}
+          </div>
+          {showModal ? (<Modal card={prodInfo} overview={props.overview} open={showModal} closeModal={() => setShowModal(false)} />) : ('')}
         </div>
-
-        {Next ?
-          ('') :
-          (<button onClick={(e) => {
-            props.interaction(e.target);
-            setStart(start + 1);
-            setEnd(end + 1);
-          }}>Next</button>)
-        }
-        {showModal ? (<Modal card={prodInfo} overview={props.overview} open={showModal} closeModal={() => setShowModal(false)} />) : ('')}
+          {Next ?
+            ('') :
+            (<button className="nav Next" onClick={(e) => {
+              props.interaction(e.target);
+              setStart(start - 300);
+            }}>Next</button>)
+          }
       </div>
     </div>
   )

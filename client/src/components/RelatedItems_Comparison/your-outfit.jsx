@@ -18,7 +18,7 @@ function YourOutfit (props) {
   ));
 
 
-  useLayoutEffect(()=> {
+  useEffect(()=> {
     if(start.toString() + 'px' === '0px') {
       togglePrev(true);
       console.log();
@@ -32,11 +32,11 @@ function YourOutfit (props) {
     if(!(ref.current.clientWidth < ref.current.scrollWidth)) {
       toggleNext(true);
     }
-  }, [start, props.list.length, ref])
-
+  }, [start])
 
   return (
-    <div data-testid="outfit" className="container">YourOutfit
+    <div className="container">
+      <p data-testid="outfit">Your Outfit</p>
       <div className="main-container">
         {Prev ?
           ('') :
@@ -49,7 +49,7 @@ function YourOutfit (props) {
               <p>Add to Outfit</p>
             </div>
             {arr}
-          </div>
+         </div>
         </div>
         {Next ?
             ('') :
