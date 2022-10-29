@@ -3,3 +3,4 @@ client/dist/main.js
 .env
 coverage/
 client/src/components/Questions_Answers/config.js
+client/src/components/Ratings_Reviews/config_rr.js

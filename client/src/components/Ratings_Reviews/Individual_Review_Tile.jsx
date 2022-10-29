@@ -46,15 +46,7 @@ class Individual_Review_Tile extends React.Component {
     })
   }
 
-  // handleReport() {
-  //   // change the text to "Reported"
-  //   this.setState({
-  //     isReported: true
-  //   });
-  // }
-
   handleIncreaseCounts(e, review_id) {
-    // increase the count of helpfulness
     let text = e.target.innerText;
     if (text === "Yes") {
 
@@ -176,15 +168,3 @@ class Individual_Review_Tile extends React.Component {
 }
 
 export default withClickData(Individual_Review_Tile, 'ratings_and_reviews');
-
-
-{/*
-<div>Photos: {this.props.review.photos}</div>
- */
-}
-
-
-
-{/* <div>{this.props.review.body}</div> */}
-
-// {this.props.review.reponse === null ? <div>test</div> :<div className="review_response"><strong>Response:</strong><div>{this.props.review.response}</div></div>}

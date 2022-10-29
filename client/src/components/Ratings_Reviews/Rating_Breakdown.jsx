@@ -85,7 +85,6 @@ class Rating_Breakdown extends React.Component {
   }
 
   render() {
-    console.log(this.state.threeStarReviews);
     return (
       <div className="ratings_breakdown">
         <strong>Ratings and Reviews</strong>
@@ -149,14 +148,3 @@ class Rating_Breakdown extends React.Component {
 }
 
 export default withClickData(Rating_Breakdown, 'ratings_and_reviews');
-
-{/* <p>
-<a className="show_more" onClick={this.show}>
-  {this.state.expanded ? (
-     <span>Show less</span>
-   ) : (
-     <span>Show more</span>
-   )
-  }
-</a>
-</p> */}
