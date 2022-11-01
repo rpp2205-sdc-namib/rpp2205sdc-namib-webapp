@@ -31,14 +31,45 @@ class Reviews_List extends React.Component {
       })
     }
 
+
     if (prevState.totalReviews !== this.props.totalReviews) {
-      this.setState({
-        productId: this.props.productId,
-        limitReached: false,
-        sortOption: 'relevance',
-        reviews: this.props.reviews,
-        tiles: 2
-      })
+      console.log(this.props.reviews);
+      console.log(this.state.reviews);
+      console.log(this.props.filteredReviewRatings);
+      let array = this.props.filteredReviewRatings;
+      let values = [];
+      let newReviews = [];
+
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] === 1) {
+          values.push(i + 1);
+        }
+      }
+
+      if (values.length === 0) {
+        this.setState({
+          productId: this.props.productId,
+          limitReached: false,
+          sortOption: 'relevance',
+          reviews: this.props.reviews,
+          tiles: 2
+        })
+      } else {
+        for (var j = 0; j < this.state.reviews.length; j++) {
+          for (var k = 0; k < values.length; k++) {
+            if (values[k] === this.state.reviews[j].rating) {
+              newReviews.push(this.state.reviews[j]);
+            }
+          }
+        }
+
+        this.setState({
+          productId: this.props.productId,
+          limitReached: false,
+          reviews: newReviews,
+          tiles: 2
+        })
+      }
     }
   }
 
@@ -70,20 +101,48 @@ class Reviews_List extends React.Component {
   }
   }
 
-  sort(e) {
-    var sort = e.target.value;
+  sort(option) {
+    var sort = option;
     var count = 500;
     if (sort === this.state.sortOption) {
       return null
     } else {
       axios.get(`/reviews/${this.state.productId}/${count}/${sort}`)
         .then((results) => {
-          this.setState({
-            reviews: results.data.results,
-            sortOption: sort,
-            limitReached: false,
-            tiles: 2
-          })
+          if(this.props.filteredReviewRatings.includes(1)) {
+            let array = this.props.filteredReviewRatings;
+            let values = [];
+            let newReviews = [];
+
+            for (var i = 0; i < array.length; i++) {
+              if (array[i] === 1) {
+                values.push(i + 1);
+              }
+            }
+
+            for (var j = 0; j < results.data.results.length; j++) {
+              for (var k = 0; k < values.length; k++) {
+                if (values[k] === results.data.results[j].rating) {
+                  newReviews.push(results.data.results[j]);
+                }
+              }
+            }
+
+            this.setState({
+              reviews: newReviews,
+              sortOption: sort,
+              limitReached: false,
+              tiles: 2
+            })
+
+          } else {
+            this.setState({
+              reviews: results.data.results,
+              sortOption: sort,
+              limitReached: false,
+              tiles: 2
+            })
+          }
         })
         .catch((error) => {
           console.error(error);
@@ -97,7 +156,7 @@ class Reviews_List extends React.Component {
         <div className="reviews_list">
         <div className="sort_options">
           <strong>{this.props.totalReviews} reviews, sorted by</strong>
-          <select id="review_list_select" value={this.state.sortOption} onChange={(e) => {this.sort(e)}}>
+          <select id="review_list_select" value={this.state.sortOption} onChange={(e) => {this.sort(e, false)}}>
             <option value="relevance">relevance</option>
             <option value="newest">newest</option>
             <option value="helpful">helpful</option>
@@ -122,7 +181,7 @@ class Reviews_List extends React.Component {
       <div className="reviews_list">
         <div className="sort_options">
           <strong>{this.props.totalReviews} reviews, sorted by</strong>
-          <select id="review_list_select" value={this.state.sortOption} onChange={(e) => {this.sort(e)}}>
+          <select id="review_list_select" value={this.state.sortOption} onChange={(e) => {this.sort(e.target.value)}}>
             <option value="relevance">relevance</option>
             <option value="newest">newest</option>
             <option value="helpful">helpful</option>
