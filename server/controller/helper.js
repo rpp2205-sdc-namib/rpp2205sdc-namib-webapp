@@ -89,8 +89,9 @@ module.exports = {
 
   getQuestionsHandler: (req, res) => {
     var product_id = req.params.product_id;
+    var count = req.params.count;
 
-    axios.get(`${API_Link}/qa/questions?product_id=${product_id}`, auth)
+    axios.get(`${API_Link}/qa/questions?product_id=${product_id}&count=${count}`, auth)
     .then(response => {
       res.status(200).send(response.data);
     })

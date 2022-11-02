@@ -16,6 +16,7 @@ class Questions_Answers extends React.Component {
       viewMoreQuestions: false,
       isFormShown: false,
       searchWord: '',
+      count: 2
     }
 
     this.getAllQuestions = this.getAllQuestions.bind(this);
@@ -32,7 +33,7 @@ class Questions_Answers extends React.Component {
   }
 
   getAllQuestions() {
-    return axios.get(`/qa/questions/${this.props.productId}`)
+    return axios.get(`/qa/questions/${this.props.productId}/20`)
     .then(data => {
       let sortedQAs = this.sortQuestionsByHelpfulness(data.data.results);
       this.setState({
@@ -60,7 +61,8 @@ class Questions_Answers extends React.Component {
   handleViewMoreQuestions(e) {
     this.props.interaction(e.target)
     this.setState({
-      viewMoreQuestions: true
+      viewMoreQuestions: true,
+      count: this.state.count + 2
     });
   }
 
@@ -85,7 +87,7 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
-    console.log('isFormShown: ', this.state.isFormShown)
+    console.log('cou t: ', this.state.count)
     if (!this.props.productId || !this.props.productName) {
       throw new Error('The product ID or product name is not specified');
     }
@@ -102,10 +104,19 @@ class Questions_Answers extends React.Component {
             );
           })}
           {this.state.viewMoreQuestions && this.state.QAs.map((qa, index) => {
-            if (index < 2) return;
             return (
               <QA key={index} qa={qa} productId={this.props.productId} productName={this.props.productName} />
             )
+            console.log('index: ', index)
+            // if (index < 2) return;
+            // if (this.state.count - 2 <= index && index < this.state.count) {
+            //   return (
+            //     <QA key={index} qa={qa} productId={this.props.productId} productName={this.props.productName} />
+            //   )
+            // }
+            // return (
+            //   <QA key={index} qa={qa} productId={this.props.productId} productName={this.props.productName} />
+            // )
           })}
         </> :
         <>

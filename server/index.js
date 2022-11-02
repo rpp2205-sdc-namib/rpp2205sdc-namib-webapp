@@ -18,7 +18,7 @@ app.get('/reviews/meta/:product_id', getReviewsHandler);
 
 app.get('/reviews/:product_id/:count/:sort', getReviewsHandler);
 
-app.get('/qa/questions/:product_id', getQuestionsHandler);
+app.get('/qa/questions/:product_id/:count', getQuestionsHandler);
 
 app.get('/qa/questions/:question_id/answers/:count', getAnswersHandler);
 
