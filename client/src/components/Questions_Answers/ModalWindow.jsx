@@ -14,23 +14,38 @@ const ModalWindow = (props) => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [uploadedImagesUrl, setUploadedImagesUrl] = useState([]);
-  const [uploadCounts, setUploadCounts] = useState(0);
+  const [imageFiles, setImageFiles] = useState([]);
+  const [imageFormData, setImageFormData] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleUploadPhotos = (files) => {
+  const generateImageData = (files) => {
     let formData = new FormData();
     formData.append('file', files[0]);
     formData.append('upload_preset', config.CLOUD_PRESET);
 
-    axios.post(`https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}/image/upload`, formData)
-    .then(response => {
-      let url = response.data.secure_url;
-      setUploadedImagesUrl(uploadedImagesUrl.concat(url));
-      setUploadCounts(uploadCounts + 1);
+    let src = URL.createObjectURL(files[0])
+    let srcArray = imageFiles.concat(src);
+    let formDataArray = imageFormData.concat(formData);
+
+    setImageFiles(srcArray);
+    setImageFormData(formDataArray);
+  }
+
+  const uploadPhotos = () => {
+    let promises = [];
+    for (var i = 0; i < imageFormData.length; i++) {
+      let request = axios.post(`https://api.cloudinary.com/v1_1/${config.CLOUD_NAME}/image/upload`, imageFormData[i]);
+      promises.push(request);
+    }
+
+    return Promise.all(promises)
+    .then(responseArr => {
+      return responseArr.map(res => {
+        return res.data.secure_url;
+      })
     })
     .catch(err => {
-      console.log('failed to upload the image');
+      console.log('err: ', err)
     })
   }
 
@@ -71,16 +86,18 @@ const ModalWindow = (props) => {
     return totalValid
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // props.interaction(e.target);
     if (validateUserInput()) {
       if (isAnswerValid) {
-        submitForm(`/qa/questions/${props.questionId}/answers`, {
-          body: answer,
-          name: nickname,
-          email: email,
-          photos: uploadedImagesUrl
+        uploadPhotos()
+        .then(data => {
+          submitForm(`/qa/questions/${props.questionId}/answers`, {
+            body: answer,
+            name: nickname,
+            email: email,
+            photos: data
+          }, e.target)
         })
       } else if (isQuestionValid) {
         submitForm(`qa/questions`, {
@@ -93,9 +110,10 @@ const ModalWindow = (props) => {
     }
   }
 
-  const submitForm = (url, parameter) => {
+  const submitForm = (url, parameter, e) => {
     axios.post(url, parameter)
     .then(data => {
+      props.interaction(e);
       setIsSubmitted(true);
     })
     .catch(err => {
@@ -171,16 +189,16 @@ const ModalWindow = (props) => {
               onChange={(e) => handleEmailChange(e.target.value)}
               placeholder="Example: jack@email.com"/>
             <p className="sub_text">For authentication reasons, you will not be emailed</p>
-            {props.questionBody && uploadCounts < 5 &&
+            {props.questionBody && imageFiles.length < 5 &&
               <div className="upload_button">
                 <label className="upload_text">
-                <input type="file" onChange={(e) => handleUploadPhotos(e.target.files)} multiple/>Upload your photos
+                <input type="file" onChange={(e) => generateImageData(e.target.files)} multiple/>Upload your photos
                 </label>
               </div>
             }
-            {uploadedImagesUrl.map(url => (
-              <img key={url} src={url} className="upload_image"/>
-            ))}
+            {imageFiles.map(image => {
+              return <img src={image} key={image} className="upload_image"/>
+            })}
             <input
               type="submit"
               value={props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}

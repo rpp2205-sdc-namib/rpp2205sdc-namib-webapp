@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
-const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, postAnswerHandler, postQuestionHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer, uploadPhotosHandler, postReviewHandler, updateHelpfulCountsForReview, updateReportForReview } = require('./controller/helper.js');
+const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, postAnswerHandler, postQuestionHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer, postReviewHandler, updateHelpfulCountsForReview, updateReportForReview } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
 
@@ -34,12 +34,9 @@ app.post('/products', (req, res) => {
 
 app.post('/reviews', postReviewHandler);
 
-app.post('/qa/questions', postQuestionHandler)
+app.post('/qa/questions', postQuestionHandler);
 
-app.post('/qa/questions/:question_id/answers', postAnswerHandler)
-
-app.post('/upload/:product_id/:question_id/:image_name', uploadPhotosHandler);
-
+app.post('/qa/questions/:question_id/answers', postAnswerHandler);
 
 
 //put routes

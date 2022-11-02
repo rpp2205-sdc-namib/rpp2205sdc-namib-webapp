@@ -1406,7 +1406,7 @@ input.rating {
 }
 
 .upload_image {
-  display: block;
+  display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px;
   width: 60px;
@@ -1435,6 +1435,7 @@ input.rating {
 }
 
 .submit_button {
+  display: block;
   background-color: #0066ff;
   font-size: 16px;
 }
