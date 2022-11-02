@@ -11,7 +11,7 @@ class Question extends React.Component {
     this.state = {
       helpfulness: props.question.question_helpfulness,
       isFormShown: false,
-      isYesClicked: false
+      isYesClicked: false,
     }
 
     this.handleAddAnswer = this.handleAddAnswer.bind(this);
@@ -73,6 +73,7 @@ class Question extends React.Component {
             questionId={this.props.question.question_id}
             questionBody={this.props.question.question_body}
             productName={this.props.productName}
+            isFormShown={this.state.isFormShown}
             closeForm={this.closeForm}
           />}
       </div>

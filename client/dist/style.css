@@ -1387,10 +1387,14 @@ input.rating {
   color: #ff0000;
 }
 
-.sub_text {
+.sub_text, .form_warning {
   font-size: 12px;
   margin-top: 5px;
   margin-bottom: 20px;
+}
+
+.form_warning {
+  color: red;
 }
 
 .upload_button, .submit_button {
@@ -1402,8 +1406,9 @@ input.rating {
 }
 
 .upload_image {
-  display: inline-block;
+  display: block;
   margin-right: 10px;
+  margin-bottom: 10px;
   width: 60px;
   height: 60px;
 }

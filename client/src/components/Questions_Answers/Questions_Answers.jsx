@@ -85,6 +85,7 @@ class Questions_Answers extends React.Component {
   }
 
   render() {
+    console.log('isFormShown: ', this.state.isFormShown)
     if (!this.props.productId || !this.props.productName) {
       throw new Error('The product ID or product name is not specified');
     }
