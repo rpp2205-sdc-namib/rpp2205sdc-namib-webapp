@@ -1,8 +1,7 @@
 const axios = require('axios');
 
 module.exports = {
-
-  totalReviewsAndAvgRating: (obj) => {
+  totalRatingsAndAvgRating: (obj) => {
     var arr = [1, 2, 3, 4, 5];
     var helperArr = arr.reduce((acc, element) => {
       var key = String(element);
@@ -10,6 +9,8 @@ module.exports = {
       acc[1] += Number(obj[key] * element) || 0;
       return acc;
     }, [0, 0]);
+
+    console.log(helperArr);
     return [helperArr[0], (Math.round(helperArr[1] / helperArr[0] * 100) / 100).toFixed(2)];
   },
 
