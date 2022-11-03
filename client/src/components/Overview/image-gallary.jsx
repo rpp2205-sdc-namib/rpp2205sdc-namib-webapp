@@ -89,6 +89,12 @@ class ImageGallary extends React.Component {
     }
     var arrowForwardNotNeeded = (this.state.bottom === this.props.photos.length - 1 || this.props.photos.length <= 4);
     var arrowBackNotNeeded = (this.state.top === 0 || this.props.photos.length <= 4);
+    var original_url = this.props.photos[this.props.currentPhotoIndex]?.url;
+    if (original_url) {
+      var current_url = original_url.slice(0, original_url.length - 2) + '40';
+    } else {
+      var current_url = 'img/NoImageThumbnail.png';
+    }
     return (
       <div className="image-gallary" data-testid="test-ImageGallary">
         <div className="gallary-list">
@@ -103,7 +109,7 @@ class ImageGallary extends React.Component {
         {arrowForwardNotNeeded ? null : <div className="arrow-down-container" onMouseOver={this.handleArrowDown.bind(this)}><div className="arrow-down"></div></div>}
         </div>
         <div className="current-photo">
-          <img id="current-photo" onClick={this.handleClick.bind(this)} style={{"cursor": "zoom-in"}} src={this.props.photos[this.props.currentPhotoIndex]?.url || 'img/NoImageThumbnail.png'}></img>
+          <img id="current-photo" onClick={this.handleClick.bind(this)} style={{"cursor": "zoom-in"}} src={current_url}></img>
             {this.props.currentPhotoIndex === 0 ? null : <div id="backBtn" onClick={this.handleBackward.bind(this)}>
             </div>}
             {this.props.currentPhotoIndex ===  this.props.photos.length - 1 ? null : <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
