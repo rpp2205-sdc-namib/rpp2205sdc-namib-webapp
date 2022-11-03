@@ -10,7 +10,7 @@ This website is divided into 4 categories.
 - Ratings & Reviews
 
 ## Description
-### Questions & Answers
+#### Questions & Answers
 This section includes a list of questions and answers for the currently rendered product.
 A user can also submit a question or an answer for the current product.
 
@@ -35,7 +35,7 @@ $ npm install
 * Add your own parameters on each file
 
 config_rr.js
-```html
+```javascript
 module.exports = {
   // Add your "preset"
   cloudinary_preset: ""
@@ -43,7 +43,7 @@ module.exports = {
 ```
 
 config.js
-```html
+```javascript
 module.exports = {
   CLOUD_NAME: "", // Add your "cloud name"
   CLOUD_PRESET: "" // Add your "preset"
@@ -56,7 +56,7 @@ $ npm run build
 ```
 
 ## Team Members
-Sijia Tao - Product Overview
-Stacey Pereira - Related Items & Comparison
-Yui Murayama - Questions & Answers
-Brandon Bissing - Ratings & Reviews
+Sijia Tao - Product Overview <br>
+Stacey Pereira - Related Items & Comparison <br>
+Yui Murayama - Questions & Answers <br>
+Brandon Bissing - Ratings & Reviews <br>
