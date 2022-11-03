@@ -64,7 +64,7 @@ class AddToCart extends React.Component {
       </div>
       <div className="add-to-card-line2">
         <button id="add-to-cart-btn" onClick={this.handleButtonClick.bind(this)}>Add To Cart</button>
-        <AddToOutfit />
+        <AddToOutfit addToOutfit={this.props.addToOutfit} removeFromOutfit={this.props.removeFromOutfit} productId={this.props.productId}/>
       </div>
 
     </div>)
