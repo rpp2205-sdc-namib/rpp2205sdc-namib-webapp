@@ -1,4 +1,5 @@
 const spdy = require('spdy');
+var compression = require('compression');
 const fs = require('fs');
 const express = require('express');
 const app = express();
@@ -6,7 +7,10 @@ const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
 const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, postAnswerHandler, postQuestionHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer, uploadPhotosHandler, postReviewHandler, updateHelpfulCountsForReview, updateReportForReview } = require('./controller/helper.js');
+
 app.use(bodyParser.json());
+app.use(compression());
+
 const options = {
   key: fs.readFileSync(__dirname + '/http2-express/server.key'),
   cert:  fs.readFileSync(__dirname + '/http2-express/server.crt')
@@ -21,8 +25,6 @@ spdy
       console.log('Listening on PORT: ' + port + '.')
     }
   })
-
-
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('/', async (req, res) => {
