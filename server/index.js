@@ -1,3 +1,6 @@
+const spdy = require('spdy');
+var compression = require('compression');
+const fs = require('fs');
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -6,8 +9,32 @@ const bodyParser = require('body-parser');
 const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesHandler, getReviewsHandler, getQuestionsHandler, getAnswersHandler, postAnswerHandler, postQuestionHandler, updateHelpfulCountsForQuestion, updateHelpfulCountsForAnswer, updateReportForQuestion, updateReportForAnswer, uploadPhotosHandler, postReviewHandler, updateHelpfulCountsForReview, updateReportForReview } = require('./controller/helper.js');
 
 app.use(bodyParser.json());
+app.use(compression());
+
+const options = {
+  key: fs.readFileSync(__dirname + '/http2-express/server.key'),
+  cert:  fs.readFileSync(__dirname + '/http2-express/server.crt')
+}
+spdy
+  .createServer(options, app)
+  .listen(port, (error) => {
+    if (error) {
+      console.error(error)
+      return process.exit(1)
+    } else {
+      console.log('Listening on PORT: ' + port + '.')
+    }
+  })
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get('/', async (req, res) => {
+  try {
+    res.writeHead(200);
+    res.end(await readFile("index.html"))
+  } catch(err) {
+    res.status(500).send(err.toString());
+  }
+})
 
 //get routes
 app.get('/products/:product_id', getProductHandler);
@@ -71,9 +98,9 @@ app.get('/:productId', (req, res) => {
   })
 })
 
-app.listen(port, () => {
-  console.log(`Listening on  http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Listening on  http://localhost:${port}`);
+// });
 
 
 //app.get('/reviews/:product_id/:count/:page/:sort', getReviewsHandler);
