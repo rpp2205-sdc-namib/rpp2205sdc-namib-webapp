@@ -2,7 +2,7 @@
 Atelier is a responsive and interactive e-commerce clothing website.
 This website is divided into 4 categories.
 
-[![Demo]](https://recordit.co/MrY9eueVsm)
+[![Demo]](https://user-images.githubusercontent.com/57865436/199666313-ef292c70-bb0d-461a-a618-a6a3c224423f.mp4)
 
 - Product Overview
 - Related Items & Comparison
@@ -15,20 +15,48 @@ This section includes a list of questions and answers for the currently rendered
 A user can also submit a question or an answer for the current product.
 
 ## Installation
-Step1. Clone the repo into your computer <br>
-`git clone https://github.com/rpp2205-fec-session/rpp2205-session-atelier.git`
+1. Clone the repo into your computer <br>
+```sh
+$ git clone https://github.com/rpp2205-fec-session/rpp2205-session-atelier.git
+```
 
-Step2. Install NPM packages <br>
-`npm install`
+2. Install NPM packages <br>
+```sh
+$ npm install
+```
 
-Step3. Change the configuration <br>
+3. Change the configuration <br>
 * Change the name of the following files <br>
   config_rr.example.js => config_rr.js <br>
   config.example.js => config.js
 
-* Add your own paramter on each file
+* Create your Cloudinary account (https://cloudinary.com/)
+* Get your "Cloud Name" and "Preset" from your dashboard
+* Add your own parameters on each file
 
-Step4. Start our App <br>
-`npm run build`
+config_rr.js
+```html
+module.exports = {
+  // Add your "preset"
+  cloudinary_preset: ""
+}
+```
 
+config.js
+```html
+module.exports = {
+  CLOUD_NAME: "", // Add your "cloud name"
+  CLOUD_PRESET: "" // Add your "preset"
+}
+```
 
+4. Start our App <br>
+```sh
+$ npm run build
+```
+
+## Team Members
+Sijia Tao - Product Overview
+Stacey Pereira - Related Items & Comparison
+Yui Murayama - Questions & Answers
+Brandon Bissing - Ratings & Reviews
