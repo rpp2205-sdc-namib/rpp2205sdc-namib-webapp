@@ -71,7 +71,7 @@ class Ratings_Reviews extends React.Component {
 
   render() {
     return (
-      <div className="review_container">
+      <div id="review_container" className="review_container">
         <Rating_Breakdown productId={this.props.productId} rating={this.props.rating} reviews={this.props.reviews} ratings={this.props.ratings} totalReviews={this.props.totalReviews} totalRatings={this.props.totalRatings} filterReviews={this.filterReviews} clearFilter={this.clearFilter} reviewsMeta={this.props.reviewsMeta}/>
         <Reviews_List productId={this.props.productId} reviews={this.state.filteredReviews.length > 0 ? this.state.filteredReviews : this.props.reviews} totalReviews={this.state.filteredReviews.length > 0 ? this.state.filteredReviews.length : this.props.totalReviews} currentProduct={this.props.currentProduct} reviewsMeta={this.props.reviewsMeta}/>
       </div>
