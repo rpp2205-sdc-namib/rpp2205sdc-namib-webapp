@@ -2,7 +2,7 @@
 Atelier is a responsive and interactive e-commerce clothing website.
 This website is divided into 4 categories.
 
-[![Demo]](https://user-images.githubusercontent.com/57865436/199661597-cced21c4-db68-490b-bafd-8dcb7d40d306.mp4)
+![demo](https://user-images.githubusercontent.com/57865436/199663559-c2ce89b4-b4f8-49c9-b522-71fd178069fe.gif)
 
 - Product Overview
 - Related Items & Comparison
