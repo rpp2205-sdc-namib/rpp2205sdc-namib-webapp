@@ -13,7 +13,7 @@ const ModalWindow = (props) => {
   const [isNicknameValid, setIsNicknameValid] = useState(false);
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const [isValid, setIsValid] = useState();
   const [imageFiles, setImageFiles] = useState([]);
   const [imageFormData, setImageFormData] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -76,20 +76,33 @@ const ModalWindow = (props) => {
   }
 
   const validateUserInput = () => {
-    (answer.length !== 0 && !isContainOnlyWhiteSpace(answer)) ? setIsAnswerValid(true) : setIsAnswerValid(false);
-    (question.length !== 0 && !isContainOnlyWhiteSpace(question)) ? setIsQuestionValid(true) : setIsQuestionValid(false);
-    (nickname.length !== 0 && !isContainOnlyWhiteSpace(nickname)) ? setIsNicknameValid(true) : setIsNicknameValid(false);
-    (email.length !== 0 && !isContainOnlyWhiteSpace(email) && validateEmail(email)) ? setIsEmailValid(true) : setIsEmailValid(false);
+    let isAnswerValid = answer.length !== 0 && !isContainOnlyWhiteSpace(answer);
+    let isQuestionValid = question.length !== 0 && !isContainOnlyWhiteSpace(question);
+    let isNicknameValid = nickname.length !== 0 && !isContainOnlyWhiteSpace(nickname);
+    let isEmailValid = email.length !== 0 && !isContainOnlyWhiteSpace(email) && validateEmail(email);
     let totalValid = (isAnswerValid || isQuestionValid) && isNicknameValid && isEmailValid;
 
-    setHasError(!totalValid);
+    // (answer.length !== 0 && !isContainOnlyWhiteSpace(answer)) ? setIsAnswerValid(true) : setIsAnswerValid(false);
+    // (question.length !== 0 && !isContainOnlyWhiteSpace(question)) ? setIsQuestionValid(true) : setIsQuestionValid(false);
+    // (nickname.length !== 0 && !isContainOnlyWhiteSpace(nickname)) ? setIsNicknameValid(true) : setIsNicknameValid(false);
+    // (email.length !== 0 && !isContainOnlyWhiteSpace(email) && validateEmail(email)) ? setIsEmailValid(true) : setIsEmailValid(false);
+    // let totalValid = (isAnswerValid || isQuestionValid) && isNicknameValid && isEmailValid;
+
+    // console.log(isAnswerValid)
+    // console.log(isQuestionValid)
+    // console.log(isNicknameValid)
+    // console.log(isEmailValid)
+
+    console.log('hasError: ', totalValid)
+
+    setIsValid(totalValid);
     return totalValid
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateUserInput()) {
-      if (isAnswerValid) {
+      if (answer.length !== 0) {
         uploadPhotos()
         .then(data => {
           submitForm(`/qa/questions/${props.questionId}/answers`, {
@@ -99,7 +112,7 @@ const ModalWindow = (props) => {
             photos: data
           }, e.target)
         })
-      } else if (isQuestionValid) {
+      } else if (question.length !== 0) {
         submitForm(`qa/questions`, {
           body: question,
           name: nickname,
@@ -113,7 +126,7 @@ const ModalWindow = (props) => {
   const submitForm = (url, parameter, e) => {
     axios.post(url, parameter)
     .then(data => {
-      props.interaction(e);
+      // props.interaction(e);
       setIsSubmitted(true);
     })
     .catch(err => {
@@ -145,7 +158,7 @@ const ModalWindow = (props) => {
 
   const closeForm = () => {
     props.closeForm();
-    setHasError(false);
+    setIsValid(false);
     setIsSubmitted(false);
     setIsEmailValid(false);
   }
@@ -160,63 +173,68 @@ const ModalWindow = (props) => {
             <button onClick={props.closeForm}>Close</button>
           </div>
           :
-          <form>
-            {props.questionBody ? <h2>Submit Your Answer</h2> : <h2>Ask Your Question</h2>}
-            {props.questionBody ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
-            {props.questionBody ?
-              <div>
-                <label htmlFor="answer_body">Your Answer:</label>
-                <input type="text" id="answer_body" className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} />
-              </div>
-            :
-              <div>
-                <label htmlFor="question_body">Your Question:</label>
-                <input type="text" id="question_body" className="text_question" maxLength="1000" onChange={(e) => handleQuestionChange(e.target.value)} />
-              </div>
-            }
-            <label htmlFor="nickname">What is your nickname?</label>
-            <input
-              className="nickname"
-              placeholder={props.questionBody ? "jackson11!" : "Example: jack543!"}
-              maxLength="60"
-              id="nickname"
-              onChange={(e) => handleNickNameChange(e.target.value)} />
-            <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
-            <label htmlFor="email">Your Email</label>
-            <input
-              className="email"
-              id="email"
-              onChange={(e) => handleEmailChange(e.target.value)}
-              placeholder="Example: jack@email.com"/>
-            <p className="sub_text">For authentication reasons, you will not be emailed</p>
-            {props.questionBody && imageFiles.length < 5 &&
-              <div className="upload_button">
-                <label className="upload_text">
-                <input type="file" onChange={(e) => generateImageData(e.target.files)} multiple/>Upload your photos
-                </label>
-              </div>
-            }
-            {imageFiles.map(image => {
-              return <img src={image} key={image} className="upload_image"/>
-            })}
-            <input
-              type="submit"
-              value={props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
-              className="submit_button"
-              onClick={handleSubmit} />
-            {hasError && !email.length && <p className="form_warning">You must enter the following: </p>}
-            {hasError ?
+          <div>
+            <form onSubmit={handleSubmit}>
+              {props.questionBody ? <h2>Submit Your Answer</h2> : <h2>Ask Your Question</h2>}
+              {props.questionBody ? <h4>{props.productName}: {props.questionBody}</h4> : <h4>About the {props.productName}</h4>}
+              {props.questionBody ?
+                <div>
+                  <label htmlFor="answer_body">Your Answer:</label>
+                  <input type="text" id="answer_body" className="text_answer" maxLength="1000" onChange={(e) => handleAnswerChange(e.target.value)} />
+                </div>
+              :
+                <div>
+                  <label htmlFor="question_body">Your Question:</label>
+                  <input type="text" id="question_body" className="text_question" maxLength="1000" onChange={(e) => handleQuestionChange(e.target.value)} />
+                </div>
+              }
+              <label htmlFor="nickname">What is your nickname?</label>
+              <input
+                className="nickname"
+                placeholder={props.questionBody ? "jackson11!" : "Example: jack543!"}
+                maxLength="60"
+                id="nickname"
+                onChange={(e) => handleNickNameChange(e.target.value)}
+              />
+              <p className="sub_text">For privacy reasons, do not use your full name or email address</p>
+              <label htmlFor="email">Your Email</label>
+              <input
+                className="email"
+                id="email"
+                onChange={(e) => handleEmailChange(e.target.value)}
+                placeholder="Example: jack@email.com"
+              />
+              <p className="sub_text">For authentication reasons, you will not be emailed</p>
+              {props.questionBody && imageFiles.length < 5 &&
+                <div className="upload_button">
+                  <label className="upload_text">
+                  <input type="file" onChange={(e) => generateImageData(e.target.files)} multiple/>Upload your photos
+                  </label>
+                </div>
+              }
+              {imageFiles.map((image, index) => <img key={image} src={image} className="upload_image"/> )}
+              <input
+                type="submit"
+                value={props.questionBody !== undefined ? 'Submit answer' : 'Submit question'}
+                className="submit_button"
+              />
+            </form>
+            {isValid === false ?
+             <>
+              <p className={`form_warning${email.length ? '_format_error' : ''}`}>You must enter the following: </p>
               <div className="form_warning">{getInvalidFields().map(f => {
-                if (f[0] === 'email' && email.length && !isEmailValid) {
-                  return <li>Your email does not meet the right format</li>
+                if (f[0] === 'email' && email.length && !validateEmail(email)) {
+                  return <li key={f}>Your email does not meet the right format</li>
                 }
                 if (f.length === 0) return <></>
                 return <li key={f[0]}>{f[0]}</li>
               })}
               </div>
-           :
-            <></>}
-          </form>
+             </>
+            :
+              <div></div>
+            }
+          </div>
         }
       </div>
     </div>
