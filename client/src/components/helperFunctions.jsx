@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 module.exports = {
-  //totalRatingsAndAvgRating
   totalRatingsAndAvgRating: (obj) => {
     var arr = [1, 2, 3, 4, 5];
     var helperArr = arr.reduce((acc, element) => {
