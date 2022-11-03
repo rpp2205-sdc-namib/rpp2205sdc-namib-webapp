@@ -94,7 +94,7 @@ class Questions_Answers extends React.Component {
         <h2 className="questions_answers_title">QUESTIONS & ANSWERS</h2>
         <Search handleChangeSearch={this.handleChangeSearch} />
         {this.state.searchWord.length < 2 ?
-        <div className={`questions${this.state.counts > 4 ? '_expand_mode' : ''}`}>
+        <div className={`questions${this.state.counts > 3 ? '_expand_mode' : ''}`}>
           {this.state.QAs.slice(0, this.state.counts).map((qa, index) => {
               return (
                 <QA key={index} qa={qa} productId={this.props.productId} productName={this.props.productName} />
@@ -112,7 +112,7 @@ class Questions_Answers extends React.Component {
         </>
         }
         <div className="questions_btn">
-          {this.state.QAs.length > 2 && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
+          {this.state.QAs.length > 2 && (this.state.counts < this.state.QAs.length) && <button className="more_answered_questions" onClick={this.handleViewMoreQuestions}>More answered questions</button>}
           <button className="add_question" onClick={this.handleAddQuestion}>Add A Question +</button>
         </div>
         {this.state.isFormShown &&

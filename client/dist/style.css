@@ -1217,7 +1217,7 @@ input.rating {
 /********* Questions & Answers widget **********/
 /** Questions & Answers */
 .questions_answers {
-  margin: 0 50px;
+  margin: 0 30px;
   color: #111;
   font-family: Helvetica, sans-serif;
 }
@@ -1250,6 +1250,7 @@ input.rating {
 .QA_container {
   width: 1000px;
   margin: 0 auto;
+  margin-top: 30px;
 }
 
 .load_more_answers, .collapse_answers {
@@ -1259,7 +1260,13 @@ input.rating {
   margin-top: 10px;
   cursor: pointer;
   padding: 0;
+  color: #606060;
 }
+
+.load_more_answers:hover, .collapse_answers:hover {
+  color: rgb(116, 196, 65);
+}
+
 
 /** Answer */
 .answer_container {
@@ -1273,11 +1280,15 @@ input.rating {
 
 .answer_text {
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .answer_sub {
   display: flex;
+}
+
+.answer_sub > * {
+  font-size: 14px;
 }
 
 .border_line {
@@ -1287,7 +1298,6 @@ input.rating {
 
 .by, .answerer, .seller, .answer_date {
   margin-right: 5px;
-  font-size: 14px;
 }
 
 .seller {
