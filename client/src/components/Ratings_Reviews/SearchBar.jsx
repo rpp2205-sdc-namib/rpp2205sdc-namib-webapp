@@ -22,12 +22,6 @@ class SearchBar extends React.Component{
     });
   }
 
-  // handleSubmit(event) {
-  //   event.preventDefault();
-  //   var word = this.state.value;
-  //   this.props.search(word);
-  // }
-
   render() {
     return (
       <div className="search_container_reviews">

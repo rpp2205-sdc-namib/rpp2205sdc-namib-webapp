@@ -10,6 +10,7 @@ class Ratings_Reviews extends React.Component {
     this.state = {
       filteredReviews: [],
       isToggled: [0,0,0,0,0],
+      ratings: this.props.reviewsMeta.ratings
     };
 
     this.clearFilter = this.clearFilter.bind(this);
@@ -25,7 +26,8 @@ class Ratings_Reviews extends React.Component {
     if (this.props.productId !== prevProps.productId) {
       this.setState({
         filteredReviews: [],
-        isToggled: [0,0,0,0,0]
+        isToggled: [0,0,0,0,0],
+        ratings: this.props.reviewsMeta.ratings
       })
     }
   }
@@ -75,9 +77,10 @@ class Ratings_Reviews extends React.Component {
   }
 
   render() {
+    console.log('this is a test for ratings', this.state.ratings)
     return (
-      <div className="review_container">
-        <Rating_Breakdown productId={this.props.productId} rating={this.props.rating} reviews={this.props.reviews} ratings={this.props.ratings} totalReviews={this.props.totalReviews} totalRatings={this.props.totalRatings} filterReviews={this.filterReviews} clearFilter={this.clearFilter} reviewsMeta={this.props.reviewsMeta}/>
+      <div id="review_container">
+        <Rating_Breakdown productId={this.props.productId} rating={this.props.rating} reviews={this.props.reviews} ratings={this.state.ratings} totalReviews={this.props.totalReviews} totalRatings={this.props.totalRatings} filterReviews={this.filterReviews} clearFilter={this.clearFilter} reviewsMeta={this.props.reviewsMeta}/>
         <Reviews_List search={this.search} productId={this.props.productId} reviews={this.state.filteredReviews.length > 0 ? this.state.filteredReviews : this.props.reviews} totalReviews={this.state.filteredReviews.length > 0 ? this.state.filteredReviews.length : this.props.totalReviews} currentProduct={this.props.currentProduct} reviewsMeta={this.props.reviewsMeta} filteredReviewRatings={this.state.isToggled}/>
       </div>
     )

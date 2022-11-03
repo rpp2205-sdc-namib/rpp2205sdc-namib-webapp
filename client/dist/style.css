@@ -685,7 +685,7 @@ div.container > p {
 }
 
 /* ratings_reviews */
-.review_container {
+#review_container {
   height: 700px;
   position: relative;
   display: flex;
@@ -772,6 +772,7 @@ p.review_recommend {
 
 div.review_photo {
   width: 70px;
+  height: 50px;
   text-align: center;
   padding: 1px;
   border: 1px solid black;
@@ -780,13 +781,15 @@ div.review_photo {
 }
 
 img.review_photo {
-  max-width: 100%;
+  width: 70px;
   height: 50px;
 }
 
 img.review_photo_modal {
+  aspect-ratio: 16 / 9;
   max-width: 100%;
-  height: 150px;
+  height: auto;
+  object-fit: cover;
 }
 
 #review_list_select {
