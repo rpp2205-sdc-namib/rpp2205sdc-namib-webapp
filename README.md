@@ -1,15 +1,30 @@
-# 🚀 Welcome to your new awesome project!
+### Atelier
+Atelier is a responsive and interactive e-commerce clothing site.
+There are 4 categories for the page.
 
-This project has been created using **webpack-cli**, you can now run
+- Product Overview
+- Related Items & Comparison
+- Questions & Answers
+- Ratings & Reviews
 
-```
-npm run build
-```
+## Table of Contents
+* Description
+* Installation
+* Usage
+* Team Members
+* Contributing
+* Roadmap
 
-or
+## Description
 
-```
-yarn build
-```
 
-to bundle your application
+
+## Installation
+Step1. Clone the repo into your computer
+`git clone https://github.com/rpp2205-fec-session/rpp2205-session-atelier.git`
+
+Step2. Install NPM packages
+`npm install`
+
+Step3. Start the app
+`npm run build:pro`
