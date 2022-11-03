@@ -1330,10 +1330,14 @@ input.rating {
   text-decoration: underline;
 }
 
-.answers_expand_mode {
+.answers_expand_mode, .questions_expand_mode {
   width: 100%;
   height: 250px;
   overflow: scroll;
+}
+
+.questions_expand_mode  {
+  height: 500px;
 }
 
 .modal_container {
