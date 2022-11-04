@@ -14,6 +14,10 @@ This website is divided into 4 categories.
 This section includes a list of questions and answers for the currently rendered product.
 A user can also submit a question or an answer for the current product.
 
+#### Ratings & Reviews
+This section includes a list of reviews for the currently rendered product.
+A user can also submit a review for the current product.
+
 ## Installation
 1. Clone the repo into your computer <br>
 ```sh

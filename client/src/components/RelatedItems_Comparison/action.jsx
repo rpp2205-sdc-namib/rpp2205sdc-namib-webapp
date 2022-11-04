@@ -15,7 +15,7 @@ function Action (props) {
       </div>
     ) : (
       <div id="action">
-        <i id={props.info.id} className="fa-regular fa-star remove" onClick={(e) => {props.removeProd(e); props.interaction(e.currentTarget)}}></i>
+        <i id={props.info.id} className="fa-regular fa-circle-xmark" onClick={(e) => {props.removeProd(e); props.interaction(e.currentTarget)}}></i>
       </div>
     )
   )
@@ -28,4 +28,3 @@ export default withClickData(Action, 'Related Items & Comparison');
 {/* <FontAwesomeIcon id={props.info.id} className="remove" icon={faXmarkCircle} onClick={(e) => {props.removeProd(e); props.interaction(e.currentTarget)}}/> */}
 {/* <i className="fa-regular fa-star star" onClick={ (e) => {props.showModal(props.info); props.interaction(e.currentTarget)}}></i> */}
 {/* <i id={props.info.id} className="fa-regular fa-star remove" onClick={(e) => {props.removeProd(e); props.interaction(e.currentTarget)}}></i> */}
-
