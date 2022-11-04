@@ -1,4 +1,3 @@
-import React from 'react';
 const data = require("./data.json");
 
 const ratingInPercentage = (value) => {

@@ -1,9 +1,9 @@
-import React from 'react';
 import Modal from './Modal.jsx';
 import Stars from '../FiveStars.jsx';
-import { FiCheck } from "react-icons/fi";
+//import { FiCheck } from "react-icons/fi";
 import axios from 'axios';
 import withClickData from '../hoc_click_data.jsx';
+import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 
 class Individual_Review_Tile extends React.Component {
   constructor(props) {
@@ -127,10 +127,22 @@ class Individual_Review_Tile extends React.Component {
         </div>
         <div>
           {this.props.review.photos.map(photo => {
+            const imageAttributes = photo.url.split("/");
+            //const getPublicId = imageAttributes.pop();
+            const publicId = imageAttributes.pop();
+            const cloudName = imageAttributes[3];
+            //const version = imageAttributes[6].split("v")[1];
+            //console.log('testing split on photo', photo.url.split("/"));
+            //console.log(publicId);
+            //const image = cloudinary.image(publicId, {width: 70, height: 53, crop: "scale"});
+            //const image = cloudinary.image(publicId, {width: 100, height: 150, crop: "fill", fetch_format: "auto"});
             return (
               <a key={photo.id} >
                 <div className="review_photo" width="70px" height="50px" onClick={() => {this.setIsOpen(true, photo.url)}}>
-                  <img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/>
+                  {/* <img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/> */}
+                  <Image cloudName={cloudName} publicId={publicId} width="70" height="50" alt="an image uploaded by the reviewer">
+                    <Transformation width="70" height="50" crop="fill" />
+                  </Image>
                 </div>
               </a>
             )
@@ -139,7 +151,7 @@ class Individual_Review_Tile extends React.Component {
         </div>
         {this.props.review.recommend === true ?
           <div className="review_recommend">
-            <FiCheck fontSize=".85em"/>
+             <i className="fa-solid fa-check"></i>
             <p className="review_recommend">I recommend this product</p>
           </div> :
           null
@@ -179,3 +191,7 @@ class Individual_Review_Tile extends React.Component {
 }
 
 export default withClickData(Individual_Review_Tile, 'ratings_and_reviews');
+
+//<img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/>
+//<i className="fa-solid fa-magnifying-glass search_icon"></i>
+//<FiCheck fontSize=".85em"/>

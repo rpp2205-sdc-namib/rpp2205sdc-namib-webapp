@@ -1,4 +1,3 @@
-import React from 'react';
 import Individual_Review_Tile from './Individual_Review_Tile.jsx';
 import Write_New_Review from './Write_New_Review.jsx';
 import axios from 'axios';

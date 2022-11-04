@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+//import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import RPC from './related-product-cards.jsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import withClickData from '../hoc_click_data.jsx';
 
 function YourOutfit (props) {
@@ -45,7 +46,7 @@ function YourOutfit (props) {
         <div id="carousel-container" ref={ref}>
           <div id="carousel" style={{ transform: `translateX(${start.toString()}px)` }}>
             <div className="card" onClick={(e) => {props.add(e); props.interaction(e.target)}}>
-              <FontAwesomeIcon icon={faPlus} />
+              <i className="fa-solid fa-plus"></i>
               <p>Add to Outfit</p>
             </div>
             {arr}
@@ -64,3 +65,5 @@ function YourOutfit (props) {
 }
 
 export default withClickData(YourOutfit, 'Related Items & Comparison');
+
+//<FontAwesomeIcon icon={faPlus} />
