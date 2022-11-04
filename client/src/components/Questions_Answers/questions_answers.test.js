@@ -40,7 +40,7 @@ describe('Answer.jsx', function() {
   test("should handle the handleReport function correctly", async function() {
     render(<Answer answer={mockData} />);
 
-    const element = screen.getByRole('report_button');
+    const element = screen.getByRole('button');
     fireEvent.click(element)
 
     expect(screen.getByText('Reported')).toBeInTheDocument();

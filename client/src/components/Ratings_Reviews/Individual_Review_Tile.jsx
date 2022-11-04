@@ -130,7 +130,7 @@ class Individual_Review_Tile extends React.Component {
             return (
               <a key={photo.id} >
                 <div className="review_photo" width="70px" height="50px" onClick={() => {this.setIsOpen(true, photo.url)}}>
-                  <img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/>
+                  <img className="review_photo" alt="review photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/>
                 </div>
               </a>
             )

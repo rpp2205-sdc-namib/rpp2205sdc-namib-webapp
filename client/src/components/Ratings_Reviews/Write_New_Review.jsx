@@ -220,7 +220,7 @@ class Write_New_Review extends React.Component {
                       {this.state.assets.map(asset => {
                           return (
                             <div className="review_photo" key={asset.asset_id}>
-                              <img className="review_photo" src={asset.url}/>
+                              <img className="review_photo" alt="review photo" src={asset.url}/>
                             </div>
                           )
                         })

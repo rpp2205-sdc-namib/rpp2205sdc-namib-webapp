@@ -109,12 +109,12 @@ class ImageGallary extends React.Component {
         {arrowForwardNotNeeded ? null : <div className="arrow-down-container" onMouseOver={this.handleArrowDown.bind(this)}><div className="arrow-down"></div></div>}
         </div>
         <div className="current-photo">
-          <img id="current-photo" onClick={this.handleClick.bind(this)} style={{"cursor": "zoom-in"}} src={current_url}></img>
+          <img id="current-photo" alt="current photo" onClick={this.handleClick.bind(this)} style={{"cursor": "zoom-in"}} src={current_url}></img>
             {this.props.currentPhotoIndex === 0 ? null : <div id="backBtn" onClick={this.handleBackward.bind(this)}>
             </div>}
             {this.props.currentPhotoIndex ===  this.props.photos.length - 1 ? null : <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
             </div>}
-            <div className="expandBtn" onClick={this.handleClick.bind(this)}>
+            <div className="expandBtn" alt="expand button" onClick={this.handleClick.bind(this)}>
               <img id="expandBtn" src="img/fullscreen-icon.jpg" />
             </div>
         </div>
