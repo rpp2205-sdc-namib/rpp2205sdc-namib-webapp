@@ -50,9 +50,9 @@ class Overview extends React.Component {
           <ImageGallary section = "overview" currentPhotoIndex={this.state.currentPhotoIndex} handleCurrentPhotoChange={this.handleCurrentPhotoChange.bind(this)} photos={this.state.styleObj.photos} handleModalAppear={this.handleModalAppear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
       <div className="overview">
           <ProductInfo productId={this.props.productId} currentProduct={this.props.currentProduct} styleObj={this.state.styleObj} rating={this.props.rating}
-          totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo} />
+          totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo}/>
           <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.props.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
-          <AddToCart styleObj={this.state.styleObj}/>
+          <AddToCart styleObj={this.state.styleObj} addToOutfit={this.props.addToOutfit} removeFromOutfit={this.props.removeFromOutfit} productId={this.props.productId}/>
       </div>
       <div className="overview overview-modal" id="overview-modal-window" style={this.state.modalStyle}>
         <ImageGallary section="modal" currentPhotoIndex={this.state.currentPhotoIndex} handleCurrentPhotoChange={this.handleCurrentPhotoChange.bind(this)} photos={this.state.styleObj.photos} handleModalDisappear={this.handleModalDisappear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>

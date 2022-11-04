@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RPC from './related-product-cards.jsx';
 import Modal from './modal.jsx';
 import axios from 'axios';
-import { totalReviewsAndAvgRating, handlePromises } from '../helperFunctions.jsx';
+import { totalRatingsAndAvgRating, handlePromises } from '../helperFunctions.jsx';
 import withClickData from '../hoc_click_data.jsx';
 
  function RPList(props) {
@@ -41,7 +41,7 @@ import withClickData from '../hoc_click_data.jsx';
           data.push({
             defaultStyle: result,
             product: responseArr[i+1].data,
-            rating: totalReviewsAndAvgRating(responseArr[i+2].data.ratings)[1]
+            rating: totalRatingsAndAvgRating(responseArr[i+2].data.ratings)[1]
           });
         }
         setRP([...data]);

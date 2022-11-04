@@ -44,6 +44,14 @@ class Individual_Review_Tile extends React.Component {
       isOpen: boolean,
       imgSrc: imgUrl
     })
+
+    //document.getElementsByClassName('reviews_expand_mode').style.overflow = "hidden";
+
+    // if (imgUrl) {
+    //   document.getElementsByClassName('reviews_expand_mode').style.overflow = "hidden";
+    // } else {
+    //   document.getElementsByClassName('reviews_expand_mode').style.overflow = "scroll";
+    // }
   }
 
   handleIncreaseCounts(e, review_id) {
@@ -121,8 +129,8 @@ class Individual_Review_Tile extends React.Component {
           {this.props.review.photos.map(photo => {
             return (
               <a key={photo.id} >
-                <div className="review_photo" onClick={() => {this.setIsOpen(true, photo.url)}}>
-                  <img className="review_photo" src={photo.url}/>
+                <div className="review_photo" width="70px" height="50px" onClick={() => {this.setIsOpen(true, photo.url)}}>
+                  <img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/>
                 </div>
               </a>
             )
@@ -146,14 +154,16 @@ class Individual_Review_Tile extends React.Component {
         <div>
           <p>
             Helpful?
-            <button className="review_yes_button"
+            <button
+              className="review_yes_button"
               disabled={this.state.isYesClicked}
               onClick={(e) => {this.handleIncreaseCounts(e, this.props.review.review_id)}}>
               Yes
             </button>
             ({this.state.helpfulness})
             |
-            <button className="review_report_button"
+            <button
+              className="review_report_button"
               disabled={this.state.isReported}
               onClick={(e) => {this.handleIncreaseCounts(e, this.props.review.review_id)}}>
               Report
@@ -161,7 +171,8 @@ class Individual_Review_Tile extends React.Component {
           </p>
         </div>
         <div><hr /></div>
-        {this.state.isOpen ? <Modal setIsOpen={this.setIsOpen} imgSrc={this.state.imgSrc}/> : null}
+        {this.state.isOpen ?
+        <Modal setIsOpen={this.setIsOpen} imgSrc={this.state.imgSrc}/> : null}
       </div>
     )
   }
