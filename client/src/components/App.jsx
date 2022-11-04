@@ -1,12 +1,20 @@
-import React from 'react';
-import Overview from './Overview/overview.jsx';
-import Ratings_Reviews from './Ratings_Reviews/Ratings_Reviews.jsx';
+import React, { Suspense } from 'react';
+const Overview = React.lazy(() => import('./Overview/overview.jsx'));
+const Ratings_Reviews = React.lazy(() => import('./Ratings_Reviews/Ratings_Reviews.jsx'));
 import axios from 'axios';
+<<<<<<< HEAD
 import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
 import RPList from './RelatedItems_Comparison/rp-list.jsx'
 import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
 import Carousel from './RelatedItems_Comparison/Carousel.jsx';
+=======
+import { totalRatingsAndAvgRating } from './helperFunctions.jsx';
+const Questions_Answers = React.lazy(() => import('./Questions_Answers/Questions_Answers.jsx'));
+const RPList = React.lazy(() => import('./RelatedItems_Comparison/rp-list.jsx'));
+const YourOutfit = React.lazy(() => import('./RelatedItems_Comparison/your-outfit.jsx'));
+const Carousel = React.lazy(() => import('./RelatedItems_Comparison/Carousel.jsx'));
+>>>>>>> main
 import TopBar from './TopBar.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 
@@ -99,9 +107,7 @@ class App extends React.Component {
 
   removeProduct(e) {
     e.preventDefault();
-    var id = e.target.id.length === 0 ? this.state.currentProductId : e.target.id;
-    console.log('id', id)
-    localStorage.removeItem(id);
+    localStorage.removeItem(e.target.id);
     this.setState({keys: [...Object.keys(localStorage)]})
   }
 
@@ -126,14 +132,19 @@ class App extends React.Component {
     }
     return (
       <div style={{"backgroundColor": this.state.background}}>
+        <Suspense fallback={<div>Loading...</div>}>
           <TopBar />
-          <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)} addToOutfit={this.addProduct.bind(this)} removeFromOutfit={this.removeProduct.bind(this)}/>
+          <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
           <RPList overview={this.state.currentProduct} productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
           <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
           <ErrorBoundary>
             <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
           </ErrorBoundary>
           <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings} reviewsMeta={this.state.reviewsMeta} currentProduct={this.state.currentProduct}/>
+<<<<<<< HEAD
+=======
+        </Suspense>
+>>>>>>> main
       </div>
     )
   }
