@@ -89,8 +89,9 @@ module.exports = {
 
   getQuestionsHandler: (req, res) => {
     var product_id = req.params.product_id;
+    var count = req.params.count;
 
-    axios.get(`${API_Link}/qa/questions?product_id=${product_id}`, auth)
+    axios.get(`${API_Link}/qa/questions?product_id=${product_id}&count=${count}`, auth)
     .then(response => {
       res.status(200).send(response.data);
     })
@@ -221,6 +222,7 @@ module.exports = {
 
   postAnswerHandler: (req, res) => {
     var question_id = req.params.question_id;
+    console.log('body; ', req.body)
     var { body, name, email, photos } = req.body;
 
     axios.post(`${API_Link}/qa/questions/${question_id}/answers`, {
@@ -233,21 +235,6 @@ module.exports = {
       console.log('err: ', err);
       res.sendStatus(500);
     });
-  },
-
-  uploadPhotosHandler: (req, res) => {
-    let productId = req.params.product_id;
-    let question_id = req.params.question_id;
-    let image_name = req.params.image_name;
-    let rootDir = './atelier';
-    let productDir = productId;
-    let questionDir = question_id;
-
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir)
-    } else {
-
-    }
   }
 
 };
