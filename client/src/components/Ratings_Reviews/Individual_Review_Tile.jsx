@@ -140,7 +140,7 @@ class Individual_Review_Tile extends React.Component {
               <a key={photo.id} >
                 <div className="review_photo" width="70px" height="50px" onClick={() => {this.setIsOpen(true, photo.url)}}>
                   {/* <img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/> */}
-                  <Image cloudName={cloudName} publicId={publicId} width="70" height="50" alt="an image uploaded by the reviewer">
+                  <Image cloudName={cloudName} publicId={publicId} width="70" height="50" alt="testing 1 2 3">
                     <Transformation width="70" height="50" crop="fill" />
                   </Image>
                 </div>

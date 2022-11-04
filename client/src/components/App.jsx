@@ -16,7 +16,6 @@ class App extends React.Component {
     this.state = {currentProductId: '',
                   reviewsMeta: {},
                   rating: 0,
-                  ratings: {},
                   totalRatings: 0,
                   reviews: [],
                   totalReviews: 0,
@@ -132,7 +131,7 @@ class App extends React.Component {
           <ErrorBoundary>
             <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
           </ErrorBoundary>
-          <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings} reviewsMeta={this.state.reviewsMeta} currentProduct={this.state.currentProduct}/>
+          <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings} reviewsMeta={this.state.reviewsMeta} currentProduct={this.state.currentProduct}/>
         </Suspense>
       </div>
     )

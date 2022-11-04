@@ -1,6 +1,4 @@
 import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 class SearchBar extends React.Component{
   constructor(props) {
@@ -9,7 +7,6 @@ class SearchBar extends React.Component{
       value: '',
     };
     this.handleChange = this.handleChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
