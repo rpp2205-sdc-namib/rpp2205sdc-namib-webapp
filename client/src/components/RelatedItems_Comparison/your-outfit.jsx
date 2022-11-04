@@ -46,7 +46,7 @@ function YourOutfit (props) {
         <div id="carousel-container" ref={ref}>
           <div id="carousel" style={{ transform: `translateX(${start.toString()}px)` }}>
             <div className="card" onClick={(e) => {props.add(e); props.interaction(e.target)}}>
-              <i class="fa-solid fa-plus"></i>
+              <i className="fa-solid fa-plus"></i>
               <p>Add to Outfit</p>
             </div>
             {arr}
