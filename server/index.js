@@ -1,4 +1,4 @@
-const spdy = require('spdy');
+// const spdy = require('spdy');
 var compression = require('compression');
 const fs = require('fs');
 const express = require('express');
@@ -11,20 +11,20 @@ const { postInteractionHandler, getProductHandler, getRelatedHandler, getStylesH
 app.use(bodyParser.json());
 app.use(compression());
 
-const options = {
-  key: fs.readFileSync(__dirname + '/http2-express/server.key'),
-  cert:  fs.readFileSync(__dirname + '/http2-express/server.crt')
-}
-spdy
-  .createServer(options, app)
-  .listen(port, (error) => {
-    if (error) {
-      console.error(error)
-      return process.exit(1)
-    } else {
-      console.log('Listening on PORT: ' + port + '.')
-    }
-  })
+// const options = {
+//   key: fs.readFileSync(__dirname + '/http2-express/server.key'),
+//   cert:  fs.readFileSync(__dirname + '/http2-express/server.crt')
+// }
+// spdy
+//   .createServer(options, app)
+//   .listen(port, (error) => {
+//     if (error) {
+//       console.error(error)
+//       return process.exit(1)
+//     } else {
+//       console.log('Listening on PORT: ' + port + '.')
+//     }
+//   })
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('/', async (req, res) => {
@@ -98,9 +98,9 @@ app.get('/:productId', (req, res) => {
   })
 })
 
-// app.listen(port, () => {
-//   console.log(`Listening on  http://localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Listening on  http://localhost:${port}`);
+});
 
 
 //app.get('/reviews/:product_id/:count/:page/:sort', getReviewsHandler);
