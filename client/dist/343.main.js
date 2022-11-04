@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_webpack_project=self.webpackChunkmy_webpack_project||[]).push([[343],{3343:(e,t,r)=>{r.r(t),r.d(t,{default:()=>c});var s=r(5466);r(4559);const c=(e,t)=>{class r extends s.Component{constructor(e){super(e),this.state={start:0,prev:"",next:""}}render(){return s.createElement(e,this.props)}}return r}}}]);
