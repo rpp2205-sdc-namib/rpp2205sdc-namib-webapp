@@ -1,4 +1,3 @@
-import React from 'react';
 import Search from './Search.jsx';
 import ModalWindow from './ModalWindow.jsx';
 import axios from 'axios';
