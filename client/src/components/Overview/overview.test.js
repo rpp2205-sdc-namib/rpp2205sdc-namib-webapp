@@ -3,7 +3,7 @@ import ProductInfo from './product-info.jsx';
 import ImageGallary from './image-gallary.jsx';
 import StyleSelector from './style-selector.jsx';
 import AddToCart from './add-to-cart.jsx';
-import { totalReviewsAndAvgRating, QuantitySelectArr } from '../helperFunctions.jsx';
+import { totalRatingsAndAvgRating, QuantitySelectArr } from '../helperFunctions.jsx';
 import { render, fireEvent, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
@@ -148,8 +148,8 @@ describe('test all overview components are rendered correctly', () => {
 });
 
 describe('helper functions are working correctly', () => {
-  test('totalReviewsAndAvgRating is working correctly', () => {
-    var result = totalReviewsAndAvgRating({
+  test('totalRatingsAndAvgRating is working correctly', () => {
+    var result = totalRatingsAndAvgRating({
       "1": "3",
       "2": "7",
       "3": "2",
@@ -204,5 +204,3 @@ describe('end to end test to see if the user interaction is working as expected'
       expect(modalImage).not.toBeInTheDocument;
   })
 })
-
-
