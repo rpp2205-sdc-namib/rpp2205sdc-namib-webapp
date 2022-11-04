@@ -1,4 +1,3 @@
-import React from 'react';
 import Reviews_List from './Reviews_List.jsx';
 import Rating_Breakdown from './Rating_Breakdown.jsx';
 import withClickData from '../hoc_click_data.jsx';

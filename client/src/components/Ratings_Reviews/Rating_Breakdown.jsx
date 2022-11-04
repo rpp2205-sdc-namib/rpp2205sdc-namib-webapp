@@ -1,4 +1,3 @@
-import React from 'react';
 import Stars from '../FiveStars.jsx';
 import Product_Breakdown from './Product_Breakdown.jsx';
 import withClickData from '../hoc_click_data.jsx';

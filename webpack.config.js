@@ -18,10 +18,10 @@ const config = {
         filename: 'main.js'
     },
     // plugins: [
-    //     new HtmlWebpackPlugin({
-    //         template: 'index.html',
-    //     }),
-
+    //     new ImageminPlugin({
+    //         // imagemin-webp docs: https://github.com/imagemin/imagemin-webp
+    //         plugins: [ImageminWebP({quality: 50})]
+    //       }),
     //     // Add your plugins here
     //     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     // ],

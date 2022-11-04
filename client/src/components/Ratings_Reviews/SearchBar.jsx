@@ -1,6 +1,6 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 class SearchBar extends React.Component{
   constructor(props) {
@@ -26,10 +26,12 @@ class SearchBar extends React.Component{
     return (
       <div className="search_container_reviews">
         <input type="text" className="search_input_reviews" value={this.state.value} placeholder="Search Reviews" onChange={this.handleChange} />
-        <FontAwesomeIcon className="search_icon_reviews" icon={ faSearch } />
+        <i className="fa-solid fa-magnifying-glass search_icon_reviews"></i>
       </div>
     )
   }
 }
 
 export default SearchBar;
+
+//<FontAwesomeIcon className="search_icon_reviews" icon={ faSearch } />
