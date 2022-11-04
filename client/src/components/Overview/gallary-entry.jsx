@@ -25,7 +25,7 @@ class GallaryEntry extends React.Component {
           var thumbnail_url = 'img/NoImageThumbnail.png';
         }
         return (<div className="gallary-entry-container" style={this.props.highlight ? highlightStyle : nonHighlightStyle}>
-          <img className="gallary-entry" src={thumbnail_url} onMouseOver={this.handleMouseOver.bind(this)} width="50px"></img>
+          <img className="gallary-entry" alt="gallary entry" src={thumbnail_url} onMouseOver={this.handleMouseOver.bind(this)} width="50px"></img>
         </div>)
       }
     } else {
