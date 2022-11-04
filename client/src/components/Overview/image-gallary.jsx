@@ -114,8 +114,8 @@ class ImageGallary extends React.Component {
             </div>}
             {this.props.currentPhotoIndex ===  this.props.photos.length - 1 ? null : <div id="forwardBtn" onClick={this.handleForward.bind(this)}>
             </div>}
-            <div className="expandBtn" alt="expand button" onClick={this.handleClick.bind(this)}>
-              <img id="expandBtn" src="img/fullscreen-icon.jpg" />
+            <div className="expandBtn" onClick={this.handleClick.bind(this)}>
+              <img id="expandBtn" alt="expand button" src="img/fullscreen-icon.jpg" />
             </div>
         </div>
       </div>)

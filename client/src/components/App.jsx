@@ -2,19 +2,11 @@ import React, { Suspense } from 'react';
 const Overview = React.lazy(() => import('./Overview/overview.jsx'));
 const Ratings_Reviews = React.lazy(() => import('./Ratings_Reviews/Ratings_Reviews.jsx'));
 import axios from 'axios';
-<<<<<<< HEAD
-import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
-import Questions_Answers from './Questions_Answers/Questions_Answers.jsx';
-import RPList from './RelatedItems_Comparison/rp-list.jsx'
-import YourOutfit from './RelatedItems_Comparison/your-outfit.jsx';
-import Carousel from './RelatedItems_Comparison/Carousel.jsx';
-=======
 import { totalRatingsAndAvgRating } from './helperFunctions.jsx';
 const Questions_Answers = React.lazy(() => import('./Questions_Answers/Questions_Answers.jsx'));
 const RPList = React.lazy(() => import('./RelatedItems_Comparison/rp-list.jsx'));
 const YourOutfit = React.lazy(() => import('./RelatedItems_Comparison/your-outfit.jsx'));
 const Carousel = React.lazy(() => import('./RelatedItems_Comparison/Carousel.jsx'));
->>>>>>> main
 import TopBar from './TopBar.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 
@@ -49,7 +41,7 @@ class App extends React.Component {
                     axios.get(`/products/${productId}/related`)];
     Promise.all(promises)
       .then(responseArr => {
-        var reviewsAndRating = totalReviewsAndAvgRating(responseArr[0].data.ratings);
+        var reviewsAndRating = totalRatingsAndAvgRating(responseArr[0].data.ratings);
         this.setState({rating: reviewsAndRating[1],
                        reviewsMeta: responseArr[0].data,
                        ratings: responseArr[0].data.ratings,
@@ -141,10 +133,7 @@ class App extends React.Component {
             <Questions_Answers productId={this.state.currentProductId} productName={this.state.currentProduct.name} />
           </ErrorBoundary>
           <Ratings_Reviews productId={this.state.currentProductId} rating={this.state.rating} ratings={this.state.ratings} totalReviews={this.state.totalReviews} reviews={this.state.reviews} totalRatings={this.state.totalRatings} reviewsMeta={this.state.reviewsMeta} currentProduct={this.state.currentProduct}/>
-<<<<<<< HEAD
-=======
         </Suspense>
->>>>>>> main
       </div>
     )
   }
