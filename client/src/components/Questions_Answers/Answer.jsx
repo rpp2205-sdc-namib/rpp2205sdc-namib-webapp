@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from 'axios';
 import withClickData from '../hoc_click_data.jsx';
 
@@ -82,10 +81,10 @@ class Answer extends React.Component {
           {this.state.isReported ?
             <button disabled={this.state.isReported}
               className="report_button"
-              role="report_button">Reported
+              role="button">Reported
             </button> :
             <button className="report_button"
-              role="report_button"
+              role="button"
               onClick={this.handleReport}>Report
             </button>}
         </div>

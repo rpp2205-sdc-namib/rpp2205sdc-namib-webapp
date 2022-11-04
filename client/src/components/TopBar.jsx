@@ -7,7 +7,7 @@ const TopBar = () => {
       <div className="topBar-text">Atelier</div>
       <div className="searchBar">
         <div className="search-area">
-          <input style={{opacity: "0%"}}/>
+          <input style={{opacity: "0%"}} aria-label="Search"/>
           <div className="searchBar-underline"></div>
         </div>
         <div className="gg-search-container"><i className="gg-search"></i></div>

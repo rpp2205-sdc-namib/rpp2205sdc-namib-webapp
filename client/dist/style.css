@@ -1284,14 +1284,12 @@ input.rating {
 /********* Questions & Answers widget **********/
 /** Questions & Answers */
 .questions_answers {
-  margin: 0 50px;
-  color: #111;
-  font-family: Helvetica, sans-serif;
+  margin: 0 20px;
 }
 
 .questions_answers_title {
-  font-size: 16px;
-  font-weight: 100;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .more_answered_questions, .add_question {
@@ -1317,6 +1315,7 @@ input.rating {
 .QA_container {
   width: 1000px;
   margin: 0 auto;
+  margin-top: 20px;
 }
 
 .load_more_answers, .collapse_answers {
@@ -1326,6 +1325,11 @@ input.rating {
   margin-top: 10px;
   cursor: pointer;
   padding: 0;
+  color: #606060;
+}
+
+.load_more_answers:hover, .collapse_answers:hover {
+  color: rgb(116, 196, 65);
 }
 
 /** Answer */
@@ -1333,18 +1337,20 @@ input.rating {
   margin-bottom: 10px;
 }
 
-.answer_symbol {
+.answer_symbol, .seller {
   font-weight: bold;
-  font-size: 16px;
 }
 
 .answer_text {
   font-weight: normal;
-  font-size: 14px;
 }
 
 .answer_sub {
   display: flex;
+}
+
+.answer_sub > * {
+  font-size: 14px;
 }
 
 .border_line {
@@ -1352,13 +1358,8 @@ input.rating {
   margin: 0px 10px;
 }
 
-.by, .answerer, .seller, .answer_date {
+.by, .answerer, .seller, .answer_date, .helpfulness_number {
   margin-right: 5px;
-  font-size: 14px;
-}
-
-.seller {
-  font-weight: bold;
 }
 
 /** Question */
@@ -1371,7 +1372,6 @@ input.rating {
 }
 
 .question {
-  font-size: 18px;
   font-weight: bold;
   margin: 0;
 }
@@ -1383,12 +1383,6 @@ input.rating {
 
 .helpful_text {
   margin: 0px 5px;
-  font-size: 14px;
-}
-
-.helpfulness_number {
-  margin-right: 5px;
-  font-size: 14px;
 }
 
 .yes_button, .add_answer_button, .report_button {
@@ -1397,10 +1391,14 @@ input.rating {
   text-decoration: underline;
 }
 
-.answers_expand_mode {
+.answers_expand_mode, .questions_expand_mode {
   width: 100%;
   height: 250px;
   overflow: scroll;
+}
+
+.questions_expand_mode  {
+  height: 500px;
 }
 
 .modal_container {
@@ -1454,10 +1452,18 @@ input.rating {
   color: #ff0000;
 }
 
-.sub_text {
+.form_warning_format_error {
+  display: none;
+}
+
+.sub_text, .form_warning {
   font-size: 12px;
   margin-top: 5px;
   margin-bottom: 20px;
+}
+
+.form_warning {
+  color: red;
 }
 
 .upload_button, .submit_button {
@@ -1471,6 +1477,7 @@ input.rating {
 .upload_image {
   display: inline-block;
   margin-right: 10px;
+  margin-bottom: 10px;
   width: 60px;
   height: 60px;
 }
@@ -1478,10 +1485,6 @@ input.rating {
 .upload_text {
   line-height: 26px;
 }
-
-/* .upload_button {
-  display: inline-block;
-} */
 
 .upload_button input[type=file] {
   display: none;
@@ -1497,19 +1500,21 @@ input.rating {
 }
 
 .submit_button {
+  display: block;
   background-color: #0066ff;
   font-size: 16px;
 }
 
 /** search component */
 .search_container {
-  margin-top: 30px;
+  position: relative;
+  margin: 30px;
   display: flex;
 }
 
 .search_input {
   display: block;
-  width: 1000px;
+  width: 70%;
   height: 50px;
   padding: 5px;
   font-size: 18px;
@@ -1524,7 +1529,7 @@ input.rating {
 .search_icon {
   width: 20px;
   height: 20px;
-  position: relative;
-  right: 15%;
-  top: 25px;
+  position: absolute;
+  right: 16%;
+  top: 40%;
 }
