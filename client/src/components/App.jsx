@@ -6,7 +6,7 @@ import { totalReviewsAndAvgRating } from './helperFunctions.jsx';
 const Questions_Answers = React.lazy(() => import('./Questions_Answers/Questions_Answers.jsx'));
 const RPList = React.lazy(() => import('./RelatedItems_Comparison/rp-list.jsx'));
 const YourOutfit = React.lazy(() => import('./RelatedItems_Comparison/your-outfit.jsx'));
-const Carousel = = React.lazy(() => import('./RelatedItems_Comparison/Carousel.jsx'));
+const Carousel = React.lazy(() => import('./RelatedItems_Comparison/Carousel.jsx'));
 import TopBar from './TopBar.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 
