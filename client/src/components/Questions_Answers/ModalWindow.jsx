@@ -5,13 +5,9 @@ import config from './config.js';
 
 const ModalWindow = (props) => {
   const [answer, setAnswer] = useState('');
-  const [isAnswerValid, setIsAnswerValid] = useState(false);
   const [question, setQuestion] = useState('');
-  const [isQuestionValid, setIsQuestionValid] = useState(false);
   const [nickname, setNickname] = useState('');
-  const [isNicknameValid, setIsNicknameValid] = useState(false);
   const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
   const [isValid, setIsValid] = useState();
   const [imageFiles, setImageFiles] = useState([]);
   const [imageFormData, setImageFormData] = useState([]);
@@ -81,19 +77,6 @@ const ModalWindow = (props) => {
     let isEmailValid = email.length !== 0 && !isContainOnlyWhiteSpace(email) && validateEmail(email);
     let totalValid = (isAnswerValid || isQuestionValid) && isNicknameValid && isEmailValid;
 
-    // (answer.length !== 0 && !isContainOnlyWhiteSpace(answer)) ? setIsAnswerValid(true) : setIsAnswerValid(false);
-    // (question.length !== 0 && !isContainOnlyWhiteSpace(question)) ? setIsQuestionValid(true) : setIsQuestionValid(false);
-    // (nickname.length !== 0 && !isContainOnlyWhiteSpace(nickname)) ? setIsNicknameValid(true) : setIsNicknameValid(false);
-    // (email.length !== 0 && !isContainOnlyWhiteSpace(email) && validateEmail(email)) ? setIsEmailValid(true) : setIsEmailValid(false);
-    // let totalValid = (isAnswerValid || isQuestionValid) && isNicknameValid && isEmailValid;
-
-    // console.log(isAnswerValid)
-    // console.log(isQuestionValid)
-    // console.log(isNicknameValid)
-    // console.log(isEmailValid)
-
-    console.log('hasError: ', totalValid)
-
     setIsValid(totalValid);
     return totalValid
   }
@@ -125,7 +108,6 @@ const ModalWindow = (props) => {
   const submitForm = (url, parameter, e) => {
     axios.post(url, parameter)
     .then(data => {
-      // props.interaction(e);
       setIsSubmitted(true);
     })
     .catch(err => {
@@ -159,7 +141,6 @@ const ModalWindow = (props) => {
     props.closeForm();
     setIsValid(false);
     setIsSubmitted(false);
-    setIsEmailValid(false);
   }
 
   return (
