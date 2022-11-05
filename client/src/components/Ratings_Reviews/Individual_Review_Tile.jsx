@@ -127,25 +127,37 @@ class Individual_Review_Tile extends React.Component {
         </div>
         <div>
           {this.props.review.photos.map(photo => {
+            console.log('testing review photos map');
             const imageAttributes = photo.url.split("/");
             //const getPublicId = imageAttributes.pop();
             const publicId = imageAttributes.pop();
             const cloudName = imageAttributes[3];
+            const isTrue = photo.url.includes('cloudinary');
+            console.log('true or false', isTrue);
             //const version = imageAttributes[6].split("v")[1];
             //console.log('testing split on photo', photo.url.split("/"));
             //console.log(publicId);
             //const image = cloudinary.image(publicId, {width: 70, height: 53, crop: "scale"});
             //const image = cloudinary.image(publicId, {width: 100, height: 150, crop: "fill", fetch_format: "auto"});
-            return (
-              <a key={photo.id} >
+            if (isTrue) {
+              return (
+                <a key={photo.id} >
+                  <div className="review_photo" width="70px" height="50px" onClick={() => {this.setIsOpen(true, photo.url)}}>
+                    <Image cloudName={cloudName} publicId={publicId} width="70" height="50" alt="an image uploaded by the reviewer">
+                      <Transformation width="70" height="50" crop="fill" alt="an image uploaded by the reviewer" />
+                    </Image>
+                  </div>
+                </a>
+              )
+            } else {
+              return (
+                <a key={photo.id} >
                 <div className="review_photo" width="70px" height="50px" onClick={() => {this.setIsOpen(true, photo.url)}}>
-                  {/* <img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/> */}
-                  <Image cloudName={cloudName} publicId={publicId} width="70" height="50" alt="an image uploaded by the reviewer">
-                    <Transformation width="70" height="50" crop="fill" />
-                  </Image>
+                  <img className="review_photo" width="70px" height="50px" alt="an image uploaded by the reviewer" src={photo.url}/>
                 </div>
-              </a>
-            )
+                </a>
+              )
+            }
            })
           }
         </div>
