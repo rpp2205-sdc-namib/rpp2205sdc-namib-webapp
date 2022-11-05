@@ -6,7 +6,6 @@ const ratingInPercentage = (value) => {
 }
 
 const Product_Breakdown = ({reviewsMeta}) => {
-  console.log('reviewsMeta', reviewsMeta);
   return (
     <div id='characteristics'>
         {

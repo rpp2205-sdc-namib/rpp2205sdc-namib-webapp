@@ -52,7 +52,7 @@ class Overview extends React.Component {
           <ProductInfo productId={this.props.productId} currentProduct={this.props.currentProduct} styleObj={this.state.styleObj} rating={this.props.rating}
           totalReviews={this.props.totalReviews} priceInfo={this.state.priceInfo}/>
           <StyleSelector productId={this.props.productId} styleObj={this.state.styleObj} styles={this.props.styles} changeStyle={this.handleStyleIdChange.bind(this)} styleId={this.state.styleId}/>
-          <AddToCart styleObj={this.state.styleObj} addToOutfit={this.props.addToOutfit} removeFromOutfit={this.props.removeFromOutfit} productId={this.props.productId}/>
+          <AddToCart styleObj={this.state.styleObj} addToOutfit={this.props.addToOutfit} removeO={this.props.removeO} productId={this.props.productId}/>
       </div>
       <div className="overview overview-modal" id="overview-modal-window" style={this.state.modalStyle}>
         <ImageGallary section="modal" currentPhotoIndex={this.state.currentPhotoIndex} handleCurrentPhotoChange={this.handleCurrentPhotoChange.bind(this)} photos={this.state.styleObj.photos} handleModalDisappear={this.handleModalDisappear.bind(this)} handleBackground={this.props.handleOverviewBackground}/>
