@@ -98,7 +98,9 @@ class App extends React.Component {
 
   removeProduct(e) {
     e.preventDefault();
-    localStorage.removeItem(e.target.id);
+    var id = isNaN(e.target.id) || e.target.id.length === 0 ? this.state.currentProductId : e.target.id;
+    console.log('id', id);
+    localStorage.removeItem(id);
     this.setState({keys: [...Object.keys(localStorage)]})
   }
 
@@ -125,7 +127,7 @@ class App extends React.Component {
       <div style={{"backgroundColor": this.state.background}}>
         <Suspense fallback={<div>Loading...</div>}>
           <TopBar />
-          <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)}/>
+          <Overview productId={this.state.currentProductId} currentProduct={this.state.currentProduct} styles={this.state.styles} handleProductIdChange={this.handleProductIdChange} defaultStyle={this.state.defaultStyle} rating={this.state.rating} totalReviews={this.state.totalReviews} handleOverviewBackground={this.handleOverviewBackground.bind(this)} removeO={this.removeProduct.bind(this)} addToOutfit={this.addProduct.bind(this)}/>
           <RPList overview={this.state.currentProduct} productId={this.state.currentProductId} relatedProds={this.state.related} changeProduct={this.handleProductIdChange.bind(this)}/>
           <YourOutfit add={this.addProduct.bind(this)} removeProd={this.removeProduct.bind(this)} list={this.state.keys} changeProduct={this.handleProductIdChange.bind(this)}/>
           <ErrorBoundary>

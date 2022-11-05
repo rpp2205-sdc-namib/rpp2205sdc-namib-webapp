@@ -39,8 +39,6 @@ class Ratings_Reviews extends React.Component {
   }
 
   filterReviews(e) {
-    console.log('Ratings_Reviews.jsx - filterReviews() has been called', e);
-    console.log(e.target.innerText[0]);
     const value = parseInt(e.target.innerText[0]);
     const reviews = this.props.reviews;
     let results = reviews.filter(result => {

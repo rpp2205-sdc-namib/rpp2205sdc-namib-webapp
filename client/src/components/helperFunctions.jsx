@@ -9,8 +9,6 @@ module.exports = {
       acc[1] += Number(obj[key] * element) || 0;
       return acc;
     }, [0, 0]);
-
-    console.log(helperArr);
     return [helperArr[0], (Math.round(helperArr[1] / helperArr[0] * 100) / 100).toFixed(2)];
   },
 

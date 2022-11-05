@@ -14,7 +14,8 @@ const AddToOutfit = (props) => {
       toggleClicked(!clicked);
       props.interaction(e.currentTarget);
       if (clicked) {
-        props.removeFromOutfit(e)
+        console.log('removeo', props.removeO)
+        props.removeO(e)
       } else {
         props.addToOutfit(e)
       }
