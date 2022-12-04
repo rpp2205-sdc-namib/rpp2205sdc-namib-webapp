@@ -2,6 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 const fs = require('fs');
 const API_Link = `https://app-hrsei-api.herokuapp.com/api/fec2/${process.env.CAMPUS_CODE}`;
+console.log('env', process.env.CAMPUS_CODE, process.env.API_PORT_Sijia)
 const auth = {headers: {Authorization: process.env.access_token}};
 
 module.exports = {
@@ -60,12 +61,13 @@ module.exports = {
     var sort = req.params.sort;
 
    if (req.url.includes('meta')) {
-     axios.get(`${API_Link}/reviews/meta?product_id=${product_id}`, {
+     axios.get(`http://localhost:${process.env.API_PORT_Sijia}/reviews/meta?product_id=${product_id}`, {
        headers: {
          'Authorization': process.env.access_token
        }
      })
        .then(response => {
+        console.log('api sijia testing', response.data)
          res.status(200).send(response.data);
        })
        .catch(err => {
